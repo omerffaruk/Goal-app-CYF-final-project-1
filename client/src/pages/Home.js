@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LoginBtn from "./Components/LoginBtn";
+import Password from "./Components/Password";
 
 import "./Home.css";
-import logo from "./logo.svg";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -24,21 +25,48 @@ export function Home() {
 	}, []);
 
 	return (
-		<main role="main">
-			<div>
-				<img
-					className="logo"
-					data-qa="logo"
-					src={logo}
-					alt="Just the React logo"
-				/>
-				<h1 className="message" data-qa="message">
-					{message}
-				</h1>
-				<Link to="/about/this/site">About</Link>
-			</div>
-		</main>
-	);
+    <div>
+      <h1>Login to your account</h1>
+      <h2>Daily standup task manager</h2>
+      <div className="slack-connect">
+        <img
+          className="Slack"
+          alt=""
+          src={require("../images/Slack_logo.png")}
+        ></img>
+        <h4>Continue with Slack</h4>
+      </div>
+
+      <p>---------- or Sign Up with Email ----------</p>
+      <div className="form">
+        <form action="" method="get" className="login-form">
+          <div className="login-form">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="mail@abc.com"
+            ></input>
+          </div>
+          <div className="login-form">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="*********"
+            ></input>
+          </div>
+        </form>
+      </div>
+      <Password />
+      <LoginBtn />
+			<Link to="/about">About</Link>
+    </div>
+  );
 }
+
+
 
 export default Home;

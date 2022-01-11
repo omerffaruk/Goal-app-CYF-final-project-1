@@ -1,11 +1,55 @@
+.App {
+  margin: 0.5em auto;
+  text-align: center;
+  width: 60%;
+}
+
+/*-------------- Header ---------------*/
+.logo,
+.avatar {
+  height: 6vmin;
+}
+
 .logo {
-	width: 100px;
+  float: left;
 }
 
-.message {
-	color: blue;
+.avatar {
+  float: right;
 }
 
-.message:hover {
-	background-color: yellow;
+/*------------ Form -------------*/
+.Slack {
+  /*button to be connected later*/
+  height: 6vmin;
+  pointer-events: none;
+  padding: 0.25em;
+}
+
+.slack-connect {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0.5em;
+  border-top: solid 1px grey;
+  border-bottom: solid 1px grey;
+}
+
+.login-form {
+  margin: 0.25em;
+  padding: 0.25em;
+}
+
+label {
+  margin: 0.25em;
+}
+
+input {
+  padding: 0.25em;
+}
+
+button {
+  margin: 2em;
+  padding: 1em;
+  width: 60%;
 }

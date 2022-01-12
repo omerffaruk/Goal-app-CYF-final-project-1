@@ -64,7 +64,7 @@ export function Home() {
       <LoginBtn />
        <div className="create-ctn">
          <h4>Not Registered Yet?</h4>
-          <Link to="/create">Create an account</Link>
+          <Link to="/signup">Create an account</Link>
         </div>
 			<Link to="/about">About</Link>
     </div>

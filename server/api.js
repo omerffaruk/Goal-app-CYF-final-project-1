@@ -8,7 +8,7 @@ router.get("/", (_, res) => {
 });
 // api/tasks returns all the tasks in the database
 router.get("/tasks", (_, res) => {
-	const selectAllTasksQuery = "SELECT * FROM todo";
+	const selectAllTasksQuery = "SELECT todo.id as taskId, todo.task, todo.date, todo.iscomplete, todo.user_id as userId, users.username, users.password, users.email, users.role FROM todo INNER JOIN users ON todo.user_id = users.id";
 	pool.query(selectAllTasksQuery, (error, result) => {
 		if (error) {
 			console.error(error);

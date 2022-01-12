@@ -25,18 +25,17 @@ export function Home() {
 	}, []);
 
 	return (
-    <div>
+    <div className="home-ctn">
       <h1>Login to your account</h1>
       <h2>Daily standup task manager</h2>
       <div className="slack-connect">
         <img
           className="Slack"
           alt=""
-          src={require("../images/Slack_logo.png")}
+          src={require("../images/Slack_logo.png").default}
         ></img>
         <h4>Continue with Slack</h4>
       </div>
-
       <p>---------- or Sign Up with Email ----------</p>
       <div className="form">
         <form action="" method="get" className="login-form">
@@ -59,9 +58,14 @@ export function Home() {
             ></input>
           </div>
         </form>
+
       </div>
       <Password />
       <LoginBtn />
+       <div className="create-ctn">
+         <h4>Not Registered Yet?</h4>
+          <Link to="/create">Create an account</Link>
+        </div>
 			<Link to="/about">About</Link>
     </div>
   );

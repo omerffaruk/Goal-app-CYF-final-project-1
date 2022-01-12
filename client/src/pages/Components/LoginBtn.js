@@ -3,7 +3,7 @@ import React from "react";
 const LoginBtn = () => {
   return (
     <div>
-      <button>Login</button>
+      <button className="login-btn">Login</button>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const SignUp = () => (
 		<div className="s-form">
 		<form action="" method="post" className="signup-form">
 		<div className="signup-form">
-				<label htmlFor="name">Username</label>
+				<label htmlFor="name">Name</label>
 				<input
 					type="text"
 					name="username"

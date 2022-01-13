@@ -1,134 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,500;0,600;0,700;1,400&display=swap");
+
 .App {
-  margin: 0 auto;
-  text-align: center;
-  width: 60%;
-  height: 100vh;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
-  background-color: #e9ecef;
-  box-shadow:  rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	margin: 0 auto;
+	text-align: center;
+	width: 60%;
+	height: 100vh;
+	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
+	background-color: #e9ecef;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 /*-------------- Header ---------------*/
 .header {
-  height: 1vmin;
+	height: 1vmin;
 }
 
 .logo,
 .avatar {
-  height: 6vmin;
+	height: 6vmin;
 }
 
 .logo {
-  padding: 0.5em;
-  float: left;
+	padding: 0.5em;
+	float: left;
 }
 
 .avatar {
-  padding: 0.5em;
-  float: right;
+	padding: 0.5em;
+	float: right;
 }
 
 /*----------------- Slack Login --------------*/
 .home-ctn {
-  margin-top: 3em;
+	margin-top: 3em;
 }
 
 .Slack {
-  /*button to be connected later*/
-  height: 6vmin;
-  pointer-events: none;
-  padding: 0.25em;
+	/*button to be connected later*/
+	height: 6vmin;
+	pointer-events: none;
+	padding: 0.25em;
 }
 
 .slack-connect {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 0.25em;
-  width: 60%;
-  border: solid 1px grey;
-  border-radius: 5px;
-  margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 0.25em;
+	width: 60%;
+	border: solid 1px grey;
+	border-radius: 5px;
+	margin: 0 auto;
 }
 
-
 .home-ctn p {
-  padding: 2em 0;
+	padding: 2em 0;
 }
 /*------------ Form -------------*/
 .login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  text-align: left;
-  margin: 0.25em auto;
-  padding: 0.25em;
-  width: 77%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	text-align: left;
+	margin: 0.25em auto;
+	padding: 0.25em;
+	width: 77%;
 }
 
 label {
-  margin: 0.25em;
-  font-size: 18px;
-  font-weight: 470;
+	margin: 0.25em;
+	font-size: 18px;
+	font-weight: 470;
 }
 
 input {
-  padding: 1em;
-  border-radius: 5px;
-  border: solid 1.5px grey;
+	padding: 1em;
+	border-radius: 5px;
+	border: solid 1.5px grey;
 }
 
 button {
-  margin: 2em;
-  padding: 1em;
-  width: 60%;
+	margin: 2em;
+	padding: 1em;
+	width: 60%;
 }
 
 /*------------ Password prompt ----------*/
 .password-ctn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .password-ctn input {
-  cursor: pointer;
+	cursor: pointer;
 }
 
-.password-ctn input:checked{
-  accent-color: #5f0f40;
+.password-ctn input:checked {
+	accent-color: #5f0f40;
 }
 
 .password-ctn a {
-  text-decoration: none;
-  color: #5f0f40;
-  font-weight: 500;
+	text-decoration: none;
+	color: #5f0f40;
+	font-weight: 500;
 }
 
 .login-btn {
-  background-color: #8b8c89;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 5px;
-  border: none;
+	background-color: #8b8c89;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 5px;
+	border: none;
 }
 
 /*--------- Create an account ----------*/
 .create-ctn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .create-ctn a {
-  text-decoration: none;
-  color: #343a40;
-  margin-top: 1.1em;
-  font-weight: 600;
+	text-decoration: none;
+	color: #343a40;
+	margin-top: 1.1em;
+	font-weight: 600;
 }
 
 .create-ctn h4 {
-  font-weight: 400;
+	font-weight: 400;
 }

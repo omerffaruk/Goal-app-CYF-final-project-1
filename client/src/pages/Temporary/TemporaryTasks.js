@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import TemporaryLoadingPage from "./TemporaryLoadingPage";
 
 function TemporaryTasks() {
 	const [tasks, setTasks] = useState([]);
@@ -43,7 +42,6 @@ function TemporaryTasks() {
 	});
 
 	if(loading) {
-		// return <TemporaryLoadingPage />;
 		return <></>;
 	}
 

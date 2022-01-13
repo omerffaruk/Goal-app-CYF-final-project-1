@@ -1,4 +1,5 @@
-const { Pool } = require("pg");
+import PG from 'pg';
+const Pool = PG.Pool;
 
 const dbUrl = process.env.DATABASE_URL || "postgres://asif:786god@localhost:5432/goal";
 
@@ -8,7 +9,4 @@ const pool = new Pool({
 	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
 });
 
-
-
-
-module.exports = pool;
+export default pool

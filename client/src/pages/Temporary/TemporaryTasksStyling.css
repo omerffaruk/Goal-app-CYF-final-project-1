@@ -1,29 +1,24 @@
 :root {
   --titles-and-link: #053974;
+  --linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 }
 
-a { 
-    text-decoration: none;
+.loading {
+    background-color: var(--linear-bg);
+    height: 70vh;
 }
 
 .temporary-link {
     color: var(--titles-and-link);
 }
 
-.temporary-link:hover {
-    font-size: 1.25rem;
-}
-
-.temporary-links-container {
-    padding: 4rem 0 2rem 0;
+.temporary-links-container, .user-tasks-container {
+    margin-top: 5em;
+    padding: 2rem 0;
 }
 
 .user-tasks-container h1, .user-tasks-container h2 {
     color: var(--titles-and-link);
-}
-
-.user-tasks-container h1 {
-    padding: 4rem 0 1rem 0;
 }
 
 .each-task li {

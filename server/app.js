@@ -29,11 +29,15 @@ const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
 
 
-import { receiver as appA } from './slackApp';
 import { Parser } from "webpack";
-app.use(appA.router); //every time use first
-app.use(cors());
 
+
+
+const app = express();
+app.use(cors());
+import { receiver as appA } from "./slackApp";
+app.use(appA.router); //every time use first
+app.use(express.json());
 
 app.use(configuredHelmet());
 app.use(morgan("dev"));

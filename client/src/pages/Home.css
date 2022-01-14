@@ -1,134 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,500;0,600;0,700;1,400&display=swap");
+
+/* ------------ Variables -------------*/
+:root {
+	--login-card-bg-color: rgb(255, 255, 255);
+	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
+	--primary-color: #053974;
+	--secondary-color: #650374;
+}
+
+/*----------- Main Elements*/
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	background: var(--linear-bg);
+}
+
 .App {
-  margin: 0 auto;
-  text-align: center;
-  width: 60%;
-  height: 100vh;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
-  background-color: #e9ecef;
-  box-shadow:  rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	margin: 0 auto;
+	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
+	min-height: 90vh;
+	background-color: var(--login-card-bg-color);
+	box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px;
+	max-width: 27em;
+	border-radius: 4px;
+}
+
+/*------------ Default Styling ------------*/
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+label {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 470;
+}
+
+input {
+	padding: 1em;
+	border-radius: 5px;
+	border: solid 1.5px var(--primary-color);
+}
+
+button {
+	margin: 2em;
+	padding: 1em;
+	width: 75%;
+}
+
+.text-center {
+	text-align: center;
 }
 
 /*-------------- Header ---------------*/
 .header {
-  height: 1vmin;
+	height: 1vmin;
 }
 
 .logo,
 .avatar {
-  height: 6vmin;
+	height: 6vmin;
 }
 
 .logo {
-  padding: 0.5em;
-  float: left;
+	padding: 0.5em;
+	float: left;
 }
 
 .avatar {
-  padding: 0.5em;
-  float: right;
+	padding: 0.5em;
+	float: right;
 }
 
 /*----------------- Slack Login --------------*/
 .home-ctn {
-  margin-top: 3em;
-}
-
-.Slack {
-  /*button to be connected later*/
-  height: 6vmin;
-  pointer-events: none;
-  padding: 0.25em;
+	margin: 3em 0;
+	padding: 20px;
 }
 
 .slack-connect {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 0.25em;
-  width: 60%;
-  border: solid 1px grey;
-  border-radius: 5px;
-  margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding: 0px 20px;
+	border: solid 1px var(--primary-color);
+	border-radius: 5px;
+	margin: 0 auto;
+	cursor: pointer;
+	position: relative;
+	transition: background-color 0.2s;
 }
 
+.slack-connect:hover {
+	background-color: rgb(240, 240, 255);
+}
+
+.Slack {
+	/*button to be connected later*/
+	top: 15px;
+	left: 10px;
+	width: 30px;
+	height: 30px;
+	pointer-events: none;
+	position: absolute;
+}
 
 .home-ctn p {
-  padding: 2em 0;
+	padding: 1em 0;
 }
 /*------------ Form -------------*/
-.login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  text-align: left;
-  margin: 0.25em auto;
-  padding: 0.25em;
-  width: 77%;
+
+.form {
+	margin-bottom: 1em;
 }
 
-label {
-  margin: 0.25em;
-  font-size: 18px;
-  font-weight: 470;
+.label-ctn {
+	padding-bottom: 0.4em;
 }
 
-input {
-  padding: 1em;
-  border-radius: 5px;
-  border: solid 1.5px grey;
-}
-
-button {
-  margin: 2em;
-  padding: 1em;
-  width: 60%;
+.login-form input {
+	border-radius: 4px;
+	border: 1px solid var(--primary-color);
+	cursor: text;
+	font-size: 16px;
+	line-height: 20px;
+	height: 40px;
+	padding: 6px 10px;
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 /*------------ Password prompt ----------*/
 .password-ctn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .password-ctn input {
-  cursor: pointer;
+	cursor: pointer;
 }
 
-.password-ctn input:checked{
-  accent-color: #5f0f40;
+.password-ctn input:checked {
+	accent-color: var(--primary-color);
 }
 
 .password-ctn a {
-  text-decoration: none;
-  color: #5f0f40;
-  font-weight: 500;
+	color: var(--secondary-color);
+	font-weight: 600;
 }
 
 .login-btn {
-  background-color: #8b8c89;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  border-radius: 5px;
-  border: none;
+	background: var(--linear-bg);
+	color: #fff;
+	font-size: 20px;
+	font-weight: 600;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+}
+
+.login-btn:hover {
+	background: #5d7ada;
 }
 
 /*--------- Create an account ----------*/
 .create-ctn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .create-ctn a {
-  text-decoration: none;
-  color: #343a40;
-  margin-top: 1.1em;
-  font-weight: 600;
+	color: var(--secondary-color);
+	margin-top: 1.1em;
+	font-weight: 600;
 }
 
 .create-ctn h4 {
-  font-weight: 400;
+	font-weight: 400;
 }

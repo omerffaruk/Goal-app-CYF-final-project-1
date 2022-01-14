@@ -1,4 +1,6 @@
+import React from "react";
 import "./SignUp.css";
+
 import { Link } from 'react-router-dom'
 import Home from "./Home";
 
@@ -7,11 +9,7 @@ import { useEffect ,useState, React } from "react";
 
 
 const SignUp = () => {
-//const [isOpen, setIsOpen] = useState(false);
- 
-//   const togglePopup = () => {
-//     setIsOpen(false);
-//   }
+
 	const createNewAccount = (e) => {
 		console.log(name, email, password);
 	
@@ -120,4 +118,9 @@ const SignUp = () => {
 	);
 };
 
+);
+
+
 export default SignUp;
+
+/*buttons are just decorative for now*/

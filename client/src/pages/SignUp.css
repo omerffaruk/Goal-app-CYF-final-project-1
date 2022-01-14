@@ -1,5 +1,6 @@
 .signup-ctn {
   margin-top: 3em;
+
 }
 
 
@@ -96,3 +97,14 @@
   border: 1px solid #999;
   font-size: 20px;
 }
+
+
+.signup-form {
+  margin-bottom: 1em; 
+}
+
+.signup-ctn input {
+  width: 100%;
+}
+
+

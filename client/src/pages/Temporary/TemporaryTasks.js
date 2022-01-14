@@ -42,7 +42,7 @@ function TemporaryTasks() {
 	});
 
 	if(loading) {
-		return <></>;
+		return <div className="loading"></div>;
 	}
 
 	return (

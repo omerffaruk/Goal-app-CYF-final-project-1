@@ -21,15 +21,15 @@ router.post("/register", (req, res) => {
 	);
 
 	const userName = req.body.name;
-	console.log(req.body.name);
+	
 	const email = req.body.email;
 	const passwords = req.body.password;
 
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
-		let slackid = "1899";
-
+		let slackid = "148889";
+       //hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
 		let query;
@@ -39,21 +39,21 @@ router.post("/register", (req, res) => {
 			.query(query, [userName, email])
 			.then((result) => {
 				if (result.rowCount > 0) {
-					res.json({ message: "user/email already exists" });
+					res.status(200).json({ message: "user/email already exists" });
 				} else {
 					query =
 						"insert into users(username,email,password,slackid,role) values($1,$2,$3,$4,$5)";
 					pool
 						.query(query, [userName, email, newpassword, slackid, role])
 						.then((result) => {
-							res.json({ message: "user created" });
+							res.status(200).json({ message: "user created" });
 						})
-						.catch((e) => console.log(e));
+						.catch((e) => res.status(500).send({ message: "server error" }));
 				}
 				//validate credentials
 			})
-			.catch(e=>console.log(e));
-	} else res.json({message: "email invalid" });
+			.catch((e) => res.status(500).send({ message: "server error" }));
+	} else res.status(200).json({message: "email invalid" });
 	function validEmail(useremail) {
 		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
 	}

@@ -1,9 +1,10 @@
 import "./SignUp.css";
 
 const SignUp = () => (
+
 <div className="signup-ctn">
 	<h2>Create A New Account</h2>
-	<p>Come and join the HTCT community! Let's set up your account.</p>
+	<p>Come and join the HTCT community! Let's set up your account. Already have one?<Link to="/">Sign in here</Link></p>
 		<div className="s-form">
 		<form action="" method="post" className="signup-form">
 		<div className="signup-form">
@@ -34,8 +35,10 @@ const SignUp = () => (
 				></input>
 			</div>
 		</form>
+		<button type="button">Submit</button>
 	</div>
 </div>
+
 );
 
 export default SignUp;

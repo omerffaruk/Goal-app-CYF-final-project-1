@@ -1,49 +1,39 @@
-import React from "react";
+import { useEffect, useState, React } from "react";
 import "./SignUp.css";
-
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Home from "./Home";
-
-import Popup from './Components/Popup'
-import { useEffect ,useState, React } from "react";
-
+import Popup from "./Components/Popup";
 
 const SignUp = () => {
-
 	const createNewAccount = (e) => {
 		console.log(name, email, password);
-	
-	
-			e.preventDefault();
+		e.preventDefault();
 		fetch("/api/register", {
-			method:'Post',
-			headers:
-			{
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+			method: "Post",
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods":
+					"GET, POST, PATCH, PUT, DELETE, OPTIONS",
+				"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
 
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-   
-				body: JSON.stringify({
-					name: name,
-					email: email,
-					password:password,
-				}),
-			 }).then(res => res.json())
-				 .then(data => window.alert(data.message)).
-				 catch(e => console.log(e))
-			
+				Accept: "application/json",
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({
+				name: name,
+				email: email,
+				password: password,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => window.alert(data.message))
+			.catch((e) => console.log(e));
+	};
 
-		}
-	
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 
-	const [password, setPassword]=useState("");
+	const [password, setPassword] = useState("");
 
 	const handleChange = (e) => {
 		if (e) {
@@ -51,10 +41,11 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			}
-			else setEmail(e.target.value);
+			} else {
+setEmail(e.target.value);
+}
 		}
-		console.log(name,email,password);
+		console.log(name, email, password);
 	};
 	return (
 		<div className="signup-ctn">
@@ -117,9 +108,6 @@ const SignUp = () => {
 		</div>
 	);
 };
-
-);
-
 
 export default SignUp;
 

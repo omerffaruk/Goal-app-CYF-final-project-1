@@ -46,7 +46,7 @@ function TemporaryTasks() {
 	}
 
 	return (
-		<div className="temporary-links-container">
+		<div className="home-ctn">
 			{usersTaskLinks}
 			<Link className="temporary-link" to={"/"}>
 				<h3>Go to Homepage</h3>

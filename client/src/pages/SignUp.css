@@ -1,6 +1,19 @@
 .signup-ctn {
   margin-top: 3em;
+}
 
+.signup-ctn .temporary-link {
+  margin-left: 0.4em;
+  /* text-decoration: underline; */
+  font-weight: 700;
+}
+
+.signup-form {
+  margin-bottom: 1em; 
+}
+
+.signup-ctn input {
+  width: 100%;
 }
 
 
@@ -96,15 +109,6 @@
   text-align: center;
   border: 1px solid #999;
   font-size: 20px;
-}
-
-
-.signup-form {
-  margin-bottom: 1em; 
-}
-
-.signup-ctn input {
-  width: 100%;
 }
 
 

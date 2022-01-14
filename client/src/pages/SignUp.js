@@ -50,12 +50,19 @@ setEmail(e.target.value);
 	return (
 		<div className="signup-ctn">
 			<h2>Create A New Account</h2>
-			<p>Come and join the HTCT community! Let's set up your account.</p>
-			<Link to="/"> Already have click here </Link>
+			<p>
+				Come and join the HTCT community! Let's set up your account. Already
+				have one?{" "}
+				<Link className="temporary-link" to="/">
+					Sign in here
+				</Link>
+			</p>
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
 					<div className="signup-form">
-						<label htmlFor="name">Name</label>
+						<div className="label-ctn">
+							<label htmlFor="name">Name</label>
+						</div>
 						<input
 							type="text"
 							name="username"
@@ -68,7 +75,9 @@ setEmail(e.target.value);
 						></input>
 					</div>
 					<div className="signup-form">
-						<label htmlFor="email">Email</label>
+						<div className="label-ctn">
+							<label htmlFor="email">Email</label>
+						</div>
 						<input
 							type="email"
 							name="email"
@@ -81,7 +90,9 @@ setEmail(e.target.value);
 						></input>
 					</div>
 					<div className="signup-form">
-						<label htmlFor="password">Password</label>
+						<div className="label-ctn">
+							<label htmlFor="password">Password</label>
+						</div>
 						<input
 							type="password"
 							name="password"
@@ -95,7 +106,7 @@ setEmail(e.target.value);
 					</div>
 					<div>
 						<button
-							className="signup-btn"
+							className="login-btn"
 							onClick={(e) => {
 								createNewAccount(e);
 							}}

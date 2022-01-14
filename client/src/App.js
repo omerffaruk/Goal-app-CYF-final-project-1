@@ -4,11 +4,12 @@ import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
 import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
 import NavBar from "./pages/Components/NavBar";
 
-
+import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 
 function App() {
   return (
+
     <div className="App">
       <NavBar />
       <Routes>
@@ -22,5 +23,6 @@ function App() {
       </Routes>
     </div>
   );
+
 }
 export default App;

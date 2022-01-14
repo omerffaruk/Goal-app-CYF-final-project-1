@@ -2,10 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
 import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
+import NavBar from "./pages/Components/NavBar";
 
 
 import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
 
 function App() {
   return (

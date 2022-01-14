@@ -5,11 +5,12 @@ import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
 
 
 import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />

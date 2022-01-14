@@ -13,10 +13,10 @@ const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
 
 const app = express();
-import { receiver as appA } from './slackApp';
+app.use(cors());
+import { receiver as appA } from "./slackApp";
 app.use(appA.router); //every time use first
 app.use(express.json());
-app.use(cors());
 app.use(configuredHelmet());
 app.use(morgan("dev"));
 

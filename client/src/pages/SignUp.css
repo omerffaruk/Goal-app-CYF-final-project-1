@@ -1,3 +1,13 @@
 .signup-ctn {
   margin-top: 3em;
+  padding: 15px 20px 20px;
 }
+
+.signup-form {
+  margin-bottom: 1em; 
+}
+
+.signup-ctn input {
+  width: 100%;
+}
+

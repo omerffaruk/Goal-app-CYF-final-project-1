@@ -12,7 +12,7 @@ function TemporaryUserTasks() {
 	const usersAllTasks = userTasks.map((task, i) => {
 		return (
 			<div key={task.taskid} className="each-task">
-				<h2>Task {i + 1}</h2>
+				<h3>Task {i + 1}</h3>
 				<ul>
 					<li>Date: {task.date}</li>
 					<li>Task: {task.task}</li>
@@ -24,8 +24,8 @@ function TemporaryUserTasks() {
 	});
 
 	return (
-		<div className="user-tasks-container">
-			<h1 className="title">{username}'s Tasks</h1>
+		<div className="home-ctn user-tasks">
+			<h2>{username}'s Tasks</h2>
 			{usersAllTasks}
 			<h3>
 				<Link className="temporary-link" to={"/"}>Go back to Home Page</Link>

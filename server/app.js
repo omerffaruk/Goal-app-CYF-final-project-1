@@ -9,14 +9,32 @@ import {
 	pushStateRouting,
 } from "./middleware";
 
+
+// middleware
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
+const bodyParser = require("body-parser");
+
+// Put these statements before you define any routes.
+app.use(
+	bodyParser.urlencoded({
+		extended: false,
+	})
+);
+app.use(bodyParser.json());
+const bcrypt = require('bcrypt');
+app.use(express.static(__dirname));
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
 
-const app = express();
+
 import { receiver as appA } from './slackApp';
+import { Parser } from "webpack";
 app.use(appA.router); //every time use first
-app.use(express.json());
 app.use(cors());
+
+
 app.use(configuredHelmet());
 app.use(morgan("dev"));
 

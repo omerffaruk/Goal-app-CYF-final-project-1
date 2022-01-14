@@ -42,3 +42,5 @@ const SignUp = () => (
 );
 
 export default SignUp;
+
+/*buttons are just decorative for now*/

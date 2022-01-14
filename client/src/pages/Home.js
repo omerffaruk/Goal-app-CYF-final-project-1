@@ -26,7 +26,7 @@ export function Home() {
 
 	return (
 		<div className="home-ctn">
-			<h1>Login to your GoalApp account</h1>
+			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<img
 					className="Slack"
@@ -35,7 +35,7 @@ export function Home() {
 				></img>
 				<h4>Continue with Slack</h4>
 			</div>
-			<p>---------- or Sign Up with Email ----------</p>
+			<p className="text-center">---------- or Sign Up with Email ----------</p>
 			<div className="form">
 				<form action="" method="get" className="login-form">
 					<div className="login-form">
@@ -63,13 +63,13 @@ export function Home() {
 				</form>
 			</div>
 			<Password />
-			<LoginBtn />
+			<LoginBtn className="text-center" />
 			<div className="create-ctn">
 				<h4>Not Registered Yet?</h4>
 				<Link to={"/signup"}>Create an account</Link>
 			</div>
 			{/* <Link to="/about">About</Link> */}
-			<h3>
+			<h3 className="text-center">
 				<Link className="temporary-link" to={"/temporary/tasks"}>
 					See All Tasks
 				</Link>

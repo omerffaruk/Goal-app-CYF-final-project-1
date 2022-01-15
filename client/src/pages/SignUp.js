@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import Home from "./Home";
 
 import Popup from './Components/Popup'
-import { useEffect ,useState, React } from "react";
+import { useEffect ,useState} from "react";
 
 
 const SignUp = () => {
@@ -118,7 +118,7 @@ const SignUp = () => {
 	);
 };
 
-);
+
 
 
 export default SignUp;

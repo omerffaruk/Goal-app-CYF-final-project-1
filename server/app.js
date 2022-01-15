@@ -23,7 +23,6 @@ app.use(
 	})
 );
 app.use(bodyParser.json());
-const bcrypt = require('bcrypt');
 app.use(express.static(__dirname));
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");
@@ -33,7 +32,6 @@ import { Parser } from "webpack";
 
 
 
-const app = express();
 app.use(cors());
 import { receiver as appA } from "./slackApp";
 app.use(appA.router); //every time use first

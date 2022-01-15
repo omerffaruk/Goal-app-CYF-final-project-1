@@ -27,12 +27,13 @@ body {
 
 .App {
 	margin: 0 auto;
+	padding: 20px;
 	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
 		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
 	min-height: 90vh;
 	background-color: var(--login-card-bg-color);
 	box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px;
-	max-width: 27em;
+	max-width: 30em;
 	border-radius: 4px;
 }
 
@@ -63,13 +64,18 @@ button {
 	width: 75%;
 }
 
+p {
+	line-height: 1.8em;
+	font-size: 1em;
+}
+
 .text-center {
 	text-align: center;
 }
 
 /*-------------- Header ---------------*/
 .header {
-	height: 1vmin;
+	height: 6vmin;
 }
 
 .logo,
@@ -90,7 +96,6 @@ button {
 /*----------------- Slack Login --------------*/
 .home-ctn {
 	margin: 3em 0;
-	padding: 20px;
 }
 
 .slack-connect {

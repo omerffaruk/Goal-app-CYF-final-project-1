@@ -1,5 +1,7 @@
 .signup-ctn {
-  margin-top: 3em;
+  margin: 0 auto;
+  max-width: 450px;
+  padding: 10px;
 }
 
 .signup-ctn .temporary-link {

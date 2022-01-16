@@ -35,7 +35,11 @@ export function Home() {
 				></img>
 				<h4>Continue with Slack</h4>
 			</div>
-			<p className="text-center">---------- or Sign Up with Email ----------</p>
+			<div className="or-ctn">
+				<hr />
+				<span>OR</span>
+				<hr />
+			</div>
 			<div className="form">
 				<form action="" method="get" className="login-form">
 					<div className="login-form">
@@ -65,7 +69,7 @@ export function Home() {
 			<Password />
 			<LoginBtn className="text-center" />
 			<div className="create-ctn">
-				<h4>Not Registered Yet?</h4>
+				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>
 			</div>
 			{/* <Link to="/about">About</Link> */}

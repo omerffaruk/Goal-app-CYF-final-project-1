@@ -1,14 +1,18 @@
 import { useEffect, useState, React } from "react";
 import "./SignUp.css";
+
+
 import { Link } from "react-router-dom";
 import Home from "./Home";
+
 import Popup from "./Components/Popup";
+import { useEffect, useState } from "react";
 
 const SignUp = () => {
 	const createNewAccount = (e) => {
-		console.log(name, email, password);
 		e.preventDefault();
-		fetch("/api/register", {
+		fetch("http://127.0.0.1:3100/api/register", {
+
 			method: "Post",
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -19,6 +23,8 @@ const SignUp = () => {
 				Accept: "application/json",
 				"Content-type": "application/json",
 			},
+
+
 			body: JSON.stringify({
 				name: name,
 				email: email,
@@ -26,7 +32,16 @@ const SignUp = () => {
 			}),
 		})
 			.then((res) => res.json())
-			.then((data) => window.alert(data.message))
+
+			.then((data) => {
+				if (data.message) window.alert(data.message);
+				else {
+					location.assign("/");
+					localStorage.setItem("t", data.user);
+					window.alert("USER CREATED, now login");
+				}
+			})
+
 			.catch((e) => console.log(e));
 	};
 
@@ -41,11 +56,10 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			} else {
-setEmail(e.target.value);
-}
+
+			} else setEmail(e.target.value);
 		}
-		console.log(name, email, password);
+
 	};
 	return (
 		<div className="signup-ctn">

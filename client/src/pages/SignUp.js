@@ -21,6 +21,11 @@ const SignUp = () => {
 				Accept: "application/json",
 				"Content-type": "application/json",
 			},
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> dd6812f66c80bb2369451e58204905df3309ad5c
 			body: JSON.stringify({
 				name: name,
 				email: email,
@@ -28,6 +33,10 @@ const SignUp = () => {
 			}),
 		})
 			.then((res) => res.json())
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd6812f66c80bb2369451e58204905df3309ad5c
 			.then((data) => {
 				if (data.message) window.alert(data.message);
 				else {
@@ -36,6 +45,10 @@ const SignUp = () => {
 					window.alert("USER CREATED, now login");
 				}
 			})
+<<<<<<< HEAD
+=======
+
+>>>>>>> dd6812f66c80bb2369451e58204905df3309ad5c
 			.catch((e) => console.log(e));
 	};
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import Checkbox from "../Components/Checkbox";
 function UsersTasks() {
 	const [tasks, setTasks] = useState([]);
-	
+
 	const { username } = useParams();
+
 	const api = `http://127.0.0.1:3100/api/tasks/${username}`;
 
 	useEffect(() => {
@@ -18,15 +18,11 @@ function UsersTasks() {
 			.catch();
 	}, []);
 
-	return (
-		<>
-			<ul>
-				{[...tasks].map((tasks) => (
-					<li>{tasks.task}</li>
-				))}
-			</ul>
-		</>
-	);
+	const yesterdayItems = tasks.map((tasks) => (
+		<Checkbox key={tasks.taskid} task={tasks} />
+	));
+
+	return <ul>{yesterdayItems}</ul>;
 }
 
 export default UsersTasks;

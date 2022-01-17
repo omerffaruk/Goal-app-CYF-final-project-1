@@ -7,6 +7,8 @@ import "./Home.css";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
 	useEffect(() => {
 		fetch("/api")
@@ -24,6 +26,13 @@ export function Home() {
 			});
 	}, []);
 
+	const handleChange = (e) => {
+		e.preventDefault();
+		if ((e.target.name === "email"))
+			setEmail(e.target.value);
+		else setPassword(e.target.value);
+	};
+	
 	return (
 		<div className="home-ctn">
 			<h1 className="text-center">Login to your GoalApp account</h1>
@@ -46,6 +55,8 @@ export function Home() {
 							type="email"
 							name="email"
 							id="email"
+							required
+							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 						></input>
 					</div>
@@ -57,13 +68,15 @@ export function Home() {
 							type="password"
 							name="password"
 							id="password"
+							required
+							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 						></input>
 					</div>
 				</form>
 			</div>
 			<Password />
-			<LoginBtn className="text-center" />
+			<LoginBtn className="text-center" email={email} password={ password} />
 			<div className="create-ctn">
 				<h4>Not Registered Yet?</h4>
 				<Link to={"/signup"}>Create an account</Link>
@@ -77,7 +90,5 @@ export function Home() {
 		</div>
 	);
 }
-
-
 
 export default Home;

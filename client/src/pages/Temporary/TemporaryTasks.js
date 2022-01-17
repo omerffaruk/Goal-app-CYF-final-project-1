@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function TemporaryTasks() {
 	const [tasks, setTasks] = useState([]);
 	const [loading, setLoading] = useState(true);
-	const api = "https://goal-app-cyf-final-project.herokuapp.com/api/tasks";
+	const api = "http://127.0.0.1:3100/api/tasks";
 
 	const fetchTasks = async () => {
 		const tasksData = await fetch(api);

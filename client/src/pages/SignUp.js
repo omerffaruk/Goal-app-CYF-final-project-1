@@ -1,5 +1,6 @@
-import React from "react";
+import { useEffect, useState, React } from "react";
 import "./SignUp.css";
+
 
 import { Link } from "react-router-dom";
 import Home from "./Home";
@@ -11,6 +12,7 @@ const SignUp = () => {
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		fetch("http://127.0.0.1:3100/api/register", {
+
 			method: "Post",
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -22,6 +24,7 @@ const SignUp = () => {
 				"Content-type": "application/json",
 			},
 
+
 			body: JSON.stringify({
 				name: name,
 				email: email,
@@ -29,6 +32,7 @@ const SignUp = () => {
 			}),
 		})
 			.then((res) => res.json())
+
 			.then((data) => {
 				if (data.message) window.alert(data.message);
 				else {
@@ -37,6 +41,7 @@ const SignUp = () => {
 					window.alert("USER CREATED, now login");
 				}
 			})
+
 			.catch((e) => console.log(e));
 	};
 
@@ -51,18 +56,27 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
+
 			} else setEmail(e.target.value);
 		}
+
 	};
 	return (
 		<div className="signup-ctn">
 			<h2>Create A New Account</h2>
-			<p>Come and join the HTCT community! Let's set up your account.</p>
-			<Link to="/"> Already have click here </Link>
+			<p>
+				Come and join the HTCT community! Let's set up your account. Already
+				have one?{" "}
+				<Link className="temporary-link" to="/">
+					Sign in here
+				</Link>
+			</p>
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
 					<div className="signup-form">
-						<label htmlFor="name">Name</label>
+						<div className="label-ctn">
+							<label htmlFor="name">Name</label>
+						</div>
 						<input
 							type="text"
 							name="username"
@@ -75,7 +89,9 @@ const SignUp = () => {
 						></input>
 					</div>
 					<div className="signup-form">
-						<label htmlFor="email">Email</label>
+						<div className="label-ctn">
+							<label htmlFor="email">Email</label>
+						</div>
 						<input
 							type="email"
 							name="email"
@@ -88,7 +104,9 @@ const SignUp = () => {
 						></input>
 					</div>
 					<div className="signup-form">
-						<label htmlFor="password">Password</label>
+						<div className="label-ctn">
+							<label htmlFor="password">Password</label>
+						</div>
 						<input
 							type="password"
 							name="password"
@@ -102,7 +120,7 @@ const SignUp = () => {
 					</div>
 					<div>
 						<button
-							className="signup-btn"
+							className="login-btn"
 							onClick={(e) => {
 								createNewAccount(e);
 							}}

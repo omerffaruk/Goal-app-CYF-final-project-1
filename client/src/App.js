@@ -6,6 +6,10 @@ import UsersTasks from "./pages/Temporary/UsersTasks";
 import NavBar from "./pages/Components/NavBar";
 
 
+
+
+import About from "./pages/About";
+
 import Home from "./pages/Home";
 
 function App() {
@@ -16,6 +20,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
 
+
 				{/* -----------Temporary Routes--------------- */}
 				<Route path="/temporary/tasks" element={<TemporaryTasks />} />
 				{/* <Route path="/temporary/tasks/:userName" element={<UsersTasks />} /> */}
@@ -23,6 +28,7 @@ function App() {
 			</Routes>
 		</div>
 	);
+
 
 }
 export default App;

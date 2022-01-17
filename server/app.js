@@ -18,7 +18,9 @@ app.use(express.urlencoded());
 
 // Put these statements before you define any routes.
 
+
 const bcrypt = require('bcrypt');
+
 app.use(express.static(__dirname));
 const apiRoot = "/api";
 const staticDir = path.join(__dirname, "static");

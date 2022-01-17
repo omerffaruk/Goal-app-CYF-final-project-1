@@ -4,8 +4,7 @@ import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
 import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
 import UsersTasks from "./pages/Temporary/UsersTasks";
 import NavBar from "./pages/Components/NavBar";
-
-
+import About from "./pages/About";
 import Home from "./pages/Home";
 
 function App() {

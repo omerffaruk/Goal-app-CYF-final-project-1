@@ -29,7 +29,6 @@ import { Parser } from "webpack";
 
 
 
-
 app.use(cors());
 import { receiver as appA } from "./slackApp";
 app.use(appA.router); //every time use first

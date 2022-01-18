@@ -7,14 +7,16 @@ function UsersTasks() {
 
 	const { username } = useParams();
 
-	const api = `http://127.0.0.1:3100/api/todaytasks/${username}`;
+	const api = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
 
 	useEffect(() => {
 		fetch(api, {
 			method: "GET",
 			headers: { authorization: localStorage.getItem("t") },
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				return res.status !== 404 ? res.json() : { user: [] };
+			})
 			.then((data) => {
 				setTasks(data.user);
 				setTodayTasks(data.user);

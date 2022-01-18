@@ -7,7 +7,7 @@ function UsersTasks() {
 
 	const { username } = useParams();
 
-	const api = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
+	const api = `http://127.0.0.1:3100/api/todaytasks/${username}`;
 
 	useEffect(() => {
 		fetch(api, {

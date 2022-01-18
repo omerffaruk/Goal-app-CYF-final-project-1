@@ -95,7 +95,10 @@ router.post("/log", (req, res) => {
 				if (auth) {
 					const token = createToken(result.rows[0].id);
 
-					res.json({ user: token });
+					res.json({
+						user: token, username: result.rows[0].username
+					
+					});
 				} else {
 					res.send("Password do not match");
 				}
@@ -239,6 +242,53 @@ router.get("/todaytasks/:username", (req, res) => {
 		res.send("not authenticated");
 	}
 });
+
+
+////////
+
+//adding tasks from client
+
+
+router.post("/newtasks", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	let token = req.headers.authorization;
+
+	if (token) {
+		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+
+		if (userAuthenticated) {
+			const task = req.body.task;
+			console.log(task)
+			const id = userAuthenticated.id;
+			const selectTasksForUserNameQuery =
+				"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
+			task.forEach(tasks => {
+				
+				pool.query(selectTasksForUserNameQuery, [tasks, id]).then((result) => {
+					let userTasks = result.rows;
+					if (userTasks.length === 0) {
+						res.status(404).send({
+							message: "No New task has been added!",
+						});
+						return;
+					}
+					res.status(200).json({ user: userTasks });
+				});
+			});
+			
+		}
+	} else {
+		res.send("not authenticated");
+	}
+});
+
+
 
 
 

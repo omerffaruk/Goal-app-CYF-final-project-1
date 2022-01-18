@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
+import TodayTasks from "./TodayTasks";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
@@ -30,6 +31,7 @@ function UsersTasks() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
+		console.log("submitted");
 		const checkedTasksId = [];
 		const uncheckedTasksId = [];
 		yesterdayTasks.forEach((task) => {
@@ -50,8 +52,25 @@ function UsersTasks() {
 		.map((task) => (
 			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
 		));
-	console.log({ yesterdayTasks, yesterdayItemsDone, yesterdayItemsUndone });
+	console.log({
+		yesterdayTasks,
+		yesterdayItemsDone,
+		yesterdayItemsUndone,
+		todayTasks,
+	});
 
+	const todayTaskInputs = todayTasks.map((task, index) => (
+		<TodayTasks
+			key={task.id || index}
+			setTodayTasks={setTodayTasks}
+			task={task}
+			index={index}
+			handleAddNewTask={handleAddNewTask}
+		/>
+	));
+	function handleAddNewTask() {
+		setTodayTasks((prev) => prev.concat({ task: "" }));
+	}
 	return (
 		<section>
 			<form onSubmit={handleSubmit}>
@@ -60,15 +79,12 @@ function UsersTasks() {
 				<h4>Yesterday's tasks Undones</h4>
 				<ul>{yesterdayItemsUndone}</ul>
 				<h4>Today's tasks, Please use enter for each plan..</h4>
-				<textarea
-					placeholder="Write something for today"
-					required
-					name="todayTasks"
-					cols="60"
-					rows="5"
-					value={"WILL BE UPDATED..."}
-					onChange={(event) => setTodayTasks(event.target.value)}
-				></textarea>
+				<article>
+					<ul>{todayTaskInputs}</ul>
+					<button type="button" onClick={handleAddNewTask}>
+						Add new Task
+					</button>
+				</article>
 				<button type="submit">Submit</button>
 			</form>
 		</section>

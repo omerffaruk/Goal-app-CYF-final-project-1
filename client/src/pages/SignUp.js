@@ -1,17 +1,16 @@
 import { useEffect, useState, React } from "react";
 import "./SignUp.css";
 
-
 import { Link } from "react-router-dom";
 import Home from "./Home";
 
 import Popup from "./Components/Popup";
 
+
 const SignUp = () => {
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		fetch("http://127.0.0.1:3100/api/register", {
-
 			method: "Post",
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -31,7 +30,6 @@ const SignUp = () => {
 			}),
 		})
 			.then((res) => res.json())
-
 			.then((data) => {
 				if (data.message) window.alert(data.message);
 				else {
@@ -40,7 +38,6 @@ const SignUp = () => {
 					window.alert("USER CREATED, now login");
 				}
 			})
-
 			.catch((e) => console.log(e));
 	};
 
@@ -55,10 +52,9 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-
 			} else setEmail(e.target.value);
+			
 		}
-
 	};
 	return (
 		<div className="signup-ctn">

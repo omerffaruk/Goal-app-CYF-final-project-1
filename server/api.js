@@ -2,13 +2,13 @@ import { Router } from "express";
 import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const moment = require("moment");
 
 const router = new Router();
 
 //validates data and registers new user in the database if user doesn't already exists
 
 router.post("/register", (req, res) => {
-
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Credentials", true);
 	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -22,7 +22,6 @@ router.post("/register", (req, res) => {
 	);
 
 	const userName = req.body.name;
-
 	const email = req.body.email;
 	const passwords = req.body.password;
 
@@ -30,7 +29,7 @@ router.post("/register", (req, res) => {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
 		let slackid = "141859719895889";
-       //hashing algorithm to store passwords in database
+		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
 		let query;
@@ -57,71 +56,53 @@ router.post("/register", (req, res) => {
 			})
 			.catch((e) => res.status(500).send({ message: "server error" }));
 	} else {
-res.status(200).json({ message: "email invalid" });
-}
+		res.status(200).json({ message: "email invalid" });
+	}
 	function validEmail(useremail) {
 		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
 	}
 });
 
-
 //authentication for users
 
 const maxAge = 3 * 24 * 24 * 60;
 const createToken = (id) => {
-
 	return jwt.sign({ id }, "htctsecretserver", {
 		expiresIn: maxAge,
 	});
 };
 
-
-
-
 router.post("/log", (req, res) => {
-
-	 res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Credentials", true);
-		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-		res.header(
-			"Access-Control-Allow-Headers",
-			"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-		);
-
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
 
 	const email = req.body.email;
 	const passwords = req.body.password;
-	
+
 	let query;
 	query = "select * from users where email = $1";
-//res.send(email)
-	pool.query(query, [email]).then(
-		(result) => {
+	//res.send(email)
+	pool
+		.query(query, [email])
+		.then((result) => {
 			if (result.rows.length > 0) {
-						const auth = bcrypt.compareSync(passwords, result.rows[0].password);
-							if (auth) {
+				const auth = bcrypt.compareSync(passwords, result.rows[0].password);
+				if (auth) {
 					const token = createToken(result.rows[0].id);
-				
 
-								res.json({ user: token });
+					res.json({ user: token });
 				} else {
-res.send("hi");
-}
-
+					res.send("Password do not match");
+				}
 			}
-		}
-
-	).catch((e) => res.send(e));
-
-
+		})
+		.catch((e) => res.send(e));
 });
-
-
-
-
-
-
-
 
 router.get("/", (_, res) => {
 	res.json({ message: "Hello, world!" });
@@ -143,38 +124,123 @@ router.get("/tasks", (_, res) => {
 });
 // api/tasks/:userName returns tasks for a specific user with the username param
 router.get("/tasks/:username", (req, res) => {
-	 res.header("Access-Control-Allow-Origin", "*");
-		res.header("Access-Control-Allow-Credentials", true);
-		res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-		res.header(
-			"Access-Control-Allow-Headers",
-			"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-		);
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
 	let token = req.headers.authorization;
-	
 
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
-		
-		if (userAuthenticated) {
 
+		if (userAuthenticated) {
 			const userName = req.params.username;
 			const selectTasksForUserNameQuery =
-			"SELECT todo.id as taskid, users.username, users.id as userid, users.role, users.email, todo.task, todo.date, todo.iscomplete FROM users INNER JOIN todo ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 ";
-			pool.query(selectTasksForUserNameQuery, [userName,userAuthenticated.id]).then((result) => {
-				const userTasks = result.rows;
-				if (userTasks.length === 0) {
-					res.status(404).send({
-						message: `The user with the username ${userName} has no tasks!`,
-					});
-					return;
-				}
-				res.status(200).json({ user: userTasks });
-			});
+				"SELECT todo.id as taskid, users.username, users.id as userid, users.role, users.email, todo.task, todo.date, todo.iscomplete FROM users INNER JOIN todo ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 ";
+			pool
+				.query(selectTasksForUserNameQuery, [userName, userAuthenticated.id])
+				.then((result) => {
+					const userTasks = result.rows;
+					if (userTasks.length === 0) {
+						res.status(404).send({
+							message: `The user with the username ${userName} has no tasks!`,
+						});
+						return;
+					}
+					res.status(200).json({ user: userTasks });
+				});
 		}
 	} else {
-res.send("not authenticated");
-}
+		res.send("not authenticated");
+	}
 });
+
+
+// api/yesterdaytasks/:username returns tasks for a specific user with the username param
+//This endpoint will bring only yesterday's tasks for the specific user
+router.get("/yesterdaytasks/:username", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	let token = req.headers.authorization;
+
+	if (token) {
+		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+
+		if (userAuthenticated) {
+			const userName = req.params.username;
+
+			const yesterdaytasks = moment().subtract(1, "days");
+			console.log(yesterdaytasks);
+			const selectTasksForUserNameQuery =
+				"SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and date(todo.date)=$3";
+			pool
+				.query(selectTasksForUserNameQuery, [userName, userAuthenticated.id,(yesterdaytasks)])
+				.then((result) => {
+					const userTasks = result.rows;
+					if (userTasks.length === 0) {
+						res.status(404).send({
+							message: `The user with the username ${userName} has no tasks!`,
+						});
+						return;
+					}
+					res.status(200).json({ user: userTasks });
+				});
+		}
+	} else {
+		res.send("not authenticated");
+	}
+});
+
+
+// api/yesterdaytasks/:username returns tasks for a specific user with the username param
+//This endpoint will bring only yesterday's tasks for the specific user
+router.get("/todaytasks/:username", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	let token = req.headers.authorization;
+
+	if (token) {
+		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+
+		if (userAuthenticated) {
+			const userName = req.params.username;
+
+			const todaytasks  = moment();
+			
+			const selectTasksForUserNameQuery =
+				"SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and date(todo.date)=$3";
+			pool
+				.query(selectTasksForUserNameQuery, [userName, userAuthenticated.id,(todaytasks)])
+				.then((result) => {
+					const userTasks = result.rows;
+					if (userTasks.length === 0) {
+						res.status(404).send({
+							message: `The user with the username ${userName} has no tasks!`,
+						});
+						return;
+					}
+					res.status(200).json({ user: userTasks });
+				});
+		}
+	} else {
+		res.send("not authenticated");
+	}
+});
+
+
+
 
 export default router;

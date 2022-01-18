@@ -59,9 +59,9 @@ export function Home() {
 							type="email"
 							name="email"
 							id="email"
-							required
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
+							aria-required
 						></input>
 					</div>
 					<div className="login-form">
@@ -72,7 +72,7 @@ export function Home() {
 							type="password"
 							name="password"
 							id="password"
-							required
+							aria-required
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 						></input>
@@ -80,7 +80,7 @@ export function Home() {
 				</form>
 			</div>
 			<Password />
-			<LoginBtn className="text-center" email={email} password={ password} />
+			<LoginBtn className="text-center" email={email} password={password} />
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>

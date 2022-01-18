@@ -95,13 +95,10 @@ router.post("/log", (req, res) => {
 				if (auth) {
 					const token = createToken(result.rows[0].id);
 
-
 					res.json({
-						user: token, username: result.rows[0].username
-					
+						user: token,
+						username: result.rows[0].username,
 					});
-
-			
 				} else {
 					res.send("Password do not match");
 				}
@@ -252,10 +249,7 @@ router.get("/todaytasks/:username", (req, res) => {
 	}
 });
 
-
-
 //adding tasks from client
-
 
 router.post("/newtasks", (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -265,41 +259,94 @@ router.post("/newtasks", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
-
+	let token = req.headers.authorization.split(" ")[1];
+	console.log(token);
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
-			const task = req.body.task;
-			console.log(task)
+			const {
+				yesterdayCheckedTasksId,
+				yesterdayUncheckedTasksId,
+				todayTasksAlreadySaved,
+				todayTasksNew,
+			} = req.body;
+			// console.log(task, "***************");
+
 			const id = userAuthenticated.id;
-			const selectTasksForUserNameQuery =
-				"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
-			task.forEach(tasks => {
-				
-				pool.query(selectTasksForUserNameQuery, [tasks, id]).then((result) => {
-					let userTasks = result.rows;
-					if (userTasks.length === 0) {
-						res.status(404).send({
-							message: "No New task has been added!",
-						});
-						return;
+			//find todays todos, delete all of them and add new ones
+			const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN
+			(SELECT todo.id
+				FROM todo
+				WHERE user_id = $1 AND
+						date >= TIMESTAMP 'today' AND
+						date <  TIMESTAMP 'tomorrow') `;
+			pool.query(deleteTodayTodosQuery, [id], (error, result) => {
+				if (error) {
+					return res.status(500).send({ msg: "Database ERROR" });
+				}
+
+				//ADD new tasks
+				const addTodayValuesQuery = todayTasksNew.map(
+					(task) => `('${task}',$1)`
+				);
+				pool.query(
+					`INSERT INTO todo(task,user_id) VALUES ${addTodayValuesQuery.join(
+						","
+					)} RETURNING id;`,
+					[id],
+					(error, result) => {
+						if (error) {
+							return res.status(500).send({ msg: "Database ERROR" });
+						}
+						// console.log(result.rows, ">>>>>>>RESULT");
+						res.send({ id: result.rows[0].id });
 					}
-					res.status(200).json({ user: userTasks });
-				});
+				);
 			});
-			
+			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
+			const yesterdaysCompletedTasksSetQuery = `UPDATE todo SET iscomplete = true WHERE id =ANY ($1)`;
+			pool.query(
+				yesterdaysCompletedTasksSetQuery,
+				[yesterdayCheckedTasksId],
+				(error, result) => {
+					if (error) {
+						return res.status(500).send({ msg: "Database ERROR" });
+					}
+				}
+			);
+			const yesterdaysUnCompletedTasksSetQuery = `UPDATE todo SET iscomplete = false WHERE id =ANY ($1)`;
+			pool.query(
+				yesterdaysUnCompletedTasksSetQuery,
+				[yesterdayUncheckedTasksId],
+				(error, result) => {
+					if (error) {
+						return res.status(500).send({ msg: "Database ERROR" });
+					}
+				}
+			);
+
+			// const selectTasksForUserNameQuery =
+			// 	"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
+			// todayTasksNew.forEach((tasks) => {
+			// 	pool
+			// 		.query(selectTasksForUserNameQuery, [tasks, id])
+			// 		.then((result) => {
+			// 			let userTasks = result.rows;
+			// 			if (userTasks.length === 0) {
+			// 				res.status(404).send({
+			// 					message: "No New task has been added!",
+			// 				});
+			// 				return;
+			// 			}
+			// 			res.status(200).json({ user: userTasks });
+			// 		});
+			// });
 		}
 	} else {
 		res.send("not authenticated");
 	}
 });
-
-
-
-
-
-
 
 export default router;

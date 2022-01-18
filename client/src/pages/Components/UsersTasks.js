@@ -4,7 +4,7 @@ import Checkbox from "./Checkbox";
 import TodayTasks from "./TodayTasks";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
-	const [todayTasks, setTodayTasks] = useState([]);
+	const [todayTasks, setTodayTasks] = useState([{ task: "" }]);
 
 	const { username } = useParams();
 
@@ -20,7 +20,7 @@ function UsersTasks() {
 				return res.status !== 404 ? res.json() : { user: [] };
 			})
 			.then((data) => {
-				setState(data.user);
+				setState((prev) => data.user.concat(prev));
 			})
 			.catch();
 	}
@@ -32,15 +32,52 @@ function UsersTasks() {
 	function handleSubmit(event) {
 		event.preventDefault();
 		console.log("submitted");
-		const checkedTasksId = [];
-		const uncheckedTasksId = [];
+		const yesterdayCheckedTasksId = [];
+		const yesterdayUncheckedTasksId = [];
 		yesterdayTasks.forEach((task) => {
 			task.iscomplete
-				? checkedTasksId.push(task.id)
-				: uncheckedTasksId.push(task.id);
+				? yesterdayCheckedTasksId.push(task.id)
+				: yesterdayUncheckedTasksId.push(task.id);
 		});
+
+		const todayTasksAlreadySaved = [];
+		const todayTasksNew = [];
+		todayTasks
+			.filter((task) => task.task !== "")
+			.forEach((task) => {
+				//filter empty ones
+				todayTasksNew.push(task.task); //later seperate
+				if (task.user_id) {
+					todayTasksAlreadySaved.push(task);
+				} else {
+					// todayTasksNew.push(task.task);//later seperate
+				}
+			});
 		// 	const todayTasksArray = todayTasks.split("\n").filter((yesterdayTasks) => yesterdayTasks);
-		console.log({ checkedTasksId, uncheckedTasksId });
+		const submitData = {
+			yesterdayCheckedTasksId,
+			yesterdayUncheckedTasksId,
+			todayTasksAlreadySaved,
+			todayTasksNew,
+		};
+
+		const token = localStorage.getItem("t");
+
+		console.log({ token });
+		const postObject = {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+				authorization: `Bearer ${token}`, // ADD Token to HEADER
+			},
+			body: JSON.stringify(submitData),
+		};
+
+		// postTodos("newtasks", postObject);
+		fetch(`http://127.0.0.1:3100/api/newtasks`, postObject).then((response) => {
+			console.log({ response });
+		});
 	}
 	const yesterdayItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)
@@ -52,12 +89,6 @@ function UsersTasks() {
 		.map((task) => (
 			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
 		));
-	console.log({
-		yesterdayTasks,
-		yesterdayItemsDone,
-		yesterdayItemsUndone,
-		todayTasks,
-	});
 
 	const todayTaskInputs = todayTasks.map((task, index) => (
 		<TodayTasks

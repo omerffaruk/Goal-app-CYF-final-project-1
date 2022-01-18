@@ -94,8 +94,7 @@ router.post("/log", (req, res) => {
 				const auth = bcrypt.compareSync(passwords, result.rows[0].password);
 				if (auth) {
 					const token = createToken(result.rows[0].id);
-
-					res.json({ user: token });
+					res.json({ user: token, username: result.rows[0].username });
 				} else {
 					res.send("Password do not match");
 				}
@@ -158,7 +157,6 @@ router.get("/tasks/:username", (req, res) => {
 	}
 });
 
-
 // api/yesterdaytasks/:username returns tasks for a specific user with the username param
 //This endpoint will bring only yesterday's tasks for the specific user
 router.get("/yesterdaytasks/:username", (req, res) => {
@@ -182,7 +180,11 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 			const selectTasksForUserNameQuery =
 				"SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and date(todo.date)=$3";
 			pool
-				.query(selectTasksForUserNameQuery, [userName, userAuthenticated.id,(yesterdaytasks)])
+				.query(selectTasksForUserNameQuery, [
+					userName,
+					userAuthenticated.id,
+					yesterdaytasks,
+				])
 				.then((result) => {
 					const userTasks = result.rows;
 					if (userTasks.length === 0) {
@@ -198,7 +200,6 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 		res.send("not authenticated");
 	}
 });
-
 
 // api/yesterdaytasks/:username returns tasks for a specific user with the username param
 //This endpoint will bring only yesterday's tasks for the specific user
@@ -218,12 +219,16 @@ router.get("/todaytasks/:username", (req, res) => {
 		if (userAuthenticated) {
 			const userName = req.params.username;
 
-			const todaytasks  = moment();
-			
+			const todaytasks = moment();
+
 			const selectTasksForUserNameQuery =
 				"SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and date(todo.date)=$3";
 			pool
-				.query(selectTasksForUserNameQuery, [userName, userAuthenticated.id,(todaytasks)])
+				.query(selectTasksForUserNameQuery, [
+					userName,
+					userAuthenticated.id,
+					todaytasks,
+				])
 				.then((result) => {
 					const userTasks = result.rows;
 					if (userTasks.length === 0) {
@@ -239,8 +244,5 @@ router.get("/todaytasks/:username", (req, res) => {
 		res.send("not authenticated");
 	}
 });
-
-
-
 
 export default router;

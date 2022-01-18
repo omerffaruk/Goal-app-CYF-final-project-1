@@ -10,6 +10,9 @@
 	--secondary-color: #650374;
 	--login-btn-hover-color: #5d7ada;
 	--header-bottom-border-color: #ccc;
+	--linkedin-bg: #0A66C2;
+	--person-pic-padding: 10px;
+	--person-pic-box-shadow-color: #2e556b;
 }
 
 /* Box sizing rules */
@@ -121,6 +124,12 @@ p {
 	padding: 10px;
 	max-width: 450px;
 	background-color: var(--login-card-bg-color);
+}
+
+.home-ctn h1 {
+	margin: 8px auto 12px;
+	line-height: 1.4em;
+	text-transform: capitalize;
 }
 
 .slack-connect {
@@ -245,9 +254,12 @@ p {
 	justify-content: space-between;
 }
 
+.create-ctn > * {
+	margin-top: 0.6em;
+}
+
 .create-ctn a {
 	color: var(--secondary-color);
-	margin-top: 1.1em;
 	font-weight: 600;
 }
 
@@ -257,7 +269,7 @@ p {
 
 /* ---------- About Page ---------*/
 .about-ctn {
-	max-width: 700px;
+	max-width: 800px;
 	margin: 0 auto;
 	padding: 0 10px;
 }
@@ -267,21 +279,71 @@ p {
 	flex-direction: column;
 }
 
-.about-ctn h2, .about-ctn h3{
+.about-ctn h2,
+.about-ctn h3 {
 	text-transform: uppercase;
+}
+
+.team-title-ctn h2 {
+	padding: 1.2em 0;
 }
 
 .team-pics-ctn {
 	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	column-gap: 3em;
+	row-gap: 2em;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	padding-bottom: 2em;
+	text-align: center;
+}
+
+/* .person-ctn {
+	margin-bottom: 3em;
+} */
+
+.person-info-ctn h4 {
+	margin: 0.5em;
+}
+
+.person-info-ctn p {
+	margin-bottom: 2em;
+	color: #707174;
+}
+
+.person-border-bottom {
+	height: 5px;
+	margin: 0 2em;
+	background-color: var(--person-pic-box-shadow-color);
+}
+
+.person-pic-ctn {
+	margin-bottom: 2em;
 }
 
 .person-pic-ctn img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-	border-radius: 8px;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	border-radius: 40%;
+	padding: var(--person-pic-padding);
+	box-shadow: inset 0 0 0 var(--person-pic-padding) var(--person-pic-box-shadow-color);
+}
+
+.person-links-ctn {
+	display: flex;
+	justify-content: center;
+}
+
+.linkedin-logo > a > svg {
+	min-width: 20px;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: transparent;
+	border-color: transparent;
+	border-radius: 2px;
+	color: white;
+	background-color: var(--linkedin-bg);
+	cursor: pointer;
 }
 
 @media only screen and (min-width: 800px) {

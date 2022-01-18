@@ -5,7 +5,7 @@ import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
 
 const About = () => (
-	<main role="main">
+	<main role="main" className="about-ctn">
 		<div>
 			<h2>About</h2>
 			<p>
@@ -29,19 +29,34 @@ const About = () => (
 			</ul>
 		</div>
 		<div className="team-ctn">
-			<h3>Meet the team HTCT</h3>
-			<div className="team-pic-ctn">
-				<img src={anzaPic} alt="Anza Azam" />
+			<div className="team-title-ctn">
+				<h3>Meet the team HTCT</h3>
 			</div>
-			<div className="team-pic-ctn">
-				<img src={dharmaPic} alt="Dharma Emmelene" />
-				<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
-			</div>
-			<div className="team-pic-ctn">
-				<img src={musaPic} alt="Musa Yuksel" />
-			</div>
-			<div className="team-pic-ctn">
-				<img src={omerPic} alt="Omer Faruk" />
+			<div className="team-pics-ctn">
+				<div className="team-person-ctn">
+					<div className="person-pic-ctn">
+						<img src={anzaPic} alt="Anza Azam" />
+					</div>
+					<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+				</div>
+				<div className="team-person-ctn">
+					<div className="person-pic-ctn">
+						<img src={dharmaPic} alt="Dharma Emmelene" />
+					</div>
+					<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+				</div>
+				<div className="team-person-ctn">
+					<div className="person-pic-ctn">
+						<img src={musaPic} alt="Musa Yuksel" />
+					</div>
+					<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+				</div>
+				<div className="team-person-ctn">
+					<div className="person-pic-ctn">
+						<img src={omerPic} alt="Omer Faruk" />
+					</div>
+					<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+				</div>
 			</div>
 		</div>
 	</main>

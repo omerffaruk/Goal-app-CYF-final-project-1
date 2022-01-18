@@ -21,8 +21,12 @@ function UsersTasks() {
 	return (
 		<>
 			<ul>
-				{[...tasks].map((tasks) => (
-					<li>{tasks.task}</li>
+				{[...tasks].map((task) => (
+					<>
+						<li> {task.task }</li>
+						<li> {task.iscomplete ?'true':'false'}</li> </>
+					
+
 				))}
 			</ul>
 		</>

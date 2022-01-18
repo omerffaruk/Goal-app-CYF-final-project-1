@@ -9,14 +9,14 @@ export default function TodayTasks({
 	const [todayValue, setTodayValue] = useState(task.task);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		// setTodayTasks((prev) =>
-		// 	prev.map((currentTask, i) => {
-		// 		if (i === index) {
-		// 			currentTask.task = event.target.value;
-		// 		}
-		// 		return currentTask;
-		// 	})
-		// );
+		setTodayTasks((prev) =>
+			prev.map((currentTask, currentIndex) => {
+				if (currentIndex === index) {
+					currentTask.task = event.target.value;
+				}
+				return currentTask;
+			})
+		);
 	}
 	return (
 		<li>

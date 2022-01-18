@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import Home from "./Home";
 
 import Popup from "./Components/Popup";
-import { useEffect, useState } from "react";
 
 const SignUp = () => {
 	const createNewAccount = (e) => {

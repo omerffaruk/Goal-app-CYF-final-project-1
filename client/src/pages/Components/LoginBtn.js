@@ -1,9 +1,10 @@
-import React from "react";
-import { useState } from "react";
+import React,{ useState } from "react";
 import TemporaryTasks from "../Temporary/TemporaryTasks";
+import { useNavigate } from "react-router-dom";
 
 const LoginBtn = ({ email, password }) => {
 	const [login, setLogin] = useState(false);
+	const navigate= useNavigate()
 	const handleLogin = (e) => {
 		e.preventDefault();
 		fetch("http://127.0.0.1:3100/api/log", {
@@ -25,9 +26,11 @@ const LoginBtn = ({ email, password }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				console.log({data})
 				if (data.user) {
 					localStorage.setItem("t", data.user);
 					setLogin(true);
+					navigate(`/${data.username}`)
 				} else window.alert("error");
 			})
 			.catch((e) => console.log(e));
@@ -38,7 +41,6 @@ const LoginBtn = ({ email, password }) => {
 			<button className="login-btn" onClick={(e) => handleLogin(e)}>
 				Login
 			</button>
-			{login && <TemporaryTasks />}
 		</div>
 	);
 };

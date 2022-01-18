@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Checkbox from "../Components/Checkbox";
+import Checkbox from "./Checkbox";
 function UsersTasks() {
 	const [tasks, setTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState("");

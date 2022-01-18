@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
 function UsersTasks() {
 	const [tasks, setTasks] = useState([]);
-	const [todayTasks, setTodayTasks] = useState("");
+	const [todayTasks, setTodayTasks] = useState([]);
 
 	const { username } = useParams();
 
-	const api = `http://127.0.0.1:3100/api/tasks/${username}`;
+	const api = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
 
 	useEffect(() => {
 		fetch(api, {
@@ -15,7 +15,10 @@ function UsersTasks() {
 			headers: { authorization: localStorage.getItem("t") },
 		})
 			.then((res) => res.json())
-			.then((data) => setTasks(data.user))
+			.then((data) => {
+				setTasks(data.user);
+				setTodayTasks(data.user);
+			})
 			.catch();
 	}, []);
 
@@ -25,22 +28,27 @@ function UsersTasks() {
 		const uncheckedTasksId = [];
 		tasks.forEach((task) => {
 			task.iscomplete
-				? checkedTasksId.push(task.taskid)
-				: uncheckedTasksId.push(task.taskid);
+				? checkedTasksId.push(task.id)
+				: uncheckedTasksId.push(task.id);
 		});
-		const todayTasksArray = todayTasks.split("\n").filter((tasks) => tasks);
-		console.log({ checkedTasksId, uncheckedTasksId, todayTasksArray });
+		// 	const todayTasksArray = todayTasks.split("\n").filter((tasks) => tasks);
+		console.log({ checkedTasksId, uncheckedTasksId });
 	}
-
-	const yesterdayItems = tasks.map((task) => (
-		<Checkbox setTasks={setTasks} key={task.taskid} task={task} />
-	));
+	const yesterdayItemsDone = tasks
+		.filter((task) => task.iscomplete)
+		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
+	const yesterdayItemsUndone = tasks
+		.filter((task) => !task.iscomplete)
+		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
+	console.log({ tasks, yesterdayItemsDone, yesterdayItemsUndone });
 
 	return (
 		<section>
 			<form onSubmit={handleSubmit}>
-				<h4>Yesterday's tasks</h4>
-				<ul>{yesterdayItems}</ul>
+				<h4>Yesterday's tasks Dones</h4>
+				<ul>{yesterdayItemsDone}</ul>
+				<h4>Yesterday's tasks Undones</h4>
+				<ul>{yesterdayItemsUndone}</ul>
 				<h4>Today's tasks, Please use enter for each plan..</h4>
 				<textarea
 					placeholder="Write something for today"
@@ -48,7 +56,7 @@ function UsersTasks() {
 					name="todayTasks"
 					cols="60"
 					rows="5"
-					value={todayTasks}
+					value={"WILL BE UPDATED..."}
 					onChange={(event) => setTodayTasks(event.target.value)}
 				></textarea>
 				<button type="submit">Submit</button>

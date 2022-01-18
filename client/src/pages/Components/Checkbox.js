@@ -2,7 +2,7 @@ export default function Checkbox({ setTasks, task }) {
 	function handleChange() {
 		setTasks((prev) =>
 			prev.map((currentTask) => {
-				if (currentTask.taskid === task.taskid) {
+				if (currentTask.id === task.id) {
 					currentTask.iscomplete = !currentTask.iscomplete;
 				}
 				return currentTask;
@@ -12,13 +12,13 @@ export default function Checkbox({ setTasks, task }) {
 
 	return (
 		<li>
-			<label>
+			<label style={{ color: `${task.iscomplete ? "green" : "red"}` }}>
 				<input
 					type="checkbox"
 					defaultChecked={task.iscomplete}
 					onChange={handleChange}
 					name="yesterdays"
-					value={task.taskid}
+					value={task.id}
 				/>
 				{task.task}
 			</label>

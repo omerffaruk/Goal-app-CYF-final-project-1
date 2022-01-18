@@ -2,45 +2,55 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
 function UsersTasks() {
-	const [tasks, setTasks] = useState([]);
+	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
 
 	const { username } = useParams();
 
-	const api = `http://127.0.0.1:3100/api/todaytasks/${username}`;
+	const yesterdayTasksEndPoint = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
+	const todayTasksEndPoint = `http://127.0.0.1:3100/api/todaytasks/${username}`;
 
-	useEffect(() => {
-		fetch(api, {
+	function fetchData(endpoint, setState) {
+		fetch(endpoint, {
 			method: "GET",
 			headers: { authorization: localStorage.getItem("t") },
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				return res.status !== 404 ? res.json() : { user: [] };
+			})
 			.then((data) => {
-				setTasks(data.user);
-				setTodayTasks(data.user);
+				setState(data.user);
 			})
 			.catch();
+	}
+	useEffect(() => {
+		fetchData(yesterdayTasksEndPoint, setYesterdayTasks);
+		fetchData(todayTasksEndPoint, setTodayTasks);
 	}, []);
 
 	function handleSubmit(event) {
 		event.preventDefault();
 		const checkedTasksId = [];
 		const uncheckedTasksId = [];
-		tasks.forEach((task) => {
+		yesterdayTasks.forEach((task) => {
 			task.iscomplete
 				? checkedTasksId.push(task.id)
 				: uncheckedTasksId.push(task.id);
 		});
-		// 	const todayTasksArray = todayTasks.split("\n").filter((tasks) => tasks);
+		// 	const todayTasksArray = todayTasks.split("\n").filter((yesterdayTasks) => yesterdayTasks);
 		console.log({ checkedTasksId, uncheckedTasksId });
 	}
-	const yesterdayItemsDone = tasks
+	const yesterdayItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)
-		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
-	const yesterdayItemsUndone = tasks
+		.map((task) => (
+			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+		));
+	const yesterdayItemsUndone = yesterdayTasks
 		.filter((task) => !task.iscomplete)
-		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
-	console.log({ tasks, yesterdayItemsDone, yesterdayItemsUndone });
+		.map((task) => (
+			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+		));
+	console.log({ yesterdayTasks, yesterdayItemsDone, yesterdayItemsUndone });
 
 	return (
 		<section>

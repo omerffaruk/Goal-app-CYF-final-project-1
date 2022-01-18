@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 function UsersTasks() {
 	const [tasks, setTasks] = useState([]);
-	
 	const { username } = useParams();
 	const api = `http://127.0.0.1:3100/api/tasks/${username}`;
 

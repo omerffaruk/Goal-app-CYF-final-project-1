@@ -28,7 +28,8 @@ function UsersTasks() {
 				? checkedTasksId.push(task.taskid)
 				: uncheckedTasksId.push(task.taskid);
 		});
-		console.log({ checkedTasksId, uncheckedTasksId });
+		const todayTasksArray = todayTasks.split("\n").filter((tasks) => tasks);
+		console.log({ checkedTasksId, uncheckedTasksId, todayTasksArray });
 	}
 
 	const yesterdayItems = tasks.map((task) => (
@@ -43,6 +44,7 @@ function UsersTasks() {
 				<h4>Today's tasks, Please use enter for each plan..</h4>
 				<textarea
 					placeholder="Write something for today"
+					required
 					name="todayTasks"
 					cols="60"
 					rows="5"

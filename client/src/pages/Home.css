@@ -2,8 +2,9 @@
 
 /* ------------ Variables -------------*/
 :root {
+	--main-bg-color: #fff;
 	--login-card-bg-color: rgb(255, 255, 255);
-	--header-bcg-color: #fff;
+	--header-bcg-color: #FFF;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
 	--hover-primary-color: #f7f7f7;
@@ -29,7 +30,7 @@ html {
 
 /* Set core body defaults */
 body {
-	min-height: 100vh;
+	min-height: 100%;
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
 	padding: 0;
@@ -42,6 +43,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: var(--primary-color);
 }
 
 a:hover {
@@ -83,6 +85,11 @@ p {
 	font-size: 1em;
 }
 
+/*---------- default ul, li styling ------*/
+ul {
+	list-style-type: none;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -95,13 +102,14 @@ p {
 	grid-template-rows: 100px auto;
 	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
 		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
-	box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px;
-	border-radius: 4px;
+	/* box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px; */
+	background-color: var(--main-bg-color);
+	/* border-radius: 4px; */
 }
 
 /*-------------- Header ---------------*/
 .header.login-page {
-	padding: 20px;
+	padding: 20px 30px;
 	background-color: var(--header-bcg-color);
 	display: flex;
 	flex-direction: row;
@@ -283,7 +291,7 @@ p {
 
 .about-ctn h2,
 .about-ctn h3 {
-	text-transform: uppercase;
+	text-transform: capitalize;
 }
 
 .team-title-ctn h2 {
@@ -293,7 +301,7 @@ p {
 .team-pics-ctn {
 	display: grid;
 	column-gap: 3em;
-	row-gap: 2em;
+	row-gap: 4em;
 	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 	padding-bottom: 2em;
 	text-align: center;

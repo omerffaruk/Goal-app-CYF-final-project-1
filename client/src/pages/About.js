@@ -83,7 +83,7 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Dharma Emmelene</h4>
 						<div className="person-border-bottom"></div>
-						<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+						<p>Dharma is a NW4 trainee, former theatre kid turned coder. Programming still allows her to explore her creativity being able to build something from nothing.</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a

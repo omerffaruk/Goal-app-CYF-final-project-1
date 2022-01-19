@@ -6,7 +6,6 @@ import Home from "./Home";
 
 import Popup from "./Components/Popup";
 
-
 const SignUp = () => {
 	const createNewAccount = (e) => {
 		e.preventDefault();
@@ -22,7 +21,6 @@ const SignUp = () => {
 				"Content-type": "application/json",
 			},
 
-
 			body: JSON.stringify({
 				name: name,
 				email: email,
@@ -31,8 +29,9 @@ const SignUp = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.message) window.alert(data.message);
-				else {
+				if (data.message) {
+					window.alert(data.message);
+				} else {
 					location.assign("/");
 					localStorage.setItem("t", data.user);
 					window.alert("USER CREATED, now login");
@@ -52,8 +51,9 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			} else setEmail(e.target.value);
-			
+			} else {
+				setEmail(e.target.value);
+			}
 		}
 	};
 	return (
@@ -68,7 +68,7 @@ const SignUp = () => {
 			</p>
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="name">Name</label>
 						</div>
@@ -83,7 +83,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="email">Email</label>
 						</div>
@@ -98,7 +98,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="password">Password</label>
 						</div>

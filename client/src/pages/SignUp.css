@@ -1,4 +1,4 @@
-.signup-ctn {
+.signup-ctn, .forgot-psw-ctn {
   margin: 0 auto;
   max-width: 450px;
   padding: 10px;
@@ -10,11 +10,11 @@
   font-weight: 700;
 }
 
-.signup-form {
+.form-field {
   margin-bottom: 1em; 
 }
 
-.signup-ctn input {
+.form-field input {
   width: 100%;
 }
 

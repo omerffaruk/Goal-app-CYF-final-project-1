@@ -3,7 +3,7 @@
 /* ------------ Variables -------------*/
 :root {
 	--login-card-bg-color: rgb(255, 255, 255);
-	--header-bcg-color: #fff;
+	--header-bcg-color: #0077b6;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
 	--hover-primary-color: #f7f7f7;

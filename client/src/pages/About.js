@@ -3,7 +3,7 @@ import anzaPic from "../images/anza.png";
 import dharmaPic from "../images/dharma.png";
 import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
-import { BsLinkedin } from "react-icons/bs";
+import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 
 const About = () => (
 	<main role="main" className="about-ctn">
@@ -52,6 +52,20 @@ const About = () => (
 									<BsLinkedin />
 								</a>
 							</div>
+							<div className="twitter-logo">
+								<a href="https://twitter.com/" target="_blank" rel="noreferrer">
+									<BsTwitter />
+								</a>
+							</div>
+							<div className="github-logo">
+								<a
+									href="https://github.com/Anza-Azam"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsGithub />
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -71,6 +85,20 @@ const About = () => (
 									rel="noreferrer"
 								>
 									<BsLinkedin />
+								</a>
+							</div>
+							<div className="twitter-logo">
+								<a href="https://twitter.com/" target="_blank" rel="noreferrer">
+									<BsTwitter />
+								</a>
+							</div>
+							<div className="github-logo">
+								<a
+									href="https://github.com/musayuksel"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsGithub />
 								</a>
 							</div>
 						</div>
@@ -94,6 +122,24 @@ const About = () => (
 									<BsLinkedin href="https://www.linkedin.com/" />
 								</a>
 							</div>
+							<div className="twitter-logo">
+								<a
+									href="https://twitter.com/@Dharma_Emmelene"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsTwitter />
+								</a>
+							</div>
+							<div className="github-logo">
+								<a
+									href="https://github.com/dharmaguadeloupe"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsGithub />
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -112,7 +158,25 @@ const About = () => (
 									target="_blank"
 									rel="noreferrer"
 								>
-									<BsLinkedin href="https://www.linkedin.com/" />
+									<BsLinkedin />
+								</a>
+							</div>
+							<div className="twitter-logo">
+								<a
+									href="https://twitter.com/merFarukYamak1"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsTwitter />
+								</a>
+							</div>
+							<div className="github-logo">
+								<a
+									href="https://github.com/omerffaruk"
+									target="_blank"
+									rel="noreferrer"
+								>
+									<BsGithub />
 								</a>
 							</div>
 						</div>

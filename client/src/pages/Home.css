@@ -283,7 +283,7 @@ ul {
 
 /* ---------- About Page ---------*/
 .about-ctn {
-	max-width: 800px;
+	max-width: 700px;
 	margin: 0 auto;
 	padding: 0 10px;
 }
@@ -296,6 +296,7 @@ ul {
 .about-ctn h2,
 .about-ctn h3 {
 	text-transform: capitalize;
+	text-align: center;
 }
 
 .team-title-ctn h2 {
@@ -306,7 +307,8 @@ ul {
 	display: grid;
 	column-gap: 3em;
 	row-gap: 4em;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	margin: 0 auto;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	padding-bottom: 2em;
 	text-align: center;
 }

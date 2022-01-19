@@ -150,7 +150,7 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Omer Yamak</h4>
 						<div className="person-border-bottom"></div>
-						<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+						<p>Omer is a NW4 trainee. His coding journey started with CYF. Since then, he has been enjoying coding. In his free time, he trains Kickboxing.</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Password = () => {
   return (
@@ -7,7 +8,7 @@ const Password = () => {
       <input type="checkbox" id="remember-user" name="remember" checked></input>
       <label htmlFor="remember">Remember me</label>
       </div>
-      <a href="#">Forgot Password ?</a>
+      <Link to={"/forgot"}>Forgot Password ?</Link>
     </div>
   );
 };

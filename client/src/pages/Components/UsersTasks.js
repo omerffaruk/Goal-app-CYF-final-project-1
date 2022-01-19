@@ -75,7 +75,7 @@ function UsersTasks() {
 		};
 
 		// postTodos("newtasks", postObject);
-		fetch(`http://127.0.0.1:3100/api/newtasks`, postObject).then((response) => {
+		fetch("http://127.0.0.1:3100/api/newtasks", postObject).then((response) => {
 			console.log({ response });
 		});
 	}
@@ -105,11 +105,11 @@ function UsersTasks() {
 	return (
 		<section>
 			<form onSubmit={handleSubmit}>
-				<h4>Yesterday's tasks Dones</h4>
+				<h4>Yesterday's tasks Completed</h4>
 				<ul>{yesterdayItemsDone}</ul>
-				<h4>Yesterday's tasks Undones</h4>
+				<h4>Yesterday's tasks Incomplete</h4>
 				<ul>{yesterdayItemsUndone}</ul>
-				<h4>Today's tasks, Please use enter for each plan..</h4>
+				<h4>Today's tasks, Please press enter for each new task..</h4>
 				<article>
 					<ul>{todayTaskInputs}</ul>
 					<button type="button" onClick={handleAddNewTask}>

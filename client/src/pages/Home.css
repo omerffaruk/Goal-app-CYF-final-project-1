@@ -4,11 +4,7 @@
 :root {
 	--main-bg-color: #fff;
 	--login-card-bg-color: rgb(255, 255, 255);
-<<<<<<< HEAD
-	--header-bcg-color: #FFF;
-=======
 	--header-bcg-color: #0077b6;
->>>>>>> 26dd8be8ea2ed3d688b5aff481953d85eaae5c5a
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
 	--hover-primary-color: #f7f7f7;

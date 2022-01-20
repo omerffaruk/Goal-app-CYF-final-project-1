@@ -80,19 +80,24 @@ export function Home() {
 					</div>
 				</form>
 			</div>
-			<Password />
+			<div>
+				<input
+					type="checkbox"
+					id="remember-user"
+					name="remember"
+					checked
+				></input>
+				<label htmlFor="remember">Remember me</label>
+			</div>
+			{/* <Password /> */}
 
-			<LoginBtn
-				className="text-center"
-				email={email}
-				password={password}
-				 
-			/>
+			<Link to={"/forgot_password"}>Forgot password</Link>
+
+			<LoginBtn className="text-center" email={email} password={password} />
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>
 			</div>
-			
 		</div>
 	);
 }

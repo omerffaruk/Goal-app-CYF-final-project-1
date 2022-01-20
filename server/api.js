@@ -306,38 +306,34 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post("/email", (req, res) => {
 	let email=req.body.email;
-	let token, id;
+	let  id;
 	
 	pool
 		.query("select * from users where email=$1",[email])
 		.then((result) => {
 id = result.rows[0].id;
 			if (id) {
-				token = createToken(id);
-				const text = `${req.protocol}://localhost:3000/reset_password/:${id}`;
+			
+				const text = `${req.protocol}://localhost:3000/reset_password/${id}`;
 				sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 				const msg = {
-					to: "anna.leeds.uk@gmail.com",
+					to: email,
 					from: "anzaazam.nw4@gmail.com",
-					subject: "Hello world",
+					subject: "Please click on the link in text to reset your password",
 					text: text,
 				};
 
 				sgMail
 					.send(msg)
 					.then(() => {
-						//Celebrate
+						
 						res.json("Email Sent!");
 					})
 					.catch((error) => {
-						//Log friendly error
+						
 						res.json(error.toString());
 
-						//Extract error msg
-						const { message, code, response } = error;
-
-						//Extract response msg
-					//	const { headers, body } = response;
+					
 					});
 
 			}
@@ -365,10 +361,11 @@ router.post("/reset_password/:id", (req, res)=>{
 
 	const token =(req.params.id)
 	const password = req.body.password;
-	console.log(token);
+	console.log(password);
     const salt = bcrypt.genSaltSync(10);
 	const newpassword = bcrypt.hashSync(password, salt);
-	//const userAuthenticated = jwt.verify(token, "htctsecretserver");
+	
+	
 
 
 	let query;

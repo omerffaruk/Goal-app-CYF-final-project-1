@@ -1,10 +1,15 @@
 import { Router } from "express";
+import express from "express";
 import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
+
 const sgMail = require("@sendgrid/mail");
+
 const router = new Router();
+router.use(express.json());
+router.use(express.urlencoded());
 
 //validates data and registers new user in the database if user doesn't already exists
 
@@ -28,7 +33,9 @@ router.post("/register", (req, res) => {
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
-		let slackid = "14185971187811889";
+
+		let slackid = "test";
+
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
@@ -259,34 +266,100 @@ router.post("/newtasks", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
-
+	let token = req.headers.authorization.split(" ")[1];
+	console.log(token);
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
-			const task = req.body.task;
-			console.log(task);
+
+			const {
+				yesterdayCheckedTasksId,
+				yesterdayUncheckedTasksId,
+				todayTasksAlreadySaved,
+				todayTasksNew,
+			} = req.body;
+			// console.log(task, "***************");
+
 			const id = userAuthenticated.id;
-			const selectTasksForUserNameQuery =
-				"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
-			task.forEach((tasks) => {
-				pool.query(selectTasksForUserNameQuery, [tasks, id]).then((result) => {
-					let userTasks = result.rows;
-					if (userTasks.length === 0) {
-						res.status(404).send({
-							message: "No New task has been added!",
-						});
-						return;
+			//find todays todos, delete all of them and add new ones
+			const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN
+			(SELECT todo.id
+				FROM todo
+				WHERE user_id = $1 AND
+						date >= TIMESTAMP 'today' AND
+						date <  TIMESTAMP 'tomorrow') `;
+			pool.query(deleteTodayTodosQuery, [id], (error, result) => {
+				if (error) {
+					return res.status(500).send({ msg: "Database ERROR" });
+				}
+
+				//ADD new tasks
+				const addTodayValuesQuery = todayTasksNew.map(
+					(task) => `('${task}',$1)`
+				);
+				pool.query(
+					`INSERT INTO todo(task,user_id) VALUES ${addTodayValuesQuery.join(
+						","
+					)} RETURNING id;`,
+					[id],
+					(error, result) => {
+						if (error) {
+							return res.status(500).send({ msg: "Database ERROR" });
+						}
+						// console.log(result.rows, ">>>>>>>RESULT");
+						res.send({ id: result.rows[0].id });
+
 					}
-					res.status(200).json({ user: userTasks });
-				});
+				);
 			});
+
+			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
+			const yesterdaysCompletedTasksSetQuery = `UPDATE todo SET iscomplete = true WHERE id =ANY ($1)`;
+			pool.query(
+				yesterdaysCompletedTasksSetQuery,
+				[yesterdayCheckedTasksId],
+				(error, result) => {
+					if (error) {
+						return res.status(500).send({ msg: "Database ERROR" });
+					}
+				}
+			);
+			const yesterdaysUnCompletedTasksSetQuery = `UPDATE todo SET iscomplete = false WHERE id =ANY ($1)`;
+			pool.query(
+				yesterdaysUnCompletedTasksSetQuery,
+				[yesterdayUncheckedTasksId],
+				(error, result) => {
+					if (error) {
+						return res.status(500).send({ msg: "Database ERROR" });
+					}
+				}
+			);
+
+			// const selectTasksForUserNameQuery =
+			// 	"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
+			// todayTasksNew.forEach((tasks) => {
+			// 	pool
+			// 		.query(selectTasksForUserNameQuery, [tasks, id])
+			// 		.then((result) => {
+			// 			let userTasks = result.rows;
+			// 			if (userTasks.length === 0) {
+			// 				res.status(404).send({
+			// 					message: "No New task has been added!",
+			// 				});
+			// 				return;
+			// 			}
+			// 			res.status(200).json({ user: userTasks });
+			// 		});
+			// });
+
 		}
 	} else {
 		res.send("not authenticated");
 	}
 });
+
 
 //let sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -367,5 +440,6 @@ router.post("/reset_password/:id", (req, res) => {
 		})
 		.catch();
 });
+
 
 export default router;

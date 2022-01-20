@@ -1,64 +1,121 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
+import TodayTasks from "./TodayTasks";
 function UsersTasks() {
-	const [tasks, setTasks] = useState([]);
-	const [todayTasks, setTodayTasks] = useState([]);
+	const [yesterdayTasks, setYesterdayTasks] = useState([]);
+	const [todayTasks, setTodayTasks] = useState([{ task: "" }]);
 
 	const { username } = useParams();
 
-	const api = `http://127.0.0.1:3100/api/todaytasks/${username}`;
+	const yesterdayTasksEndPoint = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
+	const todayTasksEndPoint = `http://127.0.0.1:3100/api/todaytasks/${username}`;
 
-	useEffect(() => {
-		fetch(api, {
+	function fetchData(endpoint, setState) {
+		fetch(endpoint, {
 			method: "GET",
 			headers: { authorization: localStorage.getItem("t") },
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				return res.status !== 404 ? res.json() : { user: [] };
+			})
 			.then((data) => {
-				setTasks(data.user);
-				setTodayTasks(data.user);
+				setState((prev) => data.user.concat(prev));
 			})
 			.catch();
+	}
+	useEffect(() => {
+		fetchData(yesterdayTasksEndPoint, setYesterdayTasks);
+		fetchData(todayTasksEndPoint, setTodayTasks);
 	}, []);
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		const checkedTasksId = [];
-		const uncheckedTasksId = [];
-		tasks.forEach((task) => {
+		console.log("submitted");
+		const yesterdayCheckedTasksId = [];
+		const yesterdayUncheckedTasksId = [];
+		yesterdayTasks.forEach((task) => {
 			task.iscomplete
-				? checkedTasksId.push(task.id)
-				: uncheckedTasksId.push(task.id);
+				? yesterdayCheckedTasksId.push(task.id)
+				: yesterdayUncheckedTasksId.push(task.id);
 		});
-		// 	const todayTasksArray = todayTasks.split("\n").filter((tasks) => tasks);
-		console.log({ checkedTasksId, uncheckedTasksId });
-	}
-	const yesterdayItemsDone = tasks
-		.filter((task) => task.iscomplete)
-		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
-	const yesterdayItemsUndone = tasks
-		.filter((task) => !task.iscomplete)
-		.map((task) => <Checkbox setTasks={setTasks} key={task.id} task={task} />);
-	console.log({ tasks, yesterdayItemsDone, yesterdayItemsUndone });
 
+		const todayTasksAlreadySaved = [];
+		const todayTasksNew = [];
+		todayTasks
+			.filter((task) => task.task !== "")
+			.forEach((task) => {
+				//filter empty ones
+				todayTasksNew.push(task.task); //later seperate
+				if (task.user_id) {
+					todayTasksAlreadySaved.push(task);
+				} else {
+					// todayTasksNew.push(task.task);//later seperate
+				}
+			});
+		// 	const todayTasksArray = todayTasks.split("\n").filter((yesterdayTasks) => yesterdayTasks);
+		const submitData = {
+			yesterdayCheckedTasksId,
+			yesterdayUncheckedTasksId,
+			todayTasksAlreadySaved,
+			todayTasksNew,
+		};
+
+		const token = localStorage.getItem("t");
+
+		console.log({ token });
+		const postObject = {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+				authorization: `Bearer ${token}`, // ADD Token to HEADER
+			},
+			body: JSON.stringify(submitData),
+		};
+
+		// postTodos("newtasks", postObject);
+		fetch("http://127.0.0.1:3100/api/newtasks", postObject).then((response) => {
+			console.log({ response });
+		});
+	}
+	const yesterdayItemsDone = yesterdayTasks
+		.filter((task) => task.iscomplete)
+		.map((task) => (
+			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+		));
+	const yesterdayItemsUndone = yesterdayTasks
+		.filter((task) => !task.iscomplete)
+		.map((task) => (
+			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+		));
+
+	const todayTaskInputs = todayTasks.map((task, index) => (
+		<TodayTasks
+			key={task.id || index}
+			setTodayTasks={setTodayTasks}
+			task={task}
+			index={index}
+			handleAddNewTask={handleAddNewTask}
+		/>
+	));
+	function handleAddNewTask() {
+		setTodayTasks((prev) => prev.concat({ task: "" }));
+	}
 	return (
 		<section>
 			<form onSubmit={handleSubmit}>
-				<h4>Yesterday's tasks Dones</h4>
+				<h4>Yesterday's tasks Completed</h4>
 				<ul>{yesterdayItemsDone}</ul>
-				<h4>Yesterday's tasks Undones</h4>
+				<h4>Yesterday's tasks Incomplete</h4>
 				<ul>{yesterdayItemsUndone}</ul>
-				<h4>Today's tasks, Please use enter for each plan..</h4>
-				<textarea
-					placeholder="Write something for today"
-					required
-					name="todayTasks"
-					cols="60"
-					rows="5"
-					value={"WILL BE UPDATED..."}
-					onChange={(event) => setTodayTasks(event.target.value)}
-				></textarea>
+				<h4>Today's tasks, Please press enter for each new task..</h4>
+				<article>
+					<ul>{todayTaskInputs}</ul>
+					<button type="button" onClick={handleAddNewTask}>
+						Add new Task
+					</button>
+				</article>
 				<button type="submit">Submit</button>
 			</form>
 		</section>

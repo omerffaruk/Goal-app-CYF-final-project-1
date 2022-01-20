@@ -84,9 +84,13 @@
 		"morgan": "^1.10.0",
 		"pg": "^8.7.1",
 		"react-icons": "^4.3.1",
+
 		"react-transition-group": "^4.4.2",
 		"sendgrid": "^5.2.3",
 		"sendgrid-rest": "^2.6.1"
+
+		"react-transition-group": "^4.4.2"
+
 	},
 	"engines": {
 		"node": "^12 || ^14",

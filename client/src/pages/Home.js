@@ -29,11 +29,13 @@ export function Home() {
 
 	const handleChange = (e) => {
 		e.preventDefault();
-		if ((e.target.name === "email"))
+		if (e.target.name === "email") {
 			setEmail(e.target.value);
-		else setPassword(e.target.value);
+		} else {
+			setPassword(e.target.value);
+		}
 	};
-	
+
 	return (
 		<div className="home-ctn">
 			<h1 className="text-center">Login to your GoalApp account</h1>
@@ -52,7 +54,7 @@ export function Home() {
 			</div>
 			<div className="form">
 				<form action="" method="get" className="login-form">
-					<div className="login-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="email">Email</label>
 						</div>
@@ -65,7 +67,7 @@ export function Home() {
 							aria-required
 						></input>
 					</div>
-					<div className="login-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="password">Password</label>
 						</div>

@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Home from "./Home";
 import Popup from "./Components/Popup";
 
-
 const SignUp = () => {
 	const [text, setText] = useState('');
 	const [popup, setPopup] = useState(false);
@@ -24,7 +23,6 @@ const SignUp = () => {
 				"Content-type": "application/json",
 			},
 
-
 			body: JSON.stringify({
 				name: name,
 				email: email,
@@ -33,6 +31,7 @@ const SignUp = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+
 				if (data.message)
 				{
 					setText(data.message)
@@ -41,6 +40,7 @@ const SignUp = () => {
 					//window.alert(data.message);
 				else {
 				
+
 					location.assign("/");
 					localStorage.setItem("t", data.user);
 			
@@ -61,9 +61,10 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
+
 			} else setEmail(e.target.value);
 			setPopup(false)
-			
+		
 		}
 	};
 	return (
@@ -79,7 +80,7 @@ const SignUp = () => {
 			{popup&&<Popup text={text} />}
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="name">Name</label>
 						</div>
@@ -94,7 +95,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="email">Email</label>
 						</div>
@@ -109,7 +110,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="password">Password</label>
 						</div>

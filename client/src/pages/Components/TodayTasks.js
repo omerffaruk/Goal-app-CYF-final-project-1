@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { MdEditNote, MdDone } from "react-icons/Md";
 export function TodayTasks({
 	task,
 	setTodayTasks,
@@ -7,6 +7,7 @@ export function TodayTasks({
 	index = 0,
 }) {
 	const [todayValue, setTodayValue] = useState(task.task);
+	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
 		setTodayTasks((prev) => {
@@ -24,7 +25,7 @@ export function TodayTasks({
 				placeholder="Enter for new task..."
 				value={todayValue}
 				onChange={handleChange}
-				// disabled={true}
+				disabled={isDisable}
 				onKeyPress={(event) => {
 					if (event.key === "Enter") {
 						event.preventDefault();
@@ -32,6 +33,13 @@ export function TodayTasks({
 					}
 				}}
 			/>
+			<button
+				style={{ cursor: "pointer" }}
+				type="button"
+				onClick={() => setIsDisable((prev) => !prev)}
+			>
+				<MdEditNote />
+			</button>
 		</li>
 	);
 }

@@ -55,6 +55,7 @@ export function NewTask({ handleAddNewTask }) {
 				if (event.key === "Enter") {
 					event.preventDefault();
 					handleAddNewTask(todayValue);
+					setTodayValue("");
 				}
 			}}
 		/>

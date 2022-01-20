@@ -37,7 +37,7 @@ app.shortcut("lunch_daily_brief", async ({ body, shortcut, ack, client }) => {
 		]);
 		const yesterdayEvents = poolResponseForYesterday.rows;
 		const todayEvents = poolResponseForToday.rows;
-		console.log({ yesterdayEvents, todayEvents });
+		// console.log({ yesterdayEvents, todayEvents });
 		const viewItems = standUpViewItems(yesterdayEvents, todayEvents);
 		const result = await client.views.open({
 			trigger_id: shortcut.trigger_id,

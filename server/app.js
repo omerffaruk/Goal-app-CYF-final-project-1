@@ -12,6 +12,9 @@ import {
 
 // middleware
 const app = express();
+app.use(cors());
+import { receiver as appA } from "./slackApp";
+app.use(appA.router); //every time use first
 app.use(express.json());
 app.use(express.urlencoded());
 
@@ -19,7 +22,7 @@ app.use(express.urlencoded());
 // Put these statements before you define any routes.
 
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 app.use(express.static(__dirname));
 const apiRoot = "/api";
@@ -27,14 +30,16 @@ const staticDir = path.join(__dirname, "static");
 
 
 
+<<<<<<< HEAD
 import { Parser } from "webpack";
 // const { BrowserWindow } = window.require("@electron/remote");
+=======
+// import { Parser } from "webpack";   delete pls if this line is unnecessary
+
+>>>>>>> c3581610ff65b213f56e1b3e1bfcdac069d37c91
 
 
-app.use(cors());
-import { receiver as appA } from "./slackApp";
-app.use(appA.router); //every time use first
-app.use(express.json());
+// app.use(express.json());
 
 app.use(configuredHelmet());
 app.use(morgan("dev"));

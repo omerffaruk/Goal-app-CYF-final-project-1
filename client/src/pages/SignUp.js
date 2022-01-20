@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Home from "./Home";
 import Popup from "./Components/Popup";
 
-
 const SignUp = () => {
 	const [text, setText] = useState('');
 	const [popup, setPopup] = useState(false);
@@ -23,7 +22,6 @@ const SignUp = () => {
 				Accept: "application/json",
 				"Content-type": "application/json",
 			},
-
 
 			body: JSON.stringify({
 				name: name,
@@ -79,7 +77,7 @@ const SignUp = () => {
 			{popup&&<Popup text={text} />}
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="name">Name</label>
 						</div>
@@ -94,7 +92,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="email">Email</label>
 						</div>
@@ -109,7 +107,7 @@ const SignUp = () => {
 							}}
 						></input>
 					</div>
-					<div className="signup-form">
+					<div className="form-field">
 						<div className="label-ctn">
 							<label htmlFor="password">Password</label>
 						</div>

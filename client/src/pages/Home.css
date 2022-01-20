@@ -2,14 +2,19 @@
 
 /* ------------ Variables -------------*/
 :root {
+	--main-bg-color: #fff;
 	--login-card-bg-color: rgb(255, 255, 255);
-	--header-bcg-color: #fff;
+	--header-bcg-color: #0077b6;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
 	--hover-primary-color: #f7f7f7;
 	--secondary-color: #650374;
 	--login-btn-hover-color: #5d7ada;
 	--header-bottom-border-color: #ccc;
+	--linkedin-bg: #0a66c2;
+	--twitter-bg: #00aced;
+	--person-pic-padding: 10px;
+	--person-pic-box-shadow-color: #2e556b;
 }
 
 /* Box sizing rules */
@@ -25,7 +30,7 @@ html {
 
 /* Set core body defaults */
 body {
-	min-height: 100vh;
+	min-height: 100%;
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
 	padding: 0;
@@ -38,6 +43,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: var(--primary-color);
 }
 
 a:hover {
@@ -79,6 +85,11 @@ p {
 	font-size: 1em;
 }
 
+/*---------- default ul, li styling ------*/
+ul {
+	list-style-type: none;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -91,18 +102,24 @@ p {
 	grid-template-rows: 100px auto;
 	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
 		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
-	box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px;
-	border-radius: 4px;
+	/* box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px; */
+	background-color: var(--main-bg-color);
+	/* border-radius: 4px; */
 }
 
 /*-------------- Header ---------------*/
 .header.login-page {
-	padding: 20px;
+	padding: 20px 30px;
 	background-color: var(--header-bcg-color);
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
 	border-bottom: 1px solid var(--header-bottom-border-color);
+}
+
+.header.login-page a {
+	color: white;
 }
 
 .logo-ctn {
@@ -121,6 +138,12 @@ p {
 	padding: 10px;
 	max-width: 450px;
 	background-color: var(--login-card-bg-color);
+}
+
+.home-ctn h1 {
+	margin: 8px auto 12px;
+	line-height: 1.4em;
+	text-transform: capitalize;
 }
 
 .slack-connect {
@@ -189,7 +212,7 @@ p {
 	padding-bottom: 0.3em;
 }
 
-.login-form input {
+.form-field input {
 	border-radius: 4px;
 	border: 1px solid var(--primary-color);
 	cursor: text;
@@ -245,9 +268,12 @@ p {
 	justify-content: space-between;
 }
 
+.create-ctn > * {
+	margin-top: 0.6em;
+}
+
 .create-ctn a {
 	color: var(--secondary-color);
-	margin-top: 1.1em;
 	font-weight: 600;
 }
 
@@ -267,21 +293,91 @@ p {
 	flex-direction: column;
 }
 
-.about-ctn h2, .about-ctn h3{
-	text-transform: uppercase;
+.about-ctn h2,
+.about-ctn h3 {
+	text-transform: capitalize;
+	text-align: center;
+}
+
+.team-title-ctn h2 {
+	padding: 1.2em 0;
 }
 
 .team-pics-ctn {
 	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	column-gap: 3em;
+	row-gap: 4em;
+	margin: 0 auto;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	padding-bottom: 2em;
+	text-align: center;
+}
+
+.person-info-ctn h4 {
+	margin: 0.5em;
+}
+
+.person-info-ctn p {
+	margin-bottom: 1.3em;
+	color: #707174;
+}
+
+.person-border-bottom {
+	height: 5px;
+	margin: 0 2em;
+	background-color: var(--person-pic-box-shadow-color);
+}
+
+.person-pic-ctn {
+	margin-bottom: 2em;
 }
 
 .person-pic-ctn img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-	border-radius: 8px;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+	border-radius: 40%;
+	padding: var(--person-pic-padding);
+	box-shadow: inset 0 0 0 var(--person-pic-padding)
+		var(--person-pic-box-shadow-color);
+}
+
+.person-links-ctn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.person-links-ctn > * > a > svg {
+	min-width: 20px;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: transparent;
+	border-color: transparent;
+	border-radius: 2px;
+	color: white;
+	cursor: pointer;
+	margin: 0 5px;
+}
+
+.linkedin-logo > a > svg {
+	background-color: var(--linkedin-bg);
+}
+
+.twitter-logo > a > svg {
+	min-width: 20px;
+	width: 1.2em;
+	height: 1.2em;
+	color: var(--twitter-bg);
+	background-color: white;
+}
+
+.github-logo > a > svg {
+	min-width: 20px;
+	width: 1.3em;
+	height: 1.3em;
+	background-color: white;
+	color: black;
 }
 
 @media only screen and (min-width: 800px) {

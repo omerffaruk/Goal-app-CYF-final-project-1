@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
@@ -7,7 +8,7 @@ const NavBar = () => {
 				<a href="/">
 					<img
 						className="logo"
-						src={require("../../images/placeholder_logo.png").default}
+						src={require("../../images/logo-white.png").default}
 						alt=""
 					/>
 				</a>
@@ -19,6 +20,11 @@ const NavBar = () => {
 					alt=""
 				/>
 			</div> */}
+			<div className="about-link-ctn">
+				<Link className="about-link" to={"/about"}>
+					<h2>About</h2>
+				</Link>
+			</div>
 		</div>
 	);
 };

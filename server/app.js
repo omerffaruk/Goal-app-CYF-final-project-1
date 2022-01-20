@@ -30,13 +30,18 @@ const staticDir = path.join(__dirname, "static");
 
 
 
-<<<<<<< HEAD
+
 import { Parser } from "webpack";
 // const { BrowserWindow } = window.require("@electron/remote");
-=======
+
+
+import { Parser } from "webpack";
+// const { BrowserWindow } = window.require("@electron/remote");
+
 // import { Parser } from "webpack";   delete pls if this line is unnecessary
 
->>>>>>> c3581610ff65b213f56e1b3e1bfcdac069d37c91
+
+
 
 
 // app.use(express.json());

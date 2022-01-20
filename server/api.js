@@ -4,7 +4,9 @@ import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
+
 const sgMail = require("@sendgrid/mail");
+
 const router = new Router();
 router.use(express.json());
 router.use(express.urlencoded());
@@ -31,7 +33,9 @@ router.post("/register", (req, res) => {
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
+
 		let slackid = "test";
+
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
@@ -305,9 +309,11 @@ router.post("/newtasks", (req, res) => {
 						}
 						// console.log(result.rows, ">>>>>>>RESULT");
 						res.send({ id: result.rows[0].id });
+
 					}
 				);
 			});
+
 			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
 			const yesterdaysCompletedTasksSetQuery = `UPDATE todo SET iscomplete = true WHERE id =ANY ($1)`;
 			pool.query(

@@ -40,6 +40,15 @@ export function TodayTasks({
 			>
 				<MdEditNote />
 			</button>
+			{!isDisable && (
+				<button
+					style={{ cursor: "pointer" }}
+					type="button"
+					onClick={() => setIsDisable((prev) => !prev)}
+				>
+					<MdDone />
+				</button>
+			)}
 		</li>
 	);
 }

@@ -1,10 +1,9 @@
 import React from "react";
-import { useState } from "react"
-import { useParams,Link } from "react-router-dom"
+import { useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 const Password = () => {
-
-  const [email, setEmail] = useState("");
+	const [email, setEmail] = useState("");
 	const handleChange = (e) => {
 		setEmail(e.target.value);
 	};
@@ -31,8 +30,8 @@ const Password = () => {
 			.then((data) => console.log(data))
 			.catch();
 	};
-  
-  return (
+
+	return (
 		<div>
 			<div className="password-ctn">
 				<div className="form">
@@ -55,12 +54,12 @@ const Password = () => {
 					</form>
 				</div>
 			</div>
-			
-			<Link to={"/reset_password/:id"}>click here to enter password and follow instructions in email</Link>;{" "}
+			<Link to={"/reset_password/:id"}>
+				click here to enter password and follow instructions in email
+			</Link>
+			;{" "}
 		</div>
 	);
-
-
 };
 
 export default Password;

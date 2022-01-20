@@ -35,7 +35,7 @@ import { Parser } from "webpack";
 // const { BrowserWindow } = window.require("@electron/remote");
 
 
-import { Parser } from "webpack";
+
 // const { BrowserWindow } = window.require("@electron/remote");
 
 // import { Parser } from "webpack";   delete pls if this line is unnecessary

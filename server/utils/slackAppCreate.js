@@ -3,9 +3,9 @@ import dotenv from "dotenv";
 dotenv.config({ path: process.cwd() + "/.env" });
 export const createApp = (appName) => {
   const signingSecret = process.env.SLACK_SIGNING_SECRET;
-  console.log({ signingSecret });
+  // console.log({ signingSecret });
   const token =process.env.SLACK_BOT_TOKEN;
-  console.log({ token });
+  // console.log({ token });
   const receiver = new ExpressReceiver({
     signingSecret,
     endpoints: {

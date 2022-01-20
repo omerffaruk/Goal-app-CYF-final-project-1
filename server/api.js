@@ -314,13 +314,13 @@ router.post("/email", (req, res) => {
 id = result.rows[0].id;
 			if (id) {
 			
-				const text = `${req.protocol}://localhost:3000/reset_password/${id}`;
+				const text = `reset_password/${id}`;
 				sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 				const msg = {
 					to: email,
 					from: "anzaazam.nw4@gmail.com",
-					subject: "Please click on the link in text to reset your password",
-					text: text,
+					subject: "Please follow the instructions",
+					text: "Replace reset_password/:id with "+text+" in the browser url click enter then write new password and click submit",
 				};
 
 				sgMail

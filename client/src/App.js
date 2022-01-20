@@ -24,7 +24,7 @@ function App() {
 				{/* <Route path="/temporary/tasks/:userName" element={<UsersTasks />} /> */}
 				{<Route path="/:username" element={<UsersTasks />} />}
 				{<Route path="/forgot_password" element={<Password /> }/>}
-				{<Route exact path="/reset_password/:id" element={<ResetPassword />} />}
+				{<Route exact path="/reset_password/:id" element= {<ResetPassword />} />}
 
 			</Routes>
 		</div>

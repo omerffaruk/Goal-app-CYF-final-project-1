@@ -8,6 +8,7 @@ import "./Home.css";
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [email, setEmail] = useState("");
+	const [popup, setPopup] = useState(false);
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
@@ -80,17 +81,18 @@ export function Home() {
 				</form>
 			</div>
 			<Password />
-			<LoginBtn className="text-center" email={email} password={password} />
+
+			<LoginBtn
+				className="text-center"
+				email={email}
+				password={password}
+				 
+			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>
 			</div>
-			{/* <Link to="/about">About</Link> */}
-			<h3 className="text-center">
-				<Link className="temporary-link" to={"/temporary/tasks"}>
-					See All Tasks
-				</Link>
-			</h3>
+			
 		</div>
 	);
 }

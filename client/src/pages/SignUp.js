@@ -3,12 +3,14 @@ import "./SignUp.css";
 
 import { Link } from "react-router-dom";
 import Home from "./Home";
-
 import Popup from "./Components/Popup";
 
 
 const SignUp = () => {
+	const [text, setText] = useState('');
+	const [popup, setPopup] = useState(false);
 	const createNewAccount = (e) => {
+		
 		e.preventDefault();
 		fetch("http://127.0.0.1:3100/api/register", {
 			method: "Post",
@@ -31,11 +33,18 @@ const SignUp = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.message) window.alert(data.message);
+				if (data.message)
+				{
+					setText(data.message)
+					setPopup(true)
+				}
+					//window.alert(data.message);
 				else {
+				
 					location.assign("/");
 					localStorage.setItem("t", data.user);
-					window.alert("USER CREATED, now login");
+			
+					
 				}
 			})
 			.catch((e) => console.log(e));
@@ -53,6 +62,7 @@ const SignUp = () => {
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
 			} else setEmail(e.target.value);
+			setPopup(false)
 			
 		}
 	};
@@ -66,6 +76,7 @@ const SignUp = () => {
 					Sign in here
 				</Link>
 			</p>
+			{popup&&<Popup text={text} />}
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
 					<div className="signup-form">

@@ -2,6 +2,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 	entry: "./client/src/index.js",
+	// 	 resolve: {
+	//       fallback: {
+	//         util: require.resolve("util/"),
+	//       },
+	//   },
 	module: {
 		rules: [
 			{
@@ -27,7 +32,11 @@ module.exports = {
 	output: {
 		publicPath: "/",
 	},
-	
+	resolve: {
+		fallback: {
+			path: false,
+		},
+	},
 	plugins: [
 		new HtmlWebpackPlugin({
 			favicon: "./client/src/favicon.ico",

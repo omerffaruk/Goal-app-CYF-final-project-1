@@ -3,7 +3,7 @@ import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
-
+const sgMail = require("@sendgrid/mail");
 const router = new Router();
 
 //validates data and registers new user in the database if user doesn't already exists
@@ -28,7 +28,7 @@ router.post("/register", (req, res) => {
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
-		let slackid = "141859719895889";
+		let slackid = "14185971187811889";
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
@@ -97,11 +97,11 @@ router.post("/log", (req, res) => {
 
 
 					res.json({
-						user: token, username: result.rows[0].username
-					
+						user: token, username: result.rows[0].username,
+
 					});
 
-			
+
 				} else {
 					res.send("Password do not match");
 				}
@@ -272,12 +272,12 @@ router.post("/newtasks", (req, res) => {
 
 		if (userAuthenticated) {
 			const task = req.body.task;
-			console.log(task)
+			console.log(task);
 			const id = userAuthenticated.id;
 			const selectTasksForUserNameQuery =
 				"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
-			task.forEach(tasks => {
-				
+			task.forEach((tasks) => {
+
 				pool.query(selectTasksForUserNameQuery, [tasks, id]).then((result) => {
 					let userTasks = result.rows;
 					if (userTasks.length === 0) {
@@ -289,7 +289,7 @@ router.post("/newtasks", (req, res) => {
 					res.status(200).json({ user: userTasks });
 				});
 			});
-			
+
 		}
 	} else {
 		res.send("not authenticated");
@@ -297,8 +297,110 @@ router.post("/newtasks", (req, res) => {
 });
 
 
+	
 
 
+//let sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+
+router.post("/email", (req, res) => {
+	let email=req.body.email;
+	let token, id;
+	
+	pool
+		.query("select * from users where email=$1",[email])
+		.then((result) => {
+id = result.rows[0].id;
+			if (id) {
+				token = createToken(id);
+				const text = `${req.protocol}://localhost:3000/reset_password/:${id}`;
+				sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+				const msg = {
+					to: "anna.leeds.uk@gmail.com",
+					from: "anzaazam.nw4@gmail.com",
+					subject: "Hello world",
+					text: text,
+				};
+
+				sgMail
+					.send(msg)
+					.then(() => {
+						//Celebrate
+						res.json("Email Sent!");
+					})
+					.catch((error) => {
+						//Log friendly error
+						res.json(error.toString());
+
+						//Extract error msg
+						const { message, code, response } = error;
+
+						//Extract response msg
+					//	const { headers, body } = response;
+					});
+
+			}
+})
+
+		.catch();
+
+
+
+});
+
+////////
+router.post("/reset_password/:id", (req, res)=>{
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+
+	const token =(req.params.id)
+	const password = req.body.password;
+	console.log(token);
+    const salt = bcrypt.genSaltSync(10);
+	const newpassword = bcrypt.hashSync(password, salt);
+	//const userAuthenticated = jwt.verify(token, "htctsecretserver");
+
+
+	let query;
+
+
+	query = "select * from users where id=$1";
+
+
+			pool
+				.query(query, [token])
+				.then((result) => {
+					if (result.rows.length > 0) {
+
+						query = "update users set password = $1 where id= $2 returning id,email,password";
+
+						pool.query(query,[newpassword, token]).
+							then((result) => {
+								res.json(result.rows[0]);
+							}
+
+								
+						).catch();
+
+
+					}
+})
+				.catch();
+
+
+
+
+});
 
 
 

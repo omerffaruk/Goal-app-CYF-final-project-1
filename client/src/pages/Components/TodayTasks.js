@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MdEditNote, MdDone, MdDeleteOutline } from "react-icons/Md";
 export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
@@ -18,10 +18,20 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 			return updatedData;
 		});
 	}
+	///reate Ref to focus on input area
+	const inputRef = useRef();
+	useEffect(() => {
+		if (!isDisable) {
+			inputRef.current.focus();
+		} else {
+			inputRef.current.blur();
+		}
+	}, [isDisable]);
 	return (
 		<li>
 			<input
 				type="text"
+				ref={inputRef}
 				name="today"
 				placeholder="Enter for new task..."
 				value={todayValue}
@@ -34,6 +44,7 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 					}
 				}}
 			/>
+			{/* //////   Edit task */}
 			<button
 				style={{ cursor: "pointer" }}
 				type="button"
@@ -41,6 +52,7 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 			>
 				<MdEditNote />
 			</button>
+			{/* ////// Approve after Edit task */}
 			{!isDisable && (
 				<button
 					style={{ cursor: "pointer" }}
@@ -50,6 +62,7 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 					<MdDone />
 				</button>
 			)}
+			{/* //////   Delete task */}
 			<button
 				style={{ cursor: "pointer" }}
 				type="button"

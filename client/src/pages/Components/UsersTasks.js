@@ -116,9 +116,6 @@ function UsersTasks() {
 				<article>
 					<ul>{todayTaskInputs}</ul>
 					<NewTask handleAddNewTask={handleAddNewTask} />
-					<button type="button" onClick={handleAddNewTask}>
-						Add new Task
-					</button>
 				</article>
 				<button type="submit">Submit</button>
 			</form>

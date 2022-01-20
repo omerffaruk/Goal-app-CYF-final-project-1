@@ -1,10 +1,12 @@
 import { Router } from "express";
+import express from "express";
 import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
-
 const router = new Router();
+router.use(express.json());
+router.use(express.urlencoded());
 
 //validates data and registers new user in the database if user doesn't already exists
 
@@ -28,7 +30,7 @@ router.post("/register", (req, res) => {
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
-		let slackid = "141859719895889";
+		let slackid = "test";
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import { MdEditNote, MdDone } from "react-icons/Md";
-export function TodayTasks({
-	task,
-	setTodayTasks,
-	handleAddNewTask,
-	index = 0,
-}) {
+import { MdEditNote, MdDone, MdDeleteOutline } from "react-icons/Md";
+export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
@@ -16,7 +11,13 @@ export function TodayTasks({
 			return updatedData;
 		});
 	}
-
+	function handleDelete(index) {
+		setTodayTasks((prev) => {
+			const updatedData = [...prev];
+			updatedData.splice(index, 1);
+			return updatedData;
+		});
+	}
 	return (
 		<li>
 			<input
@@ -49,6 +50,13 @@ export function TodayTasks({
 					<MdDone />
 				</button>
 			)}
+			<button
+				style={{ cursor: "pointer" }}
+				type="button"
+				onClick={() => handleDelete(index)}
+			>
+				<MdDeleteOutline />
+			</button>
 		</li>
 	);
 }

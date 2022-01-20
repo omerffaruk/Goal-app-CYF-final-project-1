@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
+import { nanoid } from "nanoid";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
@@ -93,15 +94,16 @@ function UsersTasks() {
 
 	const todayTaskInputs = todayTasks.map((task, index) => (
 		<TodayTasks
-			key={index}
+			key={task.id}
 			setTodayTasks={setTodayTasks}
 			task={task}
 			index={index}
 			handleAddNewTask={handleAddNewTask}
 		/>
 	));
+
 	function handleAddNewTask(newTask) {
-		setTodayTasks((prev) => prev.concat({ task: newTask }));
+		setTodayTasks((prev) => prev.concat({ id: nanoid(10), task: newTask }));
 	}
 	return (
 		<section>

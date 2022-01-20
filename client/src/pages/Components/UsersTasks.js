@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Checkbox from "./Checkbox";
-import TodayTasks from "./TodayTasks";
+import { TodayTasks, NewTask } from "./TodayTasks";
+import "./userTasksStyle.css";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
-	const [todayTasks, setTodayTasks] = useState([{ task: "" }]);
-
+	const [todayTasks, setTodayTasks] = useState([]);
+	// console.log({ todayTasks, yesterdayTasks });
 	const { username } = useParams();
 
 	const yesterdayTasksEndPoint = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
@@ -20,7 +21,7 @@ function UsersTasks() {
 				return res.status !== 404 ? res.json() : { user: [] };
 			})
 			.then((data) => {
-				setState((prev) => data.user.concat(prev));
+				setState(data.user);
 			})
 			.catch();
 	}
@@ -92,26 +93,29 @@ function UsersTasks() {
 
 	const todayTaskInputs = todayTasks.map((task, index) => (
 		<TodayTasks
-			key={task.id || index}
+			key={index}
 			setTodayTasks={setTodayTasks}
 			task={task}
 			index={index}
 			handleAddNewTask={handleAddNewTask}
 		/>
 	));
-	function handleAddNewTask() {
-		setTodayTasks((prev) => prev.concat({ task: "" }));
+	function handleAddNewTask(newTask) {
+		setTodayTasks((prev) => prev.concat({ task: newTask }));
 	}
 	return (
 		<section>
-			<form onSubmit={handleSubmit}>
+			<form className="tasksForm" onSubmit={handleSubmit}>
 				<h4>Yesterday's tasks Completed</h4>
-				<ul>{yesterdayItemsDone}</ul>
+				<ul className="yesterdayCompletedContainer">{yesterdayItemsDone}</ul>
 				<h4>Yesterday's tasks Incomplete</h4>
-				<ul>{yesterdayItemsUndone}</ul>
+				<ul className="yesterdayUncompletedContainer">
+					{yesterdayItemsUndone}
+				</ul>
 				<h4>Today's tasks, Please press enter for each new task..</h4>
 				<article>
 					<ul>{todayTaskInputs}</ul>
+					<NewTask handleAddNewTask={handleAddNewTask} />
 					<button type="button" onClick={handleAddNewTask}>
 						Add new Task
 					</button>

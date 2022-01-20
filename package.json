@@ -81,6 +81,7 @@
 		"jsx-runtime": "^1.2.0",
 		"moment": "^2.29.1",
 		"morgan": "^1.10.0",
+		"nanoid": "^3.2.0",
 		"pg": "^8.7.1",
 		"react-icons": "^4.3.1",
 		"react-transition-group": "^4.4.2"

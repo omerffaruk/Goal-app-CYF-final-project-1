@@ -6,9 +6,11 @@ import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
 import UsersTasks from "./pages/Components/UsersTasks";
 import NavBar from "./pages/Components/NavBar";
 import About from "./pages/About";
-import ForgotPassword from "./pages/ForgotPassword";
+
+import ResetPassword from "./pages/Components/ResetPassword"
 
 import Home from "./pages/Home";
+import Password from "./pages/Components/Password";
 
 function App() {
 	return (
@@ -20,9 +22,12 @@ function App() {
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />
 				{/* -----------Temporary Routes--------------- */}
-				<Route path="/temporary/tasks" element={<TemporaryTasks />} />
+				{<Route path="/temporary/tasks" element={<TemporaryTasks />} />}
 				{/* <Route path="/temporary/tasks/:userName" element={<UsersTasks />} /> */}
-				<Route path="/:username" element={<UsersTasks />} />
+				{<Route path="/:username" element={<UsersTasks />} />}
+				{<Route path="/forgot_password" element={<Password /> }/>}
+				{<Route exact path="/reset_password/:id" element= {<ResetPassword />} />}
+
 			</Routes>
 		</div>
 	);

@@ -8,6 +8,11 @@ const { devDependencies } = require("../../package.json");
 module.exports = merge(common, {
 	devtool: "source-map",
 	mode: "production",
+	// 	  resolve: {
+	//       fallback: {
+	//         util: require.resolve("util/")
+	//       }
+	//   },
 	optimization: {
 		runtimeChunk: "single",
 		splitChunks: {
@@ -18,6 +23,11 @@ module.exports = merge(common, {
 					chunks: "all",
 				},
 			},
+		},
+	},
+	resolve: {
+		fallback: {
+			path: false,
 		},
 	},
 	output: {

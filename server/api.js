@@ -4,6 +4,9 @@ import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
+
+const sgMail = require("@sendgrid/mail");
+
 const router = new Router();
 router.use(express.json());
 router.use(express.urlencoded());
@@ -30,7 +33,9 @@ router.post("/register", (req, res) => {
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
+
 		let slackid = "test";
+
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);
 		const newpassword = bcrypt.hashSync(passwords, salt);
@@ -268,6 +273,7 @@ router.post("/newtasks", (req, res) => {
 		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
+
 			const {
 				yesterdayCheckedTasksId,
 				yesterdayUncheckedTasksId,
@@ -304,9 +310,11 @@ router.post("/newtasks", (req, res) => {
 						}
 						// console.log(result.rows, ">>>>>>>RESULT");
 						res.send({ id: result.rows[0].id });
+
 					}
 				);
 			});
+
 			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
 			const yesterdaysCompletedTasksSetQuery = `UPDATE todo SET iscomplete = true WHERE id =ANY ($1)`;
 			pool.query(
@@ -345,10 +353,93 @@ router.post("/newtasks", (req, res) => {
 			// 			res.status(200).json({ user: userTasks });
 			// 		});
 			// });
+
 		}
 	} else {
 		res.send("not authenticated");
 	}
 });
+
+
+//let sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+router.post("/email", (req, res) => {
+	let email = req.body.email;
+	let id;
+
+	pool
+		.query("select * from users where email=$1", [email])
+		.then((result) => {
+			id = result.rows[0].id;
+			if (id) {
+				const text = `reset_password/${id}`;
+				sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+				const msg = {
+					to: email,
+					from: "anzaazam.nw4@gmail.com",
+					subject: "Please follow the instructions",
+					text:
+						"Replace reset_password/:id with " +
+						text +
+						" in the browser url click enter then write new password and click submit",
+				};
+
+				sgMail
+					.send(msg)
+					.then(() => {
+						res.json("Email Sent!");
+					})
+					.catch((error) => {
+						res.json(error.toString());
+					});
+			}
+		})
+
+		.catch();
+});
+
+////////
+router.post("/reset_password/:id", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+
+	const token = req.params.id;
+	const password = req.body.password;
+	console.log(password);
+	const salt = bcrypt.genSaltSync(10);
+	const newpassword = bcrypt.hashSync(password, salt);
+
+	let query;
+
+	query = "select * from users where id=$1";
+
+	pool
+		.query(query, [token])
+		.then((result) => {
+			if (result.rows.length > 0) {
+				query =
+					"update users set password = $1 where id= $2 returning id,email,password";
+
+				pool
+					.query(query, [newpassword, token])
+					.then((result) => {
+						res.json(result.rows[0]);
+					})
+					.catch();
+			}
+		})
+		.catch();
+});
+
 
 export default router;

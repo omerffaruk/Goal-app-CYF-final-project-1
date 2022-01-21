@@ -79,6 +79,12 @@ select {
 	font: inherit;
 }
 
+/* -------- default heading styling --------*/
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+}
+
 /*--------- default p styling -------*/
 p {
 	line-height: 1.8em;
@@ -294,6 +300,10 @@ ul {
 	padding: 0 10px;
 }
 
+.about-ctn h2 {
+	padding: 1em 0;
+}
+
 .team-ctn {
 	display: flex;
 	flex-direction: column;
@@ -330,7 +340,7 @@ ul {
 
 .person-border-bottom {
 	height: 5px;
-	margin: 0 2em;
+	margin: 0em 2em 1em 2em;
 	background-color: var(--person-pic-box-shadow-color);
 }
 

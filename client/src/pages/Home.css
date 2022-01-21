@@ -151,12 +151,11 @@ ul {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	padding: 0px 20px;
+	align-items: center;
 	border: solid 1px var(--primary-color);
 	border-radius: 20px;
 	margin: 0 auto;
 	cursor: pointer;
-	position: relative;
 	transition: background-color 0.2s;
 }
 
@@ -166,34 +165,32 @@ ul {
 
 .slack-connect h4 {
 	text-transform: uppercase;
-	letter-spacing: 0.8px;
+	padding: 0.6em 0em;
+	margin-bottom: 0;
 }
 
 .Slack {
-	/*button to be connected later*/
-	top: 16.5px;
-	left: 10px;
 	width: 30px;
 	height: 30px;
-	pointer-events: none;
-	position: absolute;
+	margin: 0em 0.5em;
+	justify-self: flex-start;
 }
 
 .or-ctn {
 	display: flex;
 	flex-direction: row;
+	justify-content: left;
+	align-items: center;
 	padding: 1.5em 0 1em;
 }
 
 .or-ctn hr:first-child {
-	width: 40%;
-	text-align: left;
+	width: 45%;
 	height: 1.5px;
-	margin-left: 0;
 }
 
 .or-ctn hr:nth-of-type(2) {
-	width: 40%;
+	width: 45%;
 	text-align: right;
 	height: 1.5px;
 	margin-right: 0;
@@ -380,6 +377,12 @@ ul {
 	height: 1.3em;
 	background-color: white;
 	color: black;
+}
+
+@media only screen and (min-width: 350px) {
+	.slack-connect h4 {
+		letter-spacing: 0.5px;
+	}
 }
 
 @media only screen and (min-width: 800px) {

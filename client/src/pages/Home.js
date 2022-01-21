@@ -8,6 +8,7 @@ import "./Home.css";
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [email, setEmail] = useState("");
+	const [popup, setPopup] = useState(false);
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
@@ -81,18 +82,24 @@ export function Home() {
 					</div>
 				</form>
 			</div>
-			<Password />
+			<div>
+				<input
+					type="checkbox"
+					id="remember-user"
+					name="remember"
+					checked
+				></input>
+				<label htmlFor="remember">Remember me</label>
+			</div>
+			{/* <Password /> */}
+
+			<Link to={"/forgot_password"}>Forgot password</Link>
+
 			<LoginBtn className="text-center" email={email} password={password} />
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>
 			</div>
-			{/* <Link to="/about">About</Link> */}
-			<h3 className="text-center">
-				<Link className="temporary-link" to={"/temporary/tasks"}>
-					See All Tasks
-				</Link>
-			</h3>
 		</div>
 	);
 }

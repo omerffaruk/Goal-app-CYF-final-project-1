@@ -1,8 +1,9 @@
 import React,{ useState } from "react";
-import TemporaryTasks from "../Temporary/TemporaryTasks";
 import { useNavigate } from "react-router-dom";
-
+import Popup from "./Popup.js"
 const LoginBtn = ({ email, password }) => {
+	const [text, setText] = useState("");
+ const [popups, setPopups] = useState(false);
 	const [login, setLogin] = useState(false);
 	const navigate= useNavigate()
 	const handleLogin = (e) => {
@@ -31,13 +32,18 @@ const LoginBtn = ({ email, password }) => {
 					localStorage.setItem("t", data.user);
 					setLogin(true);
 					navigate(`/${data.username}`)
-				} else window.alert("error");
+				} else {
+				 
+					//setText("usernamepassword");
+					window.alert(text)
+				};
 			})
 			.catch((e) => console.log(e));
 	};
 
 	return (
 		<div>
+			
 			<button className="login-btn" onClick={(e) => handleLogin(e)}>
 				Login
 			</button>

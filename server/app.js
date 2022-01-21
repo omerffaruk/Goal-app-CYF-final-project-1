@@ -31,7 +31,6 @@ const staticDir = path.join(__dirname, "static");
 
 
 
-import { Parser } from "webpack";
 // const { BrowserWindow } = window.require("@electron/remote");
 
 

@@ -5,6 +5,10 @@
   padding: 10px;
 }
 
+.signup-ctn h2, .forgot-psw-ctn h2 {
+  padding: 1em 0em;
+}
+
 .signup-ctn .temporary-link {
   margin-left: 0.4em;
   /* text-decoration: underline; */

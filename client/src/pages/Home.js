@@ -41,12 +41,13 @@ export function Home() {
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Fgoal-app-cyf-final-project.herokuapp.com&amp;client_id=2978480330788.2973273823381">
-				<img
-					className="Slack"
-					alt=""
-					src={require("../images/Slack_logo.png").default} />
-				<h4>Continue with Slack</h4>
-	</a>
+					<img
+						className="Slack"
+						alt=""
+						src={require("../images/Slack_logo.png").default}
+					/>
+					<h4>Continue with Slack</h4>
+				</a>
 			</div>
 			<div className="or-ctn">
 				<hr />
@@ -83,18 +84,21 @@ export function Home() {
 					</div>
 				</form>
 			</div>
-			<div>
-				<input
-					type="checkbox"
-					id="remember-user"
-					name="remember"
-					checked
-				></input>
-				<label htmlFor="remember">Remember me</label>
+			<div className="password-ctn">
+				<div>
+					<input
+						type="checkbox"
+						id="remember-user"
+						name="remember"
+						checked
+					></input>
+					<label htmlFor="remember">Remember me</label>
+				</div>
+				<div>
+					<Link to={"/forgot_password"}>Forgot password</Link>
+				</div>
 			</div>
 			{/* <Password /> */}
-
-			<Link to={"/forgot_password"}>Forgot password</Link>
 
 			<LoginBtn className="text-center" email={email} password={password} />
 			<div className="create-ctn">

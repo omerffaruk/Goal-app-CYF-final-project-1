@@ -1,5 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import { MdEditNote, MdDone, MdDeleteOutline } from "react-icons/Md";
+import {
+	MdEditNote,
+	MdDone,
+	MdDeleteOutline,
+	MdMoreVert,
+} from "react-icons/Md";
 export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
@@ -32,6 +37,7 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 			<input
 				type="text"
 				ref={inputRef}
+				className="today-task-show"
 				name="today"
 				placeholder="Enter for new task..."
 				value={todayValue}
@@ -44,32 +50,41 @@ export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 					}
 				}}
 			/>
-			{/* //////   Edit task */}
-			<button
-				style={{ cursor: "pointer" }}
+			{/* <button
+				style={{ cursor: "pointer", border: "none" }}
 				type="button"
 				onClick={() => setIsDisable((prev) => !prev)}
 			>
-				<MdEditNote />
-			</button>
-			{/* ////// Approve after Edit task */}
-			{!isDisable && (
+				<MdMoreVert />
+			</button> */}
+			<div className="today-task-show-btn-container">
+				{/* //////   Edit task */}
 				<button
 					style={{ cursor: "pointer" }}
 					type="button"
 					onClick={() => setIsDisable((prev) => !prev)}
 				>
-					<MdDone />
+					<MdEditNote />
 				</button>
-			)}
-			{/* //////   Delete task */}
-			<button
-				style={{ cursor: "pointer" }}
-				type="button"
-				onClick={() => handleDelete(index)}
-			>
-				<MdDeleteOutline />
-			</button>
+				{/* ////// Approve after Edit task */}
+				{!isDisable && (
+					<button
+						style={{ cursor: "pointer" }}
+						type="button"
+						onClick={() => setIsDisable((prev) => !prev)}
+					>
+						<MdDone />
+					</button>
+				)}
+				{/* //////   Delete task */}
+				<button
+					style={{ cursor: "pointer" }}
+					type="button"
+					onClick={() => handleDelete(index)}
+				>
+					<MdDeleteOutline />
+				</button>
+			</div>
 		</li>
 	);
 }
@@ -82,6 +97,7 @@ export function NewTask({ handleAddNewTask }) {
 
 	return (
 		<input
+			className="new-task-input"
 			type="text"
 			autoFocus
 			name="newTask"

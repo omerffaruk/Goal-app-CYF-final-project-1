@@ -106,7 +106,7 @@ function UsersTasks() {
 		setTodayTasks((prev) => prev.concat({ id: nanoid(10), task: newTask }));
 	}
 	return (
-		<section>
+		<section className="formContainer">
 			<form className="tasksForm" onSubmit={handleSubmit}>
 				<h4>Yesterday's tasks Completed</h4>
 				<ul className="yesterdayCompletedContainer">{yesterdayItemsDone}</ul>
@@ -114,12 +114,14 @@ function UsersTasks() {
 				<ul className="yesterdayUncompletedContainer">
 					{yesterdayItemsUndone}
 				</ul>
-				<h4>Today's tasks, Please press enter for each new task..</h4>
-				<article>
+				<h3>Today's tasks, Please press enter for each new task..</h3>
+				<article className="today-todos-container">
 					<ul>{todayTaskInputs}</ul>
 					<NewTask handleAddNewTask={handleAddNewTask} />
 				</article>
-				<button type="submit">Submit</button>
+				<button className="todo-submit-btn login-btn" type="submit">
+					Submit
+				</button>
 			</form>
 		</section>
 	);

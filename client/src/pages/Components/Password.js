@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import { headers } from "../../utils/generalPostObjects";
+import fetchData from "../../utils/fetchData";
 const Password = () => {
 	const [email, setEmail] = useState("");
 	const handleChange = (e) => {
@@ -9,23 +10,14 @@ const Password = () => {
 	};
 	const forgotPassword = (e) => {
 		e.preventDefault();
-
-		fetch("http://127.0.0.1:3100/api/email", {
-			method: "Post",
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods":
-					"GET, POST, PATCH, PUT, DELETE, OPTIONS",
-				"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-
-				Accept: "application/json",
-				"Content-type": "application/json",
-			},
-
+		const methodObj = {
+			method: "POST",
+			headers,
 			body: JSON.stringify({
 				email: email,
 			}),
-		})
+		};
+		fetchData(`/email`, methodObj)
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch();

@@ -12,7 +12,7 @@ export function Home() {
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
-		fetch("/api")
+		fetch("https://goal-app-cyf-final-project.herokuapp.com/api")
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.statusText);

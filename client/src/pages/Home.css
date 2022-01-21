@@ -7,7 +7,7 @@
 	--header-bcg-color: #0077b6;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
-	--hover-primary-color: #f7f7f7;
+	--hover-primary-color: #fcfafa;
 	--secondary-color: #650374;
 	--login-btn-hover-color: #5d7ada;
 	--header-bottom-border-color: #ccc;
@@ -148,15 +148,20 @@ ul {
 }
 
 .slack-connect {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 	border: solid 1px var(--primary-color);
 	border-radius: 20px;
 	margin: 0 auto;
 	cursor: pointer;
 	transition: background-color 0.2s;
+}
+
+.slack-connect a {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: black;
 }
 
 .slack-connect:hover {

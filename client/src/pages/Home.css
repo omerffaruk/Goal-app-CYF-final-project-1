@@ -186,19 +186,21 @@ ul {
 	flex-direction: row;
 	justify-content: left;
 	align-items: center;
-	padding: 1.5em 0 1em;
+	padding: 1.2em 0 1em;
 }
 
 .or-ctn hr:first-child {
-	width: 45%;
+	width: 46%;
 	height: 1.5px;
+	margin-right: 1em;
 }
 
 .or-ctn hr:nth-of-type(2) {
-	width: 45%;
+	width: 46%;
 	text-align: right;
 	height: 1.5px;
 	margin-right: 0;
+	margin-left: 1em;
 }
 
 .or-ctn span {

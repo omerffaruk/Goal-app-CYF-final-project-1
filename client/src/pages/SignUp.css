@@ -1,6 +1,7 @@
 .signup-ctn, .forgot-psw-ctn {
   margin: 0 auto;
   max-width: 450px;
+  min-width: 300px;
   padding: 10px;
 }
 

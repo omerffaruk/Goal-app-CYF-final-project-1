@@ -36,23 +36,25 @@ const ResetPassword = (e) => {
 	};
 
 	return (
-		<div className="form">
-			<form action="" method="get" className="login-form">
-				<div className="login-form">
-					<div className="label-ctn">
-						<label htmlFor="password">Password</label>
+		<div className="forgot-psw-ctn">
+			<div className="form">
+				<form action="" method="get">
+					<div className="form-field">
+						<div className="label-ctn">
+							<label htmlFor="password">Password</label>
+						</div>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							aria-required
+							onChange={(e) => handleChange(e)}
+							placeholder="Password"
+						></input>
+						<button className="login-btn" onClick={(e) => resetpassword(e)}>Submit</button>
 					</div>
-					<input
-						type="password"
-						name="password"
-						id="password"
-						aria-required
-						onChange={(e) => handleChange(e)}
-						placeholder="Password"
-					></input>
-				</div>
-				<button onClick={(e) => resetpassword(e)}>Submit</button>
-			</form>
+				</form>
+			</div>
 		</div>
 	);
 };

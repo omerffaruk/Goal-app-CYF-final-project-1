@@ -4,7 +4,7 @@ import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import { nanoid } from "nanoid";
-import getUserTasks from "../../utils/getUserTAsks";
+import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);

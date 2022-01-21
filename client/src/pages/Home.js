@@ -40,12 +40,13 @@ export function Home() {
 		<div className="home-ctn">
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
+				<a href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Fgoal-app-cyf-final-project.herokuapp.com&amp;client_id=2978480330788.2973273823381">
 				<img
 					className="Slack"
 					alt=""
-					src={require("../images/Slack_logo.png").default}
-				></img>
+					src={require("../images/Slack_logo.png").default} />
 				<h4>Continue with Slack</h4>
+	</a>
 			</div>
 			<div className="or-ctn">
 				<hr />

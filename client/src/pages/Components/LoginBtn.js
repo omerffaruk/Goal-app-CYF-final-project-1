@@ -27,9 +27,11 @@ const LoginBtn = ({ email, password }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+			
+
 				console.log({data})
 				if (data.user) {
-					localStorage.setItem("t", data.user);
+						localStorage.setItem("t", data.user);
 					setLogin(true);
 					navigate(`/${data.username}`)
 				} else {

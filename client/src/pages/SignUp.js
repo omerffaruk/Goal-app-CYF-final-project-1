@@ -31,7 +31,6 @@ const SignUp = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-
 				if (data.message)
 				{
 					setText(data.message)
@@ -40,7 +39,6 @@ const SignUp = () => {
 					//window.alert(data.message);
 				else {
 				
-
 					location.assign("/");
 					localStorage.setItem("t", data.user);
 			
@@ -61,10 +59,9 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-
 			} else setEmail(e.target.value);
 			setPopup(false)
-		
+			
 		}
 	};
 	return (

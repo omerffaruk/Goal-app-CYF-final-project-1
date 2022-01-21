@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
 import Password from "./Components/Password";
-
+import fetchData from "../utils/fetchData";
 import "./Home.css";
 
 export function Home() {
@@ -12,7 +12,7 @@ export function Home() {
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
-		fetch("/api")
+		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error(res.statusText);

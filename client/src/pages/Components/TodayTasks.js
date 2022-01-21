@@ -4,7 +4,7 @@ import {
 	MdDone,
 	MdDeleteOutline,
 	MdMoreVert,
-} from "react-icons/Md";
+} from "react-icons/md";
 export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);

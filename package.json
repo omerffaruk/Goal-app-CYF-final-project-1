@@ -68,6 +68,7 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.15.4",
+		"@react-icons/all-files": "^4.1.0",
 		"@sendgrid/mail": "^7.6.0",
 		"@slack/bolt": "^3.8.1",
 		"@slack/events-api": "^3.0.1",
@@ -87,7 +88,8 @@
 		"react-icons": "^4.3.1",
 		"react-transition-group": "^4.4.2",
 		"sendgrid": "^5.2.3",
-		"sendgrid-rest": "^2.6.1"
+		"sendgrid-rest": "^2.6.1",
+		"tailwindcss": "^3.0.15"
 	},
 	"engines": {
 		"node": "^12 || ^14",

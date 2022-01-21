@@ -61,7 +61,7 @@
 		"rimraf": "^3.0.2",
 		"style-loader": "^3.3.1",
 		"wait-on": "^6.0.0",
-		 "webpack": "^4.59.1",
+		"webpack": "5.59.1",
 		"webpack-cli": "^4.9.1",
 		"webpack-dev-server": "^4.7.3",
 		"webpack-merge": "^5.8.0"
@@ -85,13 +85,9 @@
 		"nanoid": "^3.2.0",
 		"pg": "^8.7.1",
 		"react-icons": "^4.3.1",
-
 		"react-transition-group": "^4.4.2",
 		"sendgrid": "^5.2.3",
 		"sendgrid-rest": "^2.6.1"
-
-		"react-transition-group": "^4.4.2"
-
 	},
 	"engines": {
 		"node": "^12 || ^14",

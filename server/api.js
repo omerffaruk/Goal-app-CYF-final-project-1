@@ -273,7 +273,6 @@ router.post("/newtasks", (req, res) => {
 		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
-
 			const {
 				yesterdayCheckedTasksId,
 				yesterdayUncheckedTasksId,
@@ -353,13 +352,11 @@ router.post("/newtasks", (req, res) => {
 			// 			res.status(200).json({ user: userTasks });
 			// 		});
 			// });
-
 		}
 	} else {
 		res.send("not authenticated");
 	}
 });
-
 
 //let sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -440,6 +437,5 @@ router.post("/reset_password/:id", (req, res) => {
 		})
 		.catch();
 });
-
 
 export default router;

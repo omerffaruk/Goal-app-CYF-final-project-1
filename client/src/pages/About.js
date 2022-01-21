@@ -41,7 +41,7 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Anza Azam</h4>
 						<div className="person-border-bottom"></div>
-						<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+						<p>Anza is a NW4 trainee, CYF was her game changer and gave her meaningful purpose, now she enjoys challenging herself via coding and problem solving.</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a

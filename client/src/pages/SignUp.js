@@ -4,45 +4,33 @@ import "./SignUp.css";
 import { Link } from "react-router-dom";
 import Home from "./Home";
 import Popup from "./Components/Popup";
-
+import { headers } from "../utils/generalPostObjects";
+import fetchData from "../utils/fetchData";
 const SignUp = () => {
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
 	const [popup, setPopup] = useState(false);
 	const createNewAccount = (e) => {
-		
 		e.preventDefault();
-		fetch("http://127.0.0.1:3100/api/register", {
-			method: "Post",
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods":
-					"GET, POST, PATCH, PUT, DELETE, OPTIONS",
-				"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-
-				Accept: "application/json",
-				"Content-type": "application/json",
-			},
-
+		const methodObj = {
+			method: "POST",
+			headers,
 			body: JSON.stringify({
-				name: name,
-				email: email,
-				password: password,
+				name,
+				email,
+				password,
 			}),
-		})
+		};
+		fetchData(`/register`, methodObj)
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.message)
-				{
-					setText(data.message)
-					setPopup(true)
+				if (data.message) {
+					setText(data.message);
+					setPopup(true);
 				}
-					//window.alert(data.message);
+				//window.alert(data.message);
 				else {
-				
 					location.assign("/");
 					localStorage.setItem("t", data.user);
-			
-					
 				}
 			})
 			.catch((e) => console.log(e));
@@ -60,8 +48,7 @@ const SignUp = () => {
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
 			} else setEmail(e.target.value);
-			setPopup(false)
-			
+			setPopup(false);
 		}
 	};
 	return (
@@ -74,7 +61,7 @@ const SignUp = () => {
 					Sign in here
 				</Link>
 			</p>
-			{popup&&<Popup text={text} />}
+			{popup && <Popup text={text} />}
 			<div className="s-form">
 				<form action="" method="post" className="signup-form">
 					<div className="form-field">

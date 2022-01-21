@@ -46,7 +46,7 @@ const SignUp = () => {
 			if (e.target.name === "username") {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
-				setPassword(e.target.value);
+				setPassword(e.target.value);e
 			} else setEmail(e.target.value);
 			setPopup(false);
 		}

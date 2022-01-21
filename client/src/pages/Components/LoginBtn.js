@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import Popup from "./Popup.js";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
+
 const LoginBtn = ({ email, password }) => {
 	const [text, setText] = useState("");
 	const [popups, setPopups] = useState(false);
 	const [login, setLogin] = useState(false);
 	const navigate = useNavigate();
-
 	const handleLogin = (e) => {
 		e.preventDefault();
 		const methodObj = {

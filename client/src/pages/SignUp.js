@@ -6,12 +6,12 @@ import Home from "./Home";
 import Popup from "./Components/Popup";
 
 const SignUp = () => {
-	const [text, setText] = useState('');
+	const [text, setText] = useState("");
 	const [popup, setPopup] = useState(false);
 	const createNewAccount = (e) => {
-		
+
 		e.preventDefault();
-		fetch("http://127.0.0.1:3100/api/register", {
+		fetch("https://goal-app-cyf-final-project.herokuapp.com/api/register", {
 			method: "Post",
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -31,18 +31,14 @@ const SignUp = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.message)
-				{
-					setText(data.message)
-					setPopup(true)
+				if (data.message) {
+					setText(data.message);
+					setPopup(true);
 				}
-					//window.alert(data.message);
+				//window.alert(data.message);
 				else {
-				
 					location.assign("/");
 					localStorage.setItem("t", data.user);
-			
-					
 				}
 			})
 			.catch((e) => console.log(e));
@@ -59,9 +55,11 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			} else setEmail(e.target.value);
-			setPopup(false)
-			
+			} else {
+setEmail(e.target.value);
+}
+			setPopup(false);
+
 		}
 	};
 	return (

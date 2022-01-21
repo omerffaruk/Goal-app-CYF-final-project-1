@@ -5,6 +5,7 @@ import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTAsks";
+import postTodos from "../../utils/postTodos";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
@@ -20,53 +21,7 @@ function UsersTasks() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		console.log("submitted");
-		const yesterdayCheckedTasksId = [];
-		const yesterdayUncheckedTasksId = [];
-		yesterdayTasks.forEach((task) => {
-			task.iscomplete
-				? yesterdayCheckedTasksId.push(task.id)
-				: yesterdayUncheckedTasksId.push(task.id);
-		});
-
-		const todayTasksAlreadySaved = [];
-		const todayTasksNew = [];
-		todayTasks
-			.filter((task) => task.task !== "")
-			.forEach((task) => {
-				//filter empty ones
-				todayTasksNew.push(task.task); //later seperate
-				if (task.user_id) {
-					todayTasksAlreadySaved.push(task);
-				} else {
-					// todayTasksNew.push(task.task);//later seperate
-				}
-			});
-		// 	const todayTasksArray = todayTasks.split("\n").filter((yesterdayTasks) => yesterdayTasks);
-		const submitData = {
-			yesterdayCheckedTasksId,
-			yesterdayUncheckedTasksId,
-			todayTasksAlreadySaved,
-			todayTasksNew,
-		};
-
-		const token = localStorage.getItem("t");
-
-		console.log({ token });
-		const postObject = {
-			method: "POST",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json",
-				authorization: `Bearer ${token}`, // ADD Token to HEADER
-			},
-			body: JSON.stringify(submitData),
-		};
-
-		// postTodos("newtasks", postObject);
-		fetch("http://127.0.0.1:3100/api/newtasks", postObject).then((response) => {
-			console.log({ response });
-		});
+		postTodos(yesterdayTasks, todayTasks);
 	}
 	const yesterdayItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)

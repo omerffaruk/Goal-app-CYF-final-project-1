@@ -7,7 +7,7 @@
 	--header-bcg-color: #0077b6;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
-	--hover-primary-color: #f7f7f7;
+	--hover-primary-color: #fcfafa;
 	--secondary-color: #650374;
 	--login-btn-hover-color: #5d7ada;
 	--header-bottom-border-color: #ccc;
@@ -30,7 +30,7 @@ html {
 
 /* Set core body defaults */
 body {
-	min-height: 100%;
+	min-height: 100vh;
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
 	padding: 0;
@@ -79,6 +79,12 @@ select {
 	font: inherit;
 }
 
+/* -------- default heading styling --------*/
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0;
+}
+
 /*--------- default p styling -------*/
 p {
 	line-height: 1.8em;
@@ -97,6 +103,7 @@ ul {
 /*----------- Main App class ------------*/
 .App {
 	width: 100%;
+	min-height: 100vh;
 	display: grid;
 	grid-gap: 10px;
 	grid-template-rows: 100px auto;
@@ -137,26 +144,31 @@ ul {
 	margin: 0 auto;
 	padding: 10px;
 	max-width: 450px;
+	min-width: 300px;
 	background-color: var(--login-card-bg-color);
 }
 
 .home-ctn h1 {
-	margin: 8px auto 12px;
-	line-height: 1.4em;
+	margin: 15px auto 15px;
+	line-height: 1.2em;
 	text-transform: capitalize;
 }
 
 .slack-connect {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	padding: 20px 20px;
 	border: solid 1px var(--primary-color);
 	border-radius: 20px;
 	margin: 0 auto;
 	cursor: pointer;
-	position: relative;
 	transition: background-color 0.2s;
+}
+
+.slack-connect a {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: black;
 }
 
 .slack-connect:hover {
@@ -165,7 +177,8 @@ ul {
 
 .slack-connect h4 {
 	text-transform: uppercase;
-	letter-spacing: 0.8px;
+	padding: 0.6em 0em;
+	margin-bottom: 0;
 }
 .forgotpassword{
 
@@ -187,33 +200,32 @@ ul {
 justify-self:center;
 align-self: center;}
 .Slack {
-	/*button to be connected later*/
-	top: 21px;
-	left: 10px;
 	width: 30px;
 	height: 30px;
-	pointer-events: none;
-	position: absolute;
+	margin: 0em 0.5em;
+	justify-self: flex-start;
 }
 
 .or-ctn {
 	display: flex;
 	flex-direction: row;
-	padding: 1.5em 0 1em;
+	justify-content: left;
+	align-items: center;
+	padding: 0.8em 0 0.2em;
 }
 
 .or-ctn hr:first-child {
-	width: 40%;
-	text-align: left;
+	width: 46%;
 	height: 1.5px;
-	margin-left: 0;
+	margin-right: 1em;
 }
 
 .or-ctn hr:nth-of-type(2) {
-	width: 40%;
+	width: 46%;
 	text-align: right;
 	height: 1.5px;
 	margin-right: 0;
+	margin-left: 1em;
 }
 
 .or-ctn span {
@@ -247,10 +259,12 @@ align-self: center;}
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .password-ctn input {
 	cursor: pointer;
+	margin-right: 0.25em;
 }
 
 .password-ctn input:checked {
@@ -302,8 +316,13 @@ align-self: center;}
 /* ---------- About Page ---------*/
 .about-ctn {
 	max-width: 700px;
+	min-width: 300px;
 	margin: 0 auto;
 	padding: 0 10px;
+}
+
+.about-ctn h2 {
+	padding: 1em 0;
 }
 
 .team-ctn {
@@ -342,7 +361,7 @@ align-self: center;}
 
 .person-border-bottom {
 	height: 5px;
-	margin: 0 2em;
+	margin: 0em 2em 1em 2em;
 	background-color: var(--person-pic-box-shadow-color);
 }
 
@@ -396,6 +415,12 @@ align-self: center;}
 	height: 1.3em;
 	background-color: white;
 	color: black;
+}
+
+@media only screen and (min-width: 350px) {
+	.slack-connect h4 {
+		letter-spacing: 0.5px;
+	}
 }
 
 @media only screen and (min-width: 800px) {

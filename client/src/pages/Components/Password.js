@@ -33,10 +33,18 @@ const Password = () => {
 
 	return (
 		<div>
-			<div className="password-ctn">
+			<div className="forgot-psw-ctn">
 				<div className="form">
-					<form action="" method="get" className="login-form">
-						<div className="login-form">
+					<div>
+						<h2>Forgot your password?</h2>
+						<p>
+							Please enter the email address registered for your account. A
+							verification code will be sent. You will be able to choose a new
+							password for your account.
+						</p>
+					</div>
+					<form action="" method="get">
+						<div className="form-field">
 							<div className="label-ctn">
 								<label htmlFor="email">Email</label>
 							</div>
@@ -49,15 +57,16 @@ const Password = () => {
 								aria-required
 							></input>
 						</div>
-						<button onClick={(e) => forgotPassword(e)}>Enter Email</button>
+						<button className="login-btn" onClick={(e) => forgotPassword(e)}>
+							Submit
+						</button>
 						{/* <a href="#">Forgot Password ?</a> */}
 					</form>
 				</div>
+				<Link className="temporary-link" to={"/reset_password/:id"}>
+					Click here to enter password and follow instructions in email
+				</Link>
 			</div>
-			<Link to={"/reset_password/:id"}>
-				click here to enter password and follow instructions in email
-			</Link>
-			;{" "}
 		</div>
 	);
 };

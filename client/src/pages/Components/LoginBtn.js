@@ -1,14 +1,14 @@
 import React,{ useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "./Popup.js"
+import Popup from "./Popup.js";
 const LoginBtn = ({ email, password }) => {
 	const [text, setText] = useState("");
  const [popups, setPopups] = useState(false);
 	const [login, setLogin] = useState(false);
-	const navigate= useNavigate()
+	const navigate= useNavigate();
 	const handleLogin = (e) => {
 		e.preventDefault();
-		fetch("http://127.0.0.1:3100/api/log", {
+		fetch("https://goal-app-cyf-final-project.herokuapp.com/api/log", {
 			method: "Post",
 			headers: {
 				"Access-Control-Allow-Origin": "*",
@@ -27,25 +27,22 @@ const LoginBtn = ({ email, password }) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-			
-
-				console.log({data})
+				console.log({ data });
 				if (data.user) {
-						localStorage.setItem("t", data.user);
+					localStorage.setItem("t", data.user);
 					setLogin(true);
-					navigate(`/${data.username}`)
+					navigate(`/${data.username}`);
 				} else {
-				 
 					//setText("usernamepassword");
-					window.alert(text)
-				};
+					window.alert(text);
+				}
 			})
 			.catch((e) => console.log(e));
 	};
 
 	return (
 		<div>
-			
+
 			<button className="login-btn" onClick={(e) => handleLogin(e)}>
 				Login
 			</button>

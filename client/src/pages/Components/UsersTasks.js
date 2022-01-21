@@ -4,31 +4,18 @@ import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import { nanoid } from "nanoid";
+import getUserTasks from "../../utils/getUserTAsks";
 function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
-	// console.log({ todayTasks, yesterdayTasks });
 	const { username } = useParams();
-const navigate = useNavigate();
-	const yesterdayTasksEndPoint = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
-	const todayTasksEndPoint = `http://127.0.0.1:3100/api/todaytasks/${username}`;
+	const navigate = useNavigate();
+	const yesterdayTasksEndPoint = `/yesterdaytasks/${username}`;
+	const todayTasksEndPoint = `/todaytasks/${username}`;
 
-	function fetchData(endpoint, setState) {
-		fetch(endpoint, {
-			method: "GET",
-			headers: { authorization: localStorage.getItem("t") },
-		})
-			.then((res) => {
-				return res.status !== 404 ? res.json() : { user: [] };
-			})
-			.then((data) => {
-				setState(data.user);
-			})
-			.catch();
-	}
 	useEffect(() => {
-		fetchData(yesterdayTasksEndPoint, setYesterdayTasks);
-		fetchData(todayTasksEndPoint, setTodayTasks);
+		getUserTasks(yesterdayTasksEndPoint, setYesterdayTasks);
+		getUserTasks(todayTasksEndPoint, setTodayTasks);
 	}, []);
 
 	function handleSubmit(event) {
@@ -106,10 +93,10 @@ const navigate = useNavigate();
 		setTodayTasks((prev) => prev.concat({ id: nanoid(10), task: newTask }));
 	}
 
-    const handleLogout = () => {
+	const handleLogout = () => {
 		localStorage.removeItem("t");
-		navigate("/ ")
-		};
+		navigate("/ ");
+	};
 	return (
 		<section className="formContainer">
 			<form className="tasksForm" onSubmit={handleSubmit}>

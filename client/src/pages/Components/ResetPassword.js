@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { headers } from "../../utils/generalPostObjects";
+import fetchData from "../../utils/fetchData";
 const ResetPassword = (e) => {
 	let { id } = useParams();
 
@@ -12,24 +13,15 @@ const ResetPassword = (e) => {
 	};
 	const resetpassword = (e) => {
 		e.preventDefault();
-
-		fetch(`http://127.0.0.1:3100/api/reset_password/${id}`, {
+		const methodObj = {
 			method: "POST",
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods":
-					"GET, POST, PATCH, PUT, DELETE, OPTIONS",
-				"Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-
-				Accept: "application/json",
-				"Content-type": "application/json",
-			},
-
+			headers,
 			body: JSON.stringify({
 				// email: email,
 				password: password,
 			}),
-		})
+		};
+		fetchData(`/reset_password/${id}`, methodObj)
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch();
@@ -51,7 +43,9 @@ const ResetPassword = (e) => {
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 						></input>
-						<button className="login-btn" onClick={(e) => resetpassword(e)}>Submit</button>
+						<button className="login-btn" onClick={(e) => resetpassword(e)}>
+							Submit
+						</button>
 					</div>
 				</form>
 			</div>

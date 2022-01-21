@@ -12,7 +12,7 @@ export default function Checkbox({ setTasks, task }) {
 
 	return (
 		<li>
-			<label style={{ color: `${task.iscomplete ? "green" : "red"}` }}>
+			<label>
 				<input
 					type="checkbox"
 					defaultChecked={task.iscomplete}
@@ -20,6 +20,7 @@ export default function Checkbox({ setTasks, task }) {
 					name="yesterdays"
 					value={task.id}
 				/>
+				<span></span>
 				{task.task}
 			</label>
 		</li>

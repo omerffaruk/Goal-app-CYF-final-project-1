@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import TodayTasks from "./TodayTasks";
 function UsersTasks() {
@@ -7,7 +7,7 @@ function UsersTasks() {
 	const [todayTasks, setTodayTasks] = useState([{ task: "" }]);
 
 	const { username } = useParams();
-
+const navigate = useNavigate();
 	const yesterdayTasksEndPoint = `http://127.0.0.1:3100/api/yesterdaytasks/${username}`;
 	const todayTasksEndPoint = `http://127.0.0.1:3100/api/todaytasks/${username}`;
 
@@ -102,6 +102,11 @@ function UsersTasks() {
 	function handleAddNewTask() {
 		setTodayTasks((prev) => prev.concat({ task: "" }));
 	}
+
+    const handleLogout = () => {
+		localStorage.removeItem("t");
+		navigate("/ ")
+		};
 	return (
 		<section>
 			<form onSubmit={handleSubmit}>
@@ -118,6 +123,10 @@ function UsersTasks() {
 				</article>
 				<button type="submit">Submit</button>
 			</form>
+
+			<div>
+				<button onClick={() => handleLogout()}> LogOut </button>
+			</div>
 		</section>
 	);
 }

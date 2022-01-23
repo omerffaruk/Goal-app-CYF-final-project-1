@@ -97,7 +97,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	);
 
 	let addTodayValuesQuery = "";
-	addTodayValuesQuery = todaysToDos.map((todo) => `('${todo}',false,$1)`);
+	addTodayValuesQuery = todaysToDos.map((todo) => `($$${todo}$$,false,$1)`);
 
 	if (response3) {
 		const taskUserId = user_table_id.rows[0].id;

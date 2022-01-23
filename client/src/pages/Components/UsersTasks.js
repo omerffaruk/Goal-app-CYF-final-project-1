@@ -20,12 +20,12 @@ function UsersTasks({ period }) {
 
 	const beforeFetchEndPointWithUsername = `/${beforePeriodEndPoint}/${username}`;
 	const currentEndPointWithUsername = `/${currentPeriodEndPoint}/${username}`;
-
+	const [toggleMenuClass, setToggleMenuClass] = useState(false);
 	useEffect(() => {
 		getUserTasks(beforeFetchEndPointWithUsername, setBeforePeriodTasks);
 		getUserTasks(currentEndPointWithUsername, setCurrentPeriodTasks);
 	}, [beforePeriodEndPoint, currentPeriodEndPoint]);
-	console.log({ beforePeriodEndPoint, currentPeriodEndPoint });
+	//Submit
 	function handleSubmit(event) {
 		event.preventDefault();
 		postTodos(beforePeriodTasks, currentPeriodTasks);
@@ -63,15 +63,20 @@ function UsersTasks({ period }) {
 	};
 	return (
 		<section className="formContainer">
-			<h1>{period} page will go here</h1>
 			<section className="task-filter-container">
-				<MdOutlineFilterList />
-				<div className="filter-btn-contailer">
+				<MdOutlineFilterList
+					className={"task-filter-icon"}
+					onClick={() => setToggleMenuClass((prev) => !prev)}
+				/>
+				<div
+					className={`filter-btn-container ${toggleMenuClass ? "open" : ""}`}
+				>
 					<Link
 						className={`${period === "daily" ? "active" : ""}`}
 						onClick={() => {
 							setBeforePeriodEndPoint("yesterdaytasks");
 							setCurrentPeriodEndPoint("todaytasks");
+							setToggleMenuClass(false);
 						}}
 						to={`/${username}`}
 					>
@@ -82,6 +87,7 @@ function UsersTasks({ period }) {
 						onClick={() => {
 							setBeforePeriodEndPoint("lastweektasks");
 							setCurrentPeriodEndPoint("thisweektasks");
+							setToggleMenuClass(false);
 						}}
 						to={`/${username}/weekly`}
 					>
@@ -92,6 +98,7 @@ function UsersTasks({ period }) {
 						onClick={() => {
 							setBeforePeriodEndPoint("lastmonthtasks");
 							setCurrentPeriodEndPoint("thismonthtasks");
+							setToggleMenuClass(false);
 						}}
 						to={`/${username}/monthly`}
 					>
@@ -102,22 +109,25 @@ function UsersTasks({ period }) {
 						onClick={() => {
 							setBeforePeriodEndPoint("lastquartertasks");
 							setCurrentPeriodEndPoint("thisquartertasks");
+							setToggleMenuClass(false);
 						}}
 						to={`/${username}/quarterly`}
 					>
 						Quarterly
 					</Link>
 				</div>
-				<input type="text" />
+				<input className="task-search" type="text" placeholder="Search..." />
 			</section>
 			<form className="tasksForm" onSubmit={handleSubmit}>
-				<h4>Before Priod tasks Completed</h4>
+				<h4 className="completed-h4">Before Priod tasks Completed</h4>
 				<ul className="yesterdayCompletedContainer">{beforePeriodItemsDone}</ul>
-				<h4>Before Period tasks Incomplete</h4>
+				<h4 className="uncompleted-h4">Before Period tasks Incomplete</h4>
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodItemsUndone}
 				</ul>
-				<h3>Current Period tasks, Please press enter for each new task..</h3>
+				<h3 className="current-h3">
+					Current Period tasks, Please press enter for each new task..
+				</h3>
 				<article className="today-todos-container">
 					<ul>{currentPeriodTaskInputs}</ul>
 					<NewTask handleAddNewTask={handleAddNewTask} />

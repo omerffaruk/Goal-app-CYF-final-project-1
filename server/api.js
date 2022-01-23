@@ -114,9 +114,42 @@ router.post("/log", (req, res) => {
 		.catch((e) => res.send(e));
 });
 
-router.get("/", (_, res) => {
-	res.json({ message: "Hello, world!" });
-});
+router.get("/", (req, res) => {
+	const request = require('request');
+
+	const code = req.query.code;
+  console.log('Authorizer was called');
+
+  const clientId = "2977670222342.2984355485058";
+	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
+
+  var path_to_access_token =
+		"https://slack.com/api/oauth.v2.access?" +
+		"client_id=" +
+		clientId +
+		"&" +
+		"client_secret=" +
+		clientSecret +
+		"&" +
+		"code=" +
+		code +
+		"&" +
+		"redirect_uri=" +
+		"https://5698-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+//console.log(clientId,secretId,path_to_access_token)
+
+ 
+    request(path_to_access_token, function(error, response, body) { // Request token from Slack using the access_code, then handle response
+     
+        var teamInfo = JSON.parse(body);   //Slack sends back access_code and team info in a JSON object
+        res.json(teamInfo)
+      
+     })
+
+}
+    
+	
+);
 // api/tasks returns all the tasks in the database
 router.get("/tasks", (_, res) => {
 	const selectAllTasksQuery =

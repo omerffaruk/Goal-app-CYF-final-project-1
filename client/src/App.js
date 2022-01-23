@@ -17,12 +17,13 @@ function App() {
 	return (
 		<div className="App">
 			<NavBar />
+		
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />
-			
+
 				{/* -----------Temporary Routes--------------- */}
 				{<Route path="/temporary/tasks" element={<TemporaryTasks />} />}
 				{/* <Route path="/temporary/tasks/:userName" element={<UsersTasks />} /> */}

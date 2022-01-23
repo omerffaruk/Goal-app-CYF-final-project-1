@@ -116,15 +116,15 @@ router.post("/log", (req, res) => {
 });
 
 router.get("/", (req, res) => {
-	const request = require('request');
+	const request = require("request");
 
 	const code = req.query.code;
-  console.log('Authorizer was called');
+	console.log("Authorizer was called");
 
-  const clientId = "2977670222342.2984355485058";
+	const clientId = "2977670222342.2984355485058";
 	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
 
-  var path_to_access_token =
+	var path_to_access_token =
 		"https://slack.com/api/oauth.v2.access?" +
 		"client_id=" +
 		clientId +
@@ -136,21 +136,60 @@ router.get("/", (req, res) => {
 		code +
 		"&" +
 		"redirect_uri=" +
-		"https://5698-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
-//console.log(clientId,secretId,path_to_access_token)
+		"https://8ced-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+	//console.log(clientId,secretId,path_to_access_token)
 
- 
-    request(path_to_access_token, function(error, response, body) { // Request token from Slack using the access_code, then handle response
-     
-        var teamInfo = JSON.parse(body);   //Slack sends back access_code and team info in a JSON object
-       // res.json(teamInfo)
-      redirect("localhost:3000/:username")
-     })
+	request(path_to_access_token, function (error, response, body) {
+		// Request token from Slack using the access_code, then handle response
 
-}
-    
-	
-);
+		let teamInfo = JSON.parse(body);
+
+		// Read a token from the environment variables
+
+		const { WebClient, ErrorCode } = require("@slack/web-api");
+		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
+		let respons,a=[];
+		(async () => {
+			try {
+				// This method call should fail because we're giving it a bogus user ID to lookup.
+				respons = await web.openid.connect.userInfo({
+					user: teamInfo["authed_user"]["access_token"],
+				});
+			
+				
+			} catch (error) {
+				// Check the code property, and when its a PlatformError, log the whole response.
+				if (error.code === ErrorCode.PlatformError) {
+					console.log(error.data);
+				} else {
+					// Some other error, oh no!
+					//console.log(respons);
+				}
+			}
+		})().then(() => { a.push(respons); console.log(a) 
+		
+		console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
+		if (teamInfo["authed_user"]["id"] === "U02V0K22Y76") {
+			let username;
+
+			pool
+				.query("select * from users where email= $1", [
+					respons.email,
+				])
+				.then((result) => {
+					username = result.rows[0].username;
+					return res.redirect(`http://localhost:3000/${username}`);
+				})
+				.catch();
+		}
+		
+		
+		});
+		
+
+		
+	});
+});
 // api/tasks returns all the tasks in the database
 router.get("/tasks", (_, res) => {
 	const selectAllTasksQuery =
@@ -343,7 +382,6 @@ router.post("/newtasks", (req, res) => {
 						}
 						// console.log(result.rows, ">>>>>>>RESULT");
 						res.send({ id: result.rows[0].id });
-
 					}
 				);
 			});

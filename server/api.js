@@ -1,6 +1,7 @@
 import { Router } from "express";
 import express from "express";
 import pool from "./utils/pool";
+import { isRedirect } from "node-fetch";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -142,8 +143,8 @@ router.get("/", (req, res) => {
     request(path_to_access_token, function(error, response, body) { // Request token from Slack using the access_code, then handle response
      
         var teamInfo = JSON.parse(body);   //Slack sends back access_code and team info in a JSON object
-        res.json(teamInfo)
-      
+       // res.json(teamInfo)
+      redirect("localhost:3000/:username")
      })
 
 }

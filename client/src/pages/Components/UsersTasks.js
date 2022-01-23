@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 function UsersTasks({ period }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
-	const [beforePeriodEndPoint, setBeforePeriodEndPoint] = useState("yesterdaytasks");
-	const [currentPeriodEndPoint, setCurrentPeriodEndPoint] = useState("todaytasks");
+	const [beforePeriodEndPoint, setBeforePeriodEndPoint] =
+		useState("yesterdaytasks");
+	const [currentPeriodEndPoint, setCurrentPeriodEndPoint] =
+		useState("todaytasks");
 	const { username } = useParams();
 	const navigate = useNavigate();
 
@@ -22,8 +24,8 @@ function UsersTasks({ period }) {
 	useEffect(() => {
 		getUserTasks(yesterdayTasksEndPoint, setYesterdayTasks);
 		getUserTasks(todayTasksEndPoint, setTodayTasks);
-	}, []);
-
+	}, [beforePeriodEndPoint, currentPeriodEndPoint]);
+	console.log({ beforePeriodEndPoint, currentPeriodEndPoint });
 	function handleSubmit(event) {
 		event.preventDefault();
 		postTodos(yesterdayTasks, todayTasks);
@@ -63,12 +65,46 @@ function UsersTasks({ period }) {
 			<section className="task-filter-container">
 				<MdOutlineFilterList />
 				<div className="filter-btn-contailer">
-					<Link  className={`${period==="daily"?"active":""}`} to={"/:username"}>
+					<Link
+						className={`${period === "daily" ? "active" : ""}`}
+						onClick={() => {
+							setBeforePeriodEndPoint("yesterdaytasks");
+							setCurrentPeriodEndPoint("todaytasks");
+						}}
+						to={`/${username}`}
+					>
 						Daily
 					</Link>
-					<Link className={`${period==="weekly"?"active":""}`} to={"/:username/weekly"}>Weekly</Link>
-					<Link className={`${period==="monthly"?"active":""}`} to={"/:username/monthly"}>Monthly</Link>
-					<Link className={`${period==="quarterly"?"active":""}`} to={"/:username/quarterly"}>Quarterly</Link>
+					<Link
+						className={`${period === "weekly" ? "active" : ""}`}
+						onClick={() => {
+							setBeforePeriodEndPoint("lastweektasks");
+							setCurrentPeriodEndPoint("thisweektasks");
+						}}
+						to={`/${username}/weekly`}
+					>
+						Weekly
+					</Link>
+					<Link
+						className={`${period === "monthly" ? "active" : ""}`}
+						onClick={() => {
+							setBeforePeriodEndPoint("lastmonthtasks");
+							setCurrentPeriodEndPoint("thismonthtasks");
+						}}
+						to={`/${username}/monthly`}
+					>
+						Monthly
+					</Link>
+					<Link
+						className={`${period === "quarterly" ? "active" : ""}`}
+						onClick={() => {
+							setBeforePeriodEndPoint("lastquartertasks");
+							setCurrentPeriodEndPoint("thisquartertasks");
+						}}
+						to={`/${username}/quarterly`}
+					>
+						Quarterly
+					</Link>
 				</div>
 				<input type="text" />
 			</section>

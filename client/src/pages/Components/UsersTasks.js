@@ -6,13 +6,18 @@ import "./userTasksStyle.css";
 import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
-function UsersTasks() {
+import { MdOutlineFilterList } from "react-icons/md";
+import { Link } from "react-router-dom";
+function UsersTasks({ period }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
+	const [beforePeriodEndPoint, setBeforePeriodEndPoint] = useState("yesterdaytasks");
+	const [currentPeriodEndPoint, setCurrentPeriodEndPoint] = useState("todaytasks");
 	const { username } = useParams();
 	const navigate = useNavigate();
-	const yesterdayTasksEndPoint = `/yesterdaytasks/${username}`;
-	const todayTasksEndPoint = `/todaytasks/${username}`;
+
+	const yesterdayTasksEndPoint = `/${beforePeriodEndPoint}/${username}`;
+	const todayTasksEndPoint = `/${currentPeriodEndPoint}/${username}`;
 
 	useEffect(() => {
 		getUserTasks(yesterdayTasksEndPoint, setYesterdayTasks);
@@ -54,6 +59,19 @@ function UsersTasks() {
 	};
 	return (
 		<section className="formContainer">
+			<h1>{period} page will go here</h1>
+			<section className="task-filter-container">
+				<MdOutlineFilterList />
+				<div className="filter-btn-contailer">
+					<Link  className={`${period==="daily"?"active":""}`} to={"/:username"}>
+						Daily
+					</Link>
+					<Link className={`${period==="weekly"?"active":""}`} to={"/:username/weekly"}>Weekly</Link>
+					<Link className={`${period==="monthly"?"active":""}`} to={"/:username/monthly"}>Monthly</Link>
+					<Link className={`${period==="quarterly"?"active":""}`} to={"/:username/quarterly"}>Quarterly</Link>
+				</div>
+				<input type="text" />
+			</section>
 			<form className="tasksForm" onSubmit={handleSubmit}>
 				<h4>Yesterday's tasks Completed</h4>
 				<ul className="yesterdayCompletedContainer">{yesterdayItemsDone}</ul>

@@ -5,19 +5,24 @@ import {
 	MdDeleteOutline,
 	MdMoreVert,
 } from "react-icons/md";
-export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
+export function TodayTasks({
+	task,
+	setCurrentPeriodTasks,
+	handleAddNewTask,
+	index,
+}) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		setTodayTasks((prev) => {
+		setCurrentPeriodTasks((prev) => {
 			const updatedData = [...prev];
 			updatedData[index].task = event.target.value;
 			return updatedData;
 		});
 	}
 	function handleDelete(index) {
-		setTodayTasks((prev) => {
+		setCurrentPeriodTasks((prev) => {
 			const updatedData = [...prev];
 			updatedData.splice(index, 1);
 			return updatedData;

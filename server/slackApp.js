@@ -85,18 +85,22 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 
 	//find todays todos, delete all of them and add new ones
 	const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN (SELECT todo.id
-  FROM users
-  INNER JOIN todo ON users.id = todo.user_id
-  WHERE slackid = $1 AND
-          date >= TIMESTAMP 'today' AND
-          date <  TIMESTAMP 'tomorrow') returning user_id `;
+		FROM users
+		INNER JOIN todo ON users.id = todo.user_id
+		WHERE slackid = $1 AND
+		date >= TIMESTAMP 'today' AND
+		date <  TIMESTAMP 'tomorrow') returning user_id `;
 	const response3 = await pool.query(deleteTodayTodosQuery, [body.user.id]);
+	const user_table_id = await pool.query(
+		"SELECT id FROM users WHERE slackid=$1",
+		[body.user.id]
+	);
+
 	let addTodayValuesQuery = "";
 	addTodayValuesQuery = todaysToDos.map((todo) => `('${todo}',false,$1)`);
 
 	if (response3) {
-		const taskUserId = response3.rows[0].user_id;
-		console.log(response3.rows, ">>>>>>");
+		const taskUserId = user_table_id.rows[0].id;
 		const addTodayTodosQuery = await pool.query(
 			`INSERT INTO todo(task,isComplete,user_id) VALUES ${addTodayValuesQuery.join(
 				","

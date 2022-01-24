@@ -158,6 +158,10 @@ form.tasksForm label span {
 	width: 100%;
 	/* margin-bottom: 1rem; */
 }
+.new-task-input-container {
+	display: flex;
+	align-items: center;
+}
 .new-task-input {
 	border: 1px solid #ddd;
 }
@@ -173,11 +177,25 @@ form.tasksForm label span {
 	display: flex;
 	margin: 1rem 0;
 }
-.today-todos-container li button {
+.today-todos-container li button,
+.new-task-input-btn {
 	border: none;
 	background: none;
 	padding: 0.5rem;
 }
+
+button.new-task-input-btn {
+	border: none;
+	color: #bbb;
+	position: absolute;
+	padding: 1rem;
+	right: 0;
+}
+button.new-task-input-btn.active {
+	color: var(--header-bcg-color);
+	display: block;
+}
+
 .todo-submit-btn {
 	max-width: 300px;
 	margin: 1rem auto;

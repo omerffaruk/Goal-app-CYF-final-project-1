@@ -5,16 +5,12 @@ import {
 	MdDeleteOutline,
 	MdMoreVert,
 } from "react-icons/md";
-<<<<<<< HEAD
-export function TodayTasks({ task, setTodayTasks, handleAddNewTask, index }) {
-=======
 export function TodayTasks({
 	task,
 	setCurrentPeriodTasks,
 	handleAddNewTask,
 	index,
 }) {
->>>>>>> 79bddc6069b48ea841ef5093d557efa2d1dfd3ba
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {

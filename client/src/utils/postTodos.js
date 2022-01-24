@@ -46,7 +46,6 @@ export default async function postTodos(
 	};
 
 	fetchData("/newtasks", postObject).then((response) => {
-		console.log({ response }, ">>>>>>>>HANDLE IT LATER");
 		if (response.status === 200) {
 			setTimeout(() => setIsSubmitting(false), 2000);
 		}

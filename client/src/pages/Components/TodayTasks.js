@@ -122,6 +122,7 @@ export function NewTask({ handleAddNewTask }) {
 				onClick={() => {
 					handleAddNewTask(todayValue);
 					setTodayValue("");
+					setIsTyping(false);
 				}}
 				className={`new-task-input-btn  ${isTyping && "active"} `}
 			>

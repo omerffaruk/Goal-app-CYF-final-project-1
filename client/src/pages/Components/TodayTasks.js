@@ -3,14 +3,9 @@ import {
 	MdEditNote,
 	MdDone,
 	MdDeleteOutline,
-	MdMoreVert,
+	MdSubdirectoryArrowLeft,
 } from "react-icons/md";
-export function TodayTasks({
-	task,
-	setCurrentPeriodTasks,
-	handleAddNewTask,
-	index,
-}) {
+export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
@@ -52,16 +47,10 @@ export function TodayTasks({
 					if (event.key === "Enter") {
 						event.preventDefault();
 						handleChange(event);
+						setIsDisable(true);
 					}
 				}}
 			/>
-			{/* <button
-				style={{ cursor: "pointer", border: "none" }}
-				type="button"
-				onClick={() => setIsDisable((prev) => !prev)}
-			>
-				<MdMoreVert />
-			</button> */}
 			<div className="today-task-show-btn-container">
 				{/* //////   Edit task */}
 				<button
@@ -96,27 +85,48 @@ export function TodayTasks({
 //ADD NEW TASK
 export function NewTask({ handleAddNewTask }) {
 	const [todayValue, setTodayValue] = useState("");
+	const [isTyping, setIsTyping] = useState(false);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
+		if (event.target.value.length > 0) {
+			setIsTyping(true);
+		} else setIsTyping(false);
+	}
+	function handleEnter(event) {
+		if (event.key === "Enter") {
+			event.preventDefault();
+			if (event.target.value.length > 0) {
+				handleAddNewTask(todayValue);
+				setTodayValue("");
+				setIsTyping(false);
+			}
+		}
 	}
 
 	return (
-		<input
-			className="new-task-input"
-			type="text"
-			autoFocus
-			name="newTask"
-			placeholder="Enter for new task..."
-			value={todayValue}
-			onChange={handleChange}
-			// disabled={true}
-			onKeyPress={(event) => {
-				if (event.key === "Enter") {
-					event.preventDefault();
+		<div className="new-task-input-container">
+			<input
+				className="new-task-input"
+				type="text"
+				autoFocus
+				name="newTask"
+				placeholder="Enter for new task..."
+				value={todayValue}
+				onChange={handleChange}
+				// disabled={true}
+				onKeyPress={handleEnter}
+			/>
+			<button
+				style={{ cursor: "pointer" }}
+				type="button"
+				onClick={() => {
 					handleAddNewTask(todayValue);
 					setTodayValue("");
-				}
-			}}
-		/>
+				}}
+				className={`new-task-input-btn  ${isTyping && "active"} `}
+			>
+				<MdSubdirectoryArrowLeft />
+			</button>
+		</div>
 	);
 }

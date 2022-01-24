@@ -1,14 +1,75 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;1,300&display=swap");
 
 .formContainer {
-	/* border: 1px solid rgb(255, 28, 255); */
+	/* border: 1px solid #ff1cff; */
 	margin: 0 auto;
+	position: relative;
 	width: 95%;
+}
+.task-filter-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+.filter-btn-container {
+	align-items: center;
+	display: none;
+	transition: all 0.5s ease;
+}
+.filter-btn-container.open {
+	background-color: #fff;
+	box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	top: 0;
+	opacity: 1;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+
+.task-filter-icon {
+	background-color: #eee;
+	border-radius: 50px;
+	cursor: pointer;
+	height: 3rem;
+	padding: 0.5rem;
+	transition: all 0.5s ease;
+	width: 3rem;
+	z-index: 2;
+}
+.task-filter-icon:hover {
+	background-color: #ddd;
+}
+.filter-btn-container a {
+	border-radius: 50px;
+	color: #999;
+	margin: 5px;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	transition: all 0.4s ease;
+}
+.filter-btn-container a:hover {
+	color: #444;
+}
+.filter-btn-container a.active {
+	background-color: #eee;
+	color: #222;
+}
+.task-search {
+	/* display: none; */
+	border-color: #eee;
+	transition: all 0.5s ease;
+}
+.task-search:focus {
+	border-color: #999;
+	outline: none;
 }
 .tasksForm {
 	font-family: "Montserrat", sans-serif;
-	display: flex;
-	flex-direction: column;
+	display: grid;
 }
 
 form * {
@@ -30,6 +91,10 @@ form.tasksForm h4 {
 	font-size: 1.5rem;
 	font-style: italic;
 	font-weight: 500;
+}
+form.tasksForm h3,
+form.tasksForm h4 {
+	margin: 2rem 0;
 	text-align: center;
 }
 form.tasksForm label input {
@@ -55,8 +120,9 @@ form.tasksForm label span {
 }
 
 .yesterdayCompletedContainer {
-	opacity: 0.2;
-	/* background-color: #0076b638; */
+	opacity: 0.4;
+	min-height: 200px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .yesterdayCompletedContainer li {
 	/* opacity: 0.5; */
@@ -67,12 +133,20 @@ form.tasksForm label span {
 	text-align: justify;
 	text-decoration: line-through;
 }
+.yesterdayUncompletedContainer {
+	min-height: 200px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 .yesterdayUncompletedContainer li {
 	color: var(--primary-color);
 	text-align: justify;
 }
 
 /* Todays section style */
+.today-todos-container ul {
+	min-height: 200px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 .new-task-input,
 .today-task-show {
 	background-color: #fff;
@@ -80,6 +154,10 @@ form.tasksForm label span {
 	padding: 0.75rem 0.5rem;
 	transition: all 0.5s ease;
 	width: 100%;
+	/* margin-bottom: 1rem; */
+}
+.new-task-input {
+	border: 1px solid #ddd;
 }
 .today-task-show:hover {
 	background-color: #eee;
@@ -102,8 +180,46 @@ form.tasksForm label span {
 	max-width: 300px;
 	margin: 1rem auto;
 }
+
 @media only screen and (min-width: 600px) {
-	body {
-		background-color: lightblue;
+	.task-filter-icon {
+		display: none;
+	}
+	.filter-btn-container {
+		position: initial;
+		display: flex;
+	}
+}
+@media only screen and (min-width: 1024px) {
+	.tasksForm {
+		grid-gap: 1rem;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-areas:
+			"uncompleted-h4 completed-h4"
+			"yesterdayUncompletedContainer yesterdayCompletedContainer"
+			"current-h3 current-h3"
+			"today-todos-container today-todos-container"
+			"todo-submit-btn todo-submit-btn";
+	}
+	.completed-h4 {
+		grid-area: completed-h4;
+	}
+	.uncompleted-h4 {
+		grid-area: uncompleted-h4;
+	}
+	.yesterdayCompletedContainer {
+		grid-area: yesterdayCompletedContainer;
+	}
+	.yesterdayUncompletedContainer {
+		grid-area: yesterdayUncompletedContainer;
+	}
+	.current-h3 {
+		grid-area: current-h3;
+	}
+	.today-todos-container {
+		grid-area: today-todos-container;
+	}
+	.todo-submit-btn {
+		grid-area: todo-submit-btn;
 	}
 }

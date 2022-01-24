@@ -5,7 +5,8 @@ import { isRedirect } from "node-fetch";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
-
+var LocalStorage = require("node-localstorage").LocalStorage;
+var localStorage = new LocalStorage("./scratch");
 const sgMail = require("@sendgrid/mail");
 
 const router = new Router();
@@ -166,7 +167,9 @@ router.get("/", (req, res) => {
 					//console.log(respons);
 				}
 			}
-		})().then(() => { a.push(respons); console.log(a) 
+		})().then(() => {
+			a.push(respons); console.log(a)
+			
 		
 		console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
 		if (teamInfo["authed_user"]["id"] === "U02V0K22Y76") {
@@ -177,8 +180,18 @@ router.get("/", (req, res) => {
 					respons.email,
 				])
 				.then((result) => {
-					username = result.rows[0].username;
-					return res.redirect(`http://localhost:3000/${username}`);
+					if (result.rowCount < 1) {
+						res.redirect(`http://localhost:3000/signup`);
+					}
+					else {
+						username = result.rows[0].username;
+						const authtoken = createToken(result.rows[0].id);
+
+					
+						localStorage.setItem("t", authtoken); //if you are sending token.
+
+						res.redirect(`http://localhost:3000/${username}`);
+					}
 				})
 				.catch();
 		}
@@ -214,9 +227,11 @@ router.get("/tasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
-
-	if (token) {
+	let token; //= //req.headers.authorization;
+	let t = localStorage.getItem('t')
+	if (t) token = t;
+	else  token = req.headers.authorization;
+	if (token){
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
 
 		if (userAuthenticated) {
@@ -251,7 +266,13 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
+	let token; //= //req.headers.authorization;
+	let t = localStorage.getItem("t");
+	if (t) {
+		token = t;
+		console.log(token);
+	} else token = req.headers.authorization;
+
 
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
@@ -295,7 +316,13 @@ router.get("/todaytasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
+	let token; //= //req.headers.authorization;
+	let t = localStorage.getItem("t");
+	if (t) {
+		token = t;
+		console.log(token);
+	} else token = req.headers.authorization;
+	
 
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
@@ -339,8 +366,14 @@ router.post("/newtasks", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization.split(" ")[1];
-	console.log(token);
+		let token; //= //req.headers.authorization;
+		let t = localStorage.getItem("t");
+	if (t)
+	{
+		token = t;
+		
+	}
+		else token = req.headers.authorization;
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
 		console.log(userAuthenticated, ">>>>>");
@@ -408,22 +441,7 @@ router.post("/newtasks", (req, res) => {
 				}
 			);
 
-			// const selectTasksForUserNameQuery =
-			// 	"insert into todo(task,user_id) values ($1,$2) returning id,task,date,iscomplete";
-			// todayTasksNew.forEach((tasks) => {
-			// 	pool
-			// 		.query(selectTasksForUserNameQuery, [tasks, id])
-			// 		.then((result) => {
-			// 			let userTasks = result.rows;
-			// 			if (userTasks.length === 0) {
-			// 				res.status(404).send({
-			// 					message: "No New task has been added!",
-			// 				});
-			// 				return;
-			// 			}
-			// 			res.status(200).json({ user: userTasks });
-			// 		});
-			// });
+	
 		}
 	} else {
 		res.send("not authenticated");

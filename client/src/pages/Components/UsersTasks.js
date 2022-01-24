@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
+import "./loadinAnimation.css";
 import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
@@ -65,10 +66,15 @@ function UsersTasks({ period }) {
 		navigate("/ ");
 	};
 	return (
-		<section
-			style={{ opacity: isSubmitting && "0.3" }}
-			className="formContainer"
-		>
+		<section className="formContainer">
+			<div className={`animation-container ${isSubmitting && "animate"}`}>
+				<div class="lds-ring">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
 			<section className="task-filter-container">
 				<MdOutlineFilterList
 					className={"task-filter-icon"}

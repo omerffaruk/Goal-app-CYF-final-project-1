@@ -138,7 +138,13 @@ function UsersTasks({ period }) {
 			</form>
 
 			<div>
-				<button onClick={() => handleLogout()}> LogOut </button>
+				<button
+					className="todo-submit-btn login-btn"
+					onClick={() => handleLogout()}
+				>
+					{" "}
+					LogOut{" "}
+				</button>
 			</div>
 		</section>
 	);

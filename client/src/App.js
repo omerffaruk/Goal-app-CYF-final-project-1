@@ -12,11 +12,11 @@ import ResetPassword from "./pages/Components/ResetPassword";
 import Home from "./pages/Home";
 import Password from "./pages/Components/Password";
 import ForgotPassword from "./pages/ForgotPassword";
-
 function App() {
 	return (
 		<div className="App">
 			<NavBar />
+		
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />

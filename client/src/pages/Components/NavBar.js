@@ -7,7 +7,7 @@ const NavBar = () => {
 			<div className="logo-ctn">
 				<a href="/">
 					<img
-						className="logo"
+						className="logo" id="logo"
 						src={require("../../images/logo-white.png").default}
 						alt=""
 					/>

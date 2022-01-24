@@ -1,7 +1,7 @@
 import { Router } from "express";
 import express from "express";
 import pool from "./utils/pool";
-import { isRedirect } from "node-fetch";
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
@@ -149,11 +149,11 @@ router.get("/", (req, res) => {
 
 		const { WebClient, ErrorCode } = require("@slack/web-api");
 		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
-		let respons,a=[];
+		let userProfile;
 		(async () => {
 			try {
 				// This method call should fail because we're giving it a bogus user ID to lookup.
-				respons = await web.openid.connect.userInfo({
+				userProfile = await web.openid.connect.userInfo({
 					user: teamInfo["authed_user"]["access_token"],
 				});
 			
@@ -163,21 +163,20 @@ router.get("/", (req, res) => {
 				if (error.code === ErrorCode.PlatformError) {
 					console.log(error.data);
 				} else {
-					// Some other error, oh no!
-					//console.log(respons);
+					
 				}
 			}
 		})().then(() => {
-			a.push(respons); console.log(a)
+			console.log(userProfile)
 			
 		
 		console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
-		if (teamInfo["authed_user"]["id"] === "U02V0K22Y76") {
+	
 			let username;
 
 			pool
 				.query("select * from users where email= $1", [
-					respons.email,
+					userProfile.email,
 				])
 				.then((result) => {
 					if (result.rowCount < 1) {
@@ -194,7 +193,7 @@ router.get("/", (req, res) => {
 					}
 				})
 				.catch();
-		}
+		
 		
 		
 		});

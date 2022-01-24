@@ -123,6 +123,7 @@ form.tasksForm label span {
 	opacity: 0.4;
 	min-height: 200px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	padding: 1rem;
 }
 .yesterdayCompletedContainer li {
 	/* opacity: 0.5; */
@@ -134,8 +135,9 @@ form.tasksForm label span {
 	text-decoration: line-through;
 }
 .yesterdayUncompletedContainer {
-	min-height: 200px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	min-height: 200px;
+	padding: 1rem;
 }
 .yesterdayUncompletedContainer li {
 	color: var(--primary-color);

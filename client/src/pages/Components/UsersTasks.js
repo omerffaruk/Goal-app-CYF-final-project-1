@@ -54,9 +54,10 @@ function UsersTasks({ period }) {
 	));
 
 	function handleAddNewTask(newTask) {
-		setCurrentPeriodTasks((prev) =>
-			prev.concat({ id: nanoid(10), task: newTask })
-		);
+		newTask.length > 0 &&
+			setCurrentPeriodTasks((prev) =>
+				prev.concat({ id: nanoid(10), task: newTask })
+			);
 	}
 
 	const handleLogout = () => {

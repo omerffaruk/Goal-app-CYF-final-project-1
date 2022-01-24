@@ -401,7 +401,7 @@ router.post("/newtasks", (req, res) => {
 
 				//ADD new tasks
 				const addTodayValuesQuery = todayTasksNew.map(
-					(task) => `('${task}',$1)`
+					(task) => `($$${task}$$,$1)`
 				);
 				pool.query(
 					`INSERT INTO todo(task,user_id) VALUES ${addTodayValuesQuery.join(

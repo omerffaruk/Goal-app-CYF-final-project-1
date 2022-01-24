@@ -52,6 +52,7 @@ export function TodayTasks({
 					if (event.key === "Enter") {
 						event.preventDefault();
 						handleChange(event);
+						setIsDisable(true);
 					}
 				}}
 			/>

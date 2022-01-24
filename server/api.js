@@ -190,7 +190,6 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 
 	}
 
-
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
 
@@ -357,8 +356,6 @@ router.post("/newtasks", (req, res) => {
 					}
 				}
 			);
-
-	
 		}
 	} else {
 		res.send("not authenticated");

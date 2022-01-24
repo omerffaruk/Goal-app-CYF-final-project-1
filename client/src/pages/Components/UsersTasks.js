@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
+import "./loadinAnimation.css";
 import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
@@ -15,6 +16,7 @@ function UsersTasks({ period }) {
 		useState("yesterdaytasks");
 	const [currentPeriodEndPoint, setCurrentPeriodEndPoint] =
 		useState("todaytasks");
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username } = useParams();
 	const navigate = useNavigate();
 
@@ -28,7 +30,8 @@ function UsersTasks({ period }) {
 	//Submit
 	function handleSubmit(event) {
 		event.preventDefault();
-		postTodos(beforePeriodTasks, currentPeriodTasks);
+		setIsSubmitting(true);
+		postTodos(beforePeriodTasks, currentPeriodTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = beforePeriodTasks
 		.filter((task) => task.iscomplete)
@@ -52,9 +55,10 @@ function UsersTasks({ period }) {
 	));
 
 	function handleAddNewTask(newTask) {
-		setCurrentPeriodTasks((prev) =>
-			prev.concat({ id: nanoid(10), task: newTask })
-		);
+		newTask.length > 0 &&
+			setCurrentPeriodTasks((prev) =>
+				prev.concat({ id: nanoid(10), task: newTask })
+			);
 	}
 
 	const handleLogout = () => {
@@ -63,6 +67,14 @@ function UsersTasks({ period }) {
 	};
 	return (
 		<section className="formContainer">
+			<div className={`animation-container ${isSubmitting && "animate"}`}>
+				<div class="lds-ring">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
 			<section className="task-filter-container">
 				<MdOutlineFilterList
 					className={"task-filter-icon"}

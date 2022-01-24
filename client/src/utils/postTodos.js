@@ -1,5 +1,9 @@
 import fetchData from "./fetchData";
-export default async function postTodos(yesterdayTasks, todayTasks) {
+export default async function postTodos(
+	yesterdayTasks,
+	todayTasks,
+	setIsSubmitting
+) {
 	const yesterdayCheckedTasksId = [];
 	const yesterdayUncheckedTasksId = [];
 	yesterdayTasks.forEach((task) => {
@@ -36,12 +40,14 @@ export default async function postTodos(yesterdayTasks, todayTasks) {
 		mode: "cors",
 		headers: {
 			"Content-Type": "application/json",
-			authorization: `Bearer ${token}`, // ADD Token to HEADER
+			authorization: token, // ADD Token to HEADER
 		},
 		body: JSON.stringify(submitData),
 	};
 
 	fetchData("/newtasks", postObject).then((response) => {
-		console.log({ response }, ">>>>>>>>HANDLE IT LATER");
+		if (response.status === 200) {
+			setTimeout(() => setIsSubmitting(false), 2000);
+		}
 	});
 }

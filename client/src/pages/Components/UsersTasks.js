@@ -15,6 +15,7 @@ function UsersTasks({ period }) {
 		useState("yesterdaytasks");
 	const [currentPeriodEndPoint, setCurrentPeriodEndPoint] =
 		useState("todaytasks");
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username } = useParams();
 	const navigate = useNavigate();
 
@@ -28,7 +29,8 @@ function UsersTasks({ period }) {
 	//Submit
 	function handleSubmit(event) {
 		event.preventDefault();
-		postTodos(beforePeriodTasks, currentPeriodTasks);
+		setIsSubmitting(true);
+		postTodos(beforePeriodTasks, currentPeriodTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = beforePeriodTasks
 		.filter((task) => task.iscomplete)
@@ -62,7 +64,10 @@ function UsersTasks({ period }) {
 		navigate("/ ");
 	};
 	return (
-		<section className="formContainer">
+		<section
+			style={{ opacity: isSubmitting && "0.3" }}
+			className="formContainer"
+		>
 			<section className="task-filter-container">
 				<MdOutlineFilterList
 					className={"task-filter-icon"}

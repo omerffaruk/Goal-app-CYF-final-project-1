@@ -43,7 +43,7 @@ export function Home() {
 			<div className="slack-connect">
 				<a
 					href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
-				redirect_uri=https://8ced-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
+				redirect_uri=https://ba75-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
 				>
 					<img
 						className="Slack"

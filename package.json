@@ -98,7 +98,8 @@
 		"request": "^2.88.2",
 		"request-promise": "^4.2.6",
 		"sendgrid": "^5.2.3",
-		"sendgrid-rest": "^2.6.1"
+		"sendgrid-rest": "^2.6.1",
+		"store2": "^2.13.1"
 	},
 	"engines": {
 		"node": "^12 || ^14",

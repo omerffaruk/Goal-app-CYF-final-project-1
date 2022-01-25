@@ -10,6 +10,7 @@ export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [email, setEmail] = useState("");
 	const [popup, setPopup] = useState(false);
+	const [errorDisplay, setErrorDisplay] = useState(false);
 	const [password, setPassword] = useState("");
 
 	useEffect(() => {
@@ -78,6 +79,7 @@ export function Home() {
 							<label htmlFor="password">Password</label>
 						</div>
 						<input
+							className={errorDisplay && "red-border"}
 							type="password"
 							name="password"
 							id="password"
@@ -85,6 +87,9 @@ export function Home() {
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 						></input>
+					</div>
+					<div className={`error-login ${errorDisplay && "display"}`}>
+						Wrong username and/or password! Please try again.
 					</div>
 				</form>
 			</div>
@@ -104,7 +109,7 @@ export function Home() {
 			</div>
 			{/* <Password /> */}
 
-			<LoginBtn className="text-center" email={email} password={password} />
+			<LoginBtn className="text-center" email={email} password={password} setErrorDisplay={setErrorDisplay} />
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>

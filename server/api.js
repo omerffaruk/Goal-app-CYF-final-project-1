@@ -91,7 +91,7 @@ router.post("/log", (req, res) => {
 
 	const email = req.body.email;
 	const passwords = req.body.password;
-	slacklogin['token'] = '';
+	slacklogin["token"] = "";
 	let query;
 	query = "select * from users where email = $1";
 	//res.send(email)
@@ -108,8 +108,10 @@ router.post("/log", (req, res) => {
 						username: result.rows[0].username,
 					});
 				} else {
-					res.send("Password do not match");
+					res.json("Password do not match");
 				}
+			} else {
+				return res.json("User with this email does not exist!");
 			}
 		})
 		.catch((e) => res.send(e));
@@ -186,7 +188,7 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 	if (slacklogin["token"]) {
 		token = slacklogin["token"];
 	} else {
-		token = req.headers.authorization
+		token = req.headers.authorization;
 
 	}
 
@@ -235,7 +237,7 @@ router.get("/todaytasks/:username", (req, res) => {
 let token;
  if (!slacklogin["token"]) {
 	token = req.headers.authorization;
-	console.log(token)
+	console.log(token);
 } else {
 	token = slacklogin["token"];
 }
@@ -284,12 +286,12 @@ router.post("/newtasks", (req, res) => {
 	);
 	let userAuthenticated;
 		let token;
-	if (slacklogin['token']) {
+	if (slacklogin["token"]) {
 		token = slacklogin["token"];
 		userAuthenticated = jwt.verify(token, "htctsecretserver");
 	} else {
 		token = req.headers.authorization;
-		console.log(token, '====');
+		console.log(token, "====");
 		userAuthenticated = jwt.verify(token, "htctsecretserver");
 	}
 
@@ -339,7 +341,7 @@ router.post("/newtasks", (req, res) => {
 			});
 
 			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
-			const yesterdaysCompletedTasksSetQuery = `UPDATE todo SET iscomplete = true WHERE id =ANY ($1)`;
+			const yesterdaysCompletedTasksSetQuery = "UPDATE todo SET iscomplete = true WHERE id =ANY ($1)";
 			pool.query(
 				yesterdaysCompletedTasksSetQuery,
 				[yesterdayCheckedTasksId],
@@ -349,7 +351,7 @@ router.post("/newtasks", (req, res) => {
 					}
 				}
 			);
-			const yesterdaysUnCompletedTasksSetQuery = `UPDATE todo SET iscomplete = false WHERE id =ANY ($1)`;
+			const yesterdaysUnCompletedTasksSetQuery = "UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
 			pool.query(
 				yesterdaysUnCompletedTasksSetQuery,
 				[yesterdayUncheckedTasksId],
@@ -453,7 +455,7 @@ if(code){
 	const clientId = "2977670222342.2984355485058";
 	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
 
-	var path_to_access_token =
+	let path_to_access_token =
 		"https://slack.com/api/oauth.v2.access?" +
 		"client_id=" +
 		clientId +
@@ -502,21 +504,22 @@ if(code){
 			pool
 				.query("select * from users where email= $1", [userProfile.email])
 				.then((result) => {
-					
+
 					if (result.rowCount < 1) {
-						res.redirect(`http://localhost:3000/signup`);
+						res.redirect("http://localhost:3000/signup");
 					} else {
 						username = result.rows[0].username;
 						const authtoken = createToken(result.rows[0].id);
-                        tokenarray.push(authtoken)
+                        tokenarray.push(authtoken);
 						//localStorage.setItem("token", authtoken); //if you are sending token.
-						slacklogin['token'] = tokenarray[0];
+						slacklogin["token"] = tokenarray[0];
 						res.redirect(`http://localhost:3000/${username}`);
 					}
 				})
 				.catch();
 		}
 		);
-	});}
+	});
+}
 });
 export default router;

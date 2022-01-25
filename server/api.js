@@ -5,8 +5,6 @@ import pool from "./utils/pool";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
-var LocalStorage = require("node-localstorage").LocalStorage;
-var localStorage = new LocalStorage("./scratch");
 const sgMail = require("@sendgrid/mail");
 
 const router = new Router();
@@ -14,7 +12,8 @@ router.use(express.json());
 router.use(express.urlencoded());
 
 //validates data and registers new user in the database if user doesn't already exists
-
+let slacklogin = {};
+let tokenarray=[];
 router.post("/register", (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Credentials", true);
@@ -92,7 +91,7 @@ router.post("/log", (req, res) => {
 
 	const email = req.body.email;
 	const passwords = req.body.password;
-
+	slacklogin['token'] = '';
 	let query;
 	query = "select * from users where email = $1";
 	//res.send(email)
@@ -115,89 +114,8 @@ router.post("/log", (req, res) => {
 		})
 		.catch((e) => res.send(e));
 });
-router.get("/", (req, res) => {
-	res.send({ msg: "Hello world" });
-});
 
-// router.get("/", (req, res) => {
-// 	const request = require("request");
 
-// 	const code = req.query.code;
-// 	console.log("Authorizer was called");
-
-// 	const clientId = "2977670222342.2984355485058";
-// 	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
-
-// 	var path_to_access_token =
-// 		"https://slack.com/api/oauth.v2.access?" +
-// 		"client_id=" +
-// 		clientId +
-// 		"&" +
-// 		"client_secret=" +
-// 		clientSecret +
-// 		"&" +
-// 		"code=" +
-// 		code +
-// 		"&" +
-// 		"redirect_uri=" +
-// 		"https://8ced-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
-// 	//console.log(clientId,secretId,path_to_access_token)
-
-// 	request(path_to_access_token, function (error, response, body) {
-// 		// Request token from Slack using the access_code, then handle response
-
-// 		let teamInfo = JSON.parse(body);
-
-// 		// Read a token from the environment variables
-
-// 		const { WebClient, ErrorCode } = require("@slack/web-api");
-// 		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
-// 		let userProfile;
-// 		(async () => {
-// 			try {
-// 				// This method call should fail because we're giving it a bogus user ID to lookup.
-// 				userProfile = await web.openid.connect.userInfo({
-// 					user: teamInfo["authed_user"]["access_token"],
-// 				});
-
-// 			} catch (error) {
-// 				// Check the code property, and when its a PlatformError, log the whole response.
-// 				if (error.code === ErrorCode.PlatformError) {
-// 					console.log(error.data);
-// 				} else {
-
-// 				}
-// 			}
-// 		})().then(() => {
-// 			console.log(userProfile)
-
-// 		console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
-
-// 			let username;
-
-// 			pool
-// 				.query("select * from users where email= $1", [
-// 					userProfile.email,
-// 				])
-// 				.then((result) => {
-// 					if (result.rowCount < 1) {
-// 						res.redirect(`http://localhost:3000/signup`);
-// 					}
-// 					else {
-// 						username = result.rows[0].username;
-// 						const authtoken = createToken(result.rows[0].id);
-
-// 						localStorage.setItem("t", authtoken); //if you are sending token.
-
-// 						res.redirect(`http://localhost:3000/${username}`);
-// 					}
-// 				})
-// 				.catch();
-
-// 		});
-
-// 	});
-// });
 // api/tasks returns all the tasks in the database
 router.get("/tasks", (_, res) => {
 	const selectAllTasksQuery =
@@ -222,11 +140,14 @@ router.get("/tasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token; //= //req.headers.authorization;
-	let t = localStorage.getItem("t");
-	if (t) token = t;
-	else token = req.headers.authorization;
-	if (token) {
+
+	let token;
+	if (slacklogin["token"].length!==0) {
+		token = slacklogin["token"];
+	} else {
+		token = req.headers.authorization;
+	}
+	if (token){
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
 
 		if (userAuthenticated) {
@@ -261,12 +182,13 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token; //= //req.headers.authorization;
-	let t = localStorage.getItem("t");
-	if (t) {
-		token = t;
-		console.log(token);
-	} else token = req.headers.authorization;
+	let token;
+	if (slacklogin["token"]) {
+		token = slacklogin["token"];
+	} else {
+		token = req.headers.authorization
+
+	}
 
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
@@ -310,12 +232,13 @@ router.get("/todaytasks/:username", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token; //= //req.headers.authorization;
-	let t = localStorage.getItem("t");
-	if (t) {
-		token = t;
-		console.log(token);
-	} else token = req.headers.authorization;
+let token;
+ if (slacklogin["token"].length===0) {
+	token = req.headers.authorization;
+	console.log(token)
+} else {
+	token = slacklogin["token"];
+}
 
 	if (token) {
 		const userAuthenticated = jwt.verify(token, "htctsecretserver");
@@ -359,13 +282,16 @@ router.post("/newtasks", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
-	let token = req.headers.authorization;
-	let t = localStorage.getItem("t");
-	if (t) {
-		token = t;
-	} else token = req.headers.authorization;
+		let token;
+	if (slacklogin['token'].length !== 0) {
+		token = slacklogin["token"];
+	} else {
+		token = req.headers.authorization.split(" ");
+		console.log(token, '====');
+	}
+
 	if (token) {
-		const userAuthenticated = jwt.verify(token, "htctsecretserver");
+		const userAuthenticated = jwt.verify(token[1], "htctsecretserver");
 		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
@@ -515,5 +441,79 @@ router.post("/reset_password/:id", (req, res) => {
 		})
 		.catch();
 });
+router.get("/", (req, res) => {
+	const request = require("request");
 
+	const code = req.query.code;
+	//console.log(code);
+if(code){
+	const clientId = "2977670222342.2984355485058";
+	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
+
+	var path_to_access_token =
+		"https://slack.com/api/oauth.v2.access?" +
+		"client_id=" +
+		clientId +
+		"&" +
+		"client_secret=" +
+		clientSecret +
+		"&" +
+		"code=" +
+		code +
+		"&" +
+		"redirect_uri=" +
+		"https://ba75-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+	//console.log(clientId,secretId,path_to_access_token)
+
+	request(path_to_access_token, function (error, response, body) {
+		// Request token from Slack using the access_code, then handle response
+
+		let teamInfo = JSON.parse(body);
+		//console.log(teamInfo);
+		// Read a token from the environment variables
+
+		const { WebClient, ErrorCode } = require("@slack/web-api");
+		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
+		let userProfile;
+		(async () => {
+			try {
+				// This method call should fail because we're giving it a bogus user ID to lookup.
+				userProfile = await web.openid.connect.userInfo({
+					user: teamInfo["authed_user"]["access_token"],
+				});
+			} catch (error) {
+				// Check the code property, and when its a PlatformError, log the whole response.
+				if (error.code === ErrorCode.PlatformError) {
+					console.log(error.data);
+				} else {
+				}
+			}
+		}
+		)().then(() => {
+			//console.log(userProfile);
+
+			//console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
+
+			let username;
+
+			pool
+				.query("select * from users where email= $1", [userProfile.email])
+				.then((result) => {
+					
+					if (result.rowCount < 1) {
+						res.redirect(`http://localhost:3000/signup`);
+					} else {
+						username = result.rows[0].username;
+						const authtoken = createToken(result.rows[0].id);
+                        tokenarray.push(authtoken)
+						//localStorage.setItem("token", authtoken); //if you are sending token.
+						slacklogin['token'] = tokenarray[0];
+						res.redirect(`http://localhost:3000/${username}`);
+					}
+				})
+				.catch();
+		}
+		);
+	});}
+});
 export default router;

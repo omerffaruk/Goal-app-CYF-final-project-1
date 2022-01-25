@@ -4,6 +4,7 @@ import LoginBtn from "./Components/LoginBtn";
 import Password from "./Components/Password";
 import fetchData from "../utils/fetchData";
 import "./Home.css";
+//import "./styles.css";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -37,10 +38,13 @@ export function Home() {
 	};
 
 	return (
-		<div className="home-ctn">
+		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
-				<a href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;redirect_uri=https%3A%2F%2Fgoal-app-cyf-final-project.herokuapp.com&amp;client_id=2978480330788.2973273823381">
+				<a
+					href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
+				redirect_uri=https://ba75-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
+				>
 					<img
 						className="Slack"
 						alt=""
@@ -84,7 +88,7 @@ export function Home() {
 					</div>
 				</form>
 			</div>
-			<div className="password-ctn">
+			<div className="bg-green-100 password-ctn">
 				<div>
 					<input
 						type="checkbox"

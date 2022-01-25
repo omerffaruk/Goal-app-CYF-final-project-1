@@ -284,7 +284,7 @@ router.post("/newtasks", (req, res) => {
 	);
 	let userAuthenticated;
 		let token;
-	if (slacklogin['token'].length !== 0) {
+	if (slacklogin['token']) {
 		token = slacklogin["token"];
 		userAuthenticated = jwt.verify(token, "htctsecretserver");
 	} else {

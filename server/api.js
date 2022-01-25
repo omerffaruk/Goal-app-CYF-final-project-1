@@ -233,7 +233,7 @@ router.get("/todaytasks/:username", (req, res) => {
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
 let token;
- if (slacklogin["token"].length===0) {
+ if (!slacklogin["token"]) {
 	token = req.headers.authorization;
 	console.log(token)
 } else {
@@ -282,16 +282,19 @@ router.post("/newtasks", (req, res) => {
 		"Access-Control-Allow-Headers",
 		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
 	);
+	let userAuthenticated;
 		let token;
-	if (slacklogin['token'].length !== 0) {
+	if (slacklogin['token']) {
 		token = slacklogin["token"];
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
 	} else {
-		token = req.headers.authorization.split(" ");
+		token = req.headers.authorization;
 		console.log(token, '====');
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
 	}
 
 	if (token) {
-		const userAuthenticated = jwt.verify(token[1], "htctsecretserver");
+		//userAuthenticated = jwt.verify(token[1], "htctsecretserver");
 		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {

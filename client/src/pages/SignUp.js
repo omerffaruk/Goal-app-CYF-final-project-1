@@ -20,7 +20,7 @@ const SignUp = () => {
 				password,
 			}),
 		};
-		fetchData(`/register`, methodObj)
+		fetchData("/register", methodObj)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.message) {
@@ -46,8 +46,10 @@ const SignUp = () => {
 			if (e.target.name === "username") {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
-				setPassword(e.target.value);e
-			} else setEmail(e.target.value);
+				setPassword(e.target.value);
+			} else {
+				setEmail(e.target.value);
+}
 			setPopup(false);
 		}
 	};

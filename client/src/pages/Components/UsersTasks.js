@@ -131,14 +131,14 @@ function UsersTasks({ period }) {
 				<input className="task-search" type="text" placeholder="Search..." />
 			</section>
 			<form className="tasksForm" onSubmit={handleSubmit}>
-				<h4 className="completed-h4">Before Priod tasks Completed</h4>
+				<h4 className="completed-h4">Tasks Completed</h4>
 				<ul className="yesterdayCompletedContainer">{beforePeriodItemsDone}</ul>
-				<h4 className="uncompleted-h4">Before Period tasks Incomplete</h4>
+				<h4 className="uncompleted-h4">Tasks Incomplete</h4>
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodItemsUndone}
 				</ul>
 				<h3 className="current-h3">
-					Current Period tasks, Please press enter for each new task..
+					Enter new tasks..
 				</h3>
 				<article className="today-todos-container">
 					<ul>{currentPeriodTaskInputs}</ul>

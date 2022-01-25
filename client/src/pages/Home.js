@@ -29,8 +29,20 @@ export function Home() {
 			});
 	}, []);
 
+	const validateForm = () => {
+		if(email.length === 0 ||
+			!email.includes("@")) {
+				alert("Please enter a valid email");
+				return false;
+			}
+			if(password.length === 0) {
+				alert("Please enter your password");
+				return false;
+			}
+	};
 	const handleChange = (e) => {
 		e.preventDefault();
+		validateForm();
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {

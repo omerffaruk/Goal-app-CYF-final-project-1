@@ -68,7 +68,7 @@ function UsersTasks({ period }) {
 	return (
 		<section className="formContainer">
 			<div className={`animation-container ${isSubmitting && "animate"}`}>
-				<div class="lds-ring">
+				<div className="loading-ring">
 					<div></div>
 					<div></div>
 					<div></div>

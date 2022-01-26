@@ -10,9 +10,9 @@ import "./Home.css";
 export function Home({ givenEmail,givenPassword}) {
 	
 	const [message, setMessage] = useState("Loading...");
-	const [email, setEmail] = useState(givenEmail);
+	const [email, setEmail] = useState(localStorage.getItem("email"));
 	const [remember, setRemember] = useState(true);
-	const [password, setPassword] = useState(givenPassword);
+	const [password, setPassword] = useState(localStorage.getItem("password"));
 	const [rememberUser, setRememberUser] = useState(localStorage.getItem('chk'))
 	
 	
@@ -49,7 +49,7 @@ export function Home({ givenEmail,givenPassword}) {
 	};
 	const handleChange = (e) => {
 		e.preventDefault();
-		validateForm();
+		//validateForm();
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {
@@ -57,14 +57,14 @@ export function Home({ givenEmail,givenPassword}) {
 		}
 	}
 	const handleRemember = (e) => {
-		setRemember(!remember)
+		
 		if (remember) {
 			localStorage.setItem('email', email);
 			
 			localStorage.setItem('chk', true);
        
 			localStorage.setItem('password', password);
-			
+		setRemember(!remember);	
 				
 		}
 		else {
@@ -144,8 +144,7 @@ export function Home({ givenEmail,givenPassword}) {
 						name="remember"
 						onClick={(e) => handleRemember(e)}
 						checked={rememberUser}
-					
-					
+							
 						aria-label="check to remember user"
 					
 					></input>

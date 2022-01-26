@@ -55,7 +55,7 @@ function UsersTasks({ period }) {
 
 	const handleLogout = () => {
 		localStorage.removeItem("t");
-		navigate("/ ");
+		navigate("/");
 	};
 	return (
 		<section className="formContainer">

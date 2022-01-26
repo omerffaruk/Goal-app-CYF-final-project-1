@@ -124,10 +124,10 @@ form.tasksForm label span {
 .yesterdayCompletedContainer {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	min-height: 200px;
-	max-height: 500px;
+	max-height: 750px;
 	opacity: 0.8;
 	overflow: scroll;
-	padding: 1rem;
+	padding: 48px 16px;
 }
 .task-date {
 	color: var(--primary-color);
@@ -164,7 +164,9 @@ form.tasksForm label span {
 .yesterdayUncompletedContainer {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	min-height: 200px;
-	padding: 1rem;
+	max-height: 750px;
+	overflow: scroll;
+	padding: 48px 16px;
 }
 .yesterdayUncompletedContainer li {
 	color: var(--primary-color);
@@ -175,8 +177,6 @@ form.tasksForm label span {
 .today-todos-container ul {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	min-height: 200px;
-	max-height: 500px;
-	overflow: scroll;
 }
 .new-task-input,
 .today-task-show,

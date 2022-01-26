@@ -1,17 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
-import TemporaryUserTasks from "./pages/Temporary/TemporaryUserTasks";
-//import UsersTasks from "./pages/Temporary/UsersTasks";
-import UsersTasks from "./pages/Components/UsersTasks";
 import NavBar from "./pages/Components/NavBar";
 import About from "./pages/About";
-
 import ResetPassword from "./pages/Components/ResetPassword";
-
 import Home from "./pages/Home";
 import Password from "./pages/Components/Password";
 import ForgotPassword from "./pages/ForgotPassword";
+import Dashboard from "./pages/Components/Dashboard";
 function App() {
 	const chk = localStorage.getItem("chk");
 	const givenEmail = localStorage.getItem("email");
@@ -20,7 +16,6 @@ function App() {
 	return (
 		<div className="App">
 			<NavBar />
-		
 			<Routes>
 				<Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} />} />
 				<Route path="/signup" element={<SignUp />} />
@@ -29,18 +24,18 @@ function App() {
 
 				{/* -----------Temporary Routes--------------- */}
 				<Route path="/temporary/tasks" element={<TemporaryTasks />} />
-				<Route path="/:username" element={<UsersTasks period={"daily"} />} />
+				<Route path="/:username" element={<Dashboard period={"daily"} />} />
 				<Route
 					path="/:username/weekly"
-					element={<UsersTasks period={"weekly"} />}
+					element={<Dashboard period={"weekly"} />}
 				/>
 				<Route
 					path="/:username/monthly"
-					element={<UsersTasks period={"monthly"} />}
+					element={<Dashboard period={"monthly"} />}
 				/>
 				<Route
 					path="/:username/quarterly"
-					element={<UsersTasks period={"quarterly"} />}
+					element={<Dashboard period={"quarterly"} />}
 				/>
 
 				{<Route path="/forgot_password" element={<Password />} />}

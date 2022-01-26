@@ -155,6 +155,7 @@ ul {
 }
 
 .slack-connect {
+	padding: 0.75em;
 	border: solid 1px var(--primary-color);
 	border-radius: 20px;
 	margin: 0 auto;
@@ -276,6 +277,10 @@ align-self: center;}
 	font-weight: 600;
 }
 
+.form-field input.red-border {
+	border: 2px solid red;
+}
+
 .login-btn {
 	background: var(--linear-bg);
 	color: #fff;
@@ -291,6 +296,15 @@ align-self: center;}
 
 .login-btn:hover {
 	background: #5d7ada;
+}
+
+.error-login {
+	color: red;
+	display: none;
+}
+
+.error-login.display {
+	display: block;
 }
 
 /*--------- Create an account ----------*/

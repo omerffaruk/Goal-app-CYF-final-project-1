@@ -15,6 +15,10 @@ export function Home({ givenEmail,givenPassword}) {
 	const [password, setPassword] = useState(givenPassword);
 	const [rememberUser, setRememberUser] = useState(localStorage.getItem('chk'))
 	
+	
+	
+	const [errorDisplay, setErrorDisplay] = useState(false);
+	
 
 	useEffect(() => {
 		fetchData("")
@@ -32,8 +36,20 @@ export function Home({ givenEmail,givenPassword}) {
 			})
 	}, []);
 
+	const validateForm = () => {
+		if(email.length === 0 ||
+			!email.includes("@")) {
+				alert("Please enter a valid email");
+				return false;
+			}
+			if(password.length === 0) {
+				alert("Please enter your password");
+				return false;
+			}
+	};
 	const handleChange = (e) => {
 		e.preventDefault();
+		validateForm();
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {
@@ -74,7 +90,7 @@ export function Home({ givenEmail,givenPassword}) {
 						alt=""
 						src={require("../images/Slack_logo.png").default}
 					/>
-					<h4>Continue with Slack</h4>
+					<h2>Continue with Slack</h2>
 				</a>
 			</div>
 			<div className="or-ctn">
@@ -96,6 +112,7 @@ export function Home({ givenEmail,givenPassword}) {
 							placeholder="Email address"
 							aria-required
 							value={email }
+							aria-label="enter email"
 						></input>
 					</div>
 					<div className="form-field">
@@ -103,14 +120,19 @@ export function Home({ givenEmail,givenPassword}) {
 							<label htmlFor="password">Password</label>
 						</div>
 						<input
+							className={errorDisplay && "red-border"}
 							type="password"
 							name="password"
 							id="password"
 							aria-required
+							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 							value={ password}
 						></input>
+					</div>
+					<div className={`error-login ${errorDisplay && "display"}`}>
+						Wrong username and/or password! Please try again.
 					</div>
 				</form>
 			</div>
@@ -124,8 +146,10 @@ export function Home({ givenEmail,givenPassword}) {
 						checked={rememberUser}
 					
 					
+						aria-label="check to remember user"
+					
 					></input>
-					<label htmlFor="remember">Remember me</label>
+				<label htmlFor="remember_user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>
@@ -133,7 +157,7 @@ export function Home({ givenEmail,givenPassword}) {
 			</div>
 			{/* <Password /> */}
 
-			<LoginBtn className="text-center" email={email} password={password} />
+			<LoginBtn className="text-center" email={email} password={password} setErrorDisplay={setErrorDisplay} />
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>

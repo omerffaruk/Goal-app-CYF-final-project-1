@@ -8,7 +8,7 @@ const NavBar = () => {
 				<a href="/">
 					<img
 						className="logo" id="logo"
-						src={require("../../images/logo-white-htct.png").default}
+						src={require("../../images/logo-white-edit.png").default}
 						alt="logo"
 						aria-label="link button to home page"
 					/>

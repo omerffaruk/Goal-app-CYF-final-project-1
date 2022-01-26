@@ -404,6 +404,82 @@ router.get("/weekly/:username", (req, res) => {
 		res.send("not authenticated");
 	}
 });
+//This endpoint will bring only last month's tasks for the specific user
+router.get("/monthly/:username", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	let userAuthenticated;
+	let token;
+	if (slacklogin["token"]) {
+		token = slacklogin["token"];
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
+	} else {
+		token = req.headers.authorization;
+		console.log(token, "====");
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
+	}
+
+	if (token) {
+		if (userAuthenticated) {
+			const userName = req.params.username;
+			const id = userAuthenticated.id;
+			const monthlyDataQuery = `SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and
+				date >= date_trunc('week', CURRENT_TIMESTAMP - interval '4 week') and
+						date < date_trunc('week', CURRENT_TIMESTAMP) ORDER BY date DESC`;
+			pool.query(monthlyDataQuery, [userName, id], (error, result) => {
+				if (error) {
+					return res.status(500).send({ msg: "Database ERROR" });
+				}
+				res.status(200).json({ user: result.rows });
+			});
+		}
+	} else {
+		res.send("not authenticated");
+	}
+});
+//This endpoint will bring only last quarte's tasks for the specific user
+router.get("/quarterly/:username", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+	let userAuthenticated;
+	let token;
+	if (slacklogin["token"]) {
+		token = slacklogin["token"];
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
+	} else {
+		token = req.headers.authorization;
+		console.log(token, "====");
+		userAuthenticated = jwt.verify(token, "htctsecretserver");
+	}
+
+	if (token) {
+		if (userAuthenticated) {
+			const userName = req.params.username;
+			const id = userAuthenticated.id;
+			const quarterlyDataQuery = `SELECT todo.id,todo.user_id,todo.task,todo.iscomplete,todo.date FROM todo INNER JOIN users ON users.id = todo.user_id WHERE users.username = $1 and users.id=$2 and
+				date >= date_trunc('week', CURRENT_TIMESTAMP - interval '12 week') and
+						date < date_trunc('week', CURRENT_TIMESTAMP) ORDER BY date DESC`;
+			pool.query(quarterlyDataQuery, [userName, id], (error, result) => {
+				if (error) {
+					return res.status(500).send({ msg: "Database ERROR" });
+				}
+				res.status(200).json({ user: result.rows });
+			});
+		}
+	} else {
+		res.send("not authenticated");
+	}
+});
 //This endpoint will update specific task for the specific user
 router.put("/update", (req, res) => {
 	res.header("Access-Control-Allow-Origin", "*");

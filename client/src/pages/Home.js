@@ -63,7 +63,7 @@ export function Home() {
 						alt=""
 						src={require("../images/Slack_logo.png").default}
 					/>
-					<h4>Continue with Slack</h4>
+					<h2>Continue with Slack</h2>
 				</a>
 			</div>
 			<div className="or-ctn">
@@ -84,6 +84,7 @@ export function Home() {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
+							aria-label="enter email"
 						></input>
 					</div>
 					<div className="form-field">
@@ -96,6 +97,7 @@ export function Home() {
 							name="password"
 							id="password"
 							aria-required
+							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
 						></input>
@@ -111,9 +113,10 @@ export function Home() {
 						type="checkbox"
 						id="remember-user"
 						name="remember"
+						aria-label="check to remember user"
 						checked
 					></input>
-					<label htmlFor="remember">Remember me</label>
+				<label htmlFor="remember_user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>

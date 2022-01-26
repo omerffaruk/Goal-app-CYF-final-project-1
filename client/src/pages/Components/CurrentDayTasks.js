@@ -25,7 +25,7 @@ function UsersTasks({ period }) {
 	function handleSubmit(event) {
 		event.preventDefault();
 		setIsSubmitting(true);
-		postTodos(yesterdayTasks, todayTasks, setIsSubmitting);
+		postTodos( todayTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)

@@ -4,12 +4,10 @@ import {
 	MdDeleteOutline,
 	MdOutlineIndeterminateCheckBox,
 	MdOutlineCheckBox,
-	MdIndeterminateCheckBox,
-	MdCheckBox,
 } from "react-icons/md";
 import updateTodo from "../../utils/updateTodo";
 import deleteTodo from "../../utils/deleteTodo";
-export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
+export default function Task({ task, setBeforePeriodTasks }) {
 	const [taskValue, setTaskValue] = useState(task.task);
 	const [isTyping, setIsTyping] = useState(false);
 	const inputRef = useRef();
@@ -58,15 +56,7 @@ export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
 		updateTodo(task);
 	}
 	return (
-		<li
-			style={{
-				display: "grid",
-				alignItems: "center",
-				gap: "10px",
-				gridTemplateColumns: "0.5fr 10fr 1fr 1fr",
-				// justifyContent: "space-between",
-			}}
-		>
+		<li className="past-task-li-container">
 			<label>
 				<input
 					type="checkbox"

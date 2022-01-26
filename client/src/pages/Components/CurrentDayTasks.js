@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Checkbox from "./Checkbox";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import "./loadinAnimation.css";
 import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
+import Task from "./Task";
 function UsersTasks({ period }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
@@ -25,17 +25,25 @@ function UsersTasks({ period }) {
 	function handleSubmit(event) {
 		event.preventDefault();
 		setIsSubmitting(true);
-		postTodos(yesterdayTasks, todayTasks, setIsSubmitting);
+		postTodos( todayTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)
 		.map((task) => (
-			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+			<Task
+				key={task.id}
+				task={task}
+				setBeforePeriodTasks={setYesterdayTasks}
+			/>
 		));
 	const beforePeriodItemsUndone = yesterdayTasks
 		.filter((task) => !task.iscomplete)
 		.map((task) => (
-			<Checkbox setTasks={setYesterdayTasks} key={task.id} task={task} />
+			<Task
+				key={task.id}
+				task={task}
+				setBeforePeriodTasks={setYesterdayTasks}
+			/>
 		));
 
 	const currentPeriodTaskInputs = todayTasks.map((task, index) => (

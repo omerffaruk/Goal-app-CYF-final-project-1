@@ -298,14 +298,7 @@ router.post("/newtasks", (req, res) => {
 		console.log(userAuthenticated, ">>>>>");
 
 		if (userAuthenticated) {
-			const {
-				yesterdayCheckedTasksId,
-				yesterdayUncheckedTasksId,
-				todayTasksAlreadySaved,
-				todayTasksNew,
-			} = req.body;
-			// console.log(task, "***************");
-
+			const { todayTasksNew } = req.body;
 			const id = userAuthenticated.id;
 			//find todays todos, delete all of them and add new ones
 			const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN
@@ -337,30 +330,6 @@ router.post("/newtasks", (req, res) => {
 					}
 				);
 			});
-
-			// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
-			const yesterdaysCompletedTasksSetQuery =
-				"UPDATE todo SET iscomplete = true WHERE id =ANY ($1)";
-			pool.query(
-				yesterdaysCompletedTasksSetQuery,
-				[yesterdayCheckedTasksId],
-				(error, result) => {
-					if (error) {
-						return res.status(500).send({ msg: "Database ERROR" });
-					}
-				}
-			);
-			const yesterdaysUnCompletedTasksSetQuery =
-				"UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
-			pool.query(
-				yesterdaysUnCompletedTasksSetQuery,
-				[yesterdayUncheckedTasksId],
-				(error, result) => {
-					if (error) {
-						return res.status(500).send({ msg: "Database ERROR" });
-					}
-				}
-			);
 		}
 	} else {
 		res.send("not authenticated");

@@ -20,7 +20,6 @@ export default function OldTasks({ period }) {
 				key={task.id}
 				task={task}
 				setBeforePeriodTasks={setBeforePeriodTasks}
-				setIsSubmitting={setIsSubmitting}
 			/>
 		));
 
@@ -32,7 +31,6 @@ export default function OldTasks({ period }) {
 				key={task.id}
 				task={task}
 				setBeforePeriodTasks={setBeforePeriodTasks}
-				setIsSubmitting={setIsSubmitting}
 			/>
 		));
 

@@ -1,5 +1,12 @@
 import React, { useState, useRef } from "react";
-import { MdDone, MdDeleteOutline } from "react-icons/md";
+import {
+	MdDone,
+	MdDeleteOutline,
+	MdOutlineIndeterminateCheckBox,
+	MdOutlineCheckBox,
+	MdIndeterminateCheckBox,
+	MdCheckBox,
+} from "react-icons/md";
 import updateTodo from "../../utils/updateTodo";
 import deleteTodo from "../../utils/deleteTodo";
 export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
@@ -53,9 +60,11 @@ export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
 	return (
 		<li
 			style={{
-				display: "flex",
+				display: "grid",
 				alignItems: "center",
-				justifyContent: "space-between",
+				gap: "10px",
+				gridTemplateColumns: "0.5fr 10fr 1fr 1fr",
+				// justifyContent: "space-between",
 			}}
 		>
 			<label>
@@ -65,13 +74,21 @@ export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
 					onChange={handleCheckboxChange}
 					value={task.id}
 				/>
-				<span></span>
+				{task.iscomplete ? (
+					<MdOutlineCheckBox className="completed-checkbox" />
+				) : (
+					<MdOutlineIndeterminateCheckBox className="incompleted-checkbox" />
+				)}
+			</label>
+			<label className="sr-only" htmlFor={task.id}>
+				Click for update
 			</label>
 			<input
 				type="text"
+				id={task.id}
 				ref={inputRef}
 				value={taskValue}
-				className="today-task-show"
+				className="past-task-show"
 				onChange={handleInputChange}
 				onKeyPress={(event) => {
 					if (event.key === "Enter") {
@@ -80,26 +97,23 @@ export default function Task({ task, setBeforePeriodTasks, setIsSubmitting }) {
 					}
 				}}
 			/>
-			<p>{new Intl.DateTimeFormat("en-US").format(new Date(task.date))}</p>
+			<p className="task-date">
+				{new Intl.DateTimeFormat("en-US").format(new Date(task.date))}
+			</p>
 			<div className="today-task-show-btn-container">
 				{/* //////   Edit task */}
 				{isTyping && (
-					<button
-						style={{ cursor: "pointer" }}
-						type="button"
+					<MdDone
+						className="form-icon icon-done"
+						// style={{ cursor: "pointer", color: "blue" }}
 						onClick={handleEditClick}
-					>
-						<MdDone />
-					</button>
+					/>
 				)}
-				{/* //////   Delete task */}
-				<button
-					style={{ cursor: "pointer" }}
-					type="button"
+				<MdDeleteOutline
+					className="form-icon icon-delete"
+					// style={{ cursor: "pointer", color: "red" }}
 					onClick={() => handleDelete()}
-				>
-					<MdDeleteOutline />
-				</button>
+				/>
 			</div>
 		</li>
 	);

@@ -83,7 +83,7 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Musa Yuksel</h4>
 						<div className="person-border-bottom"></div>
-						<p>Musa is a former instructor pilot turned NW$ trainee with CodeYourFuture. When he's not found sat in front of a computer working on his numerous projects, he enjoys spending time in nature where you're apt to find him cycling. A passion of his.</p>
+						<p>Musa is a former instructor pilot turned NW4 trainee with CodeYourFuture. When he's not found sat in front of a computer working on his numerous projects, he enjoys spending time in nature where you're apt to find him cycling. A passion of his.</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a

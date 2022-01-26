@@ -649,7 +649,84 @@ router.post("/reset_password/:id", (req, res) => {
 		.catch();
 });
 router.get("/", (req, res) => {
-	res.send({ msg: "hello" });
+	const request = require("request");
+
+	const code = req.query.code;
+	//console.log(code);
+if(code){
+	const clientId = "2977670222342.2984355485058";
+	const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
+
+	var path_to_access_token =
+		"https://slack.com/api/oauth.v2.access?" +
+		"client_id=" +
+		clientId +
+		"&" +
+		"client_secret=" +
+		clientSecret +
+		"&" +
+		"code=" +
+		code +
+		"&" +
+		"redirect_uri=" +
+		"https://055c-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+	//console.log(clientId,secretId,path_to_access_token)
+
+	request(path_to_access_token, function (error, response, body) {
+		// Request token from Slack using the access_code, then handle response
+
+		let teamInfo = JSON.parse(body);
+		//console.log(teamInfo);
+		// Read a token from the environment variables
+
+		const { WebClient, ErrorCode } = require("@slack/web-api");
+		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
+		
+		let userProfile;
+		(async () => {
+			try {
+				// This method call should fail because we're giving it a bogus user ID to lookup.
+				userProfile = await web.openid.connect.userInfo({
+					user: teamInfo["authed_user"]["access_token"],
+				});
+			} catch (error) {
+				// Check the code property, and when its a PlatformError, log the whole response.
+				if (error.code === ErrorCode.PlatformError) {
+					console.log(error.data);
+				} else {
+				}
+			}
+		}
+		)().then(() => {
+			//console.log(userProfile);
+
+			//console.log(teamInfo); //Slack sends back access_code and team info in a JSON object
+
+			let username;
+
+			pool
+				.query("select * from users where email= $1", [userProfile.email])
+				.then((result) => {
+					
+					if (result.rowCount < 1) {
+						res.redirect(`http://localhost:3000/signup`);
+					} else {
+
+						username = result.rows[0].username;
+						const authtoken = createToken(result.rows[0].id);
+						
+						
+					
+                        tokenarray.push(authtoken)
+						//localStorage.setItem("token", authtoken); //if you are sending token.
+						slacklogin['token'] = tokenarray[0];
+						res.redirect(`http://localhost:3000/${username}`);
+					}
+				})
+				.catch();
+		}
+		);
+	});}
 });
 // router.get("/", (req, res) => {
 // 	const request = require("request");

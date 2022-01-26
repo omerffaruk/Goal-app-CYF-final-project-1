@@ -8,11 +8,10 @@ export default function OldTasks({ period }) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username } = useParams();
 	//this link will be dynamic
-	const fetchEndPointWithUsername = `/${"yesterdaytasks"}/${username}`;
-	//fetch data with endPoint
+	const fetchEndPointWithUsername = `/${period}/${username}`;
 	useEffect(() => {
 		getUserTasks(fetchEndPointWithUsername, setBeforePeriodTasks);
-	}, []);
+	}, [fetchEndPointWithUsername]);
 	//create completed tasks
 	const beforePeriodTasksCompleted = beforePeriodTasks
 		.filter((task) => task.iscomplete)

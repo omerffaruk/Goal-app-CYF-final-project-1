@@ -465,7 +465,7 @@ if(code){
 		code +
 		"&" +
 		"redirect_uri=" +
-		"https://ba75-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+		"https://055c-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
 	//console.log(clientId,secretId,path_to_access_token)
 
 	request(path_to_access_token, function (error, response, body) {
@@ -477,6 +477,7 @@ if(code){
 
 		const { WebClient, ErrorCode } = require("@slack/web-api");
 		const web = new WebClient(teamInfo["authed_user"]["access_token"]);
+		
 		let userProfile;
 		(async () => {
 			try {
@@ -506,8 +507,12 @@ if(code){
 					if (result.rowCount < 1) {
 						res.redirect(`http://localhost:3000/signup`);
 					} else {
+
 						username = result.rows[0].username;
 						const authtoken = createToken(result.rows[0].id);
+						
+						
+					
                         tokenarray.push(authtoken)
 						//localStorage.setItem("token", authtoken); //if you are sending token.
 						slacklogin['token'] = tokenarray[0];

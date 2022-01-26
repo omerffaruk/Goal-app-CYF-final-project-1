@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
 import Password from "./Components/Password";
 import fetchData from "../utils/fetchData";
 import "./Home.css";
+
 //import "./styles.css";
 
-export function Home() {
+export function Home({ givenEmail,givenPassword}) {
+	
 	const [message, setMessage] = useState("Loading...");
-	const [email, setEmail] = useState("");
-	const [popup, setPopup] = useState(false);
-	const [password, setPassword] = useState("");
+	const [email, setEmail] = useState(givenEmail);
+	const [remember, setRemember] = useState(true);
+	const [password, setPassword] = useState(givenPassword);
+	const [rememberUser, setRememberUser] = useState(localStorage.getItem('chk'))
+	
 
 	useEffect(() => {
 		fetchData("")
@@ -25,7 +29,7 @@ export function Home() {
 			})
 			.catch((err) => {
 				console.error(err);
-			});
+			})
 	}, []);
 
 	const handleChange = (e) => {
@@ -35,15 +39,35 @@ export function Home() {
 		} else {
 			setPassword(e.target.value);
 		}
-	};
+	}
+	const handleRemember = (e) => {
+		setRemember(!remember)
+		if (remember) {
+			localStorage.setItem('email', email);
+			
+			localStorage.setItem('chk', true);
+       
+			localStorage.setItem('password', password);
+			
+				
+		}
+		else {
+	setRememberUser(false)
+			localStorage.removeItem('email');
+			localStorage.removeItem('chk');
+			localStorage.removeItem('password')
+		}
+		
+ }
+	
+	return ( 
 
-	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a
 					href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
-				redirect_uri=https://ba75-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
+				redirect_uri=https://055c-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
 				>
 					<img
 						className="Slack"
@@ -71,6 +95,7 @@ export function Home() {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
+							value={email }
 						></input>
 					</div>
 					<div className="form-field">
@@ -84,6 +109,7 @@ export function Home() {
 							aria-required
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
+							value={ password}
 						></input>
 					</div>
 				</form>
@@ -94,7 +120,10 @@ export function Home() {
 						type="checkbox"
 						id="remember-user"
 						name="remember"
-						checked
+						onClick={(e) => handleRemember(e)}
+						checked={rememberUser}
+					
+					
 					></input>
 					<label htmlFor="remember">Remember me</label>
 				</div>

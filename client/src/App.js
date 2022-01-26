@@ -13,12 +13,16 @@ import Home from "./pages/Home";
 import Password from "./pages/Components/Password";
 import ForgotPassword from "./pages/ForgotPassword";
 function App() {
+	const chk = localStorage.getItem("chk");
+	const givenEmail = localStorage.getItem("email");
+	const givenPassword = localStorage.getItem("password");
+
 	return (
 		<div className="App">
 			<NavBar />
 		
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />

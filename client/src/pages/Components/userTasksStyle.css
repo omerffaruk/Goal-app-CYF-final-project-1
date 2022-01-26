@@ -211,6 +211,13 @@ form.tasksForm label span {
 	display: flex;
 	margin: 1rem 0;
 }
+
+.past-task-li-container {
+	align-items: center;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 0.5fr 10fr 1fr 1fr;
+}
 .today-todos-container li button,
 .new-task-input-btn {
 	border: none;

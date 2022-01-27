@@ -30,12 +30,13 @@ router.post("/register", (req, res) => {
 	const userName = req.body.name;
 	const email = req.body.email;
 	const passwords = req.body.password;
+	const slackid = req.body.slackid;
 
 	if (validEmail(email)) {
 		//console.log(`${req.body.name}`)
 		let role = "trainee";
 
-		let slackid = "test";
+		//let slackid = "test";
 
 		//hashing algorithm to store passwords in database
 		const salt = bcrypt.genSaltSync(10);

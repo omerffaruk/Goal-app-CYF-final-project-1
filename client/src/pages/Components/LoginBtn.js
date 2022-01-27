@@ -4,11 +4,9 @@ import Popup from "./Popup.js";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
 
-const LoginBtn = ({ email, password }) => {
-	console.log(email,password)
+const LoginBtn = ({ email, password, setErrorDisplay, setLogin }) => {
 	const [text, setText] = useState("");
 	const [popups, setPopups] = useState(false);
-	const [login, setLogin] = useState(false);
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
 		e.preventDefault();

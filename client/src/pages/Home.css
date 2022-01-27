@@ -80,7 +80,12 @@ select {
 }
 
 /* -------- default heading styling --------*/
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: 0;
 	padding: 0;
 }
@@ -139,6 +144,21 @@ ul {
 	cursor: pointer;
 }
 
+.logout-btn {
+	background-color: var(--header-bcg-color);
+	color: white;
+	border: var(--header-bcg-color);
+}
+
+.logout-btn svg {
+	height: 40px;
+	width: 40px;
+}
+
+.logout-btn:hover {
+	background-color: inherit;
+}
+
 /*----------------- Slack Login --------------*/
 .home-ctn {
 	margin: 0 auto;
@@ -181,25 +201,24 @@ ul {
 	padding: 0.6em 0em;
 	margin-bottom: 0;
 }
-.forgotpassword{
-
+.forgotpassword {
 	display: flex;
 	align-content: flex-start;
-	justify-content:space-between;
+	justify-content: space-between;
 	flex-wrap: wrap;
 }
-.rememberme{
-
+.rememberme {
 	display: flex;
 	align-content: flex-start;
 	align-items: flex-start;
-	justify-content:space-between;
+	justify-content: space-between;
 	flex-wrap: wrap;
-
 }
-#remember-user{display: flex;
-justify-self:center;
-align-self: center;}
+#remember-user {
+	display: flex;
+	justify-self: center;
+	align-self: center;
+}
 .Slack {
 	width: 30px;
 	height: 30px;
@@ -335,10 +354,6 @@ align-self: center;}
 	padding: 0 10px;
 }
 
-.about-ctn h2 {
-	padding: 1em 0;
-}
-
 .team-ctn {
 	display: flex;
 	flex-direction: column;
@@ -348,6 +363,7 @@ align-self: center;}
 .about-ctn h3 {
 	text-transform: capitalize;
 	text-align: center;
+	padding: 1em 0;
 }
 
 .team-title-ctn h2 {

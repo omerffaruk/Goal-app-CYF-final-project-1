@@ -29,6 +29,7 @@ function App() {
 						/>
 					}
 				/>
+				{/* <Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} /> */}
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />

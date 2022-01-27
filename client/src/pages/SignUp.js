@@ -18,12 +18,14 @@ const SignUp = () => {
 				name,
 				email,
 				password,
+				slackid
 			}),
 		};
 		fetchData("/register", methodObj)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.message) {
+					
 					setText(data.message);
 					setPopup(true);
 				}
@@ -38,7 +40,7 @@ const SignUp = () => {
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-
+const [slackid, setSlackid] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleChange = (e) => {
@@ -47,9 +49,12 @@ const SignUp = () => {
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			} else {
-				setEmail(e.target.value);
-}
+			}
+			 else if (e.target.value === 'slackid') {
+				setSlackid(e.target.value);
+			}
+				else setEmail(e.target.value)
+
 			setPopup(false);
 		}
 	};
@@ -105,6 +110,21 @@ const SignUp = () => {
 							name="password"
 							id="password"
 							placeholder="*********"
+							required
+							onChange={(e) => {
+								handleChange(e);
+							}}
+						></input>
+					</div>
+					<div className="form-field">
+						<div className="label-ctn">
+							<label htmlFor="slackid">Slackid</label>
+						</div>
+						<input
+							type="text"
+							name="slackid"
+							id="slackid"
+							placeholder="slackid"
 							required
 							onChange={(e) => {
 								handleChange(e);

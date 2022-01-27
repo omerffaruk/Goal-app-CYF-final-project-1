@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link,useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
 import Password from "./Components/Password";
 import fetchData from "../utils/fetchData";
@@ -7,18 +7,14 @@ import "./Home.css";
 
 //import "./styles.css";
 
-export function Home({ givenEmail,givenPassword}) {
-	
+export function Home() {
 	const [message, setMessage] = useState("Loading...");
 	const [email, setEmail] = useState(localStorage.getItem("email"));
 	const [remember, setRemember] = useState(true);
 	const [password, setPassword] = useState(localStorage.getItem("password"));
-	const [rememberUser, setRememberUser] = useState(localStorage.getItem('chk'))
-	
-	
-	
+	const [rememberUser, setRememberUser] = useState(localStorage.getItem("chk"));
+
 	const [errorDisplay, setErrorDisplay] = useState(false);
-	
 
 	useEffect(() => {
 		fetchData("")
@@ -33,19 +29,18 @@ export function Home({ givenEmail,givenPassword}) {
 			})
 			.catch((err) => {
 				console.error(err);
-			})
+			});
 	}, []);
 
 	const validateForm = () => {
-		if(email.length === 0 ||
-			!email.includes("@")) {
-				alert("Please enter a valid email");
-				return false;
-			}
-			if(password.length === 0) {
-				alert("Please enter your password");
-				return false;
-			}
+		if (email.length === 0 || !email.includes("@")) {
+			alert("Please enter a valid email");
+			return false;
+		}
+		if (password.length === 0) {
+			alert("Please enter your password");
+			return false;
+		}
 	};
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -55,29 +50,25 @@ export function Home({ givenEmail,givenPassword}) {
 		} else {
 			setPassword(e.target.value);
 		}
-	}
+	};
 	const handleRemember = (e) => {
-		
 		if (remember) {
-			localStorage.setItem('email', email);
-			
-			localStorage.setItem('chk', true);
-       
-			localStorage.setItem('password', password);
-		setRemember(!remember);	
-				
-		}
-		else {
-	setRememberUser(false)
-			localStorage.removeItem('email');
-			localStorage.removeItem('chk');
-			localStorage.removeItem('password')
-		}
-		
- }
-	
-	return ( 
+			localStorage.setItem("email", email);
+			setEmail(email);
+			localStorage.setItem("chk", true);
 
+			localStorage.setItem("password", password);
+			setPassword(password);
+			setRemember(!remember);
+		} else {
+			setRememberUser(false);
+			localStorage.removeItem("email");
+			localStorage.removeItem("chk");
+			localStorage.removeItem("password");
+		}
+	};
+
+	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
@@ -111,7 +102,7 @@ export function Home({ givenEmail,givenPassword}) {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
-							value={email }
+							value={email}
 							aria-label="enter email"
 						></input>
 					</div>
@@ -128,7 +119,7 @@ export function Home({ givenEmail,givenPassword}) {
 							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
-							value={ password}
+							value={password}
 						></input>
 					</div>
 					<div className={`error-login ${errorDisplay && "display"}`}>
@@ -144,11 +135,9 @@ export function Home({ givenEmail,givenPassword}) {
 						name="remember"
 						onClick={(e) => handleRemember(e)}
 						checked={rememberUser}
-							
 						aria-label="check to remember user"
-					
 					></input>
-				<label htmlFor="remember_user">Remember me</label>
+					<label htmlFor="remember_user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>
@@ -156,7 +145,12 @@ export function Home({ givenEmail,givenPassword}) {
 			</div>
 			{/* <Password /> */}
 
-			<LoginBtn className="text-center" email={email} password={password} setErrorDisplay={setErrorDisplay} />
+			<LoginBtn
+				className="text-center"
+				email={email}
+				password={password}
+				setErrorDisplay={setErrorDisplay}
+			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>

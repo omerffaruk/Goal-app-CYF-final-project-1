@@ -60,11 +60,6 @@ function UsersTasks({ period }) {
 		newTask.length > 0 &&
 			setTodayTasks((prev) => prev.concat({ id: nanoid(10), task: newTask }));
 	}
-
-	const handleLogout = () => {
-		localStorage.removeItem("t");
-		navigate("/");
-	};
 	return (
 		<section className="formContainer">
 			<form className="tasksForm" onSubmit={handleSubmit}>
@@ -91,16 +86,6 @@ function UsersTasks({ period }) {
 					Submit
 				</button>
 			</form>
-
-			<div>
-				<button
-					className="todo-submit-btn login-btn"
-					onClick={() => handleLogout()}
-				>
-					{" "}
-					LogOut{" "}
-				</button>
-			</div>
 		</section>
 	);
 }

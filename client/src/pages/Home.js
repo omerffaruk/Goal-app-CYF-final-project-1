@@ -7,7 +7,7 @@ import "./Home.css";
 
 //import "./styles.css";
 
-export function Home() {
+export function Home({ setLogin }) {
 	const [message, setMessage] = useState("Loading...");
 	const [email, setEmail] = useState(localStorage.getItem("email"));
 	const [remember, setRemember] = useState(true);
@@ -149,6 +149,7 @@ export function Home() {
 				className="text-center"
 				email={email}
 				password={password}
+				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}
 			/>
 			<div className="create-ctn">

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
@@ -12,12 +13,13 @@ function App() {
 	const chk = localStorage.getItem("chk");
 	const givenEmail = localStorage.getItem("email");
 	const givenPassword = localStorage.getItem("password");
+	const [login, setLogin] = useState(false);
 
 	return (
 		<div className="App">
-			<NavBar />
+			<NavBar login={login} setLogin={setLogin} />
 			<Routes>
-				<Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} />} />
+				<Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />

@@ -4,7 +4,8 @@ import Popup from "./Popup.js";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
 
-const LoginBtn = ({ email, password, setErrorDisplay }) => {
+const LoginBtn = ({ email, password }) => {
+	console.log(email,password)
 	const [text, setText] = useState("");
 	const [popups, setPopups] = useState(false);
 	const [login, setLogin] = useState(false);
@@ -25,12 +26,12 @@ const LoginBtn = ({ email, password, setErrorDisplay }) => {
 				console.log({ data });
 				if (data.user) {
 					localStorage.setItem("t", data.user);
-					setErrorDisplay(false);
+					//setErrorDisplay(false);
 					setLogin(true);
 					navigate(`/${data.username}`);
 				} else {
 					//setText("usernamepassword");
-					 setErrorDisplay(true);
+					// setErrorDisplay(true);
 				}
 			})
 			.catch((e) => console.log(e));

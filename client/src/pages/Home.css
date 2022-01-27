@@ -335,9 +335,6 @@ align-self: center;}
 	padding: 0 10px;
 }
 
-.about-ctn h2 {
-	padding: 1em 0;
-}
 
 .team-ctn {
 	display: flex;
@@ -348,6 +345,7 @@ align-self: center;}
 .about-ctn h3 {
 	text-transform: capitalize;
 	text-align: center;
+	padding: 1em 0;
 }
 
 .team-title-ctn h2 {

@@ -15,6 +15,7 @@ app.shortcut("lunch_daily_brief", async ({ body, shortcut, ack, client }) => {
 
 		const slackid = await body.user.id;
 		//check the slackid
+			
 		const yesterdaysTasksSelectQuery = `SELECT todo.id as taskid, users.username, users.id as userid,users.slackid as slackid, users.role, users.email, todo.task, todo.date, todo.iscomplete
                                         FROM users
                                         INNER JOIN todo ON users.id = todo.user_id

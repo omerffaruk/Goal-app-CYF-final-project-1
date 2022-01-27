@@ -17,7 +17,7 @@ const About = () => (
 				current work sprint to see if any issues have come up. Keep track of
 				your tasks with the Goal! app created by HTCT.
 			</p>
-			<h4>What is the Daily Stand-Up?</h4>
+			<h3>What is the Daily Stand-Up?</h3>
 			<ul>
 				<li>15 minutes, same time every day</li>
 				<li>
@@ -32,7 +32,7 @@ const About = () => (
 		</div>
 		<div className="team-ctn">
 			<div className="team-title-ctn">
-				<h2>Meet the team HTCT</h2>
+				<h3>Meet the team HTCT</h3>
 			</div>
 			<div className="team-pics-ctn">
 				<div className="person-ctn">
@@ -53,12 +53,13 @@ const About = () => (
 									href="https://www.linkedin.com/in/anza-azam-a4564b214/"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to LinkedIn profile"
 								>
 									<BsLinkedin />
 								</a>
 							</div>
 							<div className="twitter-logo">
-								<a href="https://twitter.com/" target="_blank" rel="noreferrer">
+								<a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="link to twitter profile">
 									<BsTwitter />
 								</a>
 							</div>
@@ -67,6 +68,7 @@ const About = () => (
 									href="https://github.com/Anza-Azam"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to github profile"
 								>
 									<BsGithub />
 								</a>
@@ -81,19 +83,20 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Musa Yuksel</h4>
 						<div className="person-border-bottom"></div>
-						<p>Dharma is a NW4 trainee, former theatre kid turned coder.</p>
+						<p>Musa is a former instructor pilot turned NW4 trainee with CodeYourFuture. When he's not found sat in front of a computer working on his numerous projects, he enjoys spending time in nature where you're apt to find him cycling. A passion of his.</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a
 									href="https://www.linkedin.com/in/musa-yuksel-625838205/"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to LinkedIn profile"
 								>
 									<BsLinkedin />
 								</a>
 							</div>
 							<div className="twitter-logo">
-								<a href="https://twitter.com/" target="_blank" rel="noreferrer">
+								<a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="link to twitter">
 									<BsTwitter />
 								</a>
 							</div>
@@ -102,6 +105,7 @@ const About = () => (
 									href="https://github.com/musayuksel"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to github profile"
 								>
 									<BsGithub />
 								</a>
@@ -127,6 +131,7 @@ const About = () => (
 									href="https://www.linkedin.com/in/dharma-emmelene-259b191b5/"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to LinkedIn profile"
 								>
 									<BsLinkedin href="https://www.linkedin.com/" />
 								</a>
@@ -136,6 +141,7 @@ const About = () => (
 									href="https://twitter.com/@Dharma_Emmelene"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to twitter profile"
 								>
 									<BsTwitter />
 								</a>
@@ -145,6 +151,7 @@ const About = () => (
 									href="https://github.com/dharmaguadeloupe"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to github profile"
 								>
 									<BsGithub />
 								</a>
@@ -170,6 +177,7 @@ const About = () => (
 									href="https://www.linkedin.com/in/omer-yamak-539a84214/"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to LinkedIn profile"
 								>
 									<BsLinkedin />
 								</a>
@@ -179,6 +187,7 @@ const About = () => (
 									href="https://twitter.com/merFarukYamak1"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to twitter profile"
 								>
 									<BsTwitter />
 								</a>
@@ -188,6 +197,7 @@ const About = () => (
 									href="https://github.com/omerffaruk"
 									target="_blank"
 									rel="noreferrer"
+									aria-label="link to github profile"
 								>
 									<BsGithub />
 								</a>

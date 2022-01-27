@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
 import Password from "./Components/Password";
 import fetchData from "../utils/fetchData";
 import "./Home.css";
+
 //import "./styles.css";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
-	const [email, setEmail] = useState("");
-	const [popup, setPopup] = useState(false);
+	const [email, setEmail] = useState(localStorage.getItem("email"));
+	const [remember, setRemember] = useState(true);
+	const [password, setPassword] = useState(localStorage.getItem("password"));
+	const [rememberUser, setRememberUser] = useState(localStorage.getItem("chk"));
+
 	const [errorDisplay, setErrorDisplay] = useState(false);
-	const [password, setPassword] = useState("");
 
 	useEffect(() => {
 		fetchData("")
@@ -30,23 +33,38 @@ export function Home() {
 	}, []);
 
 	const validateForm = () => {
-		if(email.length === 0 ||
-			!email.includes("@")) {
-				alert("Please enter a valid email");
-				return false;
-			}
-			if(password.length === 0) {
-				alert("Please enter your password");
-				return false;
-			}
+		if (email.length === 0 || !email.includes("@")) {
+			alert("Please enter a valid email");
+			return false;
+		}
+		if (password.length === 0) {
+			alert("Please enter your password");
+			return false;
+		}
 	};
 	const handleChange = (e) => {
 		e.preventDefault();
-		validateForm();
+		//validateForm();
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {
 			setPassword(e.target.value);
+		}
+	};
+	const handleRemember = (e) => {
+		if (remember) {
+			localStorage.setItem("email", email);
+			setEmail(email);
+			localStorage.setItem("chk", true);
+
+			localStorage.setItem("password", password);
+			setPassword(password);
+			setRemember(!remember);
+		} else {
+			setRememberUser(false);
+			localStorage.removeItem("email");
+			localStorage.removeItem("chk");
+			localStorage.removeItem("password");
 		}
 	};
 
@@ -56,7 +74,7 @@ export function Home() {
 			<div className="slack-connect">
 				<a
 					href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
-				redirect_uri=https://ba75-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
+				redirect_uri=https://055c-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
 				>
 					<img
 						className="Slack"
@@ -84,6 +102,7 @@ export function Home() {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
+							value={email}
 							aria-label="enter email"
 						></input>
 					</div>
@@ -100,6 +119,7 @@ export function Home() {
 							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
+							value={password}
 						></input>
 					</div>
 					<div className={`error-login ${errorDisplay && "display"}`}>
@@ -113,10 +133,11 @@ export function Home() {
 						type="checkbox"
 						id="remember-user"
 						name="remember"
+						onClick={(e) => handleRemember(e)}
+						checked={rememberUser}
 						aria-label="check to remember user"
-						checked
 					></input>
-				<label htmlFor="remember_user">Remember me</label>
+					<label htmlFor="remember_user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>
@@ -124,7 +145,12 @@ export function Home() {
 			</div>
 			{/* <Password /> */}
 
-			<LoginBtn className="text-center" email={email} password={password} setErrorDisplay={setErrorDisplay} />
+			<LoginBtn
+				className="text-center"
+				email={email}
+				password={password}
+				setErrorDisplay={setErrorDisplay}
+			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>
 				<Link to={"/signup"}>Create an account</Link>

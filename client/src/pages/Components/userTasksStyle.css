@@ -81,7 +81,9 @@ form * {
 form.tasksForm label {
 	list-style-type: none;
 	font-weight: 300;
-	padding: 0.75rem 0;
+	padding: 0.5rem;
+	display: flex;
+	justify-content: center;
 }
 form.tasksForm label {
 	cursor: pointer;
@@ -120,10 +122,35 @@ form.tasksForm label span {
 }
 
 .yesterdayCompletedContainer {
-	opacity: 0.4;
-	min-height: 200px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	padding: 1rem;
+	min-height: 200px;
+	max-height: 750px;
+	opacity: 0.8;
+	overflow: scroll;
+	padding: 48px 16px;
+}
+.task-date {
+	color: var(--primary-color);
+}
+.form-icon {
+	cursor: pointer;
+	margin: 0.25rem;
+}
+.form-icon.icon-done {
+	color: var(--header-bcg-color);
+}
+.form-icon.icon-delete {
+	color: tomato;
+}
+.sr-only {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
 }
 .yesterdayCompletedContainer li {
 	/* opacity: 0.5; */
@@ -137,7 +164,9 @@ form.tasksForm label span {
 .yesterdayUncompletedContainer {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	min-height: 200px;
-	padding: 1rem;
+	max-height: 750px;
+	overflow: scroll;
+	padding: 48px 16px;
 }
 .yesterdayUncompletedContainer li {
 	color: var(--primary-color);
@@ -146,17 +175,22 @@ form.tasksForm label span {
 
 /* Todays section style */
 .today-todos-container ul {
-	min-height: 200px;
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	min-height: 200px;
 }
 .new-task-input,
-.today-task-show {
+.today-task-show,
+.past-task-show {
 	background-color: #fff;
 	border: none;
 	padding: 0.75rem 0.5rem;
 	transition: all 0.5s ease;
 	width: 100%;
 	/* margin-bottom: 1rem; */
+}
+.past-task-show:focus {
+	outline: none;
+	border-bottom: 1px solid #eee;
 }
 .new-task-input-container {
 	display: flex;
@@ -176,6 +210,13 @@ form.tasksForm label span {
 	border-bottom: 1px solid #ccc;
 	display: flex;
 	margin: 1rem 0;
+}
+
+.past-task-li-container {
+	align-items: center;
+	display: grid;
+	gap: 10px;
+	grid-template-columns: 0.5fr 10fr 1fr 1fr;
 }
 .today-todos-container li button,
 .new-task-input-btn {

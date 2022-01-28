@@ -7,7 +7,7 @@ import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
 import Task from "./Task";
-function UsersTasks() {
+function UsersTasks({ searchKeyWord }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
 
@@ -26,7 +26,10 @@ function UsersTasks() {
 		postTodos(todayTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = yesterdayTasks
-		.filter((task) => task.iscomplete)
+		.filter(
+			(task) =>
+				task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
+		)
 		.map((task) => (
 			<Task
 				key={task.id}
@@ -35,7 +38,10 @@ function UsersTasks() {
 			/>
 		));
 	const beforePeriodItemsUndone = yesterdayTasks
-		.filter((task) => !task.iscomplete)
+		.filter(
+			(task) =>
+				!task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
+		)
 		.map((task) => (
 			<Task
 				key={task.id}

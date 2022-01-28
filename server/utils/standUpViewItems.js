@@ -1,8 +1,8 @@
 export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
-	// save comleted item if user complete from webApp
+	// save complete item if user complete from webApp
 	const completedItems = [];
 	const checboxOptions = yesterdayEvents.map((yesterdayEvent) => {
-		//prepere checkboxes
+		//prepare checkboxes
 		const item = {
 			text: {
 				type: "plain_text",
@@ -31,7 +31,7 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 					text: "YOU DONT HAVE ANY VALUE FOR  YESTERDAY",
 					emoji: true,
 				},
-				value: `0`,
+				value: "0",
 			},
 		];
 	}

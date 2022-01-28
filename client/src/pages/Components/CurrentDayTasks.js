@@ -25,7 +25,7 @@ function UsersTasks({ searchKeyWord }) {
 		setIsSubmitting(true);
 		postTodos(todayTasks, setIsSubmitting);
 	}
-	const beforePeriodItemsDone = yesterdayTasks
+	const beforePeriodItemsDone /*previousPeriodItemsCompleted*/ = yesterdayTasks
 		.filter(
 			(task) =>
 				task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -34,10 +34,11 @@ function UsersTasks({ searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
+				/*setPreviousPeriodTasks={setYesterdayTasks}*/
 				setBeforePeriodTasks={setYesterdayTasks}
 			/>
 		));
-	const beforePeriodItemsUndone = yesterdayTasks
+	const beforePeriodItemsUndone /*previousPeriodItemsIncomplete*/ = yesterdayTasks
 		.filter(
 			(task) =>
 				!task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -46,6 +47,7 @@ function UsersTasks({ searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
+				/*setPreviousPeriodTasks={setYesterdayTasks}*/
 				setBeforePeriodTasks={setYesterdayTasks}
 			/>
 		));
@@ -76,12 +78,13 @@ function UsersTasks({ searchKeyWord }) {
 					</div>
 				</div>
 				<p className="completed-h4">Tasks Completed</p>
-				<ul className="yesterdayCompletedContainer">{beforePeriodItemsDone}</ul>
+				<ul className="yesterdayCompletedContainer">{/* {previousPeriodItemsCompleted} */}{beforePeriodItemsDone}</ul>
 				<p className="uncompleted-h4">Tasks Incomplete</p>
 				<ul className="yesterdayUncompletedContainer">
+					{/* previousPeriodItemsIncomplete */}
 					{beforePeriodItemsUndone}
 				</ul>
-				<h3 className="current-h3">Enter new tasks..</h3>
+				<h3 className="current-h3">Please enter new tasks..</h3>
 				<article className="today-todos-container">
 					<ul>{currentPeriodTaskInputs}</ul>
 					<NewTask handleAddNewTask={handleAddNewTask} />

@@ -60,7 +60,6 @@ router.post("/register", (req, res) => {
 });
 
 //authentication for users
-
 const maxAge = 3 * 24 * 24 * 60;
 const createToken = (id) => {
 	return jwt.sign({ id }, "htctsecretserver", {
@@ -99,21 +98,6 @@ router.post("/log", (req, res) => {
 		.catch((e) => res.send(e));
 });
 
-// api/tasks returns all the tasks in the database	-----UNNECESSARY ENDPOINT------
-router.get("/tasks", (_, res) => {
-	const selectAllTasksQuery =
-		"SELECT todo.id as taskId, todo.task, todo.date, todo.iscomplete, todo.user_id as userId, users.username, users.password, users.email, users.role FROM todo INNER JOIN users ON todo.user_id = users.id";
-	pool.query(selectAllTasksQuery, (error, result) => {
-		if (error) {
-			console.error(error);
-			return res.json(error);
-		}
-		if (result.rows.length === 0) {
-			return res.status(404).json({ message: "There is no task to show" });
-		}
-		res.status(200).json(result.rows);
-	});
-});
 // api/tasks/:userName returns tasks for a specific user with the username param
 router.get("/tasks/:username", (req, res) => {
 	setResponseHeader(res);

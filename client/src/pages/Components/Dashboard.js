@@ -7,6 +7,7 @@ import CurrentDayTasks from "./CurrentDayTasks";
 export default function Dashboard({ period }) {
 	const [toggleMenuClass, setToggleMenuClass] = useState(false);
 	const { username } = useParams();
+	const [searchKeyWord, setSearchKeyWord] = useState("");
 	return (
 		<section>
 			<section className="task-filter-container">
@@ -54,12 +55,24 @@ export default function Dashboard({ period }) {
 						Quarterly
 					</Link>
 				</div>
-				<input className="task-search" type="text" placeholder="Search..." />
+				<input
+					className="task-search"
+					type="text"
+					value={searchKeyWord}
+					onChange={(e) => setSearchKeyWord(e.target.value)}
+					placeholder="Search..."
+				/>
 			</section>
 			{period === "daily" ? (
-				<CurrentDayTasks period={period} />
+				<CurrentDayTasks
+					period={period}
+					searchKeyWord={searchKeyWord.toLowerCase().trim()}
+				/>
 			) : (
-				<OldTasks period={period} />
+				<OldTasks
+					period={period}
+					searchKeyWord={searchKeyWord.toLowerCase().trim()}
+				/>
 			)}
 		</section>
 	);

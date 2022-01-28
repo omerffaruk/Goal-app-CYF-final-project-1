@@ -23,7 +23,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 			return updatedData;
 		});
 	}
-	///reate Ref to focus on input area
+	///create Ref to focus on input area
 	const inputRef = useRef();
 	useEffect(() => {
 		if (!isDisable) {
@@ -93,7 +93,9 @@ export function NewTask({ handleAddNewTask }) {
 		setTodayValue(event.target.value);
 		if (event.target.value.length > 0) {
 			setIsTyping(true);
-		} else { setIsTyping(false) };
+		} else {
+ setIsTyping(false);
+}
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {

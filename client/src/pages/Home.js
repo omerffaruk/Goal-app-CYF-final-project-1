@@ -1,5 +1,5 @@
-		
-		
+
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
@@ -34,10 +34,8 @@ export function Home({ setLogin }) {
 			});
 	}, []);
 
-	
 	const handleChange = (e) => {
 		e.preventDefault();
-		
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {

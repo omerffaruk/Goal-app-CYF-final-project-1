@@ -20,7 +20,7 @@ export default async function postTodos(todayTasks, setIsSubmitting) {
 
 	fetchData("/newtasks", postObject).then((response) => {
 		if (response.status === 200) {
-			setTimeout(() => setIsSubmitting(false), 2000);
+			setTimeout(() => setIsSubmitting(false), 250);
 		}
 	});
 }

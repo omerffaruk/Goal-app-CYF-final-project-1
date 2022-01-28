@@ -45,11 +45,11 @@ export default function OldTasks({ period }) {
 						<div></div>
 					</div>
 				</div>
-				<h4 className="completed-h4">Tasks Completed</h4>
+				<p className="completed-h4">Tasks Completed</p>
 				<ul className="yesterdayCompletedContainer">
 					{beforePeriodTasksCompleted}
 				</ul>
-				<h4 className="uncompleted-h4">Tasks Incomplete</h4>
+				<p className="uncompleted-h4">Tasks Incomplete</p>
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodTasksIncompleted}
 				</ul>

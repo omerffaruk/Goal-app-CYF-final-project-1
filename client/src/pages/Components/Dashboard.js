@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdOutlineFilterList } from "react-icons/md";
 import OldTasks from "./OldTasks";
+import "./dashboardStyle.css";
 import CurrentDayTasks from "./CurrentDayTasks";
 export default function Dashboard({ period }) {
 	const [toggleMenuClass, setToggleMenuClass] = useState(false);

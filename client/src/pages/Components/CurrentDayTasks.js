@@ -23,7 +23,7 @@ function UsersTasks() {
 	function handleSubmit(event) {
 		event.preventDefault();
 		setIsSubmitting(true);
-		postTodos( todayTasks, setIsSubmitting);
+		postTodos(todayTasks, setIsSubmitting);
 	}
 	const beforePeriodItemsDone = yesterdayTasks
 		.filter((task) => task.iscomplete)
@@ -69,9 +69,9 @@ function UsersTasks() {
 						<div></div>
 					</div>
 				</div>
-				<h4 className="completed-h4">Tasks Completed</h4>
+				<p className="completed-h4">Tasks Completed</p>
 				<ul className="yesterdayCompletedContainer">{beforePeriodItemsDone}</ul>
-				<h4 className="uncompleted-h4">Tasks Incomplete</h4>
+				<p className="uncompleted-h4">Tasks Incomplete</p>
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodItemsUndone}
 				</ul>

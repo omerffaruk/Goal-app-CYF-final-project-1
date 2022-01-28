@@ -93,17 +93,24 @@ export default function Task({ task, setBeforePeriodTasks }) {
 			<div className="today-task-show-btn-container">
 				{/* //////   Edit task */}
 				{isTyping && (
-					<MdDone
+					<button
+						aria-label="Save changes"
 						className="form-icon icon-done"
-						
+						type="button"
 						onClick={handleEditClick}
-					/>
+					>
+						<MdDone />
+					</button>
 				)}
-				<MdDeleteOutline
+
+				<button
+					aria-label="Delete"
 					className="form-icon icon-delete"
-					
+					type="button"
 					onClick={() => handleDelete()}
-				/>
+				>
+					<MdDeleteOutline />
+				</button>
 			</div>
 		</li>
 	);

@@ -95,13 +95,13 @@ export default function Task({ task, setBeforePeriodTasks }) {
 				{isTyping && (
 					<MdDone
 						className="form-icon icon-done"
-						// style={{ cursor: "pointer", color: "blue" }}
+						
 						onClick={handleEditClick}
 					/>
 				)}
 				<MdDeleteOutline
 					className="form-icon icon-delete"
-					// style={{ cursor: "pointer", color: "red" }}
+					
 					onClick={() => handleDelete()}
 				/>
 			</div>

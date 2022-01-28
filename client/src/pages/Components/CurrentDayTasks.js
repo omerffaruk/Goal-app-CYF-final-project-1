@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import "./loadinAnimation.css";
@@ -7,14 +7,12 @@ import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
 import postTodos from "../../utils/postTodos";
 import Task from "./Task";
-function UsersTasks({ period }) {
+function UsersTasks() {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username } = useParams();
-	const navigate = useNavigate();
-
 	const yesterdayFetchEndPoint = `/yesterdaytasks/${username}`;
 	const todayFetchEndPoint = `/todaytasks/${username}`;
 	useEffect(() => {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { headers } from "../../utils/generalPostObjects";
 import fetchData from "../../utils/fetchData";
-const ResetPassword = (e) => {
+const ResetPassword = () => {
 	let { id } = useParams();
 
 	const [password, setPassword] = useState("");
@@ -23,13 +23,13 @@ const ResetPassword = (e) => {
 				method: "POST",
 				headers,
 				body: JSON.stringify({
-					// email: email,
+					
 					password: password,
 				}),
 			};
 			fetchData(`/reset_password/${id}`, methodObj)
 				.then((res) => res.json())
-				.then((data) =>
+				.then(() =>
 					alert("Password has been changed")
 				)
 				.catch();

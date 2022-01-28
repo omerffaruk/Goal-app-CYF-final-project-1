@@ -90,7 +90,7 @@ export function NewTask({ handleAddNewTask }) {
 		setTodayValue(event.target.value);
 		if (event.target.value.length > 0) {
 			setIsTyping(true);
-		} else setIsTyping(false);
+		} else { setIsTyping(false) };
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {

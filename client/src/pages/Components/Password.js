@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { headers } from "../../utils/generalPostObjects";
 import fetchData from "../../utils/fetchData";
 const Password = () => {
@@ -19,7 +19,7 @@ const Password = () => {
 		};
 		fetchData(`/email`, methodObj)
 			.then((res) => res.json())
-			.then((data) => console.log(data))
+			.then(() => { })
 			.catch();
 	};
 
@@ -52,7 +52,7 @@ const Password = () => {
 						<button className="login-btn" onClick={(e) => forgotPassword(e)}>
 							Submit
 						</button>
-						{/* <a href="#">Forgot Password ?</a> */}
+						
 					</form>
 				</div>
 				<Link className="temporary-link" to={"/reset_password/:id"}>

@@ -15,17 +15,7 @@ router.use(express.urlencoded());
 let slacklogin = {};
 let tokenarray = [];
 router.post("/register", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 
 	const userName = req.body.name;
 	const email = req.body.email;
@@ -79,13 +69,7 @@ const createToken = (id) => {
 };
 
 router.post("/log", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 
 	const email = req.body.email;
 	const passwords = req.body.password;
@@ -115,7 +99,7 @@ router.post("/log", (req, res) => {
 		.catch((e) => res.send(e));
 });
 
-// api/tasks returns all the tasks in the database
+// api/tasks returns all the tasks in the database	-----UNNECESSARY ENDPOINT------
 router.get("/tasks", (_, res) => {
 	const selectAllTasksQuery =
 		"SELECT todo.id as taskId, todo.task, todo.date, todo.iscomplete, todo.user_id as userId, users.username, users.password, users.email, users.role FROM todo INNER JOIN users ON todo.user_id = users.id";
@@ -132,13 +116,7 @@ router.get("/tasks", (_, res) => {
 });
 // api/tasks/:userName returns tasks for a specific user with the username param
 router.get("/tasks/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 
 	let token;
 	if (slacklogin["token"].length !== 0) {
@@ -174,13 +152,7 @@ router.get("/tasks/:username", (req, res) => {
 // api/yesterdaytasks/:username returns tasks for a specific user with the username param
 //This endpoint will bring only yesterday's tasks for the specific user
 router.get("/yesterdaytasks/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let token;
 	if (slacklogin["token"]) {
 		token = slacklogin["token"];
@@ -222,13 +194,7 @@ router.get("/yesterdaytasks/:username", (req, res) => {
 // api/yesterdaytasks/:username returns tasks for a specific user with the username param
 //This endpoint will bring only yesterday's tasks for the specific user
 router.get("/todaytasks/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let token;
 	if (!slacklogin["token"]) {
 		token = req.headers.authorization;
@@ -271,13 +237,7 @@ router.get("/todaytasks/:username", (req, res) => {
 //adding tasks from client
 
 router.post("/newtasks", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -333,13 +293,7 @@ router.post("/newtasks", (req, res) => {
 
 //This endpoint will bring only last week's tasks for the specific user
 router.get("/weekly/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -370,13 +324,7 @@ router.get("/weekly/:username", (req, res) => {
 });
 //This endpoint will bring only last month's tasks for the specific user
 router.get("/monthly/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -407,13 +355,7 @@ router.get("/monthly/:username", (req, res) => {
 });
 //This endpoint will bring only last quarte's tasks for the specific user
 router.get("/quarterly/:username", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -444,13 +386,7 @@ router.get("/quarterly/:username", (req, res) => {
 });
 //This endpoint will update specific task for the specific user
 router.put("/update", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -488,13 +424,7 @@ router.put("/update", (req, res) => {
 });
 //This endpoint will delete specific task
 router.delete("/delete", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
 	if (slacklogin["token"]) {
@@ -562,17 +492,7 @@ router.post("/email", (req, res) => {
 
 ////////
 router.post("/reset_password/:id", (req, res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Credentials", true);
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
-	res.header(
-		"Access-Control-Allow-Headers",
-		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
-	);
+	setResponseHeader(res);
 
 	const token = req.params.id;
 	const password = req.body.password;
@@ -735,4 +655,13 @@ router.get("/", (req, res) => {
 // 	});
 // }
 // });
+function setResponseHeader(res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Credentials", true);
+	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin,X-Requested-With,Content-Type,Accept,content-type,application/json"
+	);
+}
 export default router;

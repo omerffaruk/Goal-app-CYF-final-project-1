@@ -7,17 +7,14 @@ import {
 } from "react-icons/md";
 import updateTodo from "../../utils/updateTodo";
 import deleteTodo from "../../utils/deleteTodo";
-export default function Task({
-	task,
-	setPreviousPeriodTasks /* setBeforePeriodTasks */,
-}) {
+export default function Task({ task, setPreviousPeriodTasks }) {
 	const [taskValue, setTaskValue] = useState(task.task);
 	const [isTyping, setIsTyping] = useState(false);
 	const inputRef = useRef();
 	// Complete - Incomplete task
 	function handleCheckboxChange() {
 		setPreviousPeriodTasks((prev) =>
-			/* setBeforePeriodTasks((prev) => */
+		/* setBeforePeriodTasks((prev) => */
 			prev.map((currentTask) => {
 				if (currentTask.id === task.id) {
 					currentTask.iscomplete = !currentTask.iscomplete;
@@ -37,7 +34,6 @@ export default function Task({
 	//Edit task
 	function handleEditClick(event) {
 		setPreviousPeriodTasks((prev) =>
-			/* setBeforePeriodTasks((prev) => */
 			prev.map((currentTask) => {
 				if (currentTask.id === task.id) {
 					currentTask.task = taskValue;
@@ -52,7 +48,6 @@ export default function Task({
 	//Delete task
 	function handleDelete() {
 		setPreviousPeriodTasks((prev) =>
-			/* setBeforePeriodTasks((prev) => */
 			prev.filter((element) => element.id !== task.id)
 		);
 		deleteTodo(task.id);
@@ -63,10 +58,9 @@ export default function Task({
 	}
 	return (
 		<li className="past-task-li-container">
-			<label htmlFor={`checkbox${task.id}`}>
+			<label htmlFor="checkbox">
 				<input
 					type="checkbox"
-					id={`checkbox${task.id}`}
 					defaultChecked={task.iscomplete}
 					onChange={handleCheckboxChange}
 					value={task.id}
@@ -74,9 +68,7 @@ export default function Task({
 				{task.iscomplete ? (
 					<MdOutlineCheckBox className="completed-checkbox" />
 				) : (
-					<MdOutlineIndeterminateCheckBox
-						className="incomplete-checkbox" /* className="incompleted-checkbox" */
-					/>
+					<MdOutlineIndeterminateCheckBox className="incomplete-checkbox" />
 				)}
 			</label>
 			<label className="sr-only" htmlFor={task.id}>

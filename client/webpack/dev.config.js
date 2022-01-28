@@ -12,15 +12,6 @@ module.exports = merge(common, {
 			
 	// 	},	
 	},
-//  resolve: {
-//       fallback: {
-//         util: require.resolve("util/"),
-//       }
-// 	},
-//   resolve: {
-//       fallback: {
-//         path: false
-//       }
-//   },
+
 	mode: "development",
 });

@@ -35,4 +35,4 @@ const ForgotPassword = () => {
 
 export default ForgotPassword;
 
-/*buttons are just decorative for now*/
+

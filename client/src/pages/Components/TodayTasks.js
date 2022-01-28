@@ -54,6 +54,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 			<div className="today-task-show-btn-container">
 				{/* //////   Edit task */}
 				<button
+					aria-label="Edit task"
 					style={{ cursor: "pointer" }}
 					type="button"
 					onClick={() => setIsDisable((prev) => !prev)}
@@ -63,6 +64,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 				{/* ////// Approve after Edit task */}
 				{!isDisable && (
 					<button
+						aria-label="Save changes"
 						style={{ cursor: "pointer" }}
 						type="button"
 						onClick={() => setIsDisable((prev) => !prev)}
@@ -72,6 +74,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 				)}
 				{/* //////   Delete task */}
 				<button
+					aria-label="Delete task"
 					style={{ cursor: "pointer" }}
 					type="button"
 					onClick={() => handleDelete(index)}
@@ -117,6 +120,7 @@ export function NewTask({ handleAddNewTask }) {
 				onKeyPress={handleEnter}
 			/>
 			<button
+				aria-label="Save new task"
 				style={{ cursor: "pointer" }}
 				type="button"
 				onClick={() => {

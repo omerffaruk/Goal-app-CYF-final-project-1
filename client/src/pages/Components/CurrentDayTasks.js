@@ -25,7 +25,7 @@ function UsersTasks({ searchKeyWord }) {
 		setIsSubmitting(true);
 		postTodos(todayTasks, setIsSubmitting);
 	}
-	const beforePeriodItemsDone /*previousPeriodItemsCompleted*/ = yesterdayTasks
+	const /* beforePeriodItemsDone */ previousPeriodItemsCompleted = yesterdayTasks
 		.filter(
 			(task) =>
 				task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -34,11 +34,11 @@ function UsersTasks({ searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
-				/*setPreviousPeriodTasks={setYesterdayTasks}*/
-				setBeforePeriodTasks={setYesterdayTasks}
+				setPreviousPeriodTasks={setYesterdayTasks}
+				/* setBeforePeriodTasks={setYesterdayTasks} */
 			/>
 		));
-	const beforePeriodItemsUndone /*previousPeriodItemsIncomplete*/ = yesterdayTasks
+	const /* beforePeriodItemsUndone */ previousPeriodItemsIncomplete  = yesterdayTasks
 		.filter(
 			(task) =>
 				!task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -47,8 +47,8 @@ function UsersTasks({ searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
-				/*setPreviousPeriodTasks={setYesterdayTasks}*/
-				setBeforePeriodTasks={setYesterdayTasks}
+				setPreviousPeriodTasks={setYesterdayTasks}
+				/* setBeforePeriodTasks={setYesterdayTasks} */
 			/>
 		));
 
@@ -78,11 +78,11 @@ function UsersTasks({ searchKeyWord }) {
 					</div>
 				</div>
 				<p className="completed-h4">Tasks Completed</p>
-				<ul className="yesterdayCompletedContainer">{/* {previousPeriodItemsCompleted} */}{beforePeriodItemsDone}</ul>
-				<p className="uncompleted-h4">Tasks Incomplete</p>
-				<ul className="yesterdayUncompletedContainer">
-					{/* previousPeriodItemsIncomplete */}
-					{beforePeriodItemsUndone}
+				<ul className="yesterdayCompletedContainer">{previousPeriodItemsCompleted}{/* {beforePeriodItemsDone} */}</ul>
+				<p /* className="uncompleted-h4"*/ className="incomplete-h4">Tasks Incomplete</p>
+				<ul /* className="yesterdayUncompletedContainer" */className="yesterdayIncompleteContainer">
+					{previousPeriodItemsIncomplete}
+					{/* {beforePeriodItemsUndone} */}
 				</ul>
 				<h3 className="current-h3">Please enter new tasks..</h3>
 				<article className="today-todos-container">

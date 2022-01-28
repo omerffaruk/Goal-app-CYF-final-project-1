@@ -15,7 +15,7 @@ const About = () => (
 				are encouraged to perform a Daily Standup meeting. The Daily Standup is
 				a brief meeting where team members discuss what's going on in their
 				current work sprint to see if any issues have come up. Keep track of
-				your tasks with the Goal! app created by HTCT.
+				your tasks with the Goal! app created by HTCT (Hyper Talent Coding Team).
 			</p>
 			<h3>What is the Daily Stand-Up?</h3>
 			<ul>

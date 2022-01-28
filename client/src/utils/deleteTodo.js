@@ -15,6 +15,6 @@ export default async function deleteTodo(taskid) {
 
 	fetchData("/delete", putObject).then((response) => {
 		response.status !== 200 && alert("OOOPS!!! something wrong");
-		// console.log({ response });
+		
 	});
 }

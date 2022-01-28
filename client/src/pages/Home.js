@@ -1,16 +1,16 @@
-		
-		
+
+
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
-import Password from "./Components/Password";
+
 import fetchData from "../utils/fetchData";
 import "./Home.css";
 
 //import "./styles.css";
 
 export function Home({ setLogin }) {
-	const [message, setMessage] = useState("Loading...");
+	const [setMessage] = useState("Loading...");
 	const [email, setEmail] = useState(localStorage.getItem("email"));
 	const [remember, setRemember] = useState(true);
 	const [password, setPassword] = useState(localStorage.getItem("password"));
@@ -34,26 +34,15 @@ export function Home({ setLogin }) {
 			});
 	}, []);
 
-	const validateForm = () => {
-		if (email.length === 0 || !email.includes("@")) {
-			alert("Please enter a valid email");
-			return false;
-		}
-		if (password.length === 0) {
-			alert("Please enter your password");
-			return false;
-		}
-	};
 	const handleChange = (e) => {
 		e.preventDefault();
-		//validateForm();
 		if (e.target.name === "email") {
 			setEmail(e.target.value);
 		} else {
 			setPassword(e.target.value);
 		}
 	};
-	const handleRemember = (e) => {
+	const handleRemember = () => {
 		if (remember) {
 			localStorage.setItem("email", email);
 			setEmail(email);
@@ -145,7 +134,7 @@ export function Home({ setLogin }) {
 					<Link to={"/forgot_password"}>Forgot password</Link>
 				</div>
 			</div>
-			{/* <Password /> */}
+			
 
 			<LoginBtn
 				className="text-center"

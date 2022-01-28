@@ -1,9 +1,9 @@
 import React from "react";
-import { useState } from "react"
-import "../SignUp.css"
+import { useState } from "react";
+import "../SignUp.css";
 
 const Popup = ({ text }) => {
-	const [popup, setPopup] = useState(true)
+	const [popup, setPopup] = useState(true);
 	const handleClick = () => {
 		
 		setPopup(!popup)

@@ -50,7 +50,7 @@ const [slackid, setSlackid] = useState("");
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
 			}
-			 else if (e.target.value === 'slackid') {
+			 else if (e.target.name === 'slackid') {
 				setSlackid(e.target.value);
 			}
 				else setEmail(e.target.value)

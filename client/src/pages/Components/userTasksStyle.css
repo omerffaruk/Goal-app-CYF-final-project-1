@@ -99,7 +99,7 @@ form.tasksForm label span {
 	position: absolute;
 	width: 1px;
 }
-.incompleted-checkbox/* .incompleted-checkbox */ {
+.incomplete-checkbox/* .incompleted-checkbox */ {
 	color: #1c8b00;
 }
 .completed-checkbox {

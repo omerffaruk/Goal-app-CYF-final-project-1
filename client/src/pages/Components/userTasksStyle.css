@@ -31,14 +31,14 @@ form.tasksForm label {
 }
 
 form.tasksForm .completed-h4,
-form.tasksForm .uncompleted-h4 {
+form.tasksForm .incomplete-h4/* .uncompleted-h4 */ {
 	font-size: 1.5rem;
 	font-style: italic;
 	font-weight: 500;
 }
 form.tasksForm h3,
 form.tasksForm .completed-h4,
-form.tasksForm .uncompleted-h4 {
+form.tasksForm .incomplete-h4/* .uncompleted-h4 */ {
 	margin: 0.5rem 0;
 	text-align: center;
 }
@@ -99,7 +99,7 @@ form.tasksForm label span {
 	position: absolute;
 	width: 1px;
 }
-.incompleted-checkbox {
+.incompleted-checkbox/* .incompleted-checkbox */ {
 	color: #1c8b00;
 }
 .completed-checkbox {
@@ -114,14 +114,14 @@ form.tasksForm label span {
 	text-align: justify;
 	text-decoration: line-through;
 }
-.yesterdayUncompletedContainer {
+.yesterdayIncompleteContainer/* .yesterdayUncompletedContainer */ {
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 	min-height: 200px;
 	max-height: 750px;
 	overflow: scroll;
 	padding: 48px 16px;
 }
-.yesterdayUncompletedContainer li {
+.yesterdayIncompleteContainer/* .yesterdayUncompletedContainer */ li {
 	color: var(--primary-color);
 	text-align: justify;
 }
@@ -209,8 +209,10 @@ button.new-task-input-btn.active {
 		grid-gap: 1rem;
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-areas:
-			"uncompleted-h4 completed-h4"
-			"yesterdayUncompletedContainer yesterdayCompletedContainer"
+			"incomplete-h4 completed-h4"
+			/* "uncompleted-h4 completed-h4" */
+			"yesterdayIncompleteContainer yesterdayCompletedContainer"
+			/* "yesterdayUncompletedContainer yesterdayCompletedContainer" */
 			"current-h3 current-h3"
 			"today-todos-container today-todos-container"
 			"todo-submit-btn todo-submit-btn";
@@ -219,13 +221,15 @@ button.new-task-input-btn.active {
 		grid-area: completed-h4;
 	}
 	.uncompleted-h4 {
-		grid-area: uncompleted-h4;
+		grid-area: incomplete-h4;
+		/* grid-area: uncompleted-h4; */
 	}
 	.yesterdayCompletedContainer {
 		grid-area: yesterdayCompletedContainer;
 	}
 	.yesterdayUncompletedContainer {
-		grid-area: yesterdayUncompletedContainer;
+		grid-area: yesterdayIncompleteContainer;
+		/* grid-area: yesterdayUncompletedContainer; */
 	}
 	.current-h3 {
 		grid-area: current-h3;

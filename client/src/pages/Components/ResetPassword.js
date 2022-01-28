@@ -32,8 +32,22 @@ const ResetPassword = (e) => {
 			<div className="form">
 				<form action="" method="get">
 					<div className="form-field">
+						<p class='password-heading'><strong><h4>Replace url press enter and enter new password </h4></strong></p>
+
 						<div className="label-ctn">
-							<label htmlFor="password">Password</label>
+							<label htmlFor="password">Enter New password</label>
+						</div>
+						<input
+							type="password"
+							name="password"
+							id="password"
+							aria-required
+							onChange={(e) => handleChange(e)}
+							placeholder="Password"
+						></input>
+
+						<div className="label-ctn">
+							<label htmlFor="password">Confirm New password</label>
 						</div>
 						<input
 							type="password"

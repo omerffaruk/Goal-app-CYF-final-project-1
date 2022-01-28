@@ -94,6 +94,7 @@ h6 {
 p {
 	line-height: 1.8em;
 	font-size: 1em;
+	text-align: justify;
 }
 
 /*---------- default ul, li styling ------*/
@@ -281,7 +282,10 @@ ul {
 	justify-content: space-between;
 	align-items: center;
 }
-
+.password-heading{
+text-align: left;
+	padding-bottom: 20px;
+}
 .password-ctn input {
 	cursor: pointer;
 	margin-right: 0.25em;

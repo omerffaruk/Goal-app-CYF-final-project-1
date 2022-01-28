@@ -24,12 +24,12 @@ const LoginBtn = ({ email, password, setErrorDisplay, setLogin }) => {
 				console.log({ data });
 				if (data.user) {
 					localStorage.setItem("t", data.user);
-					setErrorDisplay(false);
+					//setErrorDisplay(false);
 					setLogin(true);
 					navigate(`/${data.username}`);
 				} else {
 					//setText("usernamepassword");
-					 setErrorDisplay(true);
+					// setErrorDisplay(true);
 				}
 			})
 			.catch((e) => console.log(e));

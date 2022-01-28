@@ -19,7 +19,17 @@ function App() {
 		<div className="App">
 			<NavBar login={login} setLogin={setLogin} />
 			<Routes>
-				<Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} />
+				<Route
+					path="/"
+					element={
+						<Home
+							givenEmail={givenEmail}
+							givenPassword={givenPassword}
+							setLogin={setLogin}
+						/>
+					}
+				/>
+				{/* <Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} /> */}
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
 				<Route path="/forgot" element={<ForgotPassword />} />

@@ -31,14 +31,14 @@ const Password = () => {
 						<h2>Forgot your password?</h2>
 						<p>
 							Please enter the email address registered for your account. A
-							verification code will be sent. You will be able to choose a new
+							verification code will be sent and you will be able to choose a new
 							password for your account.
 						</p>
 					</div>
 					<form action="" method="get">
 						<div className="form-field">
 							<div className="label-ctn">
-								<label htmlFor="email">Email</label>
+								<label htmlFor="email">Enter Registered Email</label>
 							</div>
 							<input
 								type="email"

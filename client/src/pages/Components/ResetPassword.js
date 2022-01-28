@@ -7,24 +7,35 @@ const ResetPassword = (e) => {
 	let { id } = useParams();
 
 	const [password, setPassword] = useState("");
+		const [confirmPassword, setConfirmPassword] = useState("");
 	const handleChange = (e) => {
-		setPassword(e.target.value);
-		console.log(id);
+		if (e.target.name === 'password')
+			
+			setPassword(e.target.value);
+			
+		else setConfirmPassword(e.target.value)
 	};
 	const resetpassword = (e) => {
 		e.preventDefault();
-		const methodObj = {
-			method: "POST",
-			headers,
-			body: JSON.stringify({
-				// email: email,
-				password: password,
-			}),
-		};
-		fetchData(`/reset_password/${id}`, methodObj)
-			.then((res) => res.json())
-			.then((data) => console.log(data))
-			.catch();
+		console.log(password)
+		console.log(confirmPassword);
+		if (confirmPassword===password) {
+			const methodObj = {
+				method: "POST",
+				headers,
+				body: JSON.stringify({
+					// email: email,
+					password: password,
+				}),
+			};
+			fetchData(`/reset_password/${id}`, methodObj)
+				.then((res) => res.json())
+				.then((data) =>
+					alert("Password has been changed")
+				)
+				.catch();
+		}
+		else alert("Password and confirm password don't match try again")
 	};
 
 	return (
@@ -47,15 +58,15 @@ const ResetPassword = (e) => {
 						></input>
 
 						<div className="label-ctn">
-							<label htmlFor="password">Confirm New password</label>
+							<label htmlFor="confirm new password">Confirm New password</label>
 						</div>
 						<input
 							type="password"
-							name="password"
-							id="password"
+							name="confirm-password"
+							id="confirm-password"
 							aria-required
 							onChange={(e) => handleChange(e)}
-							placeholder="Password"
+							placeholder="Confirm new Password"
 						></input>
 						<button className="login-btn" onClick={(e) => resetpassword(e)}>
 							Submit

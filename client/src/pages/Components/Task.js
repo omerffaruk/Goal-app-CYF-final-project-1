@@ -14,7 +14,7 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 	// Complete - Incomplete task
 	function handleCheckboxChange() {
 		setPreviousPeriodTasks((prev) =>
-		/* setBeforePeriodTasks((prev) => */
+			/* setBeforePeriodTasks((prev) => */
 			prev.map((currentTask) => {
 				if (currentTask.id === task.id) {
 					currentTask.iscomplete = !currentTask.iscomplete;
@@ -58,9 +58,10 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 	}
 	return (
 		<li className="past-task-li-container">
-			<label htmlFor="checkbox">
+			<label htmlFor={`checkbox${task.id}`}>
 				<input
 					type="checkbox"
+					id={`checkbox${task.id}`}
 					defaultChecked={task.iscomplete}
 					onChange={handleCheckboxChange}
 					value={task.id}

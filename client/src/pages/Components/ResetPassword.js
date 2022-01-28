@@ -17,8 +17,7 @@ const ResetPassword = (e) => {
 	};
 	const resetpassword = (e) => {
 		e.preventDefault();
-		console.log(password)
-		console.log(confirmPassword);
+	
 		if (confirmPassword===password) {
 			const methodObj = {
 				method: "POST",

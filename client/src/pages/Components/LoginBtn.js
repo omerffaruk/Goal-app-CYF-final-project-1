@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "./Popup.js";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
 
 const LoginBtn = ({ email, password, setErrorDisplay, setLogin }) => {
-	const [text, setText] = useState("");
-	const [popups, setPopups] = useState(false);
+
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
 		e.preventDefault();
@@ -21,15 +19,15 @@ const LoginBtn = ({ email, password, setErrorDisplay, setLogin }) => {
 		fetchData("/log", methodObj)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log({ data });
+				
 				if (data.user) {
 					localStorage.setItem("t", data.user);
-					//setErrorDisplay(false);
+					setErrorDisplay(false);
 					setLogin(true);
 					navigate(`/${data.username}`);
 				} else {
-					//setText("usernamepassword");
-					// setErrorDisplay(true);
+					
+					 setErrorDisplay(true);
 				}
 			})
 			.catch((e) => console.log(e));

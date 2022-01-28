@@ -15,6 +15,6 @@ export default async function updateTodo(beforePeriodTask) {
 
 	fetchData("/update", putObject).then((response) => {
 		response.status !== 200 && alert("OOOPS!!! something wrong");
-		// console.log({ response });
+		
 	});
 }

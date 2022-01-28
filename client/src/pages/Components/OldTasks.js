@@ -5,7 +5,7 @@ import Task from "./Task";
 
 export default function OldTasks({ period }) {
 	const [beforePeriodTasks, setBeforePeriodTasks] = useState([]);
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isSubmitting] = useState(false);
 	const { username } = useParams();
 	//this link will be dynamic
 	const fetchEndPointWithUsername = `/${period}/${username}`;
@@ -53,9 +53,7 @@ export default function OldTasks({ period }) {
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodTasksIncompleted}
 				</ul>
-				{/* <button className="todo-submit-btn login-btn" type="submit">
-					Submit
-				</button> */}
+			
 			</form>
 		</section>
 	);

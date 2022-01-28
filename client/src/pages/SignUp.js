@@ -1,8 +1,8 @@
-import { useEffect, useState, React } from "react";
+import { useState, React } from "react";
 import "./SignUp.css";
 
 import { Link } from "react-router-dom";
-import Home from "./Home";
+
 import Popup from "./Components/Popup";
 import { headers } from "../utils/generalPostObjects";
 import fetchData from "../utils/fetchData";
@@ -149,4 +149,3 @@ const [slackid, setSlackid] = useState("");
 
 export default SignUp;
 
-/*buttons are just decorative for now*/

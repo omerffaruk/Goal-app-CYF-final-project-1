@@ -1,82 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,600;1,300&display=swap");
 
+/* Main form container style */
+form * {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
 .formContainer {
 	/* border: 1px solid #ff1cff; */
 	margin: 0 auto;
 	position: relative;
 	width: 95%;
 }
-.task-filter-container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: relative;
-}
-.filter-btn-container {
-	align-items: center;
-	display: none;
-	transition: all 0.5s ease;
-}
-.filter-btn-container.open {
-	background-color: #fff;
-	box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-	display: flex;
-	flex-direction: column;
-	left: 0;
-	top: 0;
-	opacity: 1;
-	position: absolute;
-	width: 100%;
-	z-index: 1;
-}
 
-.task-filter-icon {
-	background-color: #eee;
-	border-radius: 50px;
-	cursor: pointer;
-	height: 3rem;
-	padding: 0.5rem;
-	transition: all 0.5s ease;
-	width: 3rem;
-	z-index: 2;
-}
-.task-filter-icon:hover {
-	background-color: #ddd;
-}
-.filter-btn-container a {
-	border-radius: 50px;
-	color: #999;
-	margin: 5px;
-	padding: 0.5rem 1rem;
-	text-decoration: none;
-	transition: all 0.4s ease;
-}
-.filter-btn-container a:hover {
-	color: #444;
-}
-.filter-btn-container a.active {
-	background-color: #eee;
-	color: #222;
-}
-.task-search {
-	/* display: none; */
-	border-color: #eee;
-	transition: all 0.5s ease;
-}
-.task-search:focus {
-	border-color: #999;
-	outline: none;
-}
 .tasksForm {
 	font-family: "Montserrat", sans-serif;
 	display: grid;
 }
 
-form * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-}
 /* form.tasksForm li, */
 form.tasksForm label {
 	list-style-type: none;
@@ -89,14 +30,16 @@ form.tasksForm label {
 	cursor: pointer;
 }
 
-form.tasksForm h4 {
+form.tasksForm .completed-h4,
+form.tasksForm .uncompleted-h4 {
 	font-size: 1.5rem;
 	font-style: italic;
 	font-weight: 500;
 }
 form.tasksForm h3,
-form.tasksForm h4 {
-	margin: 2rem 0;
+form.tasksForm .completed-h4,
+form.tasksForm .uncompleted-h4 {
+	margin: 0.5rem 0;
 	text-align: center;
 }
 form.tasksForm label input {
@@ -155,6 +98,12 @@ form.tasksForm label span {
 	padding: 0;
 	position: absolute;
 	width: 1px;
+}
+.incompleted-checkbox {
+	color: #1c8b00;
+}
+.completed-checkbox {
+	color: #1c8b00;
 }
 .yesterdayCompletedContainer li {
 	/* opacity: 0.5; */

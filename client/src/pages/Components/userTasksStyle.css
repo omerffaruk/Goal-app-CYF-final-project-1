@@ -134,12 +134,16 @@ form.tasksForm label span {
 }
 .form-icon {
 	cursor: pointer;
-	margin: 0.25rem;
+	padding: 0.75rem;
 }
 .form-icon.icon-done {
+	background-color: white;
+	border: none;
 	color: var(--header-bcg-color);
 }
 .form-icon.icon-delete {
+	background-color: white;
+	border: none;
 	color: tomato;
 }
 .sr-only {

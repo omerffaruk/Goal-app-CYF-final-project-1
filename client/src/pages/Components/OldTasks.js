@@ -15,7 +15,7 @@ export default function OldTasks({ period }) {
 	//create completed tasks
 	const beforePeriodTasksCompleted = beforePeriodTasks
 		.filter((task) => task.iscomplete)
-		.map((task, index) => (
+		.map((task) => (
 			<Task
 				key={task.id}
 				task={task}
@@ -26,7 +26,7 @@ export default function OldTasks({ period }) {
 	//create incompleted tasks
 	const beforePeriodTasksIncompleted = beforePeriodTasks
 		.filter((task) => !task.iscomplete)
-		.map((task, index) => (
+		.map((task) => (
 			<Task
 				key={task.id}
 				task={task}

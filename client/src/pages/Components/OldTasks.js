@@ -3,18 +3,19 @@ import { useParams } from "react-router-dom";
 import getUserTasks from "../../utils/getUserTasks";
 import Task from "./Task";
 
-export default function OldTasks({ period }) {
+export default function OldTasks({ period, searchKeyWord }) {
 	const [beforePeriodTasks, setBeforePeriodTasks] = useState([]);
-	const [isSubmitting] = useState(false);
 	const { username } = useParams();
-	//this link will be dynamic
 	const fetchEndPointWithUsername = `/${period}/${username}`;
 	useEffect(() => {
 		getUserTasks(fetchEndPointWithUsername, setBeforePeriodTasks);
 	}, [fetchEndPointWithUsername]);
 	//create completed tasks
 	const beforePeriodTasksCompleted = beforePeriodTasks
-		.filter((task) => task.iscomplete)
+		.filter(
+			(task) =>
+				task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
+		)
 		.map((task) => (
 			<Task
 				key={task.id}
@@ -25,7 +26,10 @@ export default function OldTasks({ period }) {
 
 	//create incompleted tasks
 	const beforePeriodTasksIncompleted = beforePeriodTasks
-		.filter((task) => !task.iscomplete)
+		.filter(
+			(task) =>
+				!task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
+		)
 		.map((task) => (
 			<Task
 				key={task.id}
@@ -37,14 +41,6 @@ export default function OldTasks({ period }) {
 	return (
 		<section className="formContainer">
 			<form className="tasksForm">
-				<div className={`animation-container ${isSubmitting && "animate"}`}>
-					<div className="loading-ring">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</div>
 				<p className="completed-h4">Tasks Completed</p>
 				<ul className="yesterdayCompletedContainer">
 					{beforePeriodTasksCompleted}
@@ -53,7 +49,6 @@ export default function OldTasks({ period }) {
 				<ul className="yesterdayUncompletedContainer">
 					{beforePeriodTasksIncompleted}
 				</ul>
-			
 			</form>
 		</section>
 	);

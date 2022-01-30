@@ -93,7 +93,7 @@ export function Home({ setLogin }) {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
-							value={email}
+						    value={email}
 							aria-label="enter email"
 						></input>
 					</div>

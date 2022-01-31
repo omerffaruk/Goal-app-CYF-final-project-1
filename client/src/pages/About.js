@@ -207,6 +207,16 @@ const About = () => (
 				</div>
 			</div>
 		</div>
+
+	{/* 	<footer className="github-logo">
+		<a
+			href="https://github.com/musayuksel/Goal-app-CYF-final-project"
+			target="_blank"
+			rel="noreferrer"
+			aria-label="link to codebase"
+		>
+		<BsGithub />
+		</a>Check out the codebase</footer> */}
 	</main>
 );
 

@@ -120,7 +120,7 @@ export function Home({ setLogin }) {
 				</form>
 			</div>
 			<div className="bg-green-100 password-ctn">
-				<div>
+				<div className="remember-me-ctn">
 					<input
 						type="checkbox"
 						id="remember-user"

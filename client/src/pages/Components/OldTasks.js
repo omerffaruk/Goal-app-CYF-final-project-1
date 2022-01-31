@@ -4,14 +4,14 @@ import getUserTasks from "../../utils/getUserTasks";
 import Task from "./Task";
 
 export default function OldTasks({ period, searchKeyWord }) {
-	const [beforePeriodTasks, setBeforePeriodTasks] = useState([]);
+	const [previousPeriodTasks, setPreviousPeriodTasks] = useState([]);
 	const { username } = useParams();
 	const fetchEndPointWithUsername = `/${period}/${username}`;
 	useEffect(() => {
-		getUserTasks(fetchEndPointWithUsername, setBeforePeriodTasks);
+		getUserTasks(fetchEndPointWithUsername, setPreviousPeriodTasks);
 	}, [fetchEndPointWithUsername]);
 	//create completed tasks
-	const beforePeriodTasksCompleted = beforePeriodTasks
+	const previousPeriodTasksCompleted = previousPeriodTasks
 		.filter(
 			(task) =>
 				task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -20,12 +20,12 @@ export default function OldTasks({ period, searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
-				setBeforePeriodTasks={setBeforePeriodTasks}
+				setPreviousPeriodTasks={setPreviousPeriodTasks}
 			/>
 		));
 
-	//create incompleted tasks
-	const beforePeriodTasksIncompleted = beforePeriodTasks
+	//create incomplete tasks
+	const previousPeriodTasksIncomplete = previousPeriodTasks
 		.filter(
 			(task) =>
 				!task.iscomplete && task.task.toLowerCase().includes(searchKeyWord)
@@ -34,7 +34,7 @@ export default function OldTasks({ period, searchKeyWord }) {
 			<Task
 				key={task.id}
 				task={task}
-				setBeforePeriodTasks={setBeforePeriodTasks}
+				setPreviousPeriodTasks={setPreviousPeriodTasks}
 			/>
 		));
 
@@ -43,11 +43,11 @@ export default function OldTasks({ period, searchKeyWord }) {
 			<form className="tasksForm">
 				<p className="completed-h4">Tasks Completed</p>
 				<ul className="yesterdayCompletedContainer">
-					{beforePeriodTasksCompleted}
+					{previousPeriodTasksCompleted}
 				</ul>
-				<p className="uncompleted-h4">Tasks Incomplete</p>
-				<ul className="yesterdayUncompletedContainer">
-					{beforePeriodTasksIncompleted}
+				<p className="incomplete-h4">Tasks Incomplete</p>
+				<ul className="yesterdayIncompleteContainer">
+				{previousPeriodTasksIncomplete}
 				</ul>
 			</form>
 		</section>

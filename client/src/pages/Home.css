@@ -300,10 +300,6 @@ text-align: left;
 	font-weight: 600;
 }
 
-.form-field input.red-border {
-	border: 2px solid red;
-}
-
 .login-btn {
 	background: var(--linear-bg);
 	color: #fff;

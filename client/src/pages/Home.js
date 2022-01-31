@@ -102,7 +102,6 @@ export function Home({ setLogin }) {
 							<label htmlFor="password">Password</label>
 						</div>
 						<input
-							className={errorDisplay && "red-border"}
 							type="password"
 							name="password"
 							id="password"

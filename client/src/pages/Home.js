@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
@@ -15,7 +13,7 @@ export function Home({ setLogin }) {
 	const [remember, setRemember] = useState(true);
 	const [password, setPassword] = useState(localStorage.getItem("password"));
 	const [rememberUser, setRememberUser] = useState(localStorage.getItem("chk"));
-
+	const [missingValidEmail, setMissingValidEmail] = useState(false);
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
@@ -59,6 +57,9 @@ export function Home({ setLogin }) {
 		}
 	};
 
+	const missingValidEmailError = <div className={`error-login ${missingValidEmail && "display"}`}>Please input a valid email</div>;
+	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
+
 	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
@@ -93,7 +94,7 @@ export function Home({ setLogin }) {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
-						    value={email}
+							value={email ? email : ""}
 							aria-label="enter email"
 						></input>
 					</div>
@@ -102,7 +103,6 @@ export function Home({ setLogin }) {
 							<label htmlFor="password">Password</label>
 						</div>
 						<input
-							className={errorDisplay && "red-border"}
 							type="password"
 							name="password"
 							id="password"
@@ -110,9 +110,10 @@ export function Home({ setLogin }) {
 							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
-							value={password}
+							value={password ? password : ""}
 						></input>
 					</div>
+					{displayMissingValidEmail}
 					<div className={`error-login ${errorDisplay && "display"}`}>
 						Wrong username and/or password! Please try again.
 					</div>
@@ -134,7 +135,6 @@ export function Home({ setLogin }) {
 					<Link to={"/forgot_password"}>Forgot password</Link>
 				</div>
 			</div>
-			
 
 			<LoginBtn
 				className="text-center"
@@ -142,6 +142,7 @@ export function Home({ setLogin }) {
 				password={password}
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}
+				setMissingValidEmail={setMissingValidEmail}
 			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>

@@ -93,7 +93,7 @@ export function Home({ setLogin }) {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
-							value={email}
+							value={email ? email : ""}
 							aria-label="enter email"
 						></input>
 					</div>
@@ -110,7 +110,7 @@ export function Home({ setLogin }) {
 							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
-							value={password}
+							value={password ? password : ""}
 						></input>
 					</div>
 					<div className={`error-login ${errorDisplay && "display"}`}>
@@ -134,7 +134,7 @@ export function Home({ setLogin }) {
 					<Link to={"/forgot_password"}>Forgot password</Link>
 				</div>
 			</div>
-			
+
 
 			<LoginBtn
 				className="text-center"

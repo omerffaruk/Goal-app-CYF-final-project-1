@@ -9,14 +9,21 @@ import "./Home.css";
 
 export function Home({ setLogin }) {
 	const [setMessage] = useState("Loading...");
-	const [email, setEmail] = useState(localStorage.getItem("email"));
-	const [remember, setRemember] = useState(true);
-	const [password, setPassword] = useState(localStorage.getItem("password"));
-	const [rememberUser, setRememberUser] = useState(localStorage.getItem("chk"));
+	const [email, setEmail] = useState('');
+	
+	const [password, setPassword] = useState('');
+	const [rememberUser, setRememberUser] = useState(false);
 	const [missingValidEmail, setMissingValidEmail] = useState(false);
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
+		if(localStorage.rememberUser && localStorage.email !== "") {
+			setEmail(localStorage.email)
+			setPassword(localStorage.password)
+			setRememberUser(!localStorage.rememberUser);
+      
+        
+      }
 		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
@@ -40,22 +47,10 @@ export function Home({ setLogin }) {
 			setPassword(e.target.value);
 		}
 	};
-	const handleRemember = () => {
-		if (remember) {
-			localStorage.setItem("email", email);
-			setEmail(email);
-			localStorage.setItem("chk", true);
-
-			localStorage.setItem("password", password);
-			setPassword(password);
-			setRemember(!remember);
-		} else {
-			setRememberUser(false);
-			localStorage.removeItem("email");
-			localStorage.removeItem("chk");
-			localStorage.removeItem("password");
-		}
+	const handleRemember = (e) => {
+		setRememberUser(!rememberUser);
 	};
+	const handlecheck = (e) => { setRememberUser(!rememberUser)}
 
 	const missingValidEmailError = <div className={`error-login ${missingValidEmail && "display"}`}>Please input a valid email</div>;
 	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
@@ -94,7 +89,7 @@ export function Home({ setLogin }) {
 							onChange={(e) => handleChange(e)}
 							placeholder="Email address"
 							aria-required
-							value={email ? email : ""}
+							value={email}
 							aria-label="enter email"
 						></input>
 					</div>
@@ -110,7 +105,7 @@ export function Home({ setLogin }) {
 							aria-label="enter password"
 							onChange={(e) => handleChange(e)}
 							placeholder="Password"
-							value={password ? password : ""}
+							value={password}
 						></input>
 					</div>
 					{displayMissingValidEmail}
@@ -126,6 +121,7 @@ export function Home({ setLogin }) {
 						id="remember-user"
 						name="remember"
 						onClick={(e) => handleRemember(e)}
+						// onClick={(e) => handlecheck(e)}
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>
@@ -139,6 +135,7 @@ export function Home({ setLogin }) {
 			<LoginBtn
 				className="text-center"
 				email={email}
+				chk={ rememberUser}
 				password={password}
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}

@@ -3,13 +3,24 @@ import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
 
-const LoginBtn = ({ email, password, setErrorDisplay, setLogin, setMissingValidEmail }) => {
+const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingValidEmail }) => {
 	function validEmail(useremail) {
 		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
 	}
 
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
+		if (chk) {
+			localStorage.email = email;
+			localStorage.password = password;
+			localStorage.rememberUser = chk;
+		}
+		else {
+			localStorage.removeItem('email')
+			localStorage.removeItem('password')
+			localStorage.removeItem('chk')
+		}
+		
 		e.preventDefault();
 		const methodObj = {
 			method: "POST",

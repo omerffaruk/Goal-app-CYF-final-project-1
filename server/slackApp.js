@@ -108,7 +108,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	}
 	if (true) {
 		// DB save was successful
-		msg = `Summary\n yesterday you complated ${complatedTodosOfYesterday.length} items\nToday, your tasks are;\n`;
+		msg = `Summary\n yesterday you completed ${complatedTodosOfYesterday.length} items\nToday, your tasks are;\n`;
 
 		todaysToDos.forEach((task) => {
 			msg += `- ${task}\n`;

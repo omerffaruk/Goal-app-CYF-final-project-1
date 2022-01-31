@@ -13,7 +13,7 @@ function App() {
 
 	const givenEmail = localStorage.getItem("email");
 	const givenPassword = localStorage.getItem("password");
-	const [login, setLogin] = useState(false);
+	const [login, setLogin] = useState(Boolean(localStorage.getItem("t")));
 
 	return (
 		<div className="App">

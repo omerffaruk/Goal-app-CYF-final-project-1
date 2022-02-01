@@ -237,7 +237,7 @@ router.get("/todaytasks/:username", (req, res) => {
 });
 
 //adding tasks from client
-router.post("/newtasks", (req, res) => {
+router.post("/newtask", (req, res) => {
 	setResponseHeader(res);
 	let userAuthenticated;
 	let token;
@@ -252,40 +252,19 @@ router.post("/newtasks", (req, res) => {
 	if (token) {
 		if (userAuthenticated) {
 			const { todayTasksNew } = req.body;
-			if (todayTasksNew.length === 0) {
-				//if submit data is empty return 200 with empty array
-				return res.send([]);
-			}
 			const id = userAuthenticated.id;
-			//find todays todos, delete all of them and add new ones
-			const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN
-			(SELECT todo.id
-				FROM todo
-				WHERE user_id = $1 AND
-						date >= TIMESTAMP 'today' AND
-						date <  TIMESTAMP 'tomorrow') `;
-			pool.query(deleteTodayTodosQuery, [id], (error, result) => {
-				if (error) {
-					return res.status(500).send({ msg: "Database ERROR" });
-				}
-
-				//ADD new tasks
-				const addTodayValuesQuery = todayTasksNew.map(
-					(task) => `($$${task}$$,$1)`
-				);
-				pool.query(
-					`INSERT INTO todo(task,user_id) VALUES ${addTodayValuesQuery.join(
-						","
-					)} RETURNING id;`,
-					[id],
-					(error, result) => {
-						if (error) {
-							return res.status(500).send({ msg: "Database ERROR" });
-						}
-						res.send({ id: result.rows[0].id });
+			//ADD new tasks
+			const addTodayValuesQuery = `${todayTasksNew}`;
+			pool.query(
+				"INSERT INTO todo(task,user_id) VALUES ($1,$2) RETURNING id",
+				[addTodayValuesQuery, id],
+				(error, result) => {
+					if (error) {
+						return res.status(500).send({ msg: "Database ERROR" });
 					}
-				);
-			});
+					res.send({ id: result.rows[0].id });
+				}
+			);
 		}
 	} else {
 		res.send("not authenticated");

@@ -6,23 +6,21 @@ import {
 	MdSubdirectoryArrowLeft,
 } from "react-icons/md";
 import postTodos from "../../utils/postTodos";
-export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
+import deleteTodo from "../../utils/deleteTodo";
+export function TodayTasks({ task, setTodayTasks, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		setCurrentPeriodTasks((prev) => {
+		setTodayTasks((prev) => {
 			const updatedData = [...prev];
 			updatedData[index].task = event.target.value;
 			return updatedData;
 		});
 	}
-	function handleDelete(index) {
-		setCurrentPeriodTasks((prev) => {
-			const updatedData = [...prev];
-			updatedData.splice(index, 1);
-			return updatedData;
-		});
+	function handleDelete() {
+		setTodayTasks((prev) => prev.filter((element) => element.id !== task.id));
+		deleteTodo(task.id);
 	}
 	///create Ref to focus on input area
 	const inputRef = useRef();
@@ -79,7 +77,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 					aria-label="Delete task"
 					className="today-task-delete-icon"
 					type="button"
-					onClick={() => handleDelete(index)}
+					onClick={handleDelete}
 				>
 					<MdDeleteOutline />
 				</button>
@@ -107,7 +105,7 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 				//take id from db
 				//add todayTasks with handleAddnewTask
 				postTodos(todayValue, setIsSubmitting).then((id) => {
-					handleAddNewTask(todayValue, id);
+					handleAddNewTask(todayValue, id.id);
 				});
 				setTodayValue("");
 				setIsTyping(false);

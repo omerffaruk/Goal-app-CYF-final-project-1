@@ -2,7 +2,7 @@ import fetchData from "./fetchData";
 export default async function postTodos(todayTasks, setIsSubmitting) {
 	//get token
 	const token = localStorage.getItem("t");
-	const todayTasksTrim = todayTasks.trim();
+	const todayTasksNew = todayTasks.trim();
 	//Prepare postObject
 	const postObject = {
 		method: "POST",
@@ -11,7 +11,7 @@ export default async function postTodos(todayTasks, setIsSubmitting) {
 			"Content-Type": "application/json",
 			authorization: token, // ADD Token to HEADER
 		},
-		body: JSON.stringify({ todayTasksTrim }),
+		body: JSON.stringify({ todayTasksNew }),
 	};
 
 	const response = await fetchData("/newtask", postObject);

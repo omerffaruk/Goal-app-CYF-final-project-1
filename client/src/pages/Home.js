@@ -20,9 +20,8 @@ export function Home({ setLogin }) {
 		if(localStorage.rememberUser && localStorage.email !== "") {
 			setEmail(localStorage.email)
 			setPassword(localStorage.password)
-			setRememberUser(!localStorage.rememberUser);
-      
-        
+			setRememberUser(localStorage.rememberUser);
+
       }
 		fetchData("")
 			.then((res) => {
@@ -50,7 +49,7 @@ export function Home({ setLogin }) {
 	const handleRemember = (e) => {
 		setRememberUser(!rememberUser);
 	};
-	const handlecheck = (e) => { setRememberUser(!rememberUser)}
+
 
 	const missingValidEmailError = <div className={`error-login ${missingValidEmail && "display"}`}>Please input a valid email</div>;
 	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
@@ -135,7 +134,7 @@ export function Home({ setLogin }) {
 			<LoginBtn
 				className="text-center"
 				email={email}
-				chk={ rememberUser}
+				chk={rememberUser}
 				password={password}
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}

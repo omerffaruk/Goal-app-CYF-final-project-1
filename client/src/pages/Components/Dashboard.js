@@ -61,8 +61,7 @@ export default function Dashboard({ period }) {
 					type="text"
 					value={searchKeyWord}
 					onChange={(e) => setSearchKeyWord(e.target.value)}
-					placeholder="&#61442; Search..."
-
+					placeholder="&#xF002; Search..."
 				/>
 			</section>
 			{period === "daily" ? (

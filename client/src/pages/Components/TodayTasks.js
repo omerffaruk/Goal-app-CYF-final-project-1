@@ -1,27 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-	MdModeEdit,
-	MdDone,
-	MdDeleteOutline,
-	MdSubdirectoryArrowLeft,
-} from "react-icons/md";
-export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
+import { MdModeEdit, MdDone, MdDeleteOutline } from "react-icons/md";
+import postTodos from "../../utils/postTodos";
+import deleteTodo from "../../utils/deleteTodo";
+import updateTodo from "../../utils/updateTodo";
+
+export function TodayTasks({ task, setTodayTasks }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		setCurrentPeriodTasks((prev) => {
-			const updatedData = [...prev];
-			updatedData[index].task = event.target.value;
-			return updatedData;
-		});
 	}
-	function handleDelete(index) {
-		setCurrentPeriodTasks((prev) => {
-			const updatedData = [...prev];
-			updatedData.splice(index, 1);
-			return updatedData;
-		});
+	function handleSaveClick() {
+		setTodayTasks((prev) =>
+			prev.map((currentTask) => {
+				if (currentTask.id === task.id) {
+					currentTask.task = todayValue;
+				}
+				return currentTask;
+			})
+		);
+		updateTodo(task);
+	}
+	// function
+	function handleDelete() {
+		setTodayTasks((prev) => prev.filter((element) => element.id !== task.id));
+		deleteTodo(task.id);
 	}
 	///create Ref to focus on input area
 	const inputRef = useRef();
@@ -46,7 +49,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 				onKeyPress={(event) => {
 					if (event.key === "Enter") {
 						event.preventDefault();
-						handleChange(event);
+						handleSaveClick();
 						setIsDisable(true);
 					}
 				}}
@@ -68,7 +71,10 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 						className="today-task-save-icon"
 						style={{ cursor: "pointer" }}
 						type="button"
-						onClick={() => setIsDisable((prev) => !prev)}
+						onClick={() => {
+							setIsDisable((prev) => !prev);
+							handleSaveClick();
+						}}
 					>
 						<MdDone />
 					</button>
@@ -78,7 +84,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 					aria-label="Delete task"
 					className="today-task-delete-icon"
 					type="button"
-					onClick={() => handleDelete(index)}
+					onClick={handleDelete}
 				>
 					<MdDeleteOutline />
 				</button>
@@ -87,28 +93,34 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 	);
 }
 //ADD NEW TASK
-export function NewTask({ handleAddNewTask }) {
+export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 	const [todayValue, setTodayValue] = useState("");
-	const [isTyping, setIsTyping] = useState(false);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		if (event.target.value.length > 0) {
-			setIsTyping(true);
-		} else {
-			setIsTyping(false);
-		}
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {
 			event.preventDefault();
-			if (event.target.value.length > 0) {
-				handleAddNewTask(todayValue);
-				setTodayValue("");
-				setIsTyping(false);
+			if (todayValue.length > 0) {
+				handleSave();
 			}
 		}
 	}
-
+	function handleClick() {
+		if (todayValue.length > 0) {
+			handleSave();
+		}
+	}
+	function handleSave() {
+		//send db
+		//take tasks from db
+		//add todayTasks with handleAddnewTask
+		setIsSubmitting(true);
+		postTodos(todayValue, setIsSubmitting).then((task) =>
+			handleAddNewTask(task.task)
+		);
+		setTodayValue("");
+	}
 	return (
 		<div className="new-task-input-container">
 			<input
@@ -119,21 +131,14 @@ export function NewTask({ handleAddNewTask }) {
 				placeholder="Enter for new task..."
 				value={todayValue}
 				onChange={handleChange}
-				// disabled={true}
 				onKeyPress={handleEnter}
 			/>
 			<button
-				aria-label="Save new task"
-				style={{ cursor: "pointer" }}
+				className="todo-submit-btn login-btn"
 				type="button"
-				onClick={() => {
-					handleAddNewTask(todayValue);
-					setTodayValue("");
-					setIsTyping(false);
-				}}
-				className={`new-task-input-btn  ${isTyping && "active"} `}
+				onClick={handleClick}
 			>
-				<MdSubdirectoryArrowLeft />
+				Save
 			</button>
 		</div>
 	);

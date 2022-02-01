@@ -7,17 +7,25 @@ import {
 } from "react-icons/md";
 import postTodos from "../../utils/postTodos";
 import deleteTodo from "../../utils/deleteTodo";
+import updateTodo from "../../utils/updateTodo";
 export function TodayTasks({ task, setTodayTasks, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		setTodayTasks((prev) => {
-			const updatedData = [...prev];
-			updatedData[index].task = event.target.value;
-			return updatedData;
-		});
 	}
+	function handleSaveClick() {
+		setTodayTasks((prev) =>
+			prev.map((currentTask) => {
+				if (currentTask.id === task.id) {
+					currentTask.task = todayValue;
+				}
+				return currentTask;
+			})
+		);
+		updateTodo(task);
+	}
+	// function
 	function handleDelete() {
 		setTodayTasks((prev) => prev.filter((element) => element.id !== task.id));
 		deleteTodo(task.id);
@@ -45,7 +53,7 @@ export function TodayTasks({ task, setTodayTasks, index }) {
 				onKeyPress={(event) => {
 					if (event.key === "Enter") {
 						event.preventDefault();
-						handleChange(event);
+						handleSaveClick();
 						setIsDisable(true);
 					}
 				}}
@@ -67,7 +75,10 @@ export function TodayTasks({ task, setTodayTasks, index }) {
 						className="today-task-save-icon"
 						style={{ cursor: "pointer" }}
 						type="button"
-						onClick={() => setIsDisable((prev) => !prev)}
+						onClick={() => {
+							setIsDisable((prev) => !prev);
+							handleSaveClick();
+						}}
 					>
 						<MdDone />
 					</button>

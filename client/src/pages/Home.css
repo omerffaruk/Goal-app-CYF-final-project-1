@@ -286,9 +286,11 @@ ul {
 .remember-me-ctn {
 	display: flex;
 }
-
-.password-heading{
-text-align: left;
+.remember-me-ctn label {
+	cursor: pointer;
+}
+.password-heading {
+	text-align: left;
 	padding-bottom: 20px;
 }
 .password-ctn input {

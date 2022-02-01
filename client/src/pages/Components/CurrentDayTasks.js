@@ -60,9 +60,9 @@ function UsersTasks({ searchKeyWord }) {
 		/>
 	));
 
-	function handleAddNewTask(newTask) {
+	function handleAddNewTask(newTask, id) {
 		newTask.length > 0 &&
-			setTodayTasks((prev) => prev.concat({ id: nanoid(10), task: newTask }));
+			setTodayTasks((prev) => prev.concat({ id: id, task: newTask }));
 	}
 	return (
 		<section className="formContainer">
@@ -76,7 +76,9 @@ function UsersTasks({ searchKeyWord }) {
 					</div>
 				</div>
 				<p className="completed-h4">Tasks Completed</p>
-				<ul className="yesterdayCompletedContainer">{previousPeriodItemsCompleted}</ul>
+				<ul className="yesterdayCompletedContainer">
+					{previousPeriodItemsCompleted}
+				</ul>
 				<p className="incomplete-h4">Tasks Incomplete</p>
 				<ul className="yesterdayIncompleteContainer">
 					{previousPeriodItemsIncomplete}
@@ -84,7 +86,10 @@ function UsersTasks({ searchKeyWord }) {
 				<h3 className="current-h3">Please enter new tasks..</h3>
 				<article className="today-todos-container">
 					<ul>{currentPeriodTaskInputs}</ul>
-					<NewTask handleAddNewTask={handleAddNewTask} />
+					<NewTask
+						handleAddNewTask={handleAddNewTask}
+						setIsSubmitting={setIsSubmitting}
+					/>
 				</article>
 				<button className="todo-submit-btn login-btn" type="submit">
 					Submit

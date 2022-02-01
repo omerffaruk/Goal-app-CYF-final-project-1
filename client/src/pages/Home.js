@@ -129,7 +129,7 @@ export function Home({ setLogin }) {
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>
-					<label htmlFor="remember_user">Remember me</label>
+					<label htmlFor="remember-user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>

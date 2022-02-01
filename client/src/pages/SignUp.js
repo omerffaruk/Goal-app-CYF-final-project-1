@@ -34,18 +34,35 @@ const SignUp = () => {
 				slackid,
 			}),
 		};
-		fetchData("/register", methodObj)
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.message) {
-					setText(data.message);
-					setPopup(true);
-				} else {
-					location.assign("/");
-					localStorage.setItem("t", data.user);
-				}
-			})
-			.catch((e) => console.log(e));
+		if (!validUserName(name)) {
+			setMissingValidUsername(true);
+		} else if (!validEmail(email)) {
+			setMissingValidUsername(false);
+			setMissingValidEmail(true);
+		} else if (!validPassword(password)) {
+			setMissingValidUsername(false);
+			setMissingValidEmail(false);
+			setMissingValidPassword(true);
+		} else if (!validSlackId(slackid)) {
+			setMissingValidUsername(false);
+			setMissingValidEmail(false);
+			setMissingValidPassword(false);
+			setMissingValidSlackid(true);
+		} else {
+			setMissingValidSlackid(false);
+			fetchData("/register", methodObj)
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.message) {
+						setText(data.message);
+						setPopup(true);
+					} else {
+						location.assign("/");
+						localStorage.setItem("t", data.user);
+					}
+				})
+				.catch((e) => console.log(e));
+		}
 	};
 
 	const handleChange = (e) => {
@@ -63,12 +80,6 @@ const SignUp = () => {
 		}
 	};
 
-	const missingValidEmailError = (
-		<div className={`error-login ${missingValidEmail && "display"}`}>
-			Please input a valid email
-		</div>
-	);
-	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
 	return (
 		<div className="signup-ctn">
 			<h2>Create A New Account</h2>
@@ -96,6 +107,9 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
+						<div className={`error-login ${missingValidUsername && "display"}`}>
+							Please input a valid username
+						</div>
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">
@@ -111,7 +125,9 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
-						{displayMissingValidEmail}
+						<div className={`error-login ${missingValidEmail && "display"}`}>
+							Please input a valid email
+						</div>
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">
@@ -127,6 +143,9 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
+						<div className={`error-login ${missingValidPassword && "display"}`}>
+							Please input a valid password
+						</div>
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">
@@ -142,6 +161,9 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
+						<div className={`error-login ${missingValidSlackid && "display"}`}>
+							Please input a valid Slackid
+						</div>
 					</div>
 					<div>
 						<button

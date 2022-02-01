@@ -19,6 +19,9 @@ const SignUp = () => {
 	const [slackid, setSlackid] = useState("");
 	const [password, setPassword] = useState("");
 	const [missingValidEmail, setMissingValidEmail] = useState(false);
+	const [missingValidPassword, setMissingValidPassword] = useState(false);
+	const [missingValidUsername, setMissingValidUsername] = useState(false);
+	const [missingValidSlackid, setMissingValidSlackid] = useState(false);
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		const methodObj = {

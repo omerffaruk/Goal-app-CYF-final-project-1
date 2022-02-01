@@ -9,21 +9,19 @@ import "./Home.css";
 
 export function Home({ setLogin }) {
 	const [setMessage] = useState("Loading...");
-	const [email, setEmail] = useState('');
-	
-	const [password, setPassword] = useState('');
+	const [email, setEmail] = useState("");
+
+	const [password, setPassword] = useState("");
 	const [rememberUser, setRememberUser] = useState(false);
 	const [missingValidEmail, setMissingValidEmail] = useState(false);
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
-		if(localStorage.rememberUser && localStorage.email !== "") {
-			setEmail(localStorage.email)
-			setPassword(localStorage.password)
+		if (localStorage.rememberUser && localStorage.email !== "") {
+			setEmail(localStorage.email);
+			setPassword(localStorage.password);
 			setRememberUser(!localStorage.rememberUser);
-      
-        
-      }
+		}
 		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
@@ -50,18 +48,27 @@ export function Home({ setLogin }) {
 	const handleRemember = (e) => {
 		setRememberUser(!rememberUser);
 	};
-	const handlecheck = (e) => { setRememberUser(!rememberUser)}
+	const handlecheck = (e) => {
+		setRememberUser(!rememberUser);
+	};
 
-	const missingValidEmailError = <div className={`error-login ${missingValidEmail && "display"}`}>Please input a valid email</div>;
+	const missingValidEmailError = (
+		<div className={`error-login ${missingValidEmail && "display"}`}>
+			Please input a valid email
+		</div>
+	);
 	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
+
+	// const clientId = process.env.REACT_APP_CLIENT_ID;
+	// console.log(process.env.REACT_APP_CLIENT_ID);
 
 	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a
-					href="https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
-				redirect_uri=https://055c-2-222-102-147.ngrok.io/api/&amp;client_id=2977670222342.2984355485058"
+					href={`https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
+				redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&amp;client_id=568949636710.2927110204163`}
 				>
 					<img
 						className="Slack"
@@ -135,7 +142,7 @@ export function Home({ setLogin }) {
 			<LoginBtn
 				className="text-center"
 				email={email}
-				chk={ rememberUser}
+				chk={rememberUser}
 				password={password}
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}

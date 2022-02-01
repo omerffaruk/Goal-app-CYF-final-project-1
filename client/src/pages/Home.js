@@ -17,12 +17,11 @@ export function Home({ setLogin }) {
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
-		if(localStorage.rememberUser && localStorage.email !== "") {
+		if (localStorage.rememberUser && localStorage.email !== "") {
 			setEmail(localStorage.email);
 			setPassword(localStorage.password);
 			setRememberUser(localStorage.rememberUser);
-
-      }
+		}
 		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
@@ -125,12 +124,12 @@ export function Home({ setLogin }) {
 						type="checkbox"
 						id="remember-user"
 						name="remember"
-						onClick={(e) => handleRemember(e)}
+						onChange={(e) => handleRemember(e)}
 						// onClick={(e) => handlecheck(e)}
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>
-					<label htmlFor="remember_user">Remember me</label>
+					<label htmlFor="remember-user">Remember me</label>
 				</div>
 				<div>
 					<Link to={"/forgot_password"}>Forgot password</Link>

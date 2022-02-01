@@ -11,9 +11,10 @@ export function validPassword(password) {
 }
 
 export function validSlackId(slackid) {
-    const validLength = slackid.length >=9 && slackid.length <= 12;
+    const sLength = slackid.length;
+    const validLength = sLength >= 9 && sLength <= 12;
     const startWithUorW = slackid[0] === "U" || slackid[0] === "W";
-    const noLowerCase = slackid.match(/[a-z]/g).length === 0;
-    const includesNumber = slackid.match(/[^a-zA-Z]+/g).length > 0;
+    const noLowerCase = !/[a-z]/.test(slackid) && /[A-Z]/.test(slackid);
+    const includesNumber = /\d/.test(slackid);
     return validLength && startWithUorW && noLowerCase && includesNumber;
 }

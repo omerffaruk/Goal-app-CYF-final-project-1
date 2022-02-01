@@ -58,7 +58,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	const complatedTodosOfYesterday = view.state.values[
 		"yesterday_input_container"
 	]["checkboxes-action"].selected_options.map((todo) => +todo.value);
-	const allTodosOfYesterday = view.blocks[0].element.options;
+	const allTodosOfYesterday = view.blocks[1].element.options; // If you add new block, change index number
 	const unComplatedTodosOfYesterday = allTodosOfYesterday
 		.map((todo) => +todo.value)
 		.filter((todo) => !complatedTodosOfYesterday.includes(todo));
@@ -72,57 +72,86 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	let msg = "";
 	// // Save to DB
 	// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
-	const yesterdaysCompletedTasksSetQuery = "UPDATE todo SET iscomplete = true WHERE id =ANY ($1)";
-	const response0 = await pool.query(yesterdaysCompletedTasksSetQuery, [
-		complatedTodosOfYesterday,
-	]);
-	const yesterdaysUnCompletedTasksSetQuery = "UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
-	const response1 = await pool.query(yesterdaysUnCompletedTasksSetQuery, [
-		unComplatedTodosOfYesterday,
-	]);
+	let isError = false;
+	try {
+		const yesterdaysCompletedTasksSetQuery =
+			"UPDATE todo SET iscomplete = true WHERE id = ANY ($1)";
+		await pool.query(yesterdaysCompletedTasksSetQuery, [
+			complatedTodosOfYesterday,
+		]);
+		const yesterdaysUnCompletedTasksSetQuery =
+			"UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
+		await pool.query(yesterdaysUnCompletedTasksSetQuery, [
+			unComplatedTodosOfYesterday,
+		]);
 
-	//find todays todos, delete all of them and add new ones
-	const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN (SELECT todo.id
+		//find todays todos, delete all of them and add new ones
+		const deleteTodayTodosQuery = `DELETE FROM todo WHERE id IN (SELECT todo.id
 		FROM users
 		INNER JOIN todo ON users.id = todo.user_id
 		WHERE slackid = $1 AND
 		date >= TIMESTAMP 'today' AND
 		date <  TIMESTAMP 'tomorrow') returning user_id `;
-	const response3 = await pool.query(deleteTodayTodosQuery, [body.user.id]);
-	const user_table_id = await pool.query(
-		"SELECT id FROM users WHERE slackid=$1",
-		[body.user.id]
-	);
-
-	let addTodayValuesQuery = "";
-	addTodayValuesQuery = todaysToDos.map((todo) => `($$${todo}$$,false,$1)`);
-
-	if (response3) {
-		const taskUserId = user_table_id.rows[0].id;
-		const addTodayTodosQuery = await pool.query(
-			`INSERT INTO todo(task,isComplete,user_id) VALUES ${addTodayValuesQuery.join(
-				","
-			)}`,
-			[taskUserId]
+		let poolResponse = await pool.query(deleteTodayTodosQuery, [body.user.id]);
+		const user_table_id = await pool.query(
+			"SELECT id FROM users WHERE slackid=$1",
+			[body.user.id]
 		);
+
+		let addTodayValuesQuery = "";
+		addTodayValuesQuery = todaysToDos.map((todo) => `($$${todo}$$,false,$1)`);
+
+		if (poolResponse) {
+			const taskUserId = user_table_id.rows[0].id;
+			await pool.query(
+				`INSERT INTO todo(task,isComplete,user_id) VALUES ${addTodayValuesQuery.join(
+					","
+				)}`,
+				[taskUserId]
+			);
+		}
+	} catch (error) {
+		isError = true;
 	}
-	if (true) {
+	if (!isError) {
 		// DB save was successful
-		msg = `Summary\n yesterday you complated ${complatedTodosOfYesterday.length} items\nToday, your tasks are;\n`;
+		msg = `*Summary of submission...*\n *yesterday* you complated *${complatedTodosOfYesterday.length}* items\n*Today, your tasks are;*\n`;
 
 		todaysToDos.forEach((task) => {
-			msg += `- ${task}\n`;
+			msg += `- _${task}_\n`;
 		});
-		msg += `Thank you <@${body.user.id}> your submission was successful`;
+		msg += `\nThank you <@${body.user.id}> your submission was successful`;
 	} else {
-		msg = "There was an error with your submission";
+		msg =
+			"OOPS 😳 !!!\nThere is an *error* with your submission, please contact with your mentor... \n You can continue <https://goal-app-cyf-final-project.herokuapp.com/|*_with website_*> ";
 	}
 
 	// Message the user
 	try {
-		await client.chat.postMessage({
-			channel: body.user.id,
-			text: msg,
+		const result = await client.views.open({
+			trigger_id: body.trigger_id,
+			view: {
+				type: "modal",
+				title: {
+					type: "plain_text",
+					text: "Hey there,",
+					emoji: true,
+				},
+				close: {
+					type: "plain_text",
+					text: "Close",
+					emoji: true,
+				},
+				blocks: [
+					{
+						type: "section",
+						text: {
+							type: "mrkdwn",
+							text: msg,
+						},
+					},
+				],
+			},
 		});
 	} catch (error) {
 		logger.error({ error });

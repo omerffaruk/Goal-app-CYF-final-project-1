@@ -512,8 +512,9 @@ router.get("/", (req, res) => {
 
 	const code = req.query.code;
 	if (code) {
-		const clientId = "2977670222342.2984355485058";
-		const clientSecret = "217eabca6dc7e55c1625adfab7ade127";
+		const clientId = process.env.CLIENT_ID;
+		const clientSecret = process.env.CLIENT_SECRET;
+		const redirectUri = process.env.REDIRECT_URI;
 
 		let path_to_access_token =
 			"https://slack.com/api/oauth.v2.access?" +
@@ -527,7 +528,7 @@ router.get("/", (req, res) => {
 			code +
 			"&" +
 			"redirect_uri=" +
-			"https://055c-2-222-102-147.ngrok.io/api/"; //Slack URL to call to receive accessToken
+			redirectUri; //Slack URL to call to receive accessToken
 
 		request(path_to_access_token, function (error, response, body) {
 			// Request token from Slack using the access_code, then handle response

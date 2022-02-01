@@ -282,6 +282,11 @@ ul {
 	justify-content: space-between;
 	align-items: center;
 }
+
+.remember-me-ctn {
+	display: flex;
+}
+
 .password-heading{
 text-align: left;
 	padding-bottom: 20px;

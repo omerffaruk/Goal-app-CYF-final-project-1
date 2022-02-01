@@ -256,13 +256,13 @@ router.post("/newtask", (req, res) => {
 			//ADD new tasks
 			const addTodayValuesQuery = `${todayTasksNew}`;
 			pool.query(
-				"INSERT INTO todo(task,user_id) VALUES ($1,$2) RETURNING id",
+				"INSERT INTO todo(task,user_id) VALUES ($1,$2) RETURNING *",
 				[addTodayValuesQuery, id],
 				(error, result) => {
 					if (error) {
 						return res.status(500).send({ msg: "Database ERROR" });
 					}
-					res.send({ id: result.rows[0].id });
+					res.send({ task: result.rows[0] });
 				}
 			);
 		}

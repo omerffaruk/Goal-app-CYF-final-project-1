@@ -17,11 +17,12 @@ export function Home({ setLogin }) {
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
-		if (localStorage.rememberUser && localStorage.email !== "") {
-			setEmail(localStorage.email);
-			setPassword(localStorage.password);
-			setRememberUser(!localStorage.rememberUser);
-		}
+		if(localStorage.rememberUser && localStorage.email !== "") {
+			setEmail(localStorage.email)
+			setPassword(localStorage.password)
+			setRememberUser(localStorage.rememberUser);
+
+      }
 		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
@@ -46,9 +47,6 @@ export function Home({ setLogin }) {
 		}
 	};
 	const handleRemember = (e) => {
-		setRememberUser(!rememberUser);
-	};
-	const handlecheck = (e) => {
 		setRememberUser(!rememberUser);
 	};
 

@@ -18,7 +18,7 @@ const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingVa
 		else {
 			localStorage.removeItem('email')
 			localStorage.removeItem('password')
-			localStorage.removeItem('chk')
+			
 		}
 		
 		e.preventDefault();

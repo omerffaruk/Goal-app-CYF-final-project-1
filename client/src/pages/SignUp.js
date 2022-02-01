@@ -27,9 +27,7 @@ const SignUp = () => {
 				if (data.message) {
 					setText(data.message);
 					setPopup(true);
-				}
-				//window.alert(data.message);
-				else {
+				} else {
 					location.assign("/");
 					localStorage.setItem("t", data.user);
 				}

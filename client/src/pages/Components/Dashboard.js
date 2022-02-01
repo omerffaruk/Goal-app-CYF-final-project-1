@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { MdOutlineFilterList } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 import OldTasks from "./OldTasks";
 import "./dashboardStyle.css";
 import CurrentDayTasks from "./CurrentDayTasks";
@@ -60,7 +61,8 @@ export default function Dashboard({ period }) {
 					type="text"
 					value={searchKeyWord}
 					onChange={(e) => setSearchKeyWord(e.target.value)}
-					placeholder="Search..."
+					placeholder="&#61442; Search..."
+
 				/>
 			</section>
 			{period === "daily" ? (

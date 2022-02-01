@@ -18,14 +18,13 @@ const SignUp = () => {
 				name,
 				email,
 				password,
-				slackid
+				slackid,
 			}),
 		};
 		fetchData("/register", methodObj)
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.message) {
-					
 					setText(data.message);
 					setPopup(true);
 				}
@@ -40,7 +39,7 @@ const SignUp = () => {
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
-const [slackid, setSlackid] = useState("");
+	const [slackid, setSlackid] = useState("");
 	const [password, setPassword] = useState("");
 
 	const handleChange = (e) => {
@@ -49,11 +48,11 @@ const [slackid, setSlackid] = useState("");
 				setName(e.target.value);
 			} else if (e.target.name === "password") {
 				setPassword(e.target.value);
-			}
-			 else if (e.target.name === 'slackid') {
+			} else if (e.target.name === "slackid") {
 				setSlackid(e.target.value);
+			} else {
+				setEmail(e.target.value);
 			}
-				else setEmail(e.target.value)
 
 			setPopup(false);
 		}
@@ -148,4 +147,3 @@ const [slackid, setSlackid] = useState("");
 };
 
 export default SignUp;
-

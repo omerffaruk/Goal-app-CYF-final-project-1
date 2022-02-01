@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import LoginBtn from "./Components/LoginBtn";
@@ -11,14 +9,21 @@ import "./Home.css";
 
 export function Home({ setLogin }) {
 	const [setMessage] = useState("Loading...");
-	const [email, setEmail] = useState(localStorage.getItem("email"));
-	const [remember, setRemember] = useState(true);
-	const [password, setPassword] = useState(localStorage.getItem("password"));
-	const [rememberUser, setRememberUser] = useState(localStorage.getItem("chk"));
-
+	const [email, setEmail] = useState('');
+	
+	const [password, setPassword] = useState('');
+	const [rememberUser, setRememberUser] = useState(false);
+	const [missingValidEmail, setMissingValidEmail] = useState(false);
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
+		if(localStorage.rememberUser && localStorage.email !== "") {
+			setEmail(localStorage.email)
+			setPassword(localStorage.password)
+			setRememberUser(!localStorage.rememberUser);
+      
+        
+      }
 		fetchData("")
 			.then((res) => {
 				if (!res.ok) {
@@ -42,22 +47,13 @@ export function Home({ setLogin }) {
 			setPassword(e.target.value);
 		}
 	};
-	const handleRemember = () => {
-		if (remember) {
-			localStorage.setItem("email", email);
-			setEmail(email);
-			localStorage.setItem("chk", true);
-
-			localStorage.setItem("password", password);
-			setPassword(password);
-			setRemember(!remember);
-		} else {
-			setRememberUser(false);
-			localStorage.removeItem("email");
-			localStorage.removeItem("chk");
-			localStorage.removeItem("password");
-		}
+	const handleRemember = (e) => {
+		setRememberUser(!rememberUser);
 	};
+	const handlecheck = (e) => { setRememberUser(!rememberUser)}
+
+	const missingValidEmailError = <div className={`error-login ${missingValidEmail && "display"}`}>Please input a valid email</div>;
+	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
 
 	return (
 		<div className="home-ctn ">
@@ -102,7 +98,6 @@ export function Home({ setLogin }) {
 							<label htmlFor="password">Password</label>
 						</div>
 						<input
-							className={errorDisplay && "red-border"}
 							type="password"
 							name="password"
 							id="password"
@@ -113,6 +108,7 @@ export function Home({ setLogin }) {
 							value={password}
 						></input>
 					</div>
+					{displayMissingValidEmail}
 					<div className={`error-login ${errorDisplay && "display"}`}>
 						Wrong username and/or password! Please try again.
 					</div>
@@ -125,6 +121,7 @@ export function Home({ setLogin }) {
 						id="remember-user"
 						name="remember"
 						onClick={(e) => handleRemember(e)}
+						// onClick={(e) => handlecheck(e)}
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>
@@ -134,14 +131,15 @@ export function Home({ setLogin }) {
 					<Link to={"/forgot_password"}>Forgot password</Link>
 				</div>
 			</div>
-			
 
 			<LoginBtn
 				className="text-center"
 				email={email}
+				chk={ rememberUser}
 				password={password}
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}
+				setMissingValidEmail={setMissingValidEmail}
 			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>

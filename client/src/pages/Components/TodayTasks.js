@@ -5,6 +5,7 @@ import {
 	MdDeleteOutline,
 	MdSubdirectoryArrowLeft,
 } from "react-icons/md";
+import postTodos from "../../utils/postTodos";
 export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
@@ -87,7 +88,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 	);
 }
 //ADD NEW TASK
-export function NewTask({ handleAddNewTask }) {
+export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 	const [todayValue, setTodayValue] = useState("");
 	const [isTyping, setIsTyping] = useState(false);
 	function handleChange(event) {
@@ -102,7 +103,12 @@ export function NewTask({ handleAddNewTask }) {
 		if (event.key === "Enter") {
 			event.preventDefault();
 			if (event.target.value.length > 0) {
-				handleAddNewTask(todayValue);
+				//send db
+				//take id from db
+				//add todayTasks with handleAddnewTask
+				postTodos(todayValue, setIsSubmitting).then((id) => {
+					handleAddNewTask(todayValue, id);
+				});
 				setTodayValue("");
 				setIsTyping(false);
 			}
@@ -122,19 +128,21 @@ export function NewTask({ handleAddNewTask }) {
 				// disabled={true}
 				onKeyPress={handleEnter}
 			/>
-			<button
+			{/* <button
 				aria-label="Save new task"
 				style={{ cursor: "pointer" }}
 				type="button"
 				onClick={() => {
-					handleAddNewTask(todayValue);
-					setTodayValue("");
-					setIsTyping(false);
+					postTodos(todayValue, setIsSubmitting).then((id) => {
+						handleAddNewTask(todayValue, id);
+						setTodayValue("");
+						setIsTyping(false);
+					});
 				}}
 				className={`new-task-input-btn  ${isTyping && "active"} `}
 			>
 				<MdSubdirectoryArrowLeft />
-			</button>
+			</button> */}
 		</div>
 	);
 }

@@ -71,7 +71,7 @@ export function Home({ setLogin }) {
 						alt=""
 						src={require("../images/Slack_logo.png").default}
 					/>
-					<h2>Login with Slack</h2>;
+					<h2>Login with Slack</h2>
 				</a>
 			</div>
 			<div className="or-ctn">

@@ -64,7 +64,7 @@ export function Home({ setLogin }) {
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a
-					href={`https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
+					href={`https://slack.com/openid/connect/authorize?scope=openid&response_type=code&
 				redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&client_id=568949636710.2927110204163`}
 				>
 					<img

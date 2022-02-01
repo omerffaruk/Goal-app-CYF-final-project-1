@@ -1,6 +1,11 @@
 import { useState, React } from "react";
 import "./SignUp.css";
-
+import {
+	validEmail,
+	validUserName,
+	validPassword,
+	validSlackId,
+} from "../utils/validationFunctions";
 import { Link } from "react-router-dom";
 
 import Popup from "./Components/Popup";
@@ -9,6 +14,11 @@ import fetchData from "../utils/fetchData";
 const SignUp = () => {
 	const [text, setText] = useState("");
 	const [popup, setPopup] = useState(false);
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [slackid, setSlackid] = useState("");
+	const [password, setPassword] = useState("");
+	const [missingValidEmail, setMissingValidEmail] = useState(false);
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		const methodObj = {
@@ -27,20 +37,13 @@ const SignUp = () => {
 				if (data.message) {
 					setText(data.message);
 					setPopup(true);
-				}
-				//window.alert(data.message);
-				else {
+				} else {
 					location.assign("/");
 					localStorage.setItem("t", data.user);
 				}
 			})
 			.catch((e) => console.log(e));
 	};
-
-	const [name, setName] = useState("");
-	const [email, setEmail] = useState("");
-	const [slackid, setSlackid] = useState("");
-	const [password, setPassword] = useState("");
 
 	const handleChange = (e) => {
 		if (e) {
@@ -53,10 +56,16 @@ const SignUp = () => {
 			} else {
 				setEmail(e.target.value);
 			}
-
 			setPopup(false);
 		}
 	};
+
+	const missingValidEmailError = (
+		<div className={`error-login ${missingValidEmail && "display"}`}>
+			Please input a valid email
+		</div>
+	);
+	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
 	return (
 		<div className="signup-ctn">
 			<h2>Create A New Account</h2>
@@ -99,6 +108,7 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
+						{displayMissingValidEmail}
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">

@@ -2,11 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
+import { validEmail } from "../../utils/validationFunctions";
 
 const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingValidEmail }) => {
-	function validEmail(useremail) {
-		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(useremail);
-	}
 
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
@@ -14,13 +12,10 @@ const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingVa
 			localStorage.email = email;
 			localStorage.password = password;
 			localStorage.rememberUser = chk;
+		} else {
+			localStorage.removeItem("email");
+			localStorage.removeItem("password");
 		}
-		else {
-			localStorage.removeItem('email')
-			localStorage.removeItem('password')
-			
-		}
-		
 		e.preventDefault();
 		const methodObj = {
 			method: "POST",

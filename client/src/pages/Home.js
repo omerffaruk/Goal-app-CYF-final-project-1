@@ -18,8 +18,8 @@ export function Home({ setLogin }) {
 
 	useEffect(() => {
 		if(localStorage.rememberUser && localStorage.email !== "") {
-			setEmail(localStorage.email)
-			setPassword(localStorage.password)
+			setEmail(localStorage.email);
+			setPassword(localStorage.password);
 			setRememberUser(localStorage.rememberUser);
 
       }
@@ -66,7 +66,7 @@ export function Home({ setLogin }) {
 			<div className="slack-connect">
 				<a
 					href={`https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;
-				redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&amp;client_id=568949636710.2927110204163`}
+				redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&client_id=568949636710.2927110204163`}
 				>
 					<img
 						className="Slack"

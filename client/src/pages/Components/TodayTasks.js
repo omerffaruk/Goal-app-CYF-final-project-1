@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-	MdEditNote,
+	MdModeEdit,
 	MdDone,
 	MdDeleteOutline,
 	MdSubdirectoryArrowLeft,
@@ -55,16 +55,17 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 				{/* //////   Edit task */}
 				<button
 					aria-label="Edit task"
-					style={{ cursor: "pointer" }}
+					className="today-task-edit-icon"
 					type="button"
 					onClick={() => setIsDisable((prev) => !prev)}
 				>
-					<MdEditNote />
+					<MdModeEdit />
 				</button>
 				{/* ////// Approve after Edit task */}
 				{!isDisable && (
 					<button
 						aria-label="Save changes"
+						className="today-task-save-icon"
 						style={{ cursor: "pointer" }}
 						type="button"
 						onClick={() => setIsDisable((prev) => !prev)}
@@ -75,7 +76,7 @@ export function TodayTasks({ task, setCurrentPeriodTasks, index }) {
 				{/* //////   Delete task */}
 				<button
 					aria-label="Delete task"
-					style={{ cursor: "pointer" }}
+					className="today-task-delete-icon"
 					type="button"
 					onClick={() => handleDelete(index)}
 				>
@@ -94,8 +95,8 @@ export function NewTask({ handleAddNewTask }) {
 		if (event.target.value.length > 0) {
 			setIsTyping(true);
 		} else {
- setIsTyping(false);
-}
+			setIsTyping(false);
+		}
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {

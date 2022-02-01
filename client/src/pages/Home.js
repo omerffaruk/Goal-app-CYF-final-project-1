@@ -64,15 +64,14 @@ export function Home({ setLogin }) {
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a
-					href={`https://slack.com/openid/connect/authorize?scope=openid&response_type=code&
-				redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&client_id=568949636710.2927110204163`}
+					href={"https://slack.com/openid/connect/authorize?scope=openid&amp;response_type=code&amp;redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&amp;client_id=568949636710.2927110204163"}
 				>
 					<img
 						className="Slack"
 						alt=""
 						src={require("../images/Slack_logo.png").default}
 					/>
-					<h2>Login with Slack</h2>
+					<h2>Login with Slack</h2>;
 				</a>
 			</div>
 			<div className="or-ctn">

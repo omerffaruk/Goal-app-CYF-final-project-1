@@ -576,14 +576,18 @@ router.get("/", (req, res) => {
 					.query("select * from users where email= $1", [userProfile.email])
 					.then((result) => {
 						if (result.rowCount < 1) {
-							res.redirect("http://localhost:3000/signup");
+							res.redirect(
+								"https://goal-app-cyf-final-project.herokuapp.com/signup"
+							);
 						} else {
 							username = result.rows[0].username;
 							const authtoken = createToken(result.rows[0].id);
 							tokenarray.push(authtoken);
 							//localStorage.setItem("token", authtoken); //if you are sending token.
 							slacklogin["token"] = tokenarray[0];
-							res.redirect(`http://localhost:3000/${username}`);
+							res.redirect(
+								`https://goal-app-cyf-final-project.herokuapp.com/${username}`
+							);
 						}
 					})
 					.catch();

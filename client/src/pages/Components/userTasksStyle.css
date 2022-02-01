@@ -87,7 +87,11 @@ form.tasksForm label span {
 .form-icon.icon-delete {
 	background-color: white;
 	border: none;
-	color: tomato;
+	color: #a03522;
+	transition: all 0.5s ease;
+}
+.form-icon.icon-delete:hover {
+	color: rgb(255, 58, 23);
 }
 .sr-only {
 	border: 0;
@@ -155,9 +159,44 @@ form.tasksForm label span {
 .today-task-show:hover {
 	background-color: #eee;
 }
+/* Today tasks buttons style */
 .today-task-show-btn-container {
 	display: flex;
-	margin: 10px 0;
+	/* margin: 10px 0; */
+}
+.today-task-show-btn-container button {
+	padding: 0;
+}
+.today-task-edit-icon {
+	color: var(--header-bcg-color);
+	cursor: pointer;
+	padding: 0 12px;
+	transition: all 0.5s ease;
+}
+.today-task-edit-icon:hover {
+	color: #06a6fc;
+}
+.today-task-save-icon {
+	color: var(--header-bcg-color);
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+
+.today-task-delete-icon {
+	color: #666;
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+.today-task-delete-icon:hover {
+	color: #f83f3f;
+}
+.today-task-delete-icon {
+	color: #666;
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+.today-task-delete-icon:hover {
+	color: #f83f3f;
 }
 .today-todos-container li {
 	border-bottom: 1px solid #ccc;
@@ -175,7 +214,8 @@ form.tasksForm label span {
 .new-task-input-btn {
 	border: none;
 	background: none;
-	padding: 0.5rem;
+	padding: 0 12px;
+	/* padding: 0.5rem; */
 }
 
 button.new-task-input-btn {

@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 import { TodayTasks, NewTask } from "./TodayTasks";
 import "./userTasksStyle.css";
 import "./loadinAnimation.css";
-import { nanoid } from "nanoid";
 import getUserTasks from "../../utils/getUserTasks";
-import postTodos from "../../utils/postTodos";
 import Task from "./Task";
 function UsersTasks({ searchKeyWord }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
@@ -18,12 +16,7 @@ function UsersTasks({ searchKeyWord }) {
 		getUserTasks(yesterdayFetchEndPoint, setYesterdayTasks);
 		getUserTasks(todayFetchEndPoint, setTodayTasks);
 	}, []);
-	//Submit
-	function handleSubmit(event) {
-		event.preventDefault();
-		setIsSubmitting(true);
-		postTodos(todayTasks, setIsSubmitting);
-	}
+
 	const previousPeriodItemsCompleted = yesterdayTasks
 		.filter(
 			(task) =>
@@ -64,7 +57,7 @@ function UsersTasks({ searchKeyWord }) {
 	}
 	return (
 		<section className="formContainer">
-			<form className="tasksForm" onSubmit={handleSubmit}>
+			<form className="tasksForm">
 				<div className={`animation-container ${isSubmitting && "animate"}`}>
 					<div className="loading-ring">
 						<div></div>
@@ -89,9 +82,6 @@ function UsersTasks({ searchKeyWord }) {
 						setIsSubmitting={setIsSubmitting}
 					/>
 				</article>
-				{/* <button className="todo-submit-btn login-btn" type="submit">
-					Submit
-				</button> */}
 			</form>
 		</section>
 	);

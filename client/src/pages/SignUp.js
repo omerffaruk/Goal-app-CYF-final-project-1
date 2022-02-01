@@ -1,6 +1,6 @@
 import { useState, React } from "react";
 import "./SignUp.css";
-
+import { validEmail, validUserName, validPassword, validSlackId } from "../utils/validationFunctions";
 import { Link } from "react-router-dom";
 
 import Popup from "./Components/Popup";
@@ -39,6 +39,7 @@ const SignUp = () => {
 	const [email, setEmail] = useState("");
 	const [slackid, setSlackid] = useState("");
 	const [password, setPassword] = useState("");
+	const [missingValidEmail, setMissingValidEmail] = useState(false);
 
 	const handleChange = (e) => {
 		if (e) {
@@ -51,10 +52,17 @@ const SignUp = () => {
 			} else {
 				setEmail(e.target.value);
 			}
-
 			setPopup(false);
 		}
 	};
+
+		const missingValidEmailError = (
+			<div className={`error-login ${missingValidEmail && "display"}`}>
+				Please input a valid email
+			</div>
+		);
+		const displayMissingValidEmail =
+			missingValidEmail && missingValidEmailError;
 	return (
 		<div className="signup-ctn">
 			<h2>Create A New Account</h2>
@@ -97,6 +105,7 @@ const SignUp = () => {
 								handleChange(e);
 							}}
 						></input>
+						{displayMissingValidEmail}
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">

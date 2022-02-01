@@ -1,14 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-	MdModeEdit,
-	MdDone,
-	MdDeleteOutline,
-	MdSubdirectoryArrowLeft,
-} from "react-icons/md";
+import { MdModeEdit, MdDone, MdDeleteOutline } from "react-icons/md";
 import postTodos from "../../utils/postTodos";
 import deleteTodo from "../../utils/deleteTodo";
 import updateTodo from "../../utils/updateTodo";
-export function TodayTasks({ task, setTodayTasks, index }) {
+
+export function TodayTasks({ task, setTodayTasks }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
 	function handleChange(event) {
@@ -99,14 +95,8 @@ export function TodayTasks({ task, setTodayTasks, index }) {
 //ADD NEW TASK
 export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 	const [todayValue, setTodayValue] = useState("");
-	const [isTyping, setIsTyping] = useState(false);
 	function handleChange(event) {
 		setTodayValue(event.target.value);
-		if (event.target.value.length > 0) {
-			setIsTyping(true);
-		} else {
-			setIsTyping(false);
-		}
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {
@@ -119,52 +109,33 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 
 	function handleSave() {
 		//send db
-		//take id from db
+		//take tasks from db
 		//add todayTasks with handleAddnewTask
-		postTodos(todayValue, setIsSubmitting).then((task) => {
-			console.log(task, ">>>");
-			handleAddNewTask(task.task);
-		});
+		setIsSubmitting(true);
+		postTodos(todayValue, setIsSubmitting).then((task) =>
+			handleAddNewTask(task.task)
+		);
 		setTodayValue("");
-		setIsTyping(false);
 	}
 	return (
-		<>
-			<div className="new-task-input-container">
-				<input
-					className="new-task-input"
-					type="text"
-					autoFocus
-					name="newTask"
-					placeholder="Enter for new task..."
-					value={todayValue}
-					onChange={handleChange}
-					// disabled={true}
-					onKeyPress={handleEnter}
-				/>
-				{/* <button
-				aria-label="Save new task"
-				style={{ cursor: "pointer" }}
+		<div className="new-task-input-container">
+			<input
+				className="new-task-input"
+				type="text"
+				autoFocus
+				name="newTask"
+				placeholder="Enter for new task..."
+				value={todayValue}
+				onChange={handleChange}
+				onKeyPress={handleEnter}
+			/>
+			<button
+				className="todo-submit-btn login-btn"
 				type="button"
-				onClick={() => {
-					postTodos(todayValue, setIsSubmitting).then((id) => {
-						handleAddNewTask(todayValue, id);
-						setTodayValue("");
-						setIsTyping(false);
-					});
-				}}
-				className={`new-task-input-btn  ${isTyping && "active"} `}
-				>
-				<MdSubdirectoryArrowLeft />
-			</button> */}
-				<button
-					className="todo-submit-btn login-btn"
-					type="button"
-					onClick={handleSave}
-				>
-					Save
-				</button>
-			</div>
-		</>
+				onClick={handleSave}
+			>
+				Save
+			</button>
+		</div>
 	);
 }

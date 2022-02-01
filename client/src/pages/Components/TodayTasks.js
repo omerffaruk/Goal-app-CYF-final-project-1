@@ -101,12 +101,16 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 	function handleEnter(event) {
 		if (event.key === "Enter") {
 			event.preventDefault();
-			if (event.target.value.length > 0) {
+			if (todayValue.length > 0) {
 				handleSave();
 			}
 		}
 	}
-
+	function handleClick() {
+		if (todayValue.length > 0) {
+			handleSave();
+		}
+	}
 	function handleSave() {
 		//send db
 		//take tasks from db
@@ -132,7 +136,7 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 			<button
 				className="todo-submit-btn login-btn"
 				type="button"
-				onClick={handleSave}
+				onClick={handleClick}
 			>
 				Save
 			</button>

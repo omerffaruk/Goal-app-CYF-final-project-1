@@ -10,7 +10,6 @@ import Task from "./Task";
 function UsersTasks({ searchKeyWord }) {
 	const [yesterdayTasks, setYesterdayTasks] = useState([]);
 	const [todayTasks, setTodayTasks] = useState([]);
-
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const { username } = useParams();
 	const yesterdayFetchEndPoint = `/yesterdaytasks/${username}`;
@@ -53,16 +52,15 @@ function UsersTasks({ searchKeyWord }) {
 	const currentPeriodTaskInputs = todayTasks.map((task, index) => (
 		<TodayTasks
 			key={task.id}
-			setCurrentPeriodTasks={setTodayTasks}
+			setTodayTasks={setTodayTasks}
 			task={task}
 			index={index}
 			handleAddNewTask={handleAddNewTask}
 		/>
 	));
 
-	function handleAddNewTask(newTask, id) {
-		newTask.length > 0 &&
-			setTodayTasks((prev) => prev.concat({ id: id, task: newTask }));
+	function handleAddNewTask(task) {
+		setTodayTasks((prev) => prev.concat(task));
 	}
 	return (
 		<section className="formContainer">
@@ -91,9 +89,9 @@ function UsersTasks({ searchKeyWord }) {
 						setIsSubmitting={setIsSubmitting}
 					/>
 				</article>
-				<button className="todo-submit-btn login-btn" type="submit">
+				{/* <button className="todo-submit-btn login-btn" type="submit">
 					Submit
-				</button>
+				</button> */}
 			</form>
 		</section>
 	);

@@ -16,8 +16,8 @@ export default async function postTodos(todayTasks, setIsSubmitting) {
 
 	const response = await fetchData("/newtask", postObject);
 	if (response.status === 200) {
-		const id = await response.json();
+		const task = await response.json();
 		setTimeout(() => setIsSubmitting(false), 250);
-		return id;
+		return task;
 	}
 }

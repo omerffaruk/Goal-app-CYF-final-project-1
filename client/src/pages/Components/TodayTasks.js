@@ -112,32 +112,37 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 		if (event.key === "Enter") {
 			event.preventDefault();
 			if (event.target.value.length > 0) {
-				//send db
-				//take id from db
-				//add todayTasks with handleAddnewTask
-				postTodos(todayValue, setIsSubmitting).then((id) => {
-					handleAddNewTask(todayValue, id.id);
-				});
-				setTodayValue("");
-				setIsTyping(false);
+				handleSave();
 			}
 		}
 	}
 
+	function handleSave() {
+		//send db
+		//take id from db
+		//add todayTasks with handleAddnewTask
+		postTodos(todayValue, setIsSubmitting).then((task) => {
+			console.log(task, ">>>");
+			handleAddNewTask(task.task);
+		});
+		setTodayValue("");
+		setIsTyping(false);
+	}
 	return (
-		<div className="new-task-input-container">
-			<input
-				className="new-task-input"
-				type="text"
-				autoFocus
-				name="newTask"
-				placeholder="Enter for new task..."
-				value={todayValue}
-				onChange={handleChange}
-				// disabled={true}
-				onKeyPress={handleEnter}
-			/>
-			{/* <button
+		<>
+			<div className="new-task-input-container">
+				<input
+					className="new-task-input"
+					type="text"
+					autoFocus
+					name="newTask"
+					placeholder="Enter for new task..."
+					value={todayValue}
+					onChange={handleChange}
+					// disabled={true}
+					onKeyPress={handleEnter}
+				/>
+				{/* <button
 				aria-label="Save new task"
 				style={{ cursor: "pointer" }}
 				type="button"
@@ -149,9 +154,17 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 					});
 				}}
 				className={`new-task-input-btn  ${isTyping && "active"} `}
-			>
+				>
 				<MdSubdirectoryArrowLeft />
 			</button> */}
-		</div>
+				<button
+					className="todo-submit-btn login-btn"
+					type="button"
+					onClick={handleSave}
+				>
+					Save
+				</button>
+			</div>
+		</>
 	);
 }

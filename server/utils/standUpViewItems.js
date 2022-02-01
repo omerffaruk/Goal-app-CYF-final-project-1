@@ -66,6 +66,13 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 		},
 		blocks: [
 			{
+				type: "section",
+				text: {
+					type: "mrkdwn",
+					text: "You can <https://goal-app-cyf-final-project.herokuapp.com/|*visit the website*> to see all your data.",
+				},
+			},
+			{
 				type: "input",
 				optional: true,
 				block_id: "yesterday_input_container",

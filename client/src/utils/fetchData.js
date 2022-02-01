@@ -8,3 +8,6 @@ export default async function fetchData(
 	);
 	return response;
 }
+
+// Heroku api url: https://goal-app-cyf-final-project.herokuapp.com/api
+// Local host url: http://127.0.0.1:3100/api

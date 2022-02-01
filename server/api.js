@@ -31,11 +31,29 @@ router.post("/register", (req, res) => {
 		let query;
 		query = "select * from users where username=$1 or email=$2";
 
+		query = "select * from users where username=$1";
+		pool.query(query, [userName]).then((result) => {
+			if (result.rowCount > 0) {
+				res.status(200).json({ message: "username already exists" });
+				return;
+			}
+		});
+
+		query = "select * from users where email=$1";
+		pool.query(query, [email]).then((result) => {
+			if (result.rowCount > 0) {
+				res.status(200).json({ message: "email already exists" });
+				return;
+			}
+		});
+
+		query = "select * from users where slackid=$1";
 		pool
-			.query(query, [userName, email])
+			.query(query, [slackid])
 			.then((result) => {
 				if (result.rowCount > 0) {
-					res.status(200).json({ message: "user/email already exists" });
+					res.status(200).json({ message: "slackid already exists" });
+					return;
 				} else {
 					query =
 						"insert into users(username,email,password,slackid,role) values($1,$2,$3,$4,$5) returning id";

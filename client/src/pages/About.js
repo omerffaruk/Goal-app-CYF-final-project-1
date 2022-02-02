@@ -11,15 +11,24 @@ const About = () => (
 		<div>
 			<h2>About</h2>
 			<p>
-				As part of the Scrum process in the Agile methodology, teams/trainees
-				are encouraged to perform a Daily Standup meeting. The Daily Standup is
-				a brief meeting where team members discuss what's going on in their
-				current work sprint to see if any issues have come up. Keep track of
-				your tasks with the Goal! app created by HTCT (Hyper Talent Coding Team).
+			 Keep track of your daily tasks with the Goal! app created by HTCT (Hyper Talent Coding Team). Using either Slack or the webapp interface, this app allows you to record your daily goals. These are uploaded to the database for future retrieval, especially useful for you to monitor your progress, throughout the course and beyond.
 			</p>
-			<h3>What is the Daily Stand-Up?</h3>
+			<h3>How to find your SlackId</h3>
+			<div id="video-ctn">
+			<iframe
+						id="video"
+            width="560"
+            height="315"
+            src={"https:youtube.com/embed/6qcA4z3srCA"}
+            title="howToVideo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+					</div>
+			{/* <h3>What is the Daily Stand-Up?</h3>
 			<ul>
-				<li>15 minutes, same time every day</li>
+				<li>5 minutes, same time every day</li>
 				<li>
 					3 Questions:
 					<ul>
@@ -28,7 +37,7 @@ const About = () => (
 						<li>What are my blockers(issues)?</li>
 					</ul>
 				</li>
-			</ul>
+			</ul> */}
 		</div>
 		<div className="team-ctn">
 			<div className="team-title-ctn">

@@ -32,6 +32,8 @@ const LoginBtn = ({
 				password: password,
 			}),
 		};
+		// this will re-render the page in case the user inputs wrong password or email again and again
+		setErrorDisplay(false);
 		if (!validEmail(email)) {
 			setErrorDisplay(false);
 			setMissingValidPassword(false);

@@ -115,14 +115,14 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	}
 	if (!isError) {
 		// DB save was successful
-		msg = `*Summary of submission...*\n *yesterday* you complated *${complatedTodosOfYesterday.length}* items\n*Today, your tasks are;*\n`;
+		msg = `*Summary...*\n *Yesterday* you completed *${complatedTodosOfYesterday.length}* items\n*Today, your tasks are:*\n`;
 		todaysToDos.forEach((task) => {
 			msg += `- _${task}_\n`;
 		});
 		msg += `\nThank you <@${body.user.id}> your submission was successful`;
 	} else {
 		msg =
-			"OOPS 😳 !!!\nThere is an *error* with your submission, please contact with your mentor... \n You can continue <https://goal-app-cyf-final-project.herokuapp.com/|*_with website_*> ";
+			"\nThere is an *error* with your submission, please contact your mentor. \n You can continue over on the<https://goal-app-cyf-final-project.herokuapp.com/|* website.*> ";
 	}
 
 	// Message the user

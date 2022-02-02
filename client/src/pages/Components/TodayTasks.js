@@ -95,8 +95,11 @@ export function TodayTasks({ task, setTodayTasks }) {
 //ADD NEW TASK
 export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 	const [todayValue, setTodayValue] = useState("");
+	const [isTyping, setIsTyping] = useState(false);
+
 	function handleChange(event) {
 		setTodayValue(event.target.value);
+		event.target.value.length > 0 ? setIsTyping(true) : setIsTyping(false);
 	}
 	function handleEnter(event) {
 		if (event.key === "Enter") {
@@ -120,6 +123,7 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 			handleAddNewTask(task.task)
 		);
 		setTodayValue("");
+		setIsTyping(false);
 	}
 	return (
 		<div className="new-task-input-container">
@@ -134,11 +138,11 @@ export function NewTask({ handleAddNewTask, setIsSubmitting }) {
 				onKeyPress={handleEnter}
 			/>
 			<button
-				className="todo-submit-btn login-btn"
+				className={`todo-submit-btn ${isTyping && "active"}`}
 				type="button"
 				onClick={handleClick}
 			>
-				Save
+				Add
 			</button>
 		</div>
 	);

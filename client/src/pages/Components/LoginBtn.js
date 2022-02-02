@@ -2,10 +2,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import fetchData from "../../utils/fetchData.js";
 import { headers } from "../../utils/generalPostObjects.js";
-import { validEmail } from "../../utils/validationFunctions";
+import { validEmail, validPassword } from "../../utils/validationFunctions";
 
-const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingValidEmail }) => {
-
+const LoginBtn = ({
+	email,
+	password,
+	chk,
+	setErrorDisplay,
+	setLogin,
+	setMissingValidEmail,
+	setMissingValidPassword,
+}) => {
 	const navigate = useNavigate();
 	const handleLogin = (e) => {
 		if (chk) {
@@ -25,8 +32,19 @@ const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingVa
 				password: password,
 			}),
 		};
-		if (validEmail(email)) {
+		// this will re-render the page in case the user inputs wrong password or email again and again
+		setErrorDisplay(false);
+		if (!validEmail(email)) {
+			setErrorDisplay(false);
+			setMissingValidPassword(false);
+			setMissingValidEmail(true);
+		} else if(!validPassword(password)) {
+			setErrorDisplay(false);
 			setMissingValidEmail(false);
+			setMissingValidPassword(true);
+		} else {
+			setMissingValidEmail(false);
+			setMissingValidPassword(false);
 			fetchData("/log", methodObj)
 				.then((res) => res.json())
 				.then((data) => {
@@ -40,8 +58,6 @@ const LoginBtn = ({ email, password,chk, setErrorDisplay, setLogin, setMissingVa
 					}
 				})
 				.catch((e) => console.log(e));
-		} else {
-			setMissingValidEmail(true);
 		}
 	};
 

@@ -28,7 +28,7 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 			{
 				text: {
 					type: "plain_text",
-					text: "YOU DONT HAVE ANY VALUE FOR  YESTERDAY",
+					text: "YOU DONT HAVE ANY TASKS FROM YESTERDAY",
 					emoji: true,
 				},
 				value: "0",
@@ -51,7 +51,7 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 		callback_id: "standup_callback_id",
 		title: {
 			type: "plain_text",
-			text: "Daily Stand up Meeting",
+			text: "Daily Standup Meeting",
 			emoji: true,
 		},
 		submit: {
@@ -79,7 +79,7 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 				element: elements,
 				label: {
 					type: "plain_text",
-					text: "Please select the ones you have completed from yesterday's tasks",
+					text: "Please select the completed tasks from yesterday",
 					emoji: true,
 				},
 			},
@@ -101,7 +101,7 @@ export default function standUpViewItems(yesterdayEvents, todayEvents = []) {
 				},
 				label: {
 					type: "plain_text",
-					text: "Please enter today's tasks with line break...",
+					text: "Please enter today's tasks, one task per line.",
 					emoji: true,
 				},
 			},

@@ -14,6 +14,7 @@ export function Home({ setLogin }) {
 	const [password, setPassword] = useState("");
 	const [rememberUser, setRememberUser] = useState(false);
 	const [missingValidEmail, setMissingValidEmail] = useState(false);
+	const [missingValidPassword, setMissingValidPassword] = useState(false);
 	const [errorDisplay, setErrorDisplay] = useState(false);
 
 	useEffect(() => {
@@ -49,13 +50,6 @@ export function Home({ setLogin }) {
 		setRememberUser(!rememberUser);
 	};
 
-	const missingValidEmailError = (
-		<div className={`error-login ${missingValidEmail && "display"}`}>
-			Please input a valid email
-		</div>
-	);
-	const displayMissingValidEmail = missingValidEmail && missingValidEmailError;
-
 	// const clientId = process.env.REACT_APP_CLIENT_ID;
 	// console.log(process.env.REACT_APP_CLIENT_ID);
 
@@ -64,7 +58,9 @@ export function Home({ setLogin }) {
 			<h1 className="text-center">Login to your GoalApp account</h1>
 			<div className="slack-connect">
 				<a
-					href={"https://slack.com/openid/connect/authorize?scope=openid&response_type=code&redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&client_id=568949636710.2927110204163"}
+					href={
+						"https://slack.com/openid/connect/authorize?scope=openid&response_type=code&redirect_uri=https://goal-app-cyf-final-project.herokuapp.com/api/&client_id=568949636710.2927110204163"
+					}
 				>
 					<img
 						className="Slack"
@@ -95,6 +91,9 @@ export function Home({ setLogin }) {
 							value={email}
 							aria-label="enter email"
 						></input>
+						<div className={`error-login ${missingValidEmail && "display"}`}>
+							Please enter a valid email
+						</div>
 					</div>
 					<div className="form-field">
 						<div className="label-ctn">
@@ -110,8 +109,10 @@ export function Home({ setLogin }) {
 							placeholder="Password"
 							value={password}
 						></input>
+						<div className={`error-login ${missingValidPassword && "display"}`}>
+							Please enter a valid password
+						</div>
 					</div>
-					{displayMissingValidEmail}
 					<div className={`error-login ${errorDisplay && "display"}`}>
 						Wrong username and/or password! Please try again.
 					</div>
@@ -143,6 +144,7 @@ export function Home({ setLogin }) {
 				setLogin={setLogin}
 				setErrorDisplay={setErrorDisplay}
 				setMissingValidEmail={setMissingValidEmail}
+				setMissingValidPassword={setMissingValidPassword}
 			/>
 			<div className="create-ctn">
 				<p>Not Registered Yet?</p>

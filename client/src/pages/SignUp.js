@@ -38,6 +38,12 @@ const SignUp = () => {
 				slackid,
 			}),
 		};
+		// set all these states to false first - in case the user tries with invalid info again and again  this will lett them know page is rerendering
+		setMissingValidUsername(false);
+		setMissingValidEmail(false);
+		setMissingValidPassword(false);
+		setMissingValidSlackid(false);
+		// error handling for username, password, email and slackid
 		if (!validUserName(name)) {
 			setMissingValidUsername(true);
 			setMissingValidUsernameMessage("Please enter a valid username");
@@ -56,6 +62,9 @@ const SignUp = () => {
 			setMissingValidSlackid(true);
 			setMissingValidSlackidMessage("Please enter a valid Slackid");
 		} else {
+			setMissingValidUsername(false);
+			setMissingValidEmail(false);
+			setMissingValidPassword(false);
 			setMissingValidSlackid(false);
 			fetchData("/register", methodObj)
 				.then((res) => res.json())
@@ -160,7 +169,7 @@ const SignUp = () => {
 							}}
 						></input>
 						<div className={`error-login ${missingValidPassword && "display"}`}>
-							Please input a valid password
+							Please enter a valid password
 						</div>
 					</div>
 					<div className="form-field">

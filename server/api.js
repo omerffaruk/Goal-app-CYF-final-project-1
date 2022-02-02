@@ -34,7 +34,9 @@ router.post("/register", (req, res) => {
 		query = "select * from users where username=$1";
 		pool.query(query, [userName]).then((result) => {
 			if (result.rowCount > 0) {
-				res.status(200).json({ message: "username already exists" });
+				res
+					.status(200)
+					.json({ message: "An account with this username already exists" });
 				return;
 			}
 		});
@@ -42,7 +44,7 @@ router.post("/register", (req, res) => {
 		query = "select * from users where email=$1";
 		pool.query(query, [email]).then((result) => {
 			if (result.rowCount > 0) {
-				res.status(200).json({ message: "email already exists" });
+				res.status(200).json({ message: "An account with this email already exists" });
 				return;
 			}
 		});
@@ -52,7 +54,9 @@ router.post("/register", (req, res) => {
 			.query(query, [slackid])
 			.then((result) => {
 				if (result.rowCount > 0) {
-					res.status(200).json({ message: "slackid already exists" });
+					res
+						.status(200)
+						.json({ message: "An account with this slackid already exists" });
 					return;
 				} else {
 					query =

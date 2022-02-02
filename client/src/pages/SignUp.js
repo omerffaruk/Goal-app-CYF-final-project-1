@@ -5,6 +5,7 @@ import {
 	validUserName,
 	validPassword,
 	validSlackId,
+	handleServerMessage,
 } from "../utils/validationFunctions";
 import { Link } from "react-router-dom";
 
@@ -19,9 +20,12 @@ const SignUp = () => {
 	const [slackid, setSlackid] = useState("");
 	const [password, setPassword] = useState("");
 	const [missingValidEmail, setMissingValidEmail] = useState(false);
+	const [missingValidEmailMessage, setMissingValidEmailMessage] = useState("");
 	const [missingValidPassword, setMissingValidPassword] = useState(false);
 	const [missingValidUsername, setMissingValidUsername] = useState(false);
+	const [missingValidUsernameMessage, setMissingValidUsernameMessage] = useState("");
 	const [missingValidSlackid, setMissingValidSlackid] = useState(false);
+	const [missingValidSlackidMessage, setMissingValidSlackidMessage] = useState("");
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		const methodObj = {
@@ -36,9 +40,11 @@ const SignUp = () => {
 		};
 		if (!validUserName(name)) {
 			setMissingValidUsername(true);
+			setMissingValidUsernameMessage("Please enter a valid username");
 		} else if (!validEmail(email)) {
 			setMissingValidUsername(false);
 			setMissingValidEmail(true);
+			setMissingValidEmailMessage("Please enter a valid email address");
 		} else if (!validPassword(password)) {
 			setMissingValidUsername(false);
 			setMissingValidEmail(false);
@@ -48,14 +54,24 @@ const SignUp = () => {
 			setMissingValidEmail(false);
 			setMissingValidPassword(false);
 			setMissingValidSlackid(true);
+			setMissingValidSlackidMessage("Please enter a valid Slackid");
 		} else {
 			setMissingValidSlackid(false);
 			fetchData("/register", methodObj)
 				.then((res) => res.json())
 				.then((data) => {
 					if (data.message) {
-						setText(data.message);
-						setPopup(true);
+						// setText(data.message);
+						handleServerMessage(
+							data,
+							setMissingValidUsernameMessage,
+							setMissingValidUsername,
+							setMissingValidEmailMessage,
+							setMissingValidEmail,
+							setMissingValidSlackidMessage,
+							setMissingValidSlackid
+						);
+						// setPopup(true);
 					} else {
 						location.assign("/");
 						localStorage.setItem("t", data.user);
@@ -108,7 +124,7 @@ const SignUp = () => {
 							}}
 						></input>
 						<div className={`error-login ${missingValidUsername && "display"}`}>
-							Please input a valid username
+							{missingValidUsernameMessage}
 						</div>
 					</div>
 					<div className="form-field">
@@ -126,7 +142,7 @@ const SignUp = () => {
 							}}
 						></input>
 						<div className={`error-login ${missingValidEmail && "display"}`}>
-							Please input a valid email
+							{missingValidEmailMessage}
 						</div>
 					</div>
 					<div className="form-field">
@@ -162,7 +178,7 @@ const SignUp = () => {
 							}}
 						></input>
 						<div className={`error-login ${missingValidSlackid && "display"}`}>
-							Please input a valid Slackid
+							{missingValidSlackidMessage}
 						</div>
 					</div>
 					<div>

@@ -56,13 +56,16 @@ export default function Dashboard({ period }) {
 						Quarterly
 					</Link>
 				</div>
-				<div><MdSearch style={{fontSize: '40px'}}/>
-					<input className='task-search'
-					type="text"
-					value={searchKeyWord}
-					onChange={(e) => setSearchKeyWord(e.target.value)}
-					placeholder='Search....'
-				/></div>
+				<div>
+					<input
+						className="task-search"
+						type="text"
+						value={searchKeyWord}
+						onChange={(e) => setSearchKeyWord(e.target.value)}
+						placeholder="Search...."
+					/>
+					<MdSearch style={{ fontSize: "30px" }} />
+				</div>
 			</section>
 			{period === "daily" ? (
 				<CurrentDayTasks

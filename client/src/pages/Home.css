@@ -364,7 +364,7 @@ ul {
 	padding: 0 10px;
 }
 
-.team-ctn {
+ .team-ctn {
 	display: flex;
 	flex-direction: column;
 }
@@ -461,6 +461,15 @@ ul {
 #video {
 	margin-left:3.5em;
 }
+
+/* Guide page*/
+.guide-link-ctn{
+	font-size: 2em;
+	
+	
+ }
+.guide-ctn{ margin:2em;}
+.guide-heading{margin-bottom:2em;}
 
 @media only screen and (min-width: 350px) {
 	.slack-connect h4 {

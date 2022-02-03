@@ -7,6 +7,7 @@ import updateTodo from "../../utils/updateTodo";
 export function TodayTasks({ task, setTodayTasks }) {
 	const [todayValue, setTodayValue] = useState(task.task);
 	const [isDisable, setIsDisable] = useState(true);
+	
 	function handleChange(event) {
 		setTodayValue(event.target.value);
 	}

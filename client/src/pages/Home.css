@@ -364,7 +364,7 @@ ul {
 	padding: 0 10px;
 }
 
-.team-ctn {
+ .team-ctn {
 	display: flex;
 	flex-direction: column;
 }
@@ -389,6 +389,7 @@ ul {
 	padding-bottom: 2em;
 	text-align: center;
 }
+.label-ctn{padding-top:10px;margin:0px;}
 
 .person-info-ctn h4 {
 	margin: 0.5em;
@@ -461,6 +462,31 @@ ul {
 	margin-left:3.5em;
 }
 
+/* Guide page*/
+.guide-link-ctn{
+	font-size: 2em;
+	
+	
+ }
+.faq-img{ width:30vw;
+	align-self: center;
+height:50vh;
+ ;}
+
+.icon{width:3em;
+height:3em;
+}
+.image-ctn{
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.image-btn{
+	display: flex;
+	justify-content: start;
+	align-self: center;
+}
 @media only screen and (min-width: 350px) {
 	.slack-connect h4 {
 		letter-spacing: 0.5px;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 
+
 const NavBar = ({ login, setLogin }) => {
 	const navigate = useNavigate();
 	const handleLogout = () => {
@@ -45,6 +46,7 @@ const NavBar = ({ login, setLogin }) => {
 					/>
 				</a>
 			</div>
+			
 			{displayAboutOrLogout}
 		</div>
 	);

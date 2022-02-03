@@ -468,9 +468,25 @@ ul {
 	
 	
  }
-.guide-ctn{ margin:2em;}
-.guide-heading{margin-bottom:2em;}
+.faq-img{ width:30vw;
+	align-self: center;
+height:50vh;
+ ;}
 
+.icon{width:3em;
+height:3em;
+}
+.image-ctn{
+	display: flex;
+	justify-content: center;
+	align-self: center;
+}
+
+.image-btn{
+	display: flex;
+	justify-content: start;
+	align-self: center;
+}
 @media only screen and (min-width: 350px) {
 	.slack-connect h4 {
 		letter-spacing: 0.5px;

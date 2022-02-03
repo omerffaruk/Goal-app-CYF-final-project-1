@@ -9,7 +9,7 @@ import Home from "./pages/Home";
 import Password from "./pages/Components/Password";
 import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Components/Dashboard";
-import Guide from "./pages/Guide";
+
 function App() {
 
 	const givenEmail = localStorage.getItem("email");
@@ -33,7 +33,7 @@ function App() {
 				{/* <Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} /> */}
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
-				<Route path="/guide" element={<Guide />} />
+				
 				<Route path="/forgot" element={<ForgotPassword />} />
 
 				{/* -----------Temporary Routes--------------- */}

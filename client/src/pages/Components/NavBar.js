@@ -46,12 +46,7 @@ const NavBar = ({ login, setLogin }) => {
 					/>
 				</a>
 			</div>
-			<div>
-				{" "}
-				<Link className="guide-link-ctn" to={"/guide"}>
-					Guide{" "}
-				</Link>{" "}
-			</div>
+			
 			{displayAboutOrLogout}
 		</div>
 	);

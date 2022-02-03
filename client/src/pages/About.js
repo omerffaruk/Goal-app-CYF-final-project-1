@@ -3,6 +3,13 @@ import anzaPic from "../images/anza.png";
 import dharmaPic from "../images/dharma.png";
 import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
+import  register from '../images/register.png'
+import standup from '../images/standup.png'
+import icon from '../images/icon.png';
+import edit from "../images/edit.png";
+import save from "../images/save.png";
+import remove from "../images/delete.png";
+
 
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 
@@ -11,21 +18,25 @@ const About = () => (
 		<div>
 			<h2>About</h2>
 			<p>
-			 Keep track of your daily tasks with the Goal! app created by HTCT (Hyper Talent Coding Team). Using either Slack or the webapp interface, this app allows you to record your daily goals. These are uploaded to the database for future retrieval, especially useful for you to monitor your progress, throughout the course and beyond.
+				Keep track of your daily tasks with the Goal! app created by HTCT (Hyper
+				Talent Coding Team). Using either Slack or the webapp interface, this
+				app allows you to record your daily goals. These are uploaded to the
+				database for future retrieval, especially useful for you to monitor your
+				progress, throughout the course and beyond.
 			</p>
 			<h3>How to find your SlackId</h3>
 			<div id="video-ctn">
-			<iframe
-						id="video"
-            width="560"
-            height="315"
-            src={"https:youtube.com/embed/6qcA4z3srCA"}
-            title="howToVideo"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-					</div>
+				<iframe
+					id="video"
+					width="560"
+					height="315"
+					src={"https:youtube.com/embed/6qcA4z3srCA"}
+					title="howToVideo"
+					frameBorder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
+				></iframe>
+			</div>
 			{/* <h3>What is the Daily Stand-Up?</h3>
 			<ul>
 				<li>5 minutes, same time every day</li>
@@ -38,6 +49,70 @@ const About = () => (
 					</ul>
 				</li>
 			</ul> */}
+			<div className="guide-ctn">
+				<h3 className="guide-heading"> Frequently Asked Questions </h3>
+				<h5> How to register a new account?</h5>
+				<p>
+					New user can signup for an account by filling up this form clicking on
+					create new account button.
+				</p>
+				<div className="image-ctn">
+					<img className="faq-img" src={register} alt="register"></img>
+				</div>
+				<h5>How to create your first stand-up? </h5>
+				<p>
+					User can add a new task via their dashboard, they can enter new task
+					in the provided area in daily tab, after entering new task, user needs
+					to click button in order to save it.
+				</p>
+				<div className="image-ctn">
+					<img className="faq-img" src={standup} alt="standup"></img>
+				</div>
+				<h5>How to add, edit and delete your task?</h5>
+				<p>
+					{" "}
+					User can edit with
+					<div className="image-btn">
+						<img className="icon" src={edit} alt="edit" />{" "}
+					</div>
+					save with
+					<div className="image-btn">
+						<img className="icon" src={save} alt="save" />{" "}
+					</div>
+					and delete with this
+					<div className="image-btn">
+						<img className="icon" src={remove} alt="delete" />{" "}
+					</div>{" "}
+					icon provided respectively.
+				</p>
+				<h5> Can I check my previous tasks? </h5>{" "}
+				<p>
+					Yes, previous day, week’s, month’s and quarter’s tasks can be viewed
+					by clicking on daily, weekly monthly and quarterly tabs.
+				</p>
+				<h5>Are the tasks in this app sorted? </h5>
+				<p>Yes, the tasks are sorted and ordered by date and time.</p>
+				<h5>Would this app allow me to search my tasks? </h5>
+				<p>
+					Yes, user can search their tasks using search bar in the dashboard.
+				</p>
+				<h5>
+					Can I shift my incomplete tasks to the complete tasks once I have
+					finished it?
+				</h5>{" "}
+				<p>
+					Yes, user can finish the task and then move the incomplete task to
+					completed tasks using this icon{" "}
+					<div className="image-btn">
+						<img className="icon" src={icon} alt="incomplete" />{" "}
+					</div>
+				</p>
+				<h5>Can I reset my password if I lose it?</h5>{" "}
+				<p>
+					Yes, user can reset their password by clicking on forgot password
+					link.
+				</p>
+			</div>
 		</div>
 		<div className="team-ctn">
 			<div className="team-title-ctn">
@@ -68,7 +143,12 @@ const About = () => (
 								</a>
 							</div>
 							<div className="twitter-logo">
-								<a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="link to twitter profile">
+								<a
+									href="https://twitter.com/"
+									target="_blank"
+									rel="noreferrer"
+									aria-label="link to twitter profile"
+								>
 									<BsTwitter />
 								</a>
 							</div>
@@ -92,7 +172,12 @@ const About = () => (
 					<div className="person-info-ctn">
 						<h4>Musa Yuksel</h4>
 						<div className="person-border-bottom"></div>
-						<p>Musa is a former instructor pilot turned NW4 trainee with CodeYourFuture. When he's not found sat in front of a computer working on his numerous projects, he enjoys spending time in nature where you're apt to find him cycling. A passion of his.</p>
+						<p>
+							Musa is a former instructor pilot turned NW4 trainee with
+							CodeYourFuture. When he's not found sat in front of a computer
+							working on his numerous projects, he enjoys spending time in
+							nature where you're apt to find him cycling. A passion of his.
+						</p>
 						<div className="person-links-ctn">
 							<div className="linkedin-logo">
 								<a
@@ -105,7 +190,12 @@ const About = () => (
 								</a>
 							</div>
 							<div className="twitter-logo">
-								<a href="https://twitter.com/" target="_blank" rel="noreferrer" aria-label="link to twitter">
+								<a
+									href="https://twitter.com/"
+									target="_blank"
+									rel="noreferrer"
+									aria-label="link to twitter"
+								>
 									<BsTwitter />
 								</a>
 							</div>
@@ -217,7 +307,7 @@ const About = () => (
 			</div>
 		</div>
 
-	{/* 	<footer className="github-logo">
+		{/* 	<footer className="github-logo">
 		<a
 			href="https://github.com/musayuksel/Goal-app-CYF-final-project"
 			target="_blank"

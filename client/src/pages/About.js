@@ -3,67 +3,54 @@ import anzaPic from "../images/anza.png";
 import dharmaPic from "../images/dharma.png";
 import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
-import  register from '../images/register.png'
-import standup from '../images/standup.png'
-import icon from '../images/icon.png';
+import  register from "../images/register.png";
+import standup from "../images/standup1.png";
+import icon from "../images/icon.png";
 import edit from "../images/edit.png";
 import save from "../images/save.png";
 import remove from "../images/delete.png";
 
 
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const About = () => (
 	<main role="main" className="bg-green-600 px-9 rounded about-ctn ">
 		<div>
-			<h2>About</h2>
+			<h2>About Goal</h2>
 			<p>
 				Keep track of your daily tasks with the Goal! app created by HTCT (Hyper
 				Talent Coding Team). Using either Slack or the webapp interface, this
 				app allows you to record your daily goals. These are uploaded to the
 				database for future retrieval, especially useful for you to monitor your
-				progress, throughout the course and beyond.
+				progress, throughout the course and beyond. Spend 10 mins each day asking yourself these questions:<br />
+				What did I accomplish yesterday?<br />
+				What do I plan to accomplish today?<br />
+				What are my issues(blockers)?
 			</p>
-			<h3>How to find your SlackId</h3>
-			<div id="video-ctn">
+			<div className="guide-ctn">
+				<h3 className="guide-heading"> Frequently Asked Questions </h3>
+				<h5>How to register a new account?</h5>
+				<p>
+					New users can signup for an <Link to ={"/signup"}>account</Link> here.
+				</p>
+				<h3>How to find your SlackId</h3>
+				<div id="video-ctn">
 				<iframe
 					id="video"
 					width="560"
 					height="315"
-					src={"https://youtube.com/embed/6qcA4z3srCA"}
+					src={"http://youtube.com/embed/6qcA4z3srCA"}
 					title="howToVideo"
 					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowFullScreen
 				></iframe>
 			</div>
-			{/* <h3>What is the Daily Stand-Up?</h3>
-			<ul>
-				<li>5 minutes, same time every day</li>
-				<li>
-					3 Questions:
-					<ul>
-						<li>What Did I accomplish yesterday?</li>
-						<li>What do I plan to accomplish today?</li>
-						<li>What are my blockers(issues)?</li>
-					</ul>
-				</li>
-			</ul> */}
-			<div className="guide-ctn">
-				<h3 className="guide-heading"> Frequently Asked Questions </h3>
-				<h5> How to register a new account?</h5>
+			<div>
+				<h5>Create your first stand-up</h5>
 				<p>
-					New user can signup for an account by filling up this form clicking on
-					create new account button.
-				</p>
-				<div className="image-ctn">
-					<img className="faq-img" src={register} alt="register"></img>
-				</div>
-				<h5>How to create your first stand-up? </h5>
-				<p>
-					User can add a new task via their dashboard, they can enter new task
-					in the provided area in daily tab, after entering new task, user needs
-					to click button in order to save it.
+				Enter the task in the field shown and click to save. Button will become active after text input
 				</p>
 				<div className="image-ctn">
 					<img className="faq-img" src={standup} alt="standup"></img>
@@ -87,8 +74,8 @@ const About = () => (
 				</p>
 				<h5> Can I check my previous tasks? </h5>{" "}
 				<p>
-					Yes, previous day, week’s, month’s and quarter’s tasks can be viewed
-					by clicking on daily, weekly monthly and quarterly tabs.
+					Yes, previous day/week/month/quarterly tasks can be viewed
+					via their tabs.
 				</p>
 				<h5>Are the tasks in this app sorted? </h5>
 				<p>Yes, the tasks are sorted and ordered by date and time.</p>
@@ -306,8 +293,8 @@ const About = () => (
 				</div>
 			</div>
 		</div>
-
-		{/* 	<footer className="github-logo">
+		</div>
+			<footer className="github-logo">
 		<a
 			href="https://github.com/musayuksel/Goal-app-CYF-final-project"
 			target="_blank"
@@ -315,7 +302,7 @@ const About = () => (
 			aria-label="link to codebase"
 		>
 		<BsGithub />
-		</a>Check out the codebase</footer> */}
+		</a>Check out the codebase</footer>
 	</main>
 );
 

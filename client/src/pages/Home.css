@@ -466,13 +466,11 @@ ul {
 .guide-link-ctn{
 	font-size: 2em;
  }
-.faq-img{ width:100%;
+.faq-img { 
+	width:100%;
 	align-self: center;
 }
 
-.icon{width:3em;
-height:3em;
-}
 .image-ctn{
 	display: flex;
 	justify-content: center;

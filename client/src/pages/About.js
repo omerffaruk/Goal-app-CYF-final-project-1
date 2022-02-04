@@ -3,12 +3,10 @@ import anzaPic from "../images/anza.png";
 import dharmaPic from "../images/dharma.png";
 import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
-import  register from "../images/register.png";
+import { MdModeEdit, MdDone, MdDeleteOutline } from "react-icons/md";
 import standup from "../images/standup1.png";
 import icon from "../images/icon.png";
-import edit from "../images/edit.png";
-import save from "../images/save.png";
-import remove from "../images/delete.png";
+
 
 
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
@@ -40,7 +38,7 @@ const About = () => (
 					id="video"
 					width="560"
 					height="315"
-					src={"https://youtube.com/embed?v=6qcA4z3srCA"}
+					src={"https://youtube.com/embed/6qcA4z3srCA"}
 					title="howToVideo"
 					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -55,23 +53,18 @@ const About = () => (
 				<div className="image-ctn">
 					<img className="faq-img" src={standup} alt="standup"></img>
 				</div>
-				<h5>How to add, edit and delete your task?</h5>
+				<h5>What do the icons mean?</h5>
+				<div className="edit">
 				<p>
 					{" "}
-					User can edit with
-					<div className="image-btn">
-						<img className="icon" src={edit} alt="edit" />{" "}
-					</div>
-					save with
-					<div className="image-btn">
-						<img className="icon" src={save} alt="save" />{" "}
-					</div>
-					and delete with this
-					<div className="image-btn">
-						<img className="icon" src={remove} alt="delete" />{" "}
-					</div>{" "}
-					icon provided respectively.
+					<MdModeEdit />
+					Edit
+					<MdDone />
+					Save
+					<MdDeleteOutline />
+					Delete
 				</p>
+				</div>
 				<h5> Can I check my previous tasks? </h5>{" "}
 				<p>
 					Yes, previous day/week/month/quarterly tasks can be viewed

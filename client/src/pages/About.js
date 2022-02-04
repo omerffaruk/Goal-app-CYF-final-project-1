@@ -3,7 +3,7 @@ import anzaPic from "../images/anza.png";
 import dharmaPic from "../images/dharma.png";
 import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
-import { MdModeEdit, MdDone, MdDeleteOutline } from "react-icons/md";
+import { MdModeEdit, MdDone, MdDeleteOutline, MdOutlineIndeterminateCheckBox } from "react-icons/md";
 import standup from "../images/standup1.png";
 import icon from "../images/icon.png";
 
@@ -65,32 +65,21 @@ const About = () => (
 					Delete
 				</p>
 				</div>
-				<h5> Can I check my previous tasks? </h5>{" "}
+				<h5> Can I check my previous tasks? </h5>
 				<p>
 					Yes, previous day/week/month/quarterly tasks can be viewed
 					via their tabs.
 				</p>
-				<h5>Are the tasks in this app sorted? </h5>
-				<p>Yes, the tasks are sorted and ordered by date and time.</p>
-				<h5>Would this app allow me to search my tasks? </h5>
-				<p>
-					Yes, user can search their tasks using search bar in the dashboard.
-				</p>
 				<h5>
-					Can I shift my incomplete tasks to the complete tasks once I have
-					finished it?
-				</h5>{" "}
+					How do I mark a task as completed ?
+				</h5>
 				<p>
-					Yes, user can finish the task and then move the incomplete task to
-					completed tasks using this icon{" "}
-					<div className="image-btn">
-						<img className="icon" src={icon} alt="incomplete" />{" "}
-					</div>
+					Clicking this icon
+					<MdOutlineIndeterminateCheckBox />
 				</p>
-				<h5>Can I reset my password if I lose it?</h5>{" "}
+				<h5>Can I reset my password if I lose it?</h5>
 				<p>
-					Yes, user can reset their password by clicking on forgot password
-					link.
+				Reset password <Link to={"/forgot_password"}>here</Link>
 				</p>
 			</div>
 		</div>

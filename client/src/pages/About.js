@@ -40,7 +40,7 @@ const About = () => (
 					id="video"
 					width="560"
 					height="315"
-					src={"http://youtube.com/embed/6qcA4z3srCA"}
+					src={"https://youtube.com/embed?v=6qcA4z3srCA"}
 					title="howToVideo"
 					frameBorder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -465,13 +465,10 @@ ul {
 /* Guide page*/
 .guide-link-ctn{
 	font-size: 2em;
-	
-	
  }
-.faq-img{ width:30vw;
+.faq-img{ width:100%;
 	align-self: center;
-height:50vh;
- ;}
+}
 
 .icon{width:3em;
 height:3em;

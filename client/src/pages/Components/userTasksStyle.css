@@ -218,19 +218,21 @@ form.tasksForm label span {
 	/* padding: 0.5rem; */
 }
 
-.todo-submit-btn {
+.new-task-input-container .todo-submit-btn {
 	background-color: #eee;
 	border: none;
 	border-radius: 5px;
 	color: #666;
-	cursor: pointer;
+	cursor: not-allowed;
 	margin: 0 0.5rem;
 	padding: 0.75rem 1.25rem;
+	white-space: nowrap;
 }
 
 .todo-submit-btn.active {
 	background-color: #5d7ada;
 	color: #fff;
+	cursor: pointer;
 }
 
 @media only screen and (min-width: 600px) {

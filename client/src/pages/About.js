@@ -5,9 +5,6 @@ import musaPic from "../images/musa.png";
 import omerPic from "../images/omer.png";
 import { MdModeEdit, MdDone, MdDeleteOutline, MdOutlineIndeterminateCheckBox } from "react-icons/md";
 import standup from "../images/standup1.png";
-import icon from "../images/icon.png";
-
-
 
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -28,11 +25,15 @@ const About = () => (
 			</p>
 			<div className="guide-ctn">
 				<h3 className="guide-heading"> Frequently Asked Questions </h3>
-				<h5>How to register a new account?</h5>
+				<h5>Register a new account?</h5>
 				<p>
-					New users can signup for an <Link to ={"/signup"}>account</Link> here.
+					New users can signup for an account <Link to ={"/signup"}>here</Link>
 				</p>
-				<h3>How to find your SlackId</h3>
+				<div>
+				<h5>Locate SlackId <a href="https://youtu.be/6qcA4z3srCA" target="_blank" rel="noreferrer">here</a></h5>
+				</div>
+				<br />
+{/*
 				<div id="video-ctn">
 				<iframe
 					id="video"
@@ -44,39 +45,45 @@ const About = () => (
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowFullScreen
 				></iframe>
-			</div>
+			</div> */}
 			<div>
 				<h5>Create your first stand-up</h5>
-				<p>
-				Enter the task in the field shown and click to save. Button will become active after text input
-				</p>
-				<div className="image-ctn">
-					<img className="faq-img" src={standup} alt="standup"></img>
-				</div>
-				<h5>What do the icons mean?</h5>
+					<p>
+					Enter the task in the field shown and click to save. Button will become active after text input
+					</p>
+						<div className="image-ctn">
+							<img className="faq-img" src={standup} alt="standup"></img>
+						</div>
+					</div>
+					<div>
+					<h5>What do the icons mean?</h5>
 				<div className="edit">
 				<p>
-					{" "}
 					<MdModeEdit />
-					Edit
+					Edit your task
+					</p>
+					<p>
 					<MdDone />
-					Save
+					Save after editing
+					</p>
+					<p>
 					<MdDeleteOutline />
-					Delete
+					Delete task
 				</p>
 				</div>
-				<h5> Can I check my previous tasks? </h5>
+				<h5>Review previous tasks? </h5>
 				<p>
-					Yes, previous day/week/month/quarterly tasks can be viewed
+					Previous day/week/month/quarterly tasks can be viewed
 					via their tabs.
 				</p>
 				<h5>
-					How do I mark a task as completed ?
+					How do I mark a task as completed?
 				</h5>
 				<p>
 					Clicking this icon
 					<MdOutlineIndeterminateCheckBox />
 				</p>
+					</div>
 				<h5>Can I reset my password if I lose it?</h5>
 				<p>
 				Reset password <Link to={"/forgot_password"}>here</Link>
@@ -275,7 +282,7 @@ const About = () => (
 				</div>
 			</div>
 		</div>
-		</div>
+
 			<footer className="github-logo">
 		<a
 			href="https://github.com/musayuksel/Goal-app-CYF-final-project"

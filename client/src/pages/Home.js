@@ -114,7 +114,7 @@ export function Home({ setLogin }) {
 						</div>
 					</div>
 					<div className={`error-login ${errorDisplay && "display"}`}>
-						Wrong username and/or password! Please try again.
+						Wrong email and/or password! Please try again.
 					</div>
 				</form>
 			</div>

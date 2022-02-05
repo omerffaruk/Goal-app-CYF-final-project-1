@@ -546,6 +546,7 @@ router.get("/", (req, res) => {
 					userProfile = await web.openid.connect.userInfo({
 						user: teamInfo["authed_user"]["access_token"],
 					});
+					console.log(userProfile);
 				} catch (error) {
 					// Check the code property, and when its a PlatformError, log the whole response.
 					if (error.code === ErrorCode.PlatformError) {

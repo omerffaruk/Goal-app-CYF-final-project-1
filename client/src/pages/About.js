@@ -43,31 +43,37 @@ const About = () => {
 					<br />
 					What are my issues(blockers)?
 				</p>
-				<div className="guide-ctn">
+				<section className="guide-ctn">
 					<h3 className="guide-heading"> Frequently Asked Questions </h3>
-					<h5>Register a new account?</h5>
-					<button
-						onClick={() =>
-							handleQuestionClick(questionOneClicked, setQuestionOneClicked)
-						}
-					>
-						{questionOneClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-					</button>
-					{questionOneClicked && (
-						<p>
-							New users can signup for an account{" "}
-							<Link to={"/signup"}>here</Link>
-						</p>
-					)}
-					<div>
-						<h5>Where to find Slack id?</h5>
-						<button
-							onClick={() =>
-								handleQuestionClick(questionTwoClicked, setQuestionTwoClicked)
-							}
-						>
-							{questionTwoClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-						</button>
+					<article className="question">
+						<header>
+							<h5>Register a new account?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(questionOneClicked, setQuestionOneClicked)
+								}
+							>
+								{questionOneClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
+						{questionOneClicked && (
+							<p>
+								New users can signup for an account{" "}
+								<Link to={"/signup"}>here</Link>
+							</p>
+						)}
+					</article>
+					<article className="question">
+						<header>
+							<h5>Where to find Slack id?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(questionTwoClicked, setQuestionTwoClicked)
+								}
+							>
+								{questionTwoClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
 						{questionTwoClicked && (
 							<p>
 								You can find your Slack id in your Slack profile in
@@ -82,8 +88,7 @@ const About = () => {
 								</a>
 							</p>
 						)}
-					</div>
-					<br />
+					</article>
 					{/*
 				<div id="video-ctn">
 				<iframe
@@ -97,18 +102,20 @@ const About = () => {
 					allowFullScreen
 				></iframe>
 			</div> */}
-					<div>
-						<h5>How to create your first stand-up?</h5>
-						<button
-							onClick={() =>
-								handleQuestionClick(
-									questionThreeClicked,
-									setQuestionThreeClicked
-								)
-							}
-						>
-							{questionThreeClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-						</button>
+					<article className="question">
+						<header>
+							<h5>How to create your first stand-up?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(
+										questionThreeClicked,
+										setQuestionThreeClicked
+									)
+								}
+							>
+								{questionThreeClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
 						{questionThreeClicked && (
 							<div>
 								<p>
@@ -120,16 +127,22 @@ const About = () => {
 								</div>
 							</div>
 						)}
-					</div>
-					<div>
-						<h5>What do the icons mean?</h5>
-						<button
-							onClick={() =>
-								handleQuestionClick(questionFourClicked, setQuestionFourClicked)
-							}
-						>
-							{questionFourClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-						</button>
+					</article>
+
+					<article className="question">
+						<header>
+							<h5>What do the icons mean?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(
+										questionFourClicked,
+										setQuestionFourClicked
+									)
+								}
+							>
+								{questionFourClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
 						{questionFourClicked && (
 							<div className="edit">
 								<p>
@@ -146,49 +159,68 @@ const About = () => {
 								</p>
 							</div>
 						)}
-						<h5>How to review previous tasks? </h5>
-						<button
-							onClick={() =>
-								handleQuestionClick(questionFiveClicked, setQuestionFiveClicked)
-							}
-						>
-							{questionFiveClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-						</button>
+					</article>
+					<article className="question">
+						<header>
+							<h5>How to review previous tasks? </h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(
+										questionFiveClicked,
+										setQuestionFiveClicked
+									)
+								}
+							>
+								{questionFiveClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
 						{questionFiveClicked && (
 							<p>
 								Previous day/week/month/quarterly tasks can be viewed via their
 								tabs.
 							</p>
 						)}
-						<h5>How do I mark a task as completed?</h5>
-						<button
-							onClick={() =>
-								handleQuestionClick(questionSixClicked, setQuestionSixClicked)
-							}
-						>
-							{questionSixClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-						</button>
+					</article>
+					<article className="question">
+						<header>
+							<h5>How do I mark a task as completed?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(questionSixClicked, setQuestionSixClicked)
+								}
+							>
+								{questionSixClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
 						{questionSixClicked && (
 							<p>
 								Clicking this icon
 								<MdOutlineIndeterminateCheckBox />
 							</p>
 						)}
-					</div>
-					<h5>Can I reset my password if I lose it?</h5>
-					<button
-						onClick={() =>
-							handleQuestionClick(questionSevenClicked, setQuestionSevenClicked)
-						}
-					>
-						{questionSevenClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
-					</button>
-					{questionSevenClicked && (
-						<p>
-							Yes you can. You can reset password <Link to={"/forgot_password"}>here</Link>
-						</p>
-					)}
-				</div>
+					</article>
+					<article className="question">
+						<header>
+							<h5>Can I reset my password if I lose it?</h5>
+							<button
+								onClick={() =>
+									handleQuestionClick(
+										questionSevenClicked,
+										setQuestionSevenClicked
+									)
+								}
+							>
+								{questionSevenClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+							</button>
+						</header>
+						{questionSevenClicked && (
+							<p>
+								Yes you can. You can reset password{" "}
+								<Link to={"/forgot_password"}>here</Link>
+							</p>
+						)}
+					</article>
+				</section>
 			</div>
 			<div className="team-ctn">
 				<div className="team-title-ctn">

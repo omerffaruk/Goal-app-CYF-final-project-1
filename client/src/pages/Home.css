@@ -15,6 +15,7 @@
 	--twitter-bg: #00aced;
 	--person-pic-padding: 10px;
 	--person-pic-box-shadow-color: #2e556b;
+	--question-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Box sizing rules */
@@ -364,7 +365,7 @@ ul {
 	padding: 0 10px;
 }
 
- .team-ctn {
+.team-ctn {
 	display: flex;
 	flex-direction: column;
 }
@@ -389,7 +390,10 @@ ul {
 	padding-bottom: 2em;
 	text-align: center;
 }
-.label-ctn{padding-top:10px;margin:0px;}
+.label-ctn {
+	padding-top: 10px;
+	margin: 0px;
+}
 
 .person-info-ctn h4 {
 	margin: 0.5em;
@@ -459,25 +463,60 @@ ul {
 }
 
 #video {
-	margin-left:3.5em;
+	margin-left: 3.5em;
 }
 
 /* Guide page*/
-.guide-link-ctn{
+.guide-ctn .question header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.guide-ctn .question {
+	padding: 0.75rem 0.75rem 0.50rem 0.75rem;
+	border: 2px solid #2e556b;
+	margin-bottom: 1rem;
+	border-radius: 0.25rem;
+	box-shadow: var(--question-box-shadow);
+}
+
+.question header button {
+	background: transparent;
+	border-color: transparent;
+	width: 2rem;
+	height: 2rem;
+	background: var(--main-bg-color);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: #2e556b;
+	cursor: pointer;
+	margin-left: 1rem;
+	align-self: center;
+	min-width: 2rem;
+}
+
+.guide-ctn header button svg {
+	height: 40px;
+	width: auto;
+}
+
+.guide-link-ctn {
 	font-size: 2em;
- }
-.faq-img { 
-	width:100%;
+}
+.faq-img {
+	width: 100%;
 	align-self: center;
 }
 
-.image-ctn{
+.image-ctn {
 	display: flex;
 	justify-content: center;
 	align-self: center;
 }
 
-.image-btn{
+.image-btn {
 	display: flex;
 	justify-content: start;
 	align-self: center;

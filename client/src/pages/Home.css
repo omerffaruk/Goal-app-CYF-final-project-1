@@ -470,6 +470,7 @@ ul {
 .guide-ctn .question header {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .guide-ctn .question {
@@ -483,9 +484,9 @@ ul {
 .question header button {
 	background: transparent;
 	border-color: transparent;
-	width: 2rem;
-	height: 2rem;
-	background: var(--main-bg-color);
+	width: 2.2rem;
+	height: 2.2rem;
+	background: #eae6eb;
 	display: flex;
 	align-items: center;
 	justify-content: center;

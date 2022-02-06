@@ -50,9 +50,7 @@ export function Home({ setLogin }) {
 		setRememberUser(!rememberUser);
 	};
 
-	// const clientId = process.env.REACT_APP_CLIENT_ID;
-	// console.log(process.env.REACT_APP_CLIENT_ID);
-
+	
 	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
@@ -114,7 +112,7 @@ export function Home({ setLogin }) {
 						</div>
 					</div>
 					<div className={`error-login ${errorDisplay && "display"}`}>
-						Wrong username and/or password! Please try again.
+						Wrong email and/or password! Please try again.
 					</div>
 				</form>
 			</div>
@@ -125,7 +123,7 @@ export function Home({ setLogin }) {
 						id="remember-user"
 						name="remember"
 						onChange={(e) => handleRemember(e)}
-						// onClick={(e) => handlecheck(e)}
+						
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>

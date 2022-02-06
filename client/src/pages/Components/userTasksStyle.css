@@ -18,7 +18,7 @@ form * {
 	display: grid;
 }
 
-/* form.tasksForm li, */
+
 form.tasksForm label {
 	list-style-type: none;
 	font-weight: 300;

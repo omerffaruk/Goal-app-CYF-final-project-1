@@ -14,7 +14,7 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 	// Complete - Incomplete task
 	function handleCheckboxChange() {
 		setPreviousPeriodTasks((prev) =>
-			/* setBeforePeriodTasks((prev) => */
+			
 			prev.map((currentTask) => {
 				if (currentTask.id === task.id) {
 					currentTask.iscomplete = !currentTask.iscomplete;
@@ -53,7 +53,7 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 		deleteTodo(task.id);
 	}
 	function handleSubmit() {
-		// setIsSubmitting(true);
+	
 		updateTodo(task);
 	}
 	return (

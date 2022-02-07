@@ -557,8 +557,8 @@ ul {
 
 input[type="checkbox"] {
 	padding: 0;
-	-ms-transform: scale(1, 1); /* IE */
-	-moz-transform: scale(1, 1); /* FF */
-	-webkit-transform: scale(1, 1); /* Safari and Chrome */
-	-o-transform: scale(1, 1); /* Opera */
+	-ms-transform: scale(1.1); /* IE */
+	-moz-transform: scale(1.1); /* FF */
+	-webkit-transform: scale(1.1); /* Safari and Chrome */
+	-o-transform: scale(1.1); /* Opera */
 }

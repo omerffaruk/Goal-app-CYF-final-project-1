@@ -473,6 +473,10 @@ ul {
 	align-items: center;
 }
 
+.guide-ctn .question header h4 {
+	font-size: 1.3em;
+}
+
 .guide-ctn .question {
 	padding: 0.75rem 0.75rem 0.50rem 0.75rem;
 	border: 2px solid #2e556b;
@@ -522,6 +526,20 @@ ul {
 	justify-content: start;
 	align-self: center;
 }
+
+/*---------- footer in about page ----------*/
+.about-ctn footer a {
+	padding: 1.5em 0 1em;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.about-ctn footer a svg {
+	margin-right: 3px;
+}
+
 @media only screen and (min-width: 350px) {
 	.slack-connect h4 {
 		letter-spacing: 0.5px;

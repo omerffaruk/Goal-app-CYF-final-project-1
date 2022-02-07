@@ -10,7 +10,12 @@ import {
 	MdOutlineIndeterminateCheckBox,
 } from "react-icons/md";
 import standup from "../images/standup1.png";
-import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import {
+	AiOutlineMinus,
+	AiOutlinePlus,
+	AiOutlineCaretDown,
+	AiOutlineCaretUp,
+} from "react-icons/ai";
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -53,7 +58,11 @@ const About = () => {
 									handleQuestionClick(questionOneClicked, setQuestionOneClicked)
 								}
 							>
-								{questionOneClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionOneClicked ? (
+									<AiOutlineCaretUp />
+								) : (
+									<AiOutlineCaretDown />
+								)}
 							</button>
 						</header>
 						{questionOneClicked && (
@@ -415,7 +424,7 @@ const About = () => {
 				</div>
 			</div>
 
-			<footer className="github-logo">
+			<footer>
 				<a
 					href="https://github.com/musayuksel/Goal-app-CYF-final-project"
 					target="_blank"
@@ -423,8 +432,8 @@ const About = () => {
 					aria-label="link to codebase"
 				>
 					<BsGithub />
+					Check out the codebase
 				</a>
-				Check out the codebase
 			</footer>
 		</main>
 	);

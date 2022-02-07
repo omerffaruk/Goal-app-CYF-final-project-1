@@ -507,10 +507,10 @@ ul {
 	color: #2e556b;
 }
 
-/* .guide-ctn header button svg {
-	height: 40px;
+.guide-ctn header button svg {
+	min-height: 30px;
 	width: auto;
-} */
+}
 
 .guide-link-ctn {
 	font-size: 2em;

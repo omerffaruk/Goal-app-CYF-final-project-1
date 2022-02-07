@@ -154,7 +154,7 @@ ul {
 
 .logout-btn svg {
 	height: 40px;
-	width: 40px;
+	width: auto;
 }
 
 .logout-btn:hover {

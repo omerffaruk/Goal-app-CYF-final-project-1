@@ -50,7 +50,7 @@ export function Home({ setLogin }) {
 		setRememberUser(!rememberUser);
 	};
 
-	
+
 	return (
 		<div className="home-ctn ">
 			<h1 className="text-center">Login to your GoalApp account</h1>
@@ -123,7 +123,6 @@ export function Home({ setLogin }) {
 						id="remember-user"
 						name="remember"
 						onChange={(e) => handleRemember(e)}
-						
 						checked={rememberUser}
 						aria-label="check to remember user"
 					></input>

@@ -457,11 +457,8 @@ router.post("/email", (req, res) => {
 				const msg = {
 					to: email,
 					from: "anzaazam.nw4@gmail.com",
-					subject: "Please follow the instructions",
-					text:
-						"Replace reset_password/:id with " +
-						text +
-						" in the browser url click enter then write new password and click submit",
+					subject: "Email Reset link provided",
+					text: `https://goal-app-cyf-final-project.herokuapp.com/api/${id}`,
 				};
 
 				sgMail
@@ -509,9 +506,11 @@ router.post("/reset_password/:id", (req, res) => {
 });
 
 router.get("/", (req, res) => {
+	console.log(code);
 	const request = require("request");
 
 	const code = req.query.code;
+
 	if (code) {
 		const clientId = process.env.CLIENT_ID;
 		const clientSecret = process.env.CLIENT_SECRET;
@@ -534,6 +533,7 @@ router.get("/", (req, res) => {
 		request(path_to_access_token, function (error, response, body) {
 			// Request token from Slack using the access_code, then handle response
 			let teamInfo = JSON.parse(body);
+			res.send(body)
 			// Read a token from the environment variables
 
 			const { WebClient, ErrorCode } = require("@slack/web-api");

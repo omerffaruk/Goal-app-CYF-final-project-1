@@ -59,7 +59,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 		"yesterday_input_container"
 	]["checkboxes-action"].selected_options.map((todo) => +todo.value);
 	const allTodosOfYesterday = view.blocks[1].element.options; // If you add new block, change index number
-	const unComplatedTodosOfYesterday = allTodosOfYesterday
+	const unCompletedTodosOfYesterday = allTodosOfYesterday
 		.map((todo) => +todo.value)
 		.filter((todo) => !completedTodosOfYesterday.includes(todo));
 	//array of input area texts(if there is 2 enter for next line it will be empty, handle it later)
@@ -82,7 +82,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 		const yesterdaysUnCompletedTasksSetQuery =
 			"UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
 		await pool.query(yesterdaysUnCompletedTasksSetQuery, [
-			unComplatedTodosOfYesterday,
+			unCompletedTodosOfYesterday,
 		]);
 
 		//find todays todos, delete all of them and add new ones

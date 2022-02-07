@@ -507,9 +507,9 @@ ul {
 	color: #2e556b;
 }
 
-.guide-ctn header button svg {
-	min-height: 30px;
-	width: auto;
+.question header button svg {
+	min-width: 20px;
+	height: auto;
 }
 
 .guide-link-ctn {

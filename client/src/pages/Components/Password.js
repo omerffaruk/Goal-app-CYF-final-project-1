@@ -10,6 +10,7 @@ const Password = () => {
 	};
 	const forgotPassword = (e) => {
 		e.preventDefault();
+		alert('Email has been sent')
 		const methodObj = {
 			method: "POST",
 			headers,
@@ -55,9 +56,7 @@ const Password = () => {
 						
 					</form>
 				</div>
-				<Link className="temporary-link" to={"/reset_password/:id"}>
-					Click here to enter password and follow instructions in email
-				</Link>
+				
 			</div>
 		</div>
 	);

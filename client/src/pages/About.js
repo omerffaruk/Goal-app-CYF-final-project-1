@@ -16,6 +16,7 @@ import {
 	AiOutlineCaretDown,
 	AiOutlineCaretUp,
 } from "react-icons/ai";
+import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
@@ -82,7 +83,11 @@ const About = () => {
 									handleQuestionClick(questionTwoClicked, setQuestionTwoClicked)
 								}
 							>
-								{questionTwoClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionTwoClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionTwoClicked && (
@@ -220,7 +225,9 @@ const About = () => {
 						<header>
 							<h4>Can I reset my password if I lose it?</h4>
 							<button
-								aria-label={questionSevenClicked ? "hide answer" : "show answer"}
+								aria-label={
+									questionSevenClicked ? "hide answer" : "show answer"
+								}
 								onClick={() =>
 									handleQuestionClick(
 										questionSevenClicked,

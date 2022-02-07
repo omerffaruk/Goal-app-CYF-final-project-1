@@ -46,7 +46,6 @@ const NavBar = ({ login, setLogin }) => {
 					/>
 				</a>
 			</div>
-			
 			{displayAboutOrLogout}
 		</div>
 	);

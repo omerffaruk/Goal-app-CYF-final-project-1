@@ -123,7 +123,7 @@ ul {
 
 /*-------------- Header ---------------*/
 .header.login-page {
-	padding: 20px 30px;
+	padding: 1.2em 1em;
 	background-color: var(--header-bcg-color);
 	display: flex;
 	flex-direction: row;
@@ -154,7 +154,7 @@ ul {
 
 .logout-btn svg {
 	height: 40px;
-	width: 40px;
+	width: auto;
 }
 
 .logout-btn:hover {
@@ -497,14 +497,19 @@ ul {
 	border-radius: 50%;
 	color: #2e556b;
 	cursor: pointer;
-	margin-left: 1rem;
+	margin-left: 0.6rem;
 	align-self: center;
 	min-width: 2rem;
 }
 
-.guide-ctn header button svg {
-	height: 40px;
-	width: auto;
+.guide-ctn article:nth-of-type(2) header button {
+	background-color: white;
+	color: #2e556b;
+}
+
+.question header button svg {
+	min-width: 20px;
+	height: auto;
 }
 
 .guide-link-ctn {

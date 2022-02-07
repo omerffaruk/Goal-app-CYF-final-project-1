@@ -100,19 +100,6 @@ const About = () => {
 							</p>
 						)}
 					</article>
-					{/*
-				<div id="video-ctn">
-				<iframe
-					id="video"
-					width="560"
-					height="315"
-					src={"https://youtube.com/embed/6qcA4z3srCA"}
-					title="howToVideo"
-					frameBorder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowFullScreen
-				></iframe>
-			</div> */}
 					<article className="question">
 						<header>
 							<h4>How to create your first stand-up?</h4>
@@ -253,9 +240,7 @@ const About = () => {
 							<h4>Anza Azam</h4>
 							<div className="person-border-bottom"></div>
 							<p>
-								Anza is a NW4 trainee, CYF was her game changer and gave her
-								meaningful purpose, now she enjoys challenging herself via
-								coding and problem solving.
+								Anza, a NW4 trainee with CYF discovered Software Engineering to be game changer and it has given her meaningful purpose.  She delights in challenging herself via coding and problem solving.
 							</p>
 							<div className="person-links-ctn">
 								<div className="linkedin-logo">

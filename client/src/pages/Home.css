@@ -123,7 +123,7 @@ ul {
 
 /*-------------- Header ---------------*/
 .header.login-page {
-	padding: 20px 30px;
+	padding: 1.2em 1em;
 	background-color: var(--header-bcg-color);
 	display: flex;
 	flex-direction: row;

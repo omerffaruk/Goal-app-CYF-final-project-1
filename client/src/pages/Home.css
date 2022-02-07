@@ -116,15 +116,14 @@ ul {
 	grid-template-rows: 100px auto;
 	font-family: "Arimo", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
 		"Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
-	/* box-shadow: rgba(0, 0, 0, 0.5) 0px 15px 64px; */
 	background-color: var(--main-bg-color);
-	/* border-radius: 4px; */
 }
 
 /*-------------- Header ---------------*/
 .header.login-page {
 	padding: 1.2em 1em;
-	background-color: var(--header-bcg-color);
+	background-color: #4B73B5
+	/* var(--header-bcg-color) */;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;

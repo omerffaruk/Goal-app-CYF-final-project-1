@@ -52,7 +52,7 @@ const About = () => {
 					<h3 className="guide-heading"> Frequently Asked Questions </h3>
 					<article className="question">
 						<header>
-							<h5>Register a new account?</h5>
+							<h4>Register a new account?</h4>
 							<button
 								aria-label={questionOneClicked ? "hide answer" : "show answer"}
 								onClick={() =>
@@ -75,7 +75,7 @@ const About = () => {
 					</article>
 					<article className="question">
 						<header>
-							<h5>Where to find Slack id?</h5>
+							<h4>Where to find Slack id?</h4>
 							<button
 								aria-label={questionTwoClicked ? "hide answer" : "show answer"}
 								onClick={() =>
@@ -115,7 +115,7 @@ const About = () => {
 			</div> */}
 					<article className="question">
 						<header>
-							<h5>How to create your first stand-up?</h5>
+							<h4>How to create your first stand-up?</h4>
 							<button
 								aria-label={
 									questionThreeClicked ? "hide answer" : "show answer"
@@ -145,7 +145,7 @@ const About = () => {
 
 					<article className="question">
 						<header>
-							<h5>What do the icons mean?</h5>
+							<h4>What do the icons mean?</h4>
 							<button
 								aria-label={questionFourClicked ? "hide answer" : "show answer"}
 								onClick={() =>
@@ -177,7 +177,7 @@ const About = () => {
 					</article>
 					<article className="question">
 						<header>
-							<h5>How to review previous tasks? </h5>
+							<h4>How to review previous tasks? </h4>
 							<button
 								aria-label={questionFiveClicked ? "hide answer" : "show answer"}
 								onClick={() =>
@@ -199,7 +199,7 @@ const About = () => {
 					</article>
 					<article className="question">
 						<header>
-							<h5>How do I mark a task as completed?</h5>
+							<h4>How do I mark a task as completed?</h4>
 							<button
 								aria-label={questionSixClicked ? "hide answer" : "show answer"}
 								onClick={() =>
@@ -218,7 +218,7 @@ const About = () => {
 					</article>
 					<article className="question">
 						<header>
-							<h5>Can I reset my password if I lose it?</h5>
+							<h4>Can I reset my password if I lose it?</h4>
 							<button
 								aria-label={questionSevenClicked ? "hide answer" : "show answer"}
 								onClick={() =>

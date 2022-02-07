@@ -473,6 +473,10 @@ ul {
 	align-items: center;
 }
 
+.guide-ctn .question header h4 {
+	font-size: 1.3em;
+}
+
 .guide-ctn .question {
 	padding: 0.75rem 0.75rem 0.50rem 0.75rem;
 	border: 2px solid #2e556b;

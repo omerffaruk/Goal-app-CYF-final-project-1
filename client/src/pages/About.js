@@ -54,6 +54,7 @@ const About = () => {
 						<header>
 							<h5>Register a new account?</h5>
 							<button
+								aria-label={questionOneClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(questionOneClicked, setQuestionOneClicked)
 								}
@@ -76,6 +77,7 @@ const About = () => {
 						<header>
 							<h5>Where to find Slack id?</h5>
 							<button
+								aria-label={questionTwoClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(questionTwoClicked, setQuestionTwoClicked)
 								}
@@ -115,6 +117,9 @@ const About = () => {
 						<header>
 							<h5>How to create your first stand-up?</h5>
 							<button
+								aria-label={
+									questionThreeClicked ? "hide answer" : "show answer"
+								}
 								onClick={() =>
 									handleQuestionClick(
 										questionThreeClicked,
@@ -142,6 +147,7 @@ const About = () => {
 						<header>
 							<h5>What do the icons mean?</h5>
 							<button
+								aria-label={questionFourClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(
 										questionFourClicked,
@@ -173,6 +179,7 @@ const About = () => {
 						<header>
 							<h5>How to review previous tasks? </h5>
 							<button
+								aria-label={questionFiveClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(
 										questionFiveClicked,
@@ -194,6 +201,7 @@ const About = () => {
 						<header>
 							<h5>How do I mark a task as completed?</h5>
 							<button
+								aria-label={questionSixClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(questionSixClicked, setQuestionSixClicked)
 								}
@@ -212,6 +220,7 @@ const About = () => {
 						<header>
 							<h5>Can I reset my password if I lose it?</h5>
 							<button
+								aria-label={questionSevenClicked ? "hide answer" : "show answer"}
 								onClick={() =>
 									handleQuestionClick(
 										questionSevenClicked,

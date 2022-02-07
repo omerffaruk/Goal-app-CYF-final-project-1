@@ -497,15 +497,20 @@ ul {
 	border-radius: 50%;
 	color: #2e556b;
 	cursor: pointer;
-	margin-left: 1rem;
+	margin-left: 0.6rem;
 	align-self: center;
 	min-width: 2rem;
 }
 
-.guide-ctn header button svg {
+.guide-ctn article:nth-of-type(2) header button {
+	background-color: white;
+	color: #2e556b;
+}
+
+/* .guide-ctn header button svg {
 	height: 40px;
 	width: auto;
-}
+} */
 
 .guide-link-ctn {
 	font-size: 2em;

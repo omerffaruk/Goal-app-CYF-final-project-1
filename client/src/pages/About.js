@@ -10,12 +10,6 @@ import {
 	MdOutlineIndeterminateCheckBox,
 } from "react-icons/md";
 import standup from "../images/standup1.png";
-import {
-	AiOutlineMinus,
-	AiOutlinePlus,
-	AiOutlineCaretDown,
-	AiOutlineCaretUp,
-} from "react-icons/ai";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";

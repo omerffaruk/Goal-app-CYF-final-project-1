@@ -458,7 +458,7 @@ router.post("/email", (req, res) => {
 					to: email,
 					from: "anzaazam.nw4@gmail.com",
 					subject: "Email Reset link provided",
-					text: `https://goal-app-cyf-final-project.herokuapp.com/api/${id}`,
+					text: `https://goal-app-cyf-final-project.herokuapp.com/api/reset_password/${id}`,
 				};
 
 				sgMail

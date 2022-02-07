@@ -220,8 +220,8 @@ ul {
 	display: flex;
 	justify-self: center;
 	align-self: center;
-	width: 1em;
-	height: auto;
+	width: 0.9em;
+	height: 0.9em;
 }
 .Slack {
 	width: 30px;

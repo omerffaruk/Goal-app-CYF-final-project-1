@@ -10,12 +10,6 @@ import {
 	MdOutlineIndeterminateCheckBox,
 } from "react-icons/md";
 import standup from "../images/standup1.png";
-import {
-	AiOutlineMinus,
-	AiOutlinePlus,
-	AiOutlineCaretDown,
-	AiOutlineCaretUp,
-} from "react-icons/ai";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { BsLinkedin, BsTwitter, BsGithub } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -61,9 +55,9 @@ const About = () => {
 								}
 							>
 								{questionOneClicked ? (
-									<AiOutlineCaretUp />
+									<BsFillCaretUpFill />
 								) : (
-									<AiOutlineCaretDown />
+									<BsFillCaretDownFill />
 								)}
 							</button>
 						</header>
@@ -119,7 +113,11 @@ const About = () => {
 									)
 								}
 							>
-								{questionThreeClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionThreeClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionThreeClicked && (
@@ -147,7 +145,11 @@ const About = () => {
 									)
 								}
 							>
-								{questionFourClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionFourClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionFourClicked && (
@@ -179,7 +181,11 @@ const About = () => {
 									)
 								}
 							>
-								{questionFiveClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionFiveClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionFiveClicked && (
@@ -198,7 +204,11 @@ const About = () => {
 									handleQuestionClick(questionSixClicked, setQuestionSixClicked)
 								}
 							>
-								{questionSixClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionSixClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionSixClicked && (
@@ -222,7 +232,11 @@ const About = () => {
 									)
 								}
 							>
-								{questionSevenClicked ? <AiOutlineMinus /> : <AiOutlinePlus />}
+								{questionSevenClicked ? (
+									<BsFillCaretUpFill />
+								) : (
+									<BsFillCaretDownFill />
+								)}
 							</button>
 						</header>
 						{questionSevenClicked && (
@@ -247,7 +261,9 @@ const About = () => {
 							<h4>Anza Azam</h4>
 							<div className="person-border-bottom"></div>
 							<p>
-								Anza, a NW4 trainee with CYF discovered Software Engineering to be game changer and it has given her meaningful purpose.  She delights in challenging herself via coding and problem solving.
+								Anza, a NW4 trainee with CYF discovered Software Engineering to
+								be game changer and it has given her meaningful purpose. She
+								delights in challenging herself via coding and problem solving.
 							</p>
 							<div className="person-links-ctn">
 								<div className="linkedin-logo">

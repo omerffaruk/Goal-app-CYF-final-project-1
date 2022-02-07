@@ -55,13 +55,13 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	// Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
 	// array of checked object
-	const complatedTodosOfYesterday = view.state.values[
+	const completedTodosOfYesterday = view.state.values[
 		"yesterday_input_container"
 	]["checkboxes-action"].selected_options.map((todo) => +todo.value);
 	const allTodosOfYesterday = view.blocks[1].element.options; // If you add new block, change index number
 	const unComplatedTodosOfYesterday = allTodosOfYesterday
 		.map((todo) => +todo.value)
-		.filter((todo) => !complatedTodosOfYesterday.includes(todo));
+		.filter((todo) => !completedTodosOfYesterday.includes(todo));
 	//array of input area texts(if there is 2 enter for next line it will be empty, handle it later)
 	const todaysToDos = view.state.values["today_input_container_big"][
 		"plain_text_input-action"
@@ -71,13 +71,13 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	// // Message to send user
 	let msg = "";
 	// // Save to DB
-	// find yesterday todaysToDos, and if  complatedTodosOfYesterday, change to the true
+	// find yesterday todaysToDos, and if  completedTodosOfYesterday, change to the true
 	let isError = false;
 	try {
 		const yesterdaysCompletedTasksSetQuery =
 			"UPDATE todo SET iscomplete = true WHERE id = ANY ($1)";
 		await pool.query(yesterdaysCompletedTasksSetQuery, [
-			complatedTodosOfYesterday,
+			completedTodosOfYesterday,
 		]);
 		const yesterdaysUnCompletedTasksSetQuery =
 			"UPDATE todo SET iscomplete = false WHERE id =ANY ($1)";
@@ -115,7 +115,7 @@ app.view("standup_callback_id", async ({ ack, body, view, client, logger }) => {
 	}
 	if (!isError) {
 		// DB save was successful
-		msg = `*Summary...*\n *Yesterday* you completed *${complatedTodosOfYesterday.length}* items\n*Today, your tasks are:*\n`;
+		msg = `*Summary...*\n *Yesterday* you completed *${completedTodosOfYesterday.length}* items\n*Today, your tasks are:*\n`;
 		todaysToDos.forEach((task) => {
 			msg += `- _${task}_\n`;
 		});

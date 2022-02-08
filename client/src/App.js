@@ -6,7 +6,6 @@ import About from "./pages/About";
 import ResetPassword from "./pages/Components/ResetPassword";
 import Home from "./pages/Home";
 import Password from "./pages/Components/Password";
-import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Components/Dashboard";
 
 function App() {
@@ -32,7 +31,8 @@ function App() {
 				{/* <Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} /> */}
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
-				<Route path="/forgot" element={<ForgotPassword />} />
+				{<Route path="/forgot_password" element={<Password />} />}
+				{<Route exact path="/reset_password/:id" element={<ResetPassword />} />}
 				<Route path="/:username" element={<Dashboard period={"daily"} />} />
 				<Route
 					path="/:username/weekly"
@@ -46,9 +46,6 @@ function App() {
 					path="/:username/quarterly"
 					element={<Dashboard period={"quarterly"} />}
 				/>
-
-				{<Route path="/forgot_password" element={<Password />} />}
-				{<Route exact path="/reset_password/:id" element={<ResetPassword />} />}
 			</Routes>
 		</div>
 	);

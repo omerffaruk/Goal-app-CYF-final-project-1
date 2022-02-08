@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SignUp from "./pages/SignUp";
-import TemporaryTasks from "./pages/Temporary/TemporaryTasks";
 import NavBar from "./pages/Components/NavBar";
 import About from "./pages/About";
 import ResetPassword from "./pages/Components/ResetPassword";
@@ -33,11 +32,7 @@ function App() {
 				{/* <Route path="/" element={<Home givenEmail={givenEmail} givenPassword={ givenPassword} setLogin={setLogin} />} /> */}
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/about" element={<About />} />
-				
 				<Route path="/forgot" element={<ForgotPassword />} />
-
-				{/* -----------Temporary Routes--------------- */}
-				<Route path="/temporary/tasks" element={<TemporaryTasks />} />
 				<Route path="/:username" element={<Dashboard period={"daily"} />} />
 				<Route
 					path="/:username/weekly"

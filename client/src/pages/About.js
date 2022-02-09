@@ -325,7 +325,7 @@ const About = () => {
 								</div>
 								<div className="twitter-logo">
 									<a
-										href="https://twitter.com/"
+										href="https://twitter.com/MusaYuxel"
 										target="_blank"
 										rel="noreferrer"
 										aria-label="link to twitter"

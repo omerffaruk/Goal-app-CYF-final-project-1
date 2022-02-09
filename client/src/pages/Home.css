@@ -1,9 +1,8 @@
-
 /* ------------ Variables -------------*/
 :root {
 	--main-bg-color: #fff;
 	--login-card-bg-color: rgb(255, 255, 255);
-	--header-bcg-color: #4B73B5;
+	--header-bcg-color: #4b73b5;
 	--linear-bg: -webkit-linear-gradient(left, #505e8d, #4298fa);
 	--primary-color: #053974;
 	--hover-primary-color: #fcfafa;
@@ -261,6 +260,14 @@ ul {
 
 .label-ctn {
 	padding-bottom: 0.3em;
+}
+.slackid-container {
+	display: flex;
+	align-items: center;
+}
+.slackid-container .question-mark {
+	cursor: pointer;
+	width: 2rem;
 }
 
 .form-field {

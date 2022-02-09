@@ -8,7 +8,7 @@ import {
 	handleServerMessage,
 } from "../utils/validationFunctions";
 import { Link } from "react-router-dom";
-
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import Popup from "./Components/Popup";
 import { headers } from "../utils/generalPostObjects";
 import fetchData from "../utils/fetchData";
@@ -23,9 +23,11 @@ const SignUp = () => {
 	const [missingValidEmailMessage, setMissingValidEmailMessage] = useState("");
 	const [missingValidPassword, setMissingValidPassword] = useState(false);
 	const [missingValidUsername, setMissingValidUsername] = useState(false);
-	const [missingValidUsernameMessage, setMissingValidUsernameMessage] = useState("");
+	const [missingValidUsernameMessage, setMissingValidUsernameMessage] =
+		useState("");
 	const [missingValidSlackid, setMissingValidSlackid] = useState(false);
-	const [missingValidSlackidMessage, setMissingValidSlackidMessage] = useState("");
+	const [missingValidSlackidMessage, setMissingValidSlackidMessage] =
+		useState("");
 	const createNewAccount = (e) => {
 		e.preventDefault();
 		const methodObj = {
@@ -173,8 +175,14 @@ const SignUp = () => {
 						</div>
 					</div>
 					<div className="form-field">
-						<div className="label-ctn">
+						<div
+							className="label-ctn slackid-container"
+							title="Find your Slackid"
+						>
 							<label htmlFor="slackid">Slackid</label>
+							<Link to="/about">
+								<AiOutlineQuestionCircle className="question-mark" />
+							</Link>
 						</div>
 						<input
 							type="text"

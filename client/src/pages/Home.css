@@ -263,7 +263,6 @@ ul {
 }
 .slackid-container {
 	display: flex;
-	align-items: center;
 }
 .slackid-container .question-mark {
 	cursor: pointer;

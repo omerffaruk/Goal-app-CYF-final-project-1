@@ -14,7 +14,6 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 	// Complete - Incomplete task
 	function handleCheckboxChange() {
 		setPreviousPeriodTasks((prev) =>
-			
 			prev.map((currentTask) => {
 				if (currentTask.id === task.id) {
 					currentTask.iscomplete = !currentTask.iscomplete;
@@ -53,7 +52,6 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 		deleteTodo(task.id);
 	}
 	function handleSubmit() {
-	
 		updateTodo(task);
 	}
 	return (
@@ -90,7 +88,7 @@ export default function Task({ task, setPreviousPeriodTasks }) {
 				}}
 			/>
 			<p className="task-date">
-				{new Intl.DateTimeFormat("en-US").format(new Date(task.date))}
+				{new Intl.DateTimeFormat("en-GB").format(new Date(task.date))}
 			</p>
 			<div className="today-task-show-btn-container">
 				{isTyping && (

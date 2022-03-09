@@ -1,22 +1,21 @@
-# Starter Kit
 
-### HTCT - GoalApp
+# HTCT - GoalApp
 
-#### Team
+## Team
 
 Project Owner - Sally McGrath  
 Tech Lead - Emily Bailey  
 Devs - Musa Yuksel, Omer Yamak, Anza Azam, Dharma Emmelene
 
-### Project Brief
+## Project Brief
 
-Business problem
+### Business problem
 
 At CodeYourFuture we use daily standups, goal setting, and design thinking to continuously evaluate our work and plan improvements, and we want to teach our trainees this habit too. But right now this means we have a lot of meetings, where ideas get lost, or that we do a lot of paperwork and repetitive work, writing out all of these processes. We don’t want to teach our trainees this!
 We want to spend around ten minutes each morning creating our standup, ten minutes each week setting our weekly goals, and ten minutes each month - etc. 
 We want to systematically record our work and then programmatically create each larger time block of goals from the smaller time block: quarter from month, month from week, week from day.
 
-Proposed functionality
+### Proposed functionality
 
 A ToDo app with time settings and Slack bot conversational interface. The app must integrate with Slack as that is where everyone in our community is every day, but the app should have a GUI (website) as well.
 All data should be stored in a database and be accessed by API. 

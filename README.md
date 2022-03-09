@@ -4,8 +4,8 @@
 
 #### Team
 
-Project Owner - Sally McGrath
-Tech Lead - Emily Bailey
+Project Owner - Sally McGrath  
+Tech Lead - Emily Bailey  
 Devs - Musa Yuksel, Omer Yamak, Anza Azam, Dharma Emmelene
 
 ### Project Brief
